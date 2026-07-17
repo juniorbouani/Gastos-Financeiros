@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.dto.SummaryResponse;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
@@ -7,7 +8,9 @@ import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 import java.util.Optional;
@@ -56,5 +59,26 @@ public class TransactionService {
 
     public List<Transaction> listByPeriod(LocalDate start, LocalDate end) {
         return repository.findByDateBetween(start, end);
+    }
+
+    public SummaryResponse getSumary(YearMonth month) {
+        LocalDate start = month.atDay(1);
+        LocalDate end = month.atEndOfMonth();
+
+        List<Transaction> transactions = repository.findByDateBetween(start, end);
+
+        BigDecimal totalIncome = transactions.stream()
+                .filter(t -> t.getType() == TransactionType.INCOME)
+                .map(Transaction::getValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal totalExpense = transactions.stream()
+                .filter(t -> t.getType() == TransactionType.EXPENSE)
+                .map(Transaction::getValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal balance = totalIncome.subtract(totalExpense);
+
+        return new SummaryResponse(month.toString(), totalIncome, totalExpense, balance);
     }
 }

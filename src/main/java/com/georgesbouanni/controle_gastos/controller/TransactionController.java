@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.controller;
 
+import com.georgesbouanni.controle_gastos.dto.SummaryResponse;
 import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
 import com.georgesbouanni.controle_gastos.service.TransactionService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 @RestController
@@ -58,5 +60,10 @@ public class TransactionController {
             @RequestParam LocalDate start,
             @RequestParam LocalDate end) {
         return service.listByPeriod(start, end);
+    }
+
+    @GetMapping("/summary")
+    public SummaryResponse getSummary(@RequestParam YearMonth month){
+        return service.getSumary(month);
     }
 }
