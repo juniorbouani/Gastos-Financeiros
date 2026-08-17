@@ -6,6 +6,8 @@ import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
 import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -80,5 +82,9 @@ public class TransactionService {
         BigDecimal balance = totalIncome.subtract(totalExpense);
 
         return new SummaryResponse(month.toString(), totalIncome, totalExpense, balance);
+    }
+
+    public Page<Transaction> listAllPaginated(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }
