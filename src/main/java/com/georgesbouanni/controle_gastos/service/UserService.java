@@ -36,4 +36,8 @@ public class UserService {
     }
 
     public void delete(String id) { repository.deleteById(id); }
+
+    public Optional<User> findByCpf(String cpf) { return repository.findByCPF(cpf);}
+
+    public Optional<User> findByEmail(String email) {return repository.findByEmail(email); }
 }

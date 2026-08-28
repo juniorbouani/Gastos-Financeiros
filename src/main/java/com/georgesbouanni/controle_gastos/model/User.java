@@ -3,14 +3,14 @@ package com.georgesbouanni.controle_gastos.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Document(collection = "/Users")
+@Document(collection = "users")
 public class User {
 
     @Id
@@ -19,11 +19,11 @@ public class User {
     @NotBlank(message = "O nome deve ser obrigatório")
     private String name;
 
-    @NotNull(message = "O CPF deve ser obrigatório")
-    private BigDecimal cpf;
+    @NotBlank(message = "O CPF deve ser obrigatório")
+    private String cpf;
 
-    @NotNull(message = "O telefone deve4 ser obrigatório")
-    private BigDecimal numeroTelefone;
+    @NotBlank(message = "O telefone deve4 ser obrigatório")
+    private String numeroTelefone;
 
     @NotNull(message = "A data de nascimento deve ser obrigatória")
     private LocalDate dataNascimento;
@@ -35,11 +35,10 @@ public class User {
     private String email;
 
     @NotNull(message = "O valor deve ser obrigatório")
-    @Positive(message = "o valor deve ser postivo")
+    @PositiveOrZero(message = "O saldo não pode ser negativo")
     private BigDecimal balance;
 
-    public User(String id, String name, BigDecimal cpf, BigDecimal numeroTelefone, LocalDate dataNascimento, String senhaHash, String email, BigDecimal balance) {
-        this.id = id;
+    public User(String name, String cpf, String numeroTelefone, LocalDate dataNascimento, String senhaHash, String email, BigDecimal balance) {
         this.name = name;
         this.cpf = cpf;
         this.numeroTelefone = numeroTelefone;
@@ -65,19 +64,19 @@ public class User {
         this.name = name;
     }
 
-    public BigDecimal getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(BigDecimal cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public BigDecimal getNumeroTelefone() {
+    public String getNumeroTelefone() {
         return numeroTelefone;
     }
 
-    public void setNumeroTelefone(BigDecimal numeroTelefone) {
+    public void setNumeroTelefone(String numeroTelefone) {
         this.numeroTelefone = numeroTelefone;
     }
 
