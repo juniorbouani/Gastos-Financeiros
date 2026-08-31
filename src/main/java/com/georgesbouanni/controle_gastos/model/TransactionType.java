@@ -1,6 +1,10 @@
 package com.georgesbouanni.controle_gastos.model;
 
 public enum TransactionType {
-    INCOME,
-    EXPENSE
+    PIX,
+    BOLETO,
+    TRANSFERENCIA,
+    TED
+
 }
+
