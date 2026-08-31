@@ -13,5 +13,9 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
 
     List<Transaction> findByDateBetween(LocalDate start, LocalDate end);
 
-    List<Transaction> findByCategory(String category);
+    List<Transaction> findBySenderId(String senderId);
+
+    List<Transaction> findByReceiverId(String receiverId);
+
+    List<Transaction> findBySenderOrReceiverId(String senderId, String receiverId);s
 }
