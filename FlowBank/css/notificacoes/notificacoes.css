@@ -1,0 +1,12 @@
+.notificacoes-container {
+    background-color: #9c9c9c;
+    padding: 28px 16px;
+    border-radius: 16px 16px 0 0;
+}
+
+.notificacao {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 4px;
+}

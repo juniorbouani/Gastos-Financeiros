@@ -1,0 +1,34 @@
+.seguranca-opcao {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.seguros {
+    margin-top: 24px;
+}
+
+.prata {
+    color: silver;
+}
+
+.ouro {
+    color: gold;
+}
+
+.seguros {
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.seguros h3::before {
+    content: '';
+    display: block;
+    margin-bottom: 24px;
+    height: 2px;
+    opacity: 10%;
+    width: 100%;
+    background-color: black;
+}

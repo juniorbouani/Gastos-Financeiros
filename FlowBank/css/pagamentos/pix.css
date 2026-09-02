@@ -1,0 +1,21 @@
+.saldo-container {
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+}
+
+.botoesPix {
+    display: flex;
+    justify-content: space-around;
+}
+
+.botoesPix a {
+    text-align: center;
+}
+
+.botaoMenuPix {
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+}

@@ -1,0 +1,17 @@
+.configuracao-opcao {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.configuracoes-conteudo {
+    margin-bottom: 48px;
+}
+
+.configuracao-opcao span {
+    color: red;
+}

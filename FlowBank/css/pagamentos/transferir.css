@@ -1,0 +1,17 @@
+.labelInput {
+    width: 100%;
+}
+
+.labelInput label {
+    font-size: 1.250rem;
+}
+
+.labelInput input {
+    display: block;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+}
