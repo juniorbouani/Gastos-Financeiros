@@ -17,5 +17,6 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
 
     List<Transaction> findByReceiverId(String receiverId);
 
+
     List<Transaction> findBySenderIdOrReceiverId(String senderId, String receiverId);
 }
