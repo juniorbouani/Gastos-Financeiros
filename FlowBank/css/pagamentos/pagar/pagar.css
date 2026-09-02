@@ -1,0 +1,13 @@
+.botoesPagar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.botaoMenuPagar {
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+    height: 50px;
+    align-items: center;
+}

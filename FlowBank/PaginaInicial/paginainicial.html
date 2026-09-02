@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Menu Principal - FlowBank</title>
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="header-conteudo">
+        <h1>Olá, {primeiroNome}!</h1>
+        <nav class="header-navegacao">
+          <a href="../notificacoes/notificacoes.html"
+            ><img src="../img/Notificacoes.svg" alt=""
+          /></a>
+          <a href="../configuracoes/configuracoes.html"
+            ><img src="../img/Configuracoes.svg" alt=""
+          /></a>
+          <a href="../perfil/perfil.html"
+            ><img src="../img/Conta.svg" alt=""
+          /></a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="botoes">
+        <a href="../pagamentos/pix.html"
+          ><div class="botaoMenu">
+            <img src="../img/Pix.svg" alt="" />
+            <p class="pix-p">Pix</p>
+          </div></a
+        >
+        <a href="../pagamentos/pagar/pagar.html"
+          ><div class="botaoMenu">
+            <img src="../img/Pagar.svg" alt="" />
+            <p>Pagar</p>
+          </div>
+        </a>
+        <a href="../seguranca/seguranca.html"
+          ><div class="botaoMenu">
+            <img src="../img/Seguranca.svg" alt="" />
+            <p class="palavra-limitada">Segurança</p>
+          </div>
+        </a>
+        <a href="../shop/shop.html"
+          ><div class="botaoMenu">
+            <img src="../img/Shop.svg" alt="" />
+            <p>Shop</p>
+          </div>
+        </a>
+        <a href="../cartoes/cartoes.html"
+          ><div class="botaoMenu">
+            <img src="../img/Cartao.svg" alt="" />
+            <p>Cartões</p>
+          </div>
+        </a>
+        <a href="../menu/menu.html"
+          ><div class="botaoMenu">
+            <img src="../img/Menu.svg" alt="" />
+            <p class="palavra-limitada">Menu</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="saldo-container">
+        <div class="saldo">
+          <h2>Saldo:</h2>
+          <p id="saldo">R$ 1.250,00</p>
+        </div>
+        <button
+          id="btn-toggle-saldo"
+          type="button"
+          aria-label="Alternar visibilidade do saldo"
+        >
+          <img
+            id="icone-olho"
+            src="../img/Ver.svg"
+            alt="Mostrar/Esconder saldo"
+          />
+        </button>
+      </div>
+
+      <div class="oquefazer-container">
+        <div class="oquefazer">
+          <h2>O que fazer?</h2>
+          <div class="opcoes-oquefazer">
+            <a href="../cartoes/cartoes.html">
+            <div class="opcoes">
+                <p>Ver Cartões</p>
+                <img src="../img/Cartao.svg" alt="" />
+              </div>
+            </a>
+            <a href="../cartoes/cartoes.html">
+            <div class="opcoes">
+                <p>Meu Dinheiro</p>
+                <img src="../img/porquinho.svg" alt="" />
+              </div>
+            </a>
+            <a href="../emprestimo/emprestimo.html">
+            <div class="opcoes">
+                <p>Empréstimo</p>
+                <img src="../img/emprestimo.svg" alt="" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="solucoes-container">
+        <div class="solucoes-conteudo">
+          <h2>Soluções para Você</h2>
+          <div class="solucao">
+            <h3>Aumente sua segurança!</h3>
+            <a href="../seguranca/seguranca.html" class="botao">Central de Segurança</a>
+          </div>
+          <div class="solucao">
+            <h3>Contrate nosso Seguro Digital!</h3>
+            <a href="../seguranca/seguroDigital.html" class="botao">Seguro Digital</a>
+          </div>
+          <div class="solucao">
+            <h3>Veja novas ofertas no Shop!</h3>
+            <a href="../shop/shop.html" class="botao">Shop</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer-principal-container">
+      <div class="footer-principal-conteudo">
+        <div class="footer-principal-nav">
+          <a href="../PaginaInicial/paginainicial.html"
+            ><img src="../img/home.svg" alt="" />
+            <p>Home</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../emprestimo/emprestimo.html"
+            ><img src="../img/emprestimo.svg" alt="" />
+            <p class="palavra-limitada">Empréstimo</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../cartoes/cartoes.html"
+            ><img src="../img/Cartao.svg" alt="" />
+            <p>Cartões</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../shop/shop.html"
+            ><img src="../img/Shop.svg" alt="" />
+            <p>Shop</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../configuracoes/configuracoes.html"
+            ><img src="../img/Configuracoes.svg" alt="" />
+            <p class="palavra-limitada">Configurações</p></a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

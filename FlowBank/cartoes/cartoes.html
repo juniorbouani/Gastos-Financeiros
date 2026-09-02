@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Cartões - FlowBank</title>
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="header-conteudo">
+        <div class="saldo-container">
+          <a href="../PaginaInicial/paginainicial.html">
+            <img src="../img/Voltar.svg" alt="" />
+          </a>
+        </div>
+        <nav class="header-navegacao">
+          <a href="../notificacoes/notificacoes.html"
+            ><img src="../img/Notificacoes.svg" alt=""
+          /></a>
+          <a href="../configuracoes/configuracoes.html"
+            ><img src="../img/Configuracoes.svg" alt=""
+          /></a>
+          <a href="../perfil/perfil.html"
+            ><img src="../img/Conta.svg" alt=""
+          /></a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="cartoes-container">
+        <div class="cartao">
+          <h3>Você ainda não cadastrou nenhum cartão.</h3>
+          <button class="botao">CADASTRAR CARTÃO</button>
+        </div>
+
+        <div class="meudinheiro-container">
+          <h3>Meu Dinheiro:</h3>
+
+          <div class="botoesCartao">
+            <a href="../pagamentos/pagar/transferirPagar.html">
+              <div class="botaoCartaoPagar">
+                <img src="../img/Pagar.svg" alt="" />
+                <p class="pix-p">Transferir</p>
+              </div>
+            </a>
+            <a href="../pagamentos/pagar/extrato.html"
+              ><div class="botaoCartaoPagar">
+                <img src="../img/boleto.svg" alt="" />
+                <p>Extrato</p>
+              </div></a
+            >
+          </div>
+
+          <div class="saldo-cartoes">
+            <h2>Saldo:</h2>
+            <p id="saldo">R$ 1.250,00</p>
+            <button
+              id="btn-toggle-saldo"
+              type="button"
+              aria-label="Alternar visibilidade do saldo"
+            >
+              <img
+                id="icone-olho"
+                src="../img/Ver.svg"
+                alt="Mostrar/Esconder saldo"
+              />
+            </button>
+          </div>
+        </div>
+
+        <div class="cartao-container">
+            <h3>Seu Cartão ficará aqui!</h3>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-principal-container">
+      <div class="footer-principal-conteudo">
+        <div class="footer-principal-nav">
+          <a href="../PaginaInicial/paginainicial.html"
+            ><img src="../img/home.svg" alt="" />
+            <p>Home</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../emprestimo/emprestimo.html"
+            ><img src="../img/emprestimo.svg" alt="" />
+            <p class="palavra-limitada">Empréstimo</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../cartoes/cartoes.html"
+            ><img src="../img/Cartao.svg" alt="" />
+            <p>Cartões</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../shop/shop.html"
+            ><img src="../img/Shop.svg" alt="" />
+            <p>Shop</p></a
+          >
+        </div>
+        <div class="footer-principal-nav">
+          <a href="../configuracoes/configuracoes.html"
+            ><img src="../img/Configuracoes.svg" alt="" />
+            <p class="palavra-limitada">Configurações</p></a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

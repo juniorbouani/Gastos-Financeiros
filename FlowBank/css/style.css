@@ -1,0 +1,20 @@
+@import "../css/login/login.css";
+@import "../css/login/cadastro.css";
+@import "../css/global.css";
+@import "../css/paginainicial/paginainicial.css";
+@import "../css/notificacoes/notificacoes.css";
+@import "../css/configuracoes/configuracoes.css";
+@import "../css/perfil/perfil.css";
+@import "../css/perfil/dadoscadastrais.css";
+@import "../css/extras/sobre.css";
+@import "../css/pagamentos/pix.css";
+@import "../css/pagamentos/transferir.css";
+@import "../css/pagamentos/confirma-dados.css";
+@import "../css/pagamentos/pagar/pagar.css";
+@import "../css/pagamentos/pagar/extrato.css";
+@import "../css/seguranca/seguranca.css";
+@import "../css/shop/shop.css";
+@import "../css/cartoes/cartoes.css";
+@import "../css/perfil/apagarConta.css";
+
+/*NESTA PÁGINA, APENAS PUXE O CSS DE OUTROS ARQUIVOS */

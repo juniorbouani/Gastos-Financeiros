@@ -1,0 +1,13 @@
+.dados {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.dados-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  height: 50vh;
+}
