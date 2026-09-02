@@ -27,6 +27,11 @@ public class TransactionController {
         this.service = service;
     }
 
+    @GetMapping
+    public Page<Transaction> list(Pageable pageable) {
+        return service.listAllPaginated(pageable);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Transaction> findById(@PathVariable String id) {
         return service.findById(id)
@@ -57,20 +62,4 @@ public class TransactionController {
         return service.listByType(type);
     }
 
-    @GetMapping("/period")
-    public List<Transaction> listByPeriod(
-            @RequestParam LocalDate start,
-            @RequestParam LocalDate end) {
-        return service.listByPeriod(start, end);
-    }
-
-    @GetMapping("/summary")
-    public SummaryResponse getSummary(@RequestParam YearMonth month){
-        return service.getSumary(month);
-    }
-
-    @GetMapping
-    public Page<Transaction> list(Pageable pageable) {
-        return service.listAllPaginated(pageable);
-    }
 }

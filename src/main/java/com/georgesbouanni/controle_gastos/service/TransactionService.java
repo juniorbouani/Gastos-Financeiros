@@ -1,18 +1,21 @@
 package com.georgesbouanni.controle_gastos.service;
 
-import com.georgesbouanni.controle_gastos.dto.SummaryResponse;
+import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Transaction;
+import com.georgesbouanni.controle_gastos.model.TransactionStatus;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
+import com.georgesbouanni.controle_gastos.model.User;
 import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
+import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.YearMonth;
+
 import java.util.List;
 
 import java.util.Optional;
@@ -21,10 +24,12 @@ import java.util.Optional;
 public class TransactionService {
 
     private final TransactionRepository repository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public TransactionService(TransactionRepository repository) {
+    public TransactionService(TransactionRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
     public List<Transaction> listAll() {
@@ -36,6 +41,25 @@ public class TransactionService {
     }
 
     public Transaction save(Transaction transaction) {
+        User sender = userRepository.findById(transaction.getSenderId())
+                .orElseThrow(() -> new ResourceNotFoundException("Remetente não encontrado com id: " + transaction.getSenderId()));
+
+        if (sender.getBalance().compareTo(transaction.getValue()) < 0) {
+            throw new InsuficientBalanceException("Saldo insuficiente para realizar essa transação");
+        }
+
+        sender.setBalance(sender.getBalance().subtract(transaction.getValue()));
+        userRepository.save(sender);
+
+        if (transaction.getReceiverId() != null) {
+            User receiver = userRepository.findById(transaction.getReceiverId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Destinatario não encontrado com id: " + transaction.getReceiverId()));
+
+            receiver.setBalance(receiver.getBalance().add(transaction.getValue()));
+            userRepository.save(receiver);
+        }
+
+        transaction.setStatus(TransactionStatus.COMPLETED);
         return repository.save(transaction);
     }
 
@@ -46,7 +70,7 @@ public class TransactionService {
         existing.setValue(updatedData.getValue());
         existing.setDate(updatedData.getDate());
         existing.setType(updatedData.getType());
-        existing.setCategory(updatedData.getCategory());
+        existing.setDestination(updatedData.getDestination());
 
         return repository.save(existing);
     }
@@ -63,25 +87,8 @@ public class TransactionService {
         return repository.findByDateBetween(start, end);
     }
 
-    public SummaryResponse getSumary(YearMonth month) {
-        LocalDate start = month.atDay(1);
-        LocalDate end = month.atEndOfMonth();
-
-        List<Transaction> transactions = repository.findByDateBetween(start, end);
-
-        BigDecimal totalIncome = transactions.stream()
-                .filter(t -> t.getType() == TransactionType.INCOME)
-                .map(Transaction::getValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        BigDecimal totalExpense = transactions.stream()
-                .filter(t -> t.getType() == TransactionType.EXPENSE)
-                .map(Transaction::getValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        BigDecimal balance = totalIncome.subtract(totalExpense);
-
-        return new SummaryResponse(month.toString(), totalIncome, totalExpense, balance);
+    public List<Transaction> listByUser(String userId) {
+        return repository.findBySenderIdOrReceiverId(userId, userId);
     }
 
     public Page<Transaction> listAllPaginated(Pageable pageable) {

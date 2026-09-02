@@ -38,6 +38,10 @@ public class User {
     @PositiveOrZero(message = "O saldo não pode ser negativo")
     private BigDecimal balance;
 
+
+    public User() {
+    }
+
     public User(String name, String cpf, String numeroTelefone, LocalDate dataNascimento, String senhaHash, String email, BigDecimal balance) {
         this.name = name;
         this.cpf = cpf;
