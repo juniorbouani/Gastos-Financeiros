@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Transaction;
@@ -9,15 +10,12 @@ import com.georgesbouanni.controle_gastos.model.User;
 import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-
 import java.util.List;
-
 import java.util.Optional;
 
 @Service
@@ -36,36 +34,51 @@ public class TransactionService {
         return repository.findAll();
     }
 
-    public Optional<Transaction> findById(String id) {
+    public Page<Transaction> listAllPaginated(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public Optional<Transaction> findById(Long id) {
         return repository.findById(id);
     }
 
-    public Transaction save(Transaction transaction) {
-        User sender = userRepository.findById(transaction.getSenderId())
-                .orElseThrow(() -> new ResourceNotFoundException("Remetente não encontrado com id: " + transaction.getSenderId()));
+    public Transaction save(TransactionRequest request) {
+        User sender = userRepository.findById(request.getSenderId())
+                .orElseThrow(() -> new ResourceNotFoundException("Remetente não encontrado com id: " + request.getSenderId()));
 
-        if (sender.getBalance().compareTo(transaction.getValue()) < 0) {
+        if (sender.getBalance().compareTo(request.getValue()) < 0) {
             throw new InsuficientBalanceException("Saldo insuficiente para realizar essa transação");
         }
 
-        sender.setBalance(sender.getBalance().subtract(transaction.getValue()));
+        sender.setBalance(sender.getBalance().subtract(request.getValue()));
         userRepository.save(sender);
 
-        if (transaction.getReceiverId() != null) {
-            User receiver = userRepository.findById(transaction.getReceiverId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Destinatario não encontrado com id: " + transaction.getReceiverId()));
-
-            receiver.setBalance(receiver.getBalance().add(transaction.getValue()));
+        User receiver = null;
+        if (request.getReceiverId() != null) {
+            receiver = userRepository.findById(request.getReceiverId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Destinatario não encontrado com id: " + request.getReceiverId()));
+            receiver.setBalance(receiver.getBalance().add(request.getValue()));
             userRepository.save(receiver);
         }
 
-        transaction.setStatus(TransactionStatus.COMPLETED);
+        Transaction transaction = new Transaction(
+                request.getDescription(),
+                request.getValue(),
+                request.getDate(),
+                request.getType(),
+                TransactionStatus.COMPLETED,
+                sender,
+                receiver,
+                request.getDestination()
+        );
+
         return repository.save(transaction);
     }
 
-    public Transaction update(String id, Transaction updatedData) {
+    public Transaction update(Long id, Transaction updatedData) {
         Transaction existing = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Transação não encontrada com id: " + id));
+
         existing.setDescription(updatedData.getDescription());
         existing.setValue(updatedData.getValue());
         existing.setDate(updatedData.getDate());
@@ -75,7 +88,7 @@ public class TransactionService {
         return repository.save(existing);
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 
@@ -87,11 +100,7 @@ public class TransactionService {
         return repository.findByDateBetween(start, end);
     }
 
-    public List<Transaction> listByUser(String userId) {
+    public List<Transaction> listByUser(Long userId) {
         return repository.findBySenderIdOrReceiverId(userId, userId);
-    }
-
-    public Page<Transaction> listAllPaginated(Pageable pageable) {
-        return repository.findAll(pageable);
     }
 }

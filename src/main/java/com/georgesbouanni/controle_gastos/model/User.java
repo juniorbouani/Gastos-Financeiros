@@ -1,20 +1,24 @@
 package com.georgesbouanni.controle_gastos.model;
 
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Document(collection = "users")
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "O nome deve ser obrigatório")
     private String name;
@@ -22,7 +26,7 @@ public class User {
     @NotBlank(message = "O CPF deve ser obrigatório")
     private String cpf;
 
-    @NotBlank(message = "O telefone deve4 ser obrigatório")
+    @NotBlank(message = "O telefone deve ser obrigatório")
     private String numeroTelefone;
 
     @NotNull(message = "A data de nascimento deve ser obrigatória")
@@ -38,7 +42,6 @@ public class User {
     @PositiveOrZero(message = "O saldo não pode ser negativo")
     private BigDecimal balance;
 
-
     public User() {
     }
 
@@ -52,11 +55,11 @@ public class User {
         this.balance = balance;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

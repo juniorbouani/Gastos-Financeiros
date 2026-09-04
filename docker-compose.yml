@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: flowbank-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - flowbank_data:/var/lib/postgresql/data
+
+volumes:
+  flowbank_data:

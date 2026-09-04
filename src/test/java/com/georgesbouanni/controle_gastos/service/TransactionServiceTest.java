@@ -1,6 +1,8 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
+import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionStatus;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
@@ -14,15 +16,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.Mockito.times;
 
-import java.lang.module.ResolutionException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -39,14 +39,20 @@ public class TransactionServiceTest {
 
     @Test
     void listarTodasAsTransacoes() {
+        User sender = new User();
+        sender.setId(1L);
+
+        User receiver = new User();
+        receiver.setId(2L);
+
         Transaction transaction = new Transaction(
                 "Pix para João",
                 new BigDecimal("150.50"),
                 LocalDate.of(2026, 7, 20),
                 TransactionType.PIX,
                 TransactionStatus.COMPLETED,
-                "joãozinho234",
-                "matheuzinho876",
+                sender,
+                receiver,
                 null
         );
 
@@ -61,33 +67,34 @@ public class TransactionServiceTest {
 
     @Test
     void buscarTransacaoPorId() {
+        User sender = new User();
+        sender.setId(1L);
+
         Transaction transaction = new Transaction(
                 "Pix para João",
                 new BigDecimal("150.50"),
                 LocalDate.of(2026, 7, 20),
                 TransactionType.PIX,
                 TransactionStatus.COMPLETED,
-                "joãozinho234",
-                "matheuzinho876",
+                sender,
+                null,
                 null
         );
+        transaction.setId(10L);
 
-        transaction.setId("abc123");
+        when(repository.findById(10L)).thenReturn(Optional.of(transaction));
 
-        when(repository.findById("abc123")).thenReturn(Optional.of(transaction));
-
-        Optional<Transaction> resultado = service.findById("abc123");
+        Optional<Transaction> resultado = service.findById(10L);
 
         Assertions.assertTrue(resultado.isPresent());
         Assertions.assertEquals("Pix para João", resultado.get().getDescription());
-
     }
 
     @Test
     void retornarVazioQuandoNãoTiverID() {
-        when(repository.findById("id-invalido")).thenReturn(Optional.empty());
+        when(repository.findById(999L)).thenReturn(Optional.empty());
 
-        Optional<Transaction> resultado = service.findById("id-invalido");
+        Optional<Transaction> resultado = service.findById(999L);
 
         Assertions.assertTrue(resultado.isEmpty());
     }
@@ -95,83 +102,73 @@ public class TransactionServiceTest {
     @Test
     void salvarTransacaoComSaldoSuficiente() {
         User sender = new User();
-        sender.setId("sender123");
+        sender.setId(1L);
         sender.setBalance(new BigDecimal("500.00"));
 
         User receiver = new User();
-        receiver.setId("receiver543");
+        receiver.setId(2L);
         receiver.setBalance(new BigDecimal("100.00"));
 
-        Transaction transaction = new Transaction(
-                "Pix para João",
-                new BigDecimal("150.50"),
-                LocalDate.of(2026, 7, 20),
-                TransactionType.PIX,
-                TransactionStatus.COMPLETED,
-                "joãozinho234",
-                "matheuzinho876",
-                null
-        );
+        TransactionRequest request = new TransactionRequest();
+        request.setDescription("Pix para João");
+        request.setValue(new BigDecimal("150.50"));
+        request.setDate(LocalDate.of(2026, 7, 20));
+        request.setType(TransactionType.PIX);
+        request.setSenderId(1L);
+        request.setReceiverId(2L);
 
-        when(userRepository.findById("joãozinho234")).thenReturn(Optional.of(sender));
-        when(userRepository.findById("receiver543")).thenReturn(Optional.of(receiver));
-        when(repository.save(transaction)).thenReturn(transaction);
+        when(userRepository.findById(1L)).thenReturn(Optional.of(sender));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(receiver));
+        when(repository.save(Mockito.any(Transaction.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        Transaction resultado = service.save(transaction);
+        Transaction resultado = service.save(request);
 
         Assertions.assertNotNull(resultado);
         Assertions.assertEquals(TransactionStatus.COMPLETED, resultado.getStatus());
         Assertions.assertEquals(new BigDecimal("349.50"), sender.getBalance());
         Assertions.assertEquals(new BigDecimal("250.50"), receiver.getBalance());
-        Mockito.verify(repository, times(1)).save(transaction);
+        Mockito.verify(repository, times(1)).save(Mockito.any(Transaction.class));
     }
 
     @Test
     void lancarExcecaoQuandoTiverSaldoInsuficiente() {
         User sender = new User();
-        sender.setId("sender123");
+        sender.setId(1L);
         sender.setBalance(new BigDecimal("50.00"));
 
-        Transaction transaction = new Transaction(
-                "Pix para João",
-                new BigDecimal("150.50"),
-                LocalDate.of(2026, 7, 20),
-                TransactionType.PIX,
-                TransactionStatus.COMPLETED,
-                "joãozinho234",
-                "matheuzinho876",
-                null
-        );
+        TransactionRequest request = new TransactionRequest();
+        request.setDescription("Pix para João");
+        request.setValue(new BigDecimal("150.50"));
+        request.setDate(LocalDate.of(2026, 7, 20));
+        request.setType(TransactionType.PIX);
+        request.setSenderId(1L);
+        request.setReceiverId(2L);
 
-        when(userRepository.findById("joãozinho234")).thenReturn(Optional.of(sender));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(sender));
 
-        Assertions.assertThrows(InsuficientBalanceException.class, () -> service.save(transaction));
+        Assertions.assertThrows(InsuficientBalanceException.class, () -> service.save(request));
         Mockito.verify(repository, times(0)).save(Mockito.any());
     }
 
     @Test
     void lancarExcecaoQuandoRemetenteNaoExiste() {
-        Transaction transaction = new Transaction(
-                "Pix para João",
-                new BigDecimal("150.50"),
-                LocalDate.of(2026, 7, 20),
-                TransactionType.PIX,
-                null,
-                "sender-inexistente",
-                "matheuzinho876",
-                null
-        );
+        TransactionRequest request = new TransactionRequest();
+        request.setDescription("Pix para João");
+        request.setValue(new BigDecimal("150.50"));
+        request.setDate(LocalDate.of(2026, 7, 20));
+        request.setType(TransactionType.PIX);
+        request.setSenderId(999L);
+        request.setReceiverId(2L);
 
-        when(userRepository.findById("sender-inexistente")).thenReturn(Optional.empty());
+        when(userRepository.findById(999L)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(ResolutionException.class, () -> service.save(transaction));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.save(request));
     }
 
     @Test
     void deletarTransacao() {
-        service.delete("abc123");
+        service.delete(1L);
 
-        Mockito.verify(repository, times(1)).deleteById("abc123");
+        Mockito.verify(repository, times(1)).deleteById(1L);
     }
-
 }

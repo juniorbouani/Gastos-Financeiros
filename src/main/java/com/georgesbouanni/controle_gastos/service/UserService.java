@@ -15,15 +15,23 @@ public class UserService {
     private final UserRepository repository;
 
     @Autowired
-    public UserService(UserRepository repository) { this.repository = repository; }
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
-    public List<User> findAll() { return repository.findAll(); }
+    public List<User> findAll() {
+        return repository.findAll();
+    }
 
-    public Optional<User> findById(String id) { return repository.findById(id); }
+    public Optional<User> findById(Long id) {
+        return repository.findById(id);
+    }
 
-    public User save(User user) { return repository.save(user); }
+    public User save(User user) {
+        return repository.save(user);
+    }
 
-    public User update(String id,User user) {
+    public User update(Long id, User user) {
         User exist = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado com id: " + id));
         exist.setName(user.getName());
@@ -31,13 +39,18 @@ public class UserService {
         exist.setEmail(user.getEmail());
         exist.setDataNascimento(user.getDataNascimento());
         exist.setBalance(user.getBalance());
-
         return repository.save(exist);
     }
 
-    public void delete(String id) { repository.deleteById(id); }
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 
-    public Optional<User> findByCpf(String cpf) { return repository.findByCPF(cpf);}
+    public Optional<User> findByCpf(String cpf) {
+        return repository.findByCpf(cpf);
+    }
 
-    public Optional<User> findByEmail(String email) {return repository.findByEmail(email); }
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
 }

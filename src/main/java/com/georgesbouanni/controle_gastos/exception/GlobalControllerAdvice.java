@@ -24,20 +24,17 @@ public class GlobalControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handValidationErrors(MethodArgumentNotValidException ex) {
-        Map<String, String> errors  = new HashMap<>();
-
+        Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage()));
-
         return ResponseEntity.badRequest().body(errors);
     }
 
     @ExceptionHandler(InsuficientBalanceException.class)
-    public ResponseEntity<ErrorResponse> handleInsufficientBalance(InsuficientBalanceException ex, WebRequest request){
+    public ResponseEntity<ErrorResponse> handleInsufficientBalance(InsuficientBalanceException ex, WebRequest request) {
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
                 "Bad Request", ex.getMessage(),
                 request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
-
 }

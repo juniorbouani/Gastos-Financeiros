@@ -1,19 +1,20 @@
 package com.georgesbouanni.controle_gastos.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Document(collection = "transactions")
+@Entity
+@Table(name = "transactions")
 public class Transaction {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "A descrição é obrigatória!")
     private String description;
@@ -26,15 +27,21 @@ public class Transaction {
     private LocalDate date;
 
     @NotNull(message = "O tipo é obrigatorio!")
+    @Enumerated(EnumType.STRING)
     private TransactionType type;
 
     @NotNull(message = "O status é obrigatorio")
+    @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
-    @NotBlank(message = "O remetente é obrigatório!")
-    private String senderId;
+    @NotNull(message = "O remetente é obrigatório!")
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
-    private String receiverId;
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    private User receiver;
 
     private String destination;
 
@@ -42,22 +49,22 @@ public class Transaction {
     }
 
     public Transaction(String description, BigDecimal value, LocalDate date, TransactionType type,
-                       TransactionStatus status, String senderId, String receiverId, String destination) {
+                       TransactionStatus status, User sender, User receiver, String destination) {
         this.description = description;
         this.value = value;
         this.date = date;
         this.type = type;
         this.status = status;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.sender = sender;
+        this.receiver = receiver;
         this.destination = destination;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -101,20 +108,20 @@ public class Transaction {
         this.status = status;
     }
 
-    public String getSenderId() {
-        return senderId;
+    public User getSender() {
+        return sender;
     }
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public String getReceiverId() {
-        return receiverId;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setReceiverId(String receiverId) {
-        this.receiverId = receiverId;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public String getDestination() {

@@ -1,6 +1,6 @@
 package com.georgesbouanni.controle_gastos.controller;
 
-import com.georgesbouanni.controle_gastos.dto.SummaryResponse;
+import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
 import com.georgesbouanni.controle_gastos.service.TransactionService;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.List;
 
 @RestController
@@ -33,7 +32,7 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaction> findById(@PathVariable String id) {
+    public ResponseEntity<Transaction> findById(@PathVariable Long id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -41,18 +40,18 @@ public class TransactionController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Transaction create(@Valid @RequestBody Transaction transaction) {
-        return service.save(transaction);
+    public Transaction create(@Valid @RequestBody TransactionRequest request) {
+        return service.save(request);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transaction> update(@PathVariable String id, @Valid @RequestBody Transaction transaction) {
+    public ResponseEntity<Transaction> update(@PathVariable Long id, @Valid @RequestBody Transaction transaction) {
         Transaction updated = service.update(id, transaction);
         return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
@@ -62,4 +61,15 @@ public class TransactionController {
         return service.listByType(type);
     }
 
+    @GetMapping("/period")
+    public List<Transaction> listByPeriod(
+            @RequestParam LocalDate start,
+            @RequestParam LocalDate end) {
+        return service.listByPeriod(start, end);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Transaction> listByUser(@PathVariable Long userId) {
+        return service.listByUser(userId);
+    }
 }
