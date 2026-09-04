@@ -1,0 +1,31 @@
+body {
+    margin: 0 auto;
+    max-width: 1200px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, p, a, input, label, span {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #000;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    background-color: #9c9c9c;
+    padding: 28px 16px;
+    border-radius: 16px;
+    margin-bottom: 36px;
+}
+
+.footer-principal-container {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: white;
+}

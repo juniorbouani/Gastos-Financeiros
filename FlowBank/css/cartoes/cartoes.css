@@ -1,0 +1,54 @@
+.cartao {
+    margin-bottom: 24px;
+}
+
+.meudinheiro-container {
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.meudinheiro-container h3 {
+    margin-top: 8px;
+    font-size: 1.5rem;
+}
+
+.saldo-cartoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.saldo-cartoes h2 {
+    font-size: 1.4rem;
+}
+
+.botoesCartao {
+    display: flex;
+    justify-content: space-around;
+}
+
+.botaoCartaoPagar {
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+    height: 50px;
+    align-items: center;
+    border: 1px solid black;
+    width: 64px;
+    margin: 12px 0 12px 0;
+}
+
+.cartao-container {
+    margin-top: 24px;
+    background-color: white;
+    padding: 12px;
+    border-radius: 4px;
+    height: 120px;
+}
+
+.cartoes-container {
+    margin-bottom: 48px;
+}

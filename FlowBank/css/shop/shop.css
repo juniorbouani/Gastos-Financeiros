@@ -1,0 +1,23 @@
+.shop-conteudo {
+  margin-bottom: 48px;
+}
+
+.produto,
+.produto-confirmar {
+  margin: 24px 0 36px 0;
+  background-color: white;
+  padding: 18px;
+  border-radius: 4px;
+}
+
+.produto-descricao p,
+.produto-descricao-confirmar p {
+  font-size: 1.8rem;
+}
+.produto-descricao span, .produto-descricao-confirmar span {
+  font-size: 1.2rem;
+}
+
+.produto-confirmar {
+    margin-bottom: 4px;
+}

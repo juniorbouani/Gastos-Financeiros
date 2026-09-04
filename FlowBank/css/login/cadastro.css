@@ -1,0 +1,61 @@
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.cadastro-container h1 {
+  font-size: 2.5rem;
+}
+
+.cadastro-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  margin-top: 8px;
+}
+
+.caixa-de-cadastro input {
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.caixa-de-cadastro label {
+  font-size: 1.25rem;
+}
+
+.botao {
+  display: block;
+  padding: 16px;
+  background-color: #3c3c3c;
+  border-radius: 4px;
+  text-align: center;
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+  font-weight: 600;
+  letter-spacing: 0.09rem;
+}
+
+.botao:hover {
+  background-color: #1c1c1c;
+}
+
+.cadastro-conteudo p {
+  margin-top: 12px;
+}
+
+.cadastro-conteudo p a {
+  padding: 0;
+  color: blue;
+  text-decoration: underline;
+  background-color: initial;
+  text-align: start;
+}

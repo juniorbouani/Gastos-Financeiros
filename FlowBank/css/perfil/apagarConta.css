@@ -1,0 +1,29 @@
+.apagar-conteudo {
+    text-align: center;
+}
+
+.apagar-conteudo p {
+    margin: 12px 0 12px 0;
+}
+
+.opcoesApagar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.opcoesApagar a {
+    background-color: white;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.opcoesApagar button {
+    background-color: red;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 4px;
+}
