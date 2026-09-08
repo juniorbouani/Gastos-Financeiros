@@ -4,6 +4,7 @@ import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.User;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> findAll() {
@@ -28,6 +31,7 @@ public class UserService {
     }
 
     public User save(User user) {
+        user.setSenhaHash(passwordEncoder.encode(user.getSenhaHash()));
         return repository.save(user);
     }
 
