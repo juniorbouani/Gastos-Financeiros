@@ -1,6 +1,6 @@
 package com.georgesbouanni.controle_gastos.dto;
 
-import com.georgesbouanni.controle_gastos.model.TransactionType;
+import  com.georgesbouanni.controle_gastos.model.TransactionType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
