@@ -31,6 +31,7 @@ public class UserService {
     }
 
     public User save(User user) {
+        user.setCpf(user.getCpf().replaceAll("[^0-9]", ""));
         user.setSenhaHash(passwordEncoder.encode(user.getSenhaHash()));
         return repository.save(user);
     }

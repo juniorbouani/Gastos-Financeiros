@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+@Service
 public class CustomUserDetailService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -22,6 +24,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
         User user = userRepository.findByCpf(cpf)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com cpf: " + cpf));
+
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getCpf())
                 .password(user.getSenhaHash())

@@ -27,15 +27,17 @@ public class AuthController {
 
     @PostMapping("/login")
     public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        String cpfLimpo = request.getCpf().replaceAll("[^0-9]", "");
+
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getCpf(), request.getSenha())
+                    new UsernamePasswordAuthenticationToken(cpfLimpo, request.getSenha())
             );
         } catch (Exception e) {
             throw new BadCredentialsException("CPF ou senha inválidos");
         }
 
-        String token = jwtService.generateToken(request.getCpf());
+        String token = jwtService.generateToken(cpfLimpo);
         return new LoginResponse(token);
     }
 }
