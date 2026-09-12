@@ -46,4 +46,12 @@ public class GlobalControllerAdvice {
                 request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
+
+    @ExceptionHandler(PixKeyAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handlePixAlreadyExists(PixKeyAlreadyExistsException ex, WebRequest request) {
+        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(),
+                "Conflict", ex.getMessage(),
+                request.getDescription(false).replace("uri=", ""));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 }
