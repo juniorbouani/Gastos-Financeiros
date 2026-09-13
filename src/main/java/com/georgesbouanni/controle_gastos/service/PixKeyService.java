@@ -29,13 +29,18 @@ public class PixKeyService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com id: " + userId));
 
-        // se for ? recebe uma chave pix aleatoria, se for : signifca que a variavel recebe o valor da keyValue que pode ser um cpf, email
-        String finalKeyValue = (type == PixKeyType.ALEATORIA)
-                ? UUID.randomUUID().toString()
-                : keyValue;
+        String finalKeyValue;
+
+        if (type == PixKeyType.ALEATORIA) {
+            finalKeyValue = UUID.randomUUID().toString();
+        } else if (type == PixKeyType.EMAIL) {
+            finalKeyValue = keyValue.trim().toLowerCase();
+        } else {
+            finalKeyValue = keyValue.trim();
+        }
 
         if (repository.existsByKeyValue(finalKeyValue)) {
-            throw new PixKeyAlreadyExistsException("Essa chave pix já está em uso.");
+            throw new PixKeyAlreadyExistsException("Essa chave PIX já está em uso.");
         }
 
         PixKey pixKey = new PixKey(user, type, finalKeyValue);

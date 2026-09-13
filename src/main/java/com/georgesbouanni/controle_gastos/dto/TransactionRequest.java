@@ -30,6 +30,11 @@ public class TransactionRequest {
 
     private String destination;
 
+    private String pixKey;
+
+    public String getPixKey() { return pixKey; }
+
+    public void setPixKey(String pixKey) { this.pixKey = pixKey; }
 
     public String getDescription() {
         return description;

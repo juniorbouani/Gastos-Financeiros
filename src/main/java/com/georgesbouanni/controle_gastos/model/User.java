@@ -1,5 +1,7 @@
 package com.georgesbouanni.controle_gastos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +34,7 @@ public class User {
     @NotNull(message = "A data de nascimento deve ser obrigatória")
     private LocalDate dataNascimento;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank(message = "A senha deve ser obrigatória")
     private String senhaHash;
 

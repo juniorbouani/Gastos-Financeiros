@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.exception.EmailAlreadyExistsException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.User;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
@@ -31,6 +32,13 @@ public class UserService {
     }
 
     public User save(User user) {
+        String emailNormalizado = user.getEmail().trim().toLowerCase();
+
+        if (repository.findByEmail(emailNormalizado).isPresent()) {
+            throw new EmailAlreadyExistsException("Esse e-mail já está cadastrado.");
+        }
+
+        user.setEmail(emailNormalizado);
         user.setCpf(user.getCpf().replaceAll("[^0-9]", ""));
         user.setSenhaHash(passwordEncoder.encode(user.getSenhaHash()));
         return repository.save(user);

@@ -54,4 +54,12 @@ public class GlobalControllerAdvice {
                 request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleEmailAlreadyExists(EmailAlreadyExistsException ex, WebRequest request) {
+        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(),
+                "Conflict", ex.getMessage(),
+                request.getDescription(false).replace("uri=", ""));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 }

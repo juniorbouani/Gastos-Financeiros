@@ -3,10 +3,8 @@ package com.georgesbouanni.controle_gastos.service;
 import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
-import com.georgesbouanni.controle_gastos.model.Transaction;
-import com.georgesbouanni.controle_gastos.model.TransactionStatus;
-import com.georgesbouanni.controle_gastos.model.TransactionType;
-import com.georgesbouanni.controle_gastos.model.User;
+import com.georgesbouanni.controle_gastos.model.*;
+import com.georgesbouanni.controle_gastos.repository.PixKeyRepository;
 import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +21,13 @@ public class TransactionService {
 
     private final TransactionRepository repository;
     private final UserRepository userRepository;
+    private final PixKeyRepository pixKeyRepository;
 
     @Autowired
-    public TransactionService(TransactionRepository repository, UserRepository userRepository) {
+    public TransactionService(TransactionRepository repository, UserRepository userRepository, PixKeyRepository pixKeyRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
+        this.pixKeyRepository = pixKeyRepository;
     }
 
     public List<Transaction> listAll() {
@@ -54,9 +54,17 @@ public class TransactionService {
         userRepository.save(sender);
 
         User receiver = null;
-        if (request.getReceiverId() != null) {
+
+        if (request.getType() == TransactionType.PIX && request.getPixKey() != null) {
+            PixKey pixKey = pixKeyRepository.findByKeyValue(request.getPixKey())
+                    .orElseThrow(() -> new ResourceNotFoundException("Chave PIX não encontrada: " + request.getPixKey()));
+            receiver = pixKey.getUser();
+        } else if (request.getReceiverId() != null) {
             receiver = userRepository.findById(request.getReceiverId())
                     .orElseThrow(() -> new ResourceNotFoundException("Destinatario não encontrado com id: " + request.getReceiverId()));
+        }
+
+        if (receiver != null) {
             receiver.setBalance(receiver.getBalance().add(request.getValue()));
             userRepository.save(receiver);
         }
