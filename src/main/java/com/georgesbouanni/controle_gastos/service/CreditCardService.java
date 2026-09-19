@@ -49,10 +49,10 @@ public class CreditCardService {
     private String gerarNumeroMascarado() {
         Random random = new Random();
         int ultimosDigitos = 1000 + random.nextInt(9000);
-        return "**** **** ****" + ultimosDigitos;
+        return " **** **** **** " + ultimosDigitos;
     }
 
-    private List<CreditCard> listByUser(Long userId) {
+    public List<CreditCard> listByUser(Long userId) {
         return cardRepository.findByUserId(userId);
     }
 
