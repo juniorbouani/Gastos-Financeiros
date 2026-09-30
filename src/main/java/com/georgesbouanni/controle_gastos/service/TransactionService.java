@@ -4,6 +4,7 @@ import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.*;
+import com.georgesbouanni.controle_gastos.repository.CategoryRepository;
 import com.georgesbouanni.controle_gastos.repository.PixKeyRepository;
 import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
@@ -22,12 +23,14 @@ public class TransactionService {
     private final TransactionRepository repository;
     private final UserRepository userRepository;
     private final PixKeyRepository pixKeyRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public TransactionService(TransactionRepository repository, UserRepository userRepository, PixKeyRepository pixKeyRepository) {
+    public TransactionService(TransactionRepository repository, UserRepository userRepository, PixKeyRepository pixKeyRepository, CategoryRepository categoryRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.pixKeyRepository = pixKeyRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public List<Transaction> listAll() {
@@ -69,6 +72,13 @@ public class TransactionService {
             userRepository.save(receiver);
         }
 
+        Category category = null;
+
+        if (request.getCategoryId() != null) {
+            category = categoryRepository.findById(request.getCategoryId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com id: " + request.getCategoryId()));
+        }
+
         Transaction transaction = new Transaction(
                 request.getDescription(),
                 request.getValue(),
@@ -77,7 +87,8 @@ public class TransactionService {
                 TransactionStatus.COMPLETED,
                 sender,
                 receiver,
-                request.getDestination()
+                request.getDestination(),
+                category
         );
 
         return repository.save(transaction);

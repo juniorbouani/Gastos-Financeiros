@@ -32,6 +32,8 @@ public class TransactionRequest {
 
     private String pixKey;
 
+    private Long categoryId;
+
     public String getPixKey() { return pixKey; }
 
     public void setPixKey(String pixKey) { this.pixKey = pixKey; }
@@ -90,5 +92,13 @@ public class TransactionRequest {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

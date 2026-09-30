@@ -7,6 +7,7 @@ import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionStatus;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
 import com.georgesbouanni.controle_gastos.model.User;
+import com.georgesbouanni.controle_gastos.repository.CategoryRepository;
 import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -34,6 +35,9 @@ public class TransactionServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private CategoryRepository categoryRepository;
+
     @InjectMocks
     private TransactionService service;
 
@@ -53,6 +57,7 @@ public class TransactionServiceTest {
                 TransactionStatus.COMPLETED,
                 sender,
                 receiver,
+                null,
                 null
         );
 
@@ -77,6 +82,7 @@ public class TransactionServiceTest {
                 TransactionType.PIX,
                 TransactionStatus.COMPLETED,
                 sender,
+                null,
                 null,
                 null
         );

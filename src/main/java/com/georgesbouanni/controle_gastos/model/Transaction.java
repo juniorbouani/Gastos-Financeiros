@@ -45,11 +45,16 @@ public class Transaction {
 
     private String destination;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Transaction() {
     }
 
     public Transaction(String description, BigDecimal value, LocalDate date, TransactionType type,
-                       TransactionStatus status, User sender, User receiver, String destination) {
+                       TransactionStatus status, User sender, User receiver, String destination,
+                       Category category) {
         this.description = description;
         this.value = value;
         this.date = date;
@@ -58,6 +63,7 @@ public class Transaction {
         this.sender = sender;
         this.receiver = receiver;
         this.destination = destination;
+        this.category = category;
     }
 
     public Long getId() {
@@ -130,5 +136,13 @@ public class Transaction {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
