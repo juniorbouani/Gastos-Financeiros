@@ -1,21 +1,29 @@
-.saldo-container {
-    display: flex;
-    gap: 24px;
-    justify-content: space-between;
-}
-
 .botoesPix {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  box-sizing: border-box;
+  gap: 12px;
 }
 
 .botoesPix a {
-    text-align: center;
+  text-align: center;
+  width: 100%;
 }
 
 .botaoMenuPix {
-    background-color: white;
-    padding: 8px;
-    border-radius: 4px;
-    text-align: center;
+  background-color: #d9d9d9;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.botaoMenuPix P {
+  color: #1f1c1c;
+}
+
+@media (min-width: 600px) {
+  .opcoes-oquefazer {
+    display: block;
+    width: 100%;
+  }
 }

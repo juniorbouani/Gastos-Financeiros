@@ -1,54 +1,70 @@
 .cartao {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
+}
+
+.cartao h3 {
+  margin-bottom: 4px;
 }
 
 .meudinheiro-container {
-    background-color: white;
-    padding: 8px;
-    border-radius: 4px;
+  background-color: #28273d;
+  padding: 8px;
+  border-radius: 4px;
 }
 
 .meudinheiro-container h3 {
-    margin-top: 8px;
-    font-size: 1.5rem;
+  margin-top: 8px;
+  font-size: 1.5rem;
 }
 
 .saldo-cartoes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
 }
 
 .saldo-cartoes h2 {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 .botoesCartao {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.botoesCartao a {
+    width: 100vw;
 }
 
 .botaoCartaoPagar {
-    background-color: white;
-    padding: 8px;
-    border-radius: 4px;
-    text-align: center;
-    height: 50px;
-    align-items: center;
-    border: 1px solid black;
-    width: 64px;
-    margin: 12px 0 12px 0;
+  background-color: #d9d9d9;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  height: 64px;
+  align-items: center;
+  border: 1px solid black;
+  width: 100%;
+  margin: 12px 0 12px 0;
+  box-sizing: border-box;
+}
+
+.botaoCartaoPagar p {
+  color: #1f1c1c;
 }
 
 .cartao-container {
-    margin-top: 24px;
-    background-color: white;
-    padding: 12px;
-    border-radius: 4px;
-    height: 120px;
+  margin-top: 24px;
+  background-color: #28273d;
+  padding: 12px;
+  border-radius: 4px;
+  height: 120px;
 }
 
 .cartoes-container {
-    margin-bottom: 48px;
+  margin-bottom: 48px;
 }

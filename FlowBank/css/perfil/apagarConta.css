@@ -14,9 +14,10 @@
 }
 
 .opcoesApagar a {
-    background-color: white;
+    background-color: #D9D9D9;
     padding: 12px;
     border-radius: 4px;
+    color: #1F1C1C;
 }
 
 .opcoesApagar button {

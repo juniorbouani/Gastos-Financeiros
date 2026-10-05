@@ -1,61 +1,100 @@
 .login-container {
   display: flex;
-  justify-content: center; 
-  align-items: center;     
+  justify-content: center;
+  align-items: center;
   height: 100vh;
+  background-color: #646370;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .login-container h1 {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
+}
+
+.login-container img {
+  width: 50%;
 }
 
 .login-container h3 {
-    font-size: 1.5rem;
-    margin-bottom: 24px;
-    margin-top: 8px;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  margin-top: 8px;
 }
 
 .caixa-de-login input {
-    display: block;
-    margin-top: 4px;
-    margin-bottom: 12px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 24px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .caixa-de-login label {
-    font-size: 1.250rem;
-}
-
-.botao {
-    display: block;
-    padding: 16px;
-    background-color: #3C3C3C;
-    border-radius: 4px;
-    text-align: center;
-    color: white;
-    width: 100%;
-    box-sizing: border-box;
-    transition: .2s ease;
-    font-weight: 600;
-    letter-spacing: .09rem;
-}
-
-.botao:hover {
-    background-color: #1C1C1C;
+  font-size: 1.25rem;
 }
 
 .login-conteudo p {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 .login-conteudo p a {
-    padding: 0;
-    color: blue;
-    text-decoration: underline;
+  padding: 0;
+  color: #0f00e0;
+  text-decoration: underline;
+  background-color: initial;
+  text-align: start;
+  transition: 0.2s ease;
+}
+
+.login-conteudo p a:hover {
+  color: #2b1cff;
+}
+
+@media (min-width: 1200px) {
+  .login-conteudo {
+    width: 50vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .login-container img {
+    display: none;
+  }
+  .login-container {
     background-color: initial;
-    text-align: start;
+  }
+  .login-conteudo {
+    background-color: #646370;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (min-width: 500px) {
+  .login-container h1 {
+    font-size: 3rem;
+  }
+  .login-container h3 {
+    font-size: 2rem;
+  }
+  .login-conteudo {
+    padding: 24px;
+  }
+  .caixa-de-login input {
+    width: 100%;
+    padding: 16px 32px;
+    box-sizing: border-box;
+  }
+  .caixa-de-login label {
+    font-size: 1.5rem;
+  }
+  .login-conteudo p {
+    font-size: 1rem;
+  }
 }

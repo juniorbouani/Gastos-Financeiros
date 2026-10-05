@@ -1,31 +1,138 @@
 body {
-    margin: 0 auto;
-    max-width: 1200px;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0 auto;
+  max-width: 1800px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #28273d;
 }
 
-h1, h2, h3, p, a, input, label, span {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    color: #000;
+h1,
+h2,
+h3,
+p,
+a,
+input,
+label,
+span,
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  color: #f6ecec;
+}
+
+input {
+  background-color: #28273d;
+  border: none;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .container {
-    background-color: #9c9c9c;
-    padding: 28px 16px;
-    border-radius: 16px;
-    margin-bottom: 36px;
+  background-color: #646370;
+  padding: 28px 16px;
+  border-radius: 16px;
+  margin-bottom: 36px;
+}
+
+.saldo h2, .saldo p  {
+    margin-left: 32px;
+}
+
+.saldo h2 {
+    font-size: 1.3rem;
+}
+
+.saldo-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
 }
 
 .footer-principal-container {
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
-    background-color: white;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: #d9d9d9;
+}
+
+.footer-principal-conteudo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-principal-nav {
+  display: block;
+  text-align: center;
+  width: 100px;
+}
+
+.footer-principal-nav img {
+    display: block;
+    justify-self: center;
+}
+
+.footer-principal-nav p {
+  color: #1F1C1C;
+}
+
+.botao {
+  display: block;
+  padding: 16px;
+  background-color: #2b1cff;
+  border-radius: 4px;
+  text-align: center;
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+  font-weight: 600;
+  letter-spacing: 0.09rem;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.botao:hover {
+  background-color: #0f00e0;
+}
+
+.header-navegacao {
+  display: flex;
+  align-items: center;
+}
+
+.header-navegacao a {
+  width: 25px;
+}
+
+.header-conteudo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.opcoes {
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.opcoes::after {
+  content: '';
+  display: block;
+  width: 2%;
+  height: 2px;
+  background-color: #28273d;
+  position: absolute;
+  left: 0;
+  bottom: -24px;
+}
+
+@media(max-width:370px) {
+    .saldo h2, .saldo p  {
+    margin-left: 8px;
+}
 }

@@ -10,14 +10,49 @@
   border-radius: 4px;
 }
 
+.produto a {
+  margin-top: 12px;
+}
+
+.produto p,
+.produto span {
+  color: #1f1c1c;
+  margin-top: 12px;
+}
+
 .produto-descricao p,
 .produto-descricao-confirmar p {
   font-size: 1.8rem;
+  color: #1f1c1c;
 }
-.produto-descricao span, .produto-descricao-confirmar span {
+.produto-descricao span,
+.produto-descricao-confirmar span {
   font-size: 1.2rem;
+  color: #1f1c1c;
 }
 
 .produto-confirmar {
-    margin-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 800px) {
+  .produto {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .produto img {
+    width: 50%;
+    border-radius: 8px;
+  }
+  .produto-descricao {
+    display: block;
+    align-items: center;
+  }
+  .produto-confirmar img {
+    width: 25%;
+  }
+  .produto-confirmar {
+    text-align: center;
+  }
 }

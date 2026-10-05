@@ -26,3 +26,9 @@
     justify-content: center;
     margin-top: 12px;
 }
+
+@media (min-width:700px) {
+    .perfil-dados img {
+       height: 25vw;  
+    }
+}

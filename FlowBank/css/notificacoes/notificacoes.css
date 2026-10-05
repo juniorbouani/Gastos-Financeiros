@@ -1,12 +1,11 @@
-.notificacoes-container {
-    background-color: #9c9c9c;
-    padding: 28px 16px;
-    border-radius: 16px 16px 0 0;
+.notificacao p {
+  color: #1f1c1c;
 }
 
 .notificacao {
-    margin-top: 12px;
-    padding: 12px;
-    background-color: white;
-    border-radius: 4px;
+  margin-top: 12px;
+  padding: 12px;
+  background-color: #d9d9d9;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }

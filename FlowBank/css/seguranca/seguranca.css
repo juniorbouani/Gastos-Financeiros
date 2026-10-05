@@ -1,34 +1,64 @@
 .seguranca-opcao {
-    margin-top: 12px;
-    padding: 12px;
-    background-color: white;
-    border-radius: 4px;
+  margin-top: 12px;
+  padding: 12px;
+  background-color: #d9d9d9;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin-bottom: 36px;
+}
+
+.seguranca-opcao::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #28273d;
+  bottom: -20px;
+  left: 0;
+}
+
+.seguranca-opcao p {
+  color: #0f00f0;
 }
 
 .seguros {
-    margin-top: 24px;
+  margin-top: 4px;
 }
 
 .prata {
-    color: silver;
+  color: silver;
 }
 
 .ouro {
-    color: gold;
+  color: gold;
 }
 
 .seguros {
-    background-color: white;
-    padding: 8px;
-    border-radius: 4px;
+  background-color: #28273d;
+  padding: 12px;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  margin-top: 12px;
+}
+
+.seguros li {
+  color: #d9d9d9;
 }
 
 .seguros h3::before {
-    content: '';
-    display: block;
-    margin-bottom: 24px;
-    height: 2px;
-    opacity: 10%;
-    width: 100%;
-    background-color: black;
+  content: "";
+  display: block;
+  margin-bottom: 24px;
+  height: 2px;
+  opacity: 10%;
+  width: 100%;
+  background-color: black;
+}
+
+@media (min-width: 600px) {
+   .seguranca-opcao p {
+    font-size: 1.3rem;
+  }
 }

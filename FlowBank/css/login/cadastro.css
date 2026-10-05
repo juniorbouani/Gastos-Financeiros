@@ -2,7 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 12px;
+}
+
+.cadastro-container img {
+  width: 45%;
 }
 
 .cadastro-container h1 {
@@ -30,22 +34,11 @@
   font-size: 1.25rem;
 }
 
-.botao {
-  display: block;
-  padding: 16px;
-  background-color: #3c3c3c;
-  border-radius: 4px;
-  text-align: center;
-  color: white;
-  width: 100%;
-  box-sizing: border-box;
-  transition: 0.2s ease;
-  font-weight: 600;
-  letter-spacing: 0.09rem;
-}
-
-.botao:hover {
-  background-color: #1c1c1c;
+.cadastro-conteudo {
+  background-color: #646370;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .cadastro-conteudo p {
@@ -58,4 +51,35 @@
   text-decoration: underline;
   background-color: initial;
   text-align: start;
+}
+
+@media (min-width: 1200px) {
+  .cadastro-conteudo {
+    width: 25vw;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .cadastro-container img {
+    display: none;
+  }
+}
+
+@media (min-width: 500px) {
+  .cadastro-container h1 {
+    font-size: 3rem;
+  }
+  .cadastro-container h3 {
+    font-size: 2rem;
+  }
+  .caixa-de-cadastro label {
+    font-size: 1.5rem;
+  }
+  .caixa-de-cadastro input {
+    padding: 16px 28px;
+  }
+  .cadastro-conteudo p {
+    font-size: 1.250rem;
+  }
 }
