@@ -1,58 +1,182 @@
-.shop-conteudo {
-  margin-bottom: 48px;
+/* --- TELA SHOP --- */
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
 }
 
-.produto,
-.produto-confirmar {
-  margin: 24px 0 36px 0;
-  background-color: white;
-  padding: 18px;
-  border-radius: 4px;
+.produto-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
-.produto a {
-  margin-top: 12px;
+.produto-card:hover {
+  transform: translateY(-4px);
+  border-color: #3b25eb;
+  box-shadow: 0 8px 24px rgba(59, 37, 235, 0.15);
 }
 
-.produto p,
-.produto span {
-  color: #1f1c1c;
-  margin-top: 12px;
+.produto-imagem-wrapper {
+  width: 100%;
+  height: 180px;
+  background-color: #1c1f29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
 }
 
-.produto-descricao p,
-.produto-descricao-confirmar p {
-  font-size: 1.8rem;
-  color: #1f1c1c;
+.produto-imagem-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
-.produto-descricao span,
-.produto-descricao-confirmar span {
+
+.produto-detalhes {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.produto-nome {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.produto-preco {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #10b981;
+  margin-bottom: 8px;
+}
+
+.btn-comprar {
+  margin-top: auto;
+  background-color: #3b25eb;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-comprar:hover {
+  background-color: #2b19c2;
+}
+
+/* --- TELA INTERNA DE COMPRA (CHECKOUT SHOP) --- */
+
+.checkout-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 18px;
+  padding: 24px;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkout-produto-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.checkout-imagem-wrapper {
+  width: 110px;
+  height: 110px;
+  background-color: #1c1f29;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.checkout-imagem-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.checkout-produto-detalhes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checkout-produto-detalhes h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.checkout-preco {
   font-size: 1.2rem;
-  color: #1f1c1c;
+  font-weight: 700;
+  color: #10b981;
 }
 
-.produto-confirmar {
-  margin-bottom: 4px;
+.checkout-saldo-box {
+  background-color: #1c1f29;
+  border: 1px solid #2a2e3d;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #8f94a3;
 }
 
-@media (min-width: 800px) {
-  .produto {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.checkout-saldo-box strong {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.btn-confirmar-compra {
+  width: 100%;
+  margin-top: 4px;
+}
+
+@media (max-width: 500px) {
+  .checkout-produto-info {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .produto img {
-    width: 50%;
-    border-radius: 8px;
+
+  .checkout-imagem-wrapper {
+    width: 100%;
+    height: 160px;
   }
-  .produto-descricao {
-    display: block;
-    align-items: center;
+}
+
+@media (max-width: 600px) {
+  .shop-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
   }
-  .produto-confirmar img {
-    width: 25%;
-  }
-  .produto-confirmar {
-    text-align: center;
+
+  .produto-imagem-wrapper {
+    height: 140px;
   }
 }

@@ -1,17 +1,68 @@
-.labelInput {
-    width: 100%;
+/* --- FORMULÁRIO DE TRANSFERÊNCIA PIX --- */
+
+.transferir-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 18px;
+  padding: 28px;
+  width: 100%;
 }
 
-.labelInput label {
-    font-size: 1.250rem;
+.transferir-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.labelInput input {
-    display: block;
-    padding: 12px;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 8px;
-    margin-bottom: 4px;
-    border-radius: 4px;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group label {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.input-group input {
+  background-color: #0b0c10;
+  border: 1px solid #222530;
+  border-radius: 12px;
+  padding: 16px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #3b25eb;
+}
+
+.input-group input::placeholder {
+  color: #5d6375;
+}
+
+.btn-transferir {
+  background-color: #3b25eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  text-align: center;
+}
+
+.btn-transferir:hover {
+  background-color: #311ec7;
+}
+
+.btn-transferir:active {
+  transform: scale(0.99);
 }

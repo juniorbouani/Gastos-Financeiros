@@ -1,70 +1,100 @@
-.cartao {
-  margin-bottom: 24px;
-}
+/* --- TELA DE CARTÕES --- */
 
-.cartao h3 {
-  margin-bottom: 4px;
-}
-
-.meudinheiro-container {
-  background-color: #28273d;
-  padding: 8px;
-  border-radius: 4px;
-}
-
-.meudinheiro-container h3 {
-  margin-top: 8px;
-  font-size: 1.5rem;
-}
-
-.saldo-cartoes {
+.cartoes-acao-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 16px;
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.status-mensagem {
+  margin: 0;
+  color: #8f94a3;
+  font-size: 0.95rem;
+}
+
+.btn-cadastrar-cartao {
+  width: 100%;
+}
+
+.meu-dinheiro-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.meu-dinheiro-container h2,
+.cartoes-preview-container h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.margin-top-card {
+  margin-top: 4px;
+}
+
+/* Cartão Visual */
+.cartao-credito-preview {
+  background: linear-gradient(135deg, #1c1f2e 0%, #0d0e14 100%);
+  border: 1px solid #2d3245;
+  border-radius: 18px;
+  padding: 24px;
+  max-width: 380px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   margin-top: 12px;
 }
 
-.saldo-cartoes h2 {
-  font-size: 1.4rem;
-}
-
-.botoesCartao {
+.cartao-topo {
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-}
-
-.botoesCartao a {
-    width: 100vw;
-}
-
-.botaoCartaoPagar {
-  background-color: #d9d9d9;
-  padding: 8px;
-  border-radius: 4px;
-  text-align: center;
-  height: 64px;
+  justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
-  width: 100%;
-  margin: 12px 0 12px 0;
-  box-sizing: border-box;
 }
 
-.botaoCartaoPagar p {
-  color: #1f1c1c;
+.cartao-bandeira {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #3b25eb;
+  letter-spacing: 0.5px;
 }
 
-.cartao-container {
-  margin-top: 24px;
-  background-color: #28273d;
-  padding: 12px;
-  border-radius: 4px;
-  height: 120px;
+.cartao-chip {
+  width: 42px;
+  height: 30px;
+  background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+  border-radius: 6px;
 }
 
-.cartoes-container {
-  margin-bottom: 48px;
+.cartao-numero {
+  font-size: 1.15rem;
+  font-family: monospace;
+  letter-spacing: 2px;
+  color: #ffffff;
+}
+
+.cartao-rodape {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartao-label {
+  font-size: 0.65rem;
+  color: #8f94a3;
+  letter-spacing: 1px;
+}
+
+.cartao-nome,
+.cartao-validade {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
 }

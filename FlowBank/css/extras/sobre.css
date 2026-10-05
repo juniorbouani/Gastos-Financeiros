@@ -1,11 +1,58 @@
-.sobre {
-    margin-top: 12px;
-    padding: 12px;
-    background-color: #d9d9d9;
-    border-radius: 8px;
+/* --- TELA SOBRE / TERMOS --- */
+
+.termo-text-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 18px;
+  padding: 28px;
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.sobre p {
-    color: #1f1c1c;
-    font-size: 1.125rem;
+.termo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1e212b;
+  padding-bottom: 16px;
+}
+
+.termo-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.termo-badge {
+  background-color: #1c1f29;
+  border: 1px solid #2a2e3d;
+  color: #3b25eb;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.termo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  line-height: 1.6;
+  color: #a0a5b5;
+  font-size: 0.92rem;
+}
+
+.termo-body h3 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.termo-body p {
+  margin: 0;
 }

@@ -1,102 +1,214 @@
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="../img/favicon-flowbank.svg"
+      type="image/x-icon"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
     <title>Seguro Digital - FlowBank</title>
   </head>
   <body>
-    <div class="menu-container">
-      <div class="header-conteudo">
-        <a href="../PaginaInicial/paginainicial.html"
-          ><img src="../img/Voltar.svg" alt=""
-        /></a>
-        <nav class="header-navegacao">
-          <a href="../notificacoes/notificacoes.html"
-            ><img src="../img/Notificacoes.svg" alt=""
-          /></a>
-          <a href="../perfil/perfil.html"
-            ><img src="../img/Conta.svg" alt=""
-          /></a>
-        </nav>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="seguranca-conteudo">
-        <h2>Seguro Digital</h2>
-        <div class="seguros">
-          <div class="seguroOuro">
-            <h3>Seguro <span class="ouro">Ouro</span></h3>
-            <ul>
-              <li>Proteção de 100% do seu dinheiro!</li>
-              <li>Retorno em até 24 horas!</li>
-              <li>Suporte 24hs!</li>
-              <li>Apenas <strong>R$5,99/mês</strong>!</li>
-            </ul>
-          </div>
-          <div class="seguroOurobotao">
-            <a href="../pagamentos/confirmar.html" class="botao"
-              >ASSINAR PLANO OURO</a
+    <!-- Layout Principal Dashboard -->
+    <div class="app-dashboard">
+      <!-- Sidebar Lateral Esquerda -->
+      <aside class="sidebar-lateral">
+        <div class="sidebar-top">
+          <div class="brand-logo">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
+              <path
+                d="M4 15C7 9 10 9 12 13C14 17 17 15 20 9"
+                stroke="#3b25eb"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>FlowBank</span>
           </div>
+
+          <nav class="sidebar-nav">
+            <a href="../PaginaInicial/paginainicial.html" class="nav-item">
+              <img src="../img/home.svg" alt="" />
+              <span>Início</span>
+            </a>
+            <a href="../pagamentos/pagar/extrato.html" class="nav-item">
+              <img src="../img/Pagar.svg" alt="" />
+              <span>Extrato</span>
+            </a>
+            <a href="../pagamentos/pix.html" class="nav-item">
+              <img src="../img/Pix.svg" alt="" />
+              <span>Transferir</span>
+            </a>
+            <a href="../pagamentos/pagar/pagar.html" class="nav-item">
+              <img src="../img/Pagar.svg" alt="" />
+              <span>Pagar</span>
+            </a>
+            <a href="../cartoes/cartoes.html" class="nav-item">
+              <img src="../img/Cartao.svg" alt="" />
+              <span>Cartões</span>
+            </a>
+            <a href="../shop/shop.html" class="nav-item">
+              <img src="../img/Shop.svg" alt="" />
+              <span>Shop</span>
+            </a>
+            <a href="../configuracoes/configuracoes.html" class="nav-item active">
+              <img src="../img/Configuracoes.svg" alt="" />
+              <span>Configurações</span>
+            </a>
+          </nav>
         </div>
 
-        <div class="seguros">
-          <div class="seguroPrata">
-            <h3>Seguro <span class="prata">Prata</span></h3>
-            <ul>
-              <li>Proteção de até 80% do seu dinheiro!</li>
-              <li>Retorno em até 72 horas!</li>
-              <li>Suporte de Seg. a Sex.</li>
-              <li>Apenas <strong>R$2,99/mês</strong>!</li>
-            </ul>
-          </div>
-          <div class="seguroPratabotao">
-            <a href="../pagamentos/confirmar.html" class="botao"
-              >ASSINAR PLANO PRATA</a
+        <div class="sidebar-bottom">
+          <a href="../index.html" class="nav-item logout">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
             >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span>Sair</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Conteúdo Central -->
+      <main class="menu-container">
+        <!-- Header com botão voltar -->
+        <header class="header-conteudo pix-header">
+          <div class="extrato-header-title">
+            <a href="../seguranca/seguranca.html" class="btn-voltar">
+              <img src="../img/Voltar.svg" alt="Voltar" />
+            </a>
+            <h1>Seguro Digital</h1>
+          </div>
+          <nav class="header-navegacao">
+            <a href="../notificacoes/notificacoes.html">
+              <img src="../img/Notificacoes.svg" alt="Notificações" />
+            </a>
+            <a href="../perfil/perfil.html">
+              <img src="../img/Conta.svg" alt="Perfil" />
+            </a>
+          </nav>
+        </header>
+
+        <!-- Container dos Planos de Seguro -->
+        <div class="pix-page-container">
+          <div class="seguros-grid">
+            
+            <!-- Card Seguro Ouro (Destaque) -->
+            <div class="seguro-card seguro-ouro">
+              <div class="seguro-badge">MAIS COMPLETO</div>
+              <div class="seguro-header">
+                <h3>Seguro Ouro</h3>
+                <p class="seguro-preco">R$ 5,99<span>/mês</span></p>
+              </div>
+
+              <ul class="seguro-beneficios">
+                <li>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Proteção de <strong>100%</strong> do seu dinheiro!</span>
+                </li>
+                <li>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Retorno em até <strong>24 horas!</strong></span>
+                </li>
+                <li>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Suporte <strong>24hs!</strong></span>
+                </li>
+              </ul>
+
+              <a href="../pagamentos/confirmar.html"><button type="button" class="btn-assinar btn-ouro">
+                ASSINAR PLANO OURO
+              </button></a>
+            </div>
+
+            <!-- Card Seguro Prata -->
+            <div class="seguro-card seguro-prata">
+              <div class="seguro-header">
+                <h3>Seguro Prata</h3>
+                <p class="seguro-preco">R$ 2,99<span>/mês</span></p>
+              </div>
+
+              <ul class="seguro-beneficios">
+                <li>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Proteção de até <strong>80%</strong> do seu dinheiro!</span>
+                </li>
+                <li>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Retorno em até <strong>72 horas!</strong></span>
+                </li>
+                <li>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Suporte de <strong>Seg. a Sex.</strong></span>
+                </li>
+              </ul>
+
+              <a href="../pagamentos/confirmar.html"><button type="button" class="btn-assinar btn-prata">
+              ASSINAR PLANO PRATA
+            </button></a>
+            </div>
+
           </div>
         </div>
-      </div>
-    </div>
 
-    <footer class="footer-principal-container">
-      <div class="footer-principal-conteudo">
-        <div class="footer-principal-nav">
-          <a href="../PaginaInicial/paginainicial.html"
-            ><img src="../img/home.svg" alt="" />
-            <p>Home</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../emprestimo/emprestimo.html"
-            ><img src="../img/emprestimo.svg" alt="" />
-            <p class="palavra-limitada">Empréstimo</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../cartoes/cartoes.html"
-            ><img src="../img/Cartao.svg" alt="" />
-            <p>Cartões</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../shop/shop.html"
-            ><img src="../img/Shop.svg" alt="" />
-            <p>Shop</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../configuracoes/configuracoes.html"
-            ><img src="../img/Configuracoes.svg" alt="" />
-            <p class="palavra-limitada">Configurações</p></a
-          >
-        </div>
-      </div>
-    </footer>
+        <!-- Footer Mobile -->
+        <footer class="footer-principal-container">
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../PaginaInicial/paginainicial.html">
+                <img src="../img/home.svg" alt="" />
+                <p>Home</p>
+              </a>
+            </div>
+
+            <div class="footer-principal-nav">
+              <a href="../emprestimo/emprestimo.html">
+                <img src="../img/emprestimo.svg" alt="" />
+                <p class="palavra-limitada">Empréstimo</p>
+              </a>
+            </div>
+
+            <div class="footer-principal-nav">
+              <a href="../cartoes/cartoes.html">
+                <img src="../img/Cartao.svg" alt="" />
+                <p>Cartões</p>
+              </a>
+            </div>
+
+            <div class="footer-principal-nav">
+              <a href="../shop/shop.html">
+                <img src="../img/Shop.svg" alt="" />
+                <p>Shop</p>
+              </a>
+            </div>
+
+            <div class="footer-principal-nav">
+              <a href="../configuracoes/configuracoes.html">
+                <img src="../img/Configuracoes.svg" alt="" />
+                <p class="palavra-limitada">Configurações</p>
+              </a>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
 
     <script src="../js/main.js"></script>
   </body>

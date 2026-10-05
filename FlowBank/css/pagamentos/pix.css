@@ -1,29 +1,387 @@
-.botoesPix {
-  display: flex;
-  box-sizing: border-box;
-  gap: 12px;
+/* --- TELA PIX (ESTILOS ESPECÍFICOS) --- */
+
+.pix-header {
+  margin-bottom: 28px;
 }
 
-.botoesPix a {
-  text-align: center;
+.pix-saldo-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 18px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
+.saldo-header-pix {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-voltar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1c1f29;
+  border: 1px solid #272b38;
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.2s;
+}
+
+.btn-voltar:hover {
+  background-color: #252936;
+}
+
+.btn-voltar img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+.saldo-info h2 {
+  font-size: 0.85rem;
+  color: #8f94a3;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.saldo-info #saldo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 2px 0 0 0;
+}
+
+.pix-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 900px;
+}
+
+/* BOTÕES PIX DA TELA INTERNA */
+.botoesPix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.botoesPix a {
+  text-decoration: none;
+}
+
 .botaoMenuPix {
-  background-color: #d9d9d9;
-  padding: 8px;
-  border-radius: 4px;
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 16px;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.botaoMenuPix:hover {
+  background-color: #1c1f29;
+  border-color: #3b25eb;
+  transform: translateY(-2px);
+}
+
+.botaoMenuPix img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+}
+
+.botaoMenuPix p {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* HISTÓRICO DE TRANSFERÊNCIAS */
+.ultimastransferencias h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.historico-pix-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historico-item {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.2s;
+}
+
+.historico-item:hover {
+  background-color: #1c1f29;
+}
+
+.historico-detalhes {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.badge-tipo {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.badge-tipo.entrada {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.badge-tipo.saida {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.historico-titulo {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.historico-meta {
+  font-size: 0.8rem;
+  color: #8f94a3;
+  display: block;
+  margin-top: 2px;
+}
+
+.historico-valor {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.valor-entrada {
+  color: #22c55e;
+}
+
+.valor-saida {
+  color: #ffffff;
+}
+
+/* RESPONSIVIDADE PIX */
+@media (max-width: 768px) {
+  .botoesPix {
+    grid-template-columns: 1fr;
+  }
+
+  .saldo-info #saldo {
+    font-size: 1.4rem;
+  }
+
+  .historico-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .historico-valor {
+    align-self: flex-end;
+  }
+}
+
+/* --- FORMULÁRIO DE TRANSFERÊNCIA PIX --- */
+
+.transferir-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 18px;
+  padding: 28px;
+  width: 100%;
+}
+
+.transferir-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group label {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.input-group input {
+  background-color: #0b0c10;
+  border: 1px solid #222530;
+  border-radius: 12px;
+  padding: 16px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #3b25eb;
+}
+
+.input-group input::placeholder {
+  color: #5d6375;
+}
+
+.btn-transferir {
+  background-color: #3b25eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
   text-align: center;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
-.botaoMenuPix P {
-  color: #1f1c1c;
+.btn-transferir:hover {
+  background-color: #311ec7;
 }
 
-@media (min-width: 600px) {
-  .opcoes-oquefazer {
-    display: block;
-    width: 100%;
+.btn-transferir:active {
+  transform: scale(0.99);
+}
+
+/* --- TELA CRIAR CHAVE PIX --- */
+
+.select-chave {
+  background-color: #0b0c10;
+  border: 1px solid #222530;
+  border-radius: 12px;
+  padding: 16px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238f94a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+}
+
+.select-chave:focus {
+  border-color: #3b25eb;
+}
+
+.chaves-registradas-container h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.chaves-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chave-item {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: background-color 0.2s;
+}
+
+.chave-item:hover {
+  background-color: #1c1f29;
+}
+
+.chave-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.badge-tipo-chave {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background-color: #1e212b;
+  color: #3b25eb;
+  flex-shrink: 0;
+}
+
+.chave-valor {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-copiar-chave {
+  background-color: #1c1f29;
+  border: 1px solid #272b38;
+  color: #8f94a3;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-copiar-chave:hover {
+  background-color: #3b25eb;
+  border-color: #3b25eb;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .chave-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .btn-copiar-chave {
+    align-self: flex-end;
   }
 }

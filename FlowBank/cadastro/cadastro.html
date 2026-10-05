@@ -1,42 +1,100 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Cadastro - FlowBank</title>
-  </head>
-  <body>
-    <div class="cadastro-container">
-      <div class="cadastro-conteudo">
-        <h1>FlowBank</h1>
-        <h3>Cadastro</h3>
-        <div class="caixa-de-cadastro">
-          <label for="name">Nome Completo:</label>
-          <input type="text" id="name" />
-          <label for="cpf">CPF:</label>
-          <input type="number" id="cpf" placeholder="XXX.XXX.XXX-XX" />
-          <label for="dataNascimento">Data de Nascimento:</label>
-          <input type="date" id="dataNascimento" />
-          <label for="numeroTelefone">Telefone:</label>
-          <input type="tel" id="numeroTelefone" placeholder="(00) 00000-0000" />
-          <label for="email">Email:</label>
-          <input type="email" id="email" />
-          <label for="senhaHash">Senha:</label>
-          <input type="password" id="senhaHash" />
-          <label for="confirmarSenha">Confirmar Senha:</label>
-          <input type="password" id="confirmarSenha" />
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>Cadastro - FlowBank</title>
+</head>
+<body>
+
+  <div class="cadastro-container">
+    
+    <!-- Painel de Apresentação (Esquerda) -->
+    <div class="brand-section">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 15C7 9 10 9 12 13C14 17 17 15 20 9" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
         </div>
-        <a class="botao" href="../PaginaInicial/paginainicial.html"
-          >CADASTRAR</a
-        >
-        <p>
-          Já tem cadastro?
-          <a href="../index.html">Entre em sua conta aqui!</a>
+        <span class="logo-text">FlowBank</span>
+      </div>
+
+      <div class="brand-hero">
+        <h1>Abra sua conta em poucos minutos.</h1>
+        <p>Junte-se ao banco digital que simplifica sua vida financeira com segurança e controle total.</p>
+      </div>
+    </div>
+
+    <!-- Conteúdo do Form de Cadastro (Direita) -->
+    <div class="cadastro-conteudo">
+      <div class="header-actions">
+        <button class="btn-accessibility" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="4" r="2"/>
+            <path d="M12 6v12M8 10h8M9 20l3-4 3 4"/>
+          </svg>
+          Acessibilidade
+        </button>
+      </div>
+
+      <div class="form-wrapper">
+        <h3 class="form-title">Criar Conta</h3>
+
+        <div class="caixa-de-cadastro">
+          <div class="input-group">
+            <label for="name">Nome Completo:</label>
+            <input type="text" id="name" placeholder="Seu nome completo" />
+          </div>
+
+          <div class="input-group-row">
+            <div class="input-group">
+              <label for="cpf">CPF:</label>
+              <input type="text" id="cpf" placeholder="000.000.000-00" />
+            </div>
+
+            <div class="input-group">
+              <label for="dataNascimento">Data de Nascimento:</label>
+              <input type="date" id="dataNascimento" />
+            </div>
+          </div>
+
+          <div class="input-group-row">
+            <div class="input-group">
+              <label for="numeroTelefone">Telefone:</label>
+              <input type="tel" id="numeroTelefone" placeholder="(00) 00000-0000" />
+            </div>
+
+            <div class="input-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" placeholder="seuemail@exemplo.com" />
+            </div>
+          </div>
+
+          <div class="input-group-row">
+            <div class="input-group">
+              <label for="senhaHash">Senha:</label>
+              <input type="password" id="senhaHash" placeholder="Digite sua senha" />
+            </div>
+
+            <div class="input-group">
+              <label for="confirmarSenha">Confirmar Senha:</label>
+              <input type="password" id="confirmarSenha" placeholder="Confirme sua senha" />
+            </div>
+          </div>
+        </div>
+
+        <a class="botao" href="../PaginaInicial/paginainicial.html">CADASTRAR &rarr;</a>
+
+        <p class="signup-text">
+          Já tem cadastro? <a href="../index.html">Entre em sua conta aqui!</a>
         </p>
       </div>
-      <img src="../img/banco.jpg" alt="" />
     </div>
-  </body>
+
+  </div>
+
+</body>
 </html>

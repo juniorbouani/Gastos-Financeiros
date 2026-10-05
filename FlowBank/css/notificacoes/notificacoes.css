@@ -1,11 +1,87 @@
-.notificacao p {
-  color: #1f1c1c;
+/* --- TELA DE NOTIFICAÇÕES --- */
+
+.notificacoes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
 }
 
-.notificacao {
-  margin-top: 12px;
-  padding: 12px;
-  background-color: #d9d9d9;
-  border-radius: 4px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+.notificacao-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 14px;
+  transition: background-color 0.2s, border-color 0.2s;
+  position: relative;
+}
+
+.notificacao-card:hover {
+  background-color: #1c1f29;
+  border-color: #2a2e3d;
+}
+
+/* Indicador visual de notificação não lida */
+.notificacao-card.nao-lida {
+  border-left: 4px solid #3b25eb;
+  background-color: #161922;
+}
+
+/* Wrapper do Ícone */
+.notificacao-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(59, 37, 235, 0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notificacao-icon-wrapper img,
+.notificacao-icon-wrapper svg {
+  width: 20px;
+  height: 20px;
+}
+
+.notificacao-icon-wrapper img {
+  filter: invert(18%) sepia(88%) saturate(5412%) hue-rotate(248deg) brightness(96%) contrast(106%);
+}
+
+/* Conteúdo */
+.notificacao-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.notificacao-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.notificacao-topo h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.notificacao-tempo {
+  font-size: 0.75rem;
+  color: #8f94a3;
+  white-space: nowrap;
+}
+
+.notificacao-conteudo p {
+  font-size: 0.85rem;
+  color: #8f94a3;
+  line-height: 1.4;
 }

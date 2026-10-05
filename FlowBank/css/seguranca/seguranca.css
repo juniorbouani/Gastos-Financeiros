@@ -1,64 +1,131 @@
-.seguranca-opcao {
-  margin-top: 12px;
-  padding: 12px;
-  background-color: #d9d9d9;
-  border-radius: 4px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+.config-item-info {
+  display: flex;
+  align-items: center;
+  gap: 14px; 
+}
+
+
+.config-item-info svg,
+.config-item-info img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0; 
+}
+
+/* --- TELA SEGURO DIGITAL --- */
+
+.seguros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.seguro-card {
   position: relative;
-  margin-bottom: 36px;
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 18px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  transition: transform 0.2s, border-color 0.2s;
 }
 
-.seguranca-opcao::after {
-  content: "";
+.seguro-card:hover {
+  transform: translateY(-4px);
+}
+
+.seguro-card.seguro-ouro {
+  border-color: #eab308;
+  background: linear-gradient(180deg, rgba(234, 179, 8, 0.05) 0%, #13151b 100%);
+}
+
+.seguro-badge {
   position: absolute;
-  display: block;
+  top: -12px;
+  right: 20px;
+  background-color: #eab308;
+  color: #000000;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.seguro-header h3 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.seguro-preco {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.seguro-preco span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8f94a3;
+}
+
+.seguro-beneficios {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.seguro-beneficios li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: #a0a5b5;
+}
+
+.seguro-beneficios li strong {
+  color: #ffffff;
+}
+
+.seguro-beneficios svg {
+  flex-shrink: 0;
+}
+
+.btn-assinar {
   width: 100%;
-  height: 2px;
-  background-color: #28273d;
-  bottom: -20px;
-  left: 0;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
 }
 
-.seguranca-opcao p {
-  color: #0f00f0;
+.btn-ouro {
+  background-color: #3b25eb;
+  color: #ffffff;
 }
 
-.seguros {
-  margin-top: 4px;
+.btn-ouro:hover {
+  background-color: #2c19c7;
 }
 
-.prata {
-  color: silver;
+.btn-prata {
+  background-color: #1c1f29;
+  color: #ffffff;
+  border: 1px solid #2a2e3d;
 }
 
-.ouro {
-  color: gold;
-}
-
-.seguros {
-  background-color: #28273d;
-  padding: 12px;
-  border-radius: 4px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  margin-top: 12px;
-}
-
-.seguros li {
-  color: #d9d9d9;
-}
-
-.seguros h3::before {
-  content: "";
-  display: block;
-  margin-bottom: 24px;
-  height: 2px;
-  opacity: 10%;
-  width: 100%;
-  background-color: black;
-}
-
-@media (min-width: 600px) {
-   .seguranca-opcao p {
-    font-size: 1.3rem;
-  }
+.btn-prata:hover {
+  background-color: #2a2e3d;
 }

@@ -1,179 +1,383 @@
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="../img/favicon-flowbank.svg"
+      type="image/x-icon"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
     <title>Menu Principal - FlowBank</title>
   </head>
   <body>
-    <div class="menu-container">
-      <div class="header-conteudo">
-        <h1>Olá, {primeiroNome}!</h1>
-        <nav class="header-navegacao">
-          <a href="../notificacoes/notificacoes.html"
-            ><img src="../img/Notificacoes.svg" alt=""
-          /></a>
-          <a href="../configuracoes/configuracoes.html"
-            ><img src="../img/Configuracoes.svg" alt=""
-          /></a>
-          <a href="../perfil/perfil.html"
-            ><img src="../img/Conta.svg" alt=""
-          /></a>
-        </nav>
-      </div>
-    </div>
+    <div class="app-dashboard">
+      <aside class="sidebar-lateral">
+        <div class="sidebar-top">
+          <div class="brand-logo">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 15C7 9 10 9 12 13C14 17 17 15 20 9"
+                stroke="#3b25eb"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>FlowBank</span>
+          </div>
 
-    <div class="container">
-      <div class="botoes">
-        <a href="../pagamentos/pix.html"
-          ><div class="botaoMenu">
-            <img src="../img/Pix.svg" alt="" />
-            <p class="pix-p">Pix</p>
-          </div></a
-        >
-        <a href="../pagamentos/pagar/pagar.html"
-          ><div class="botaoMenu">
-            <img src="../img/Pagar.svg" alt="" />
-            <p>Pagar</p>
-          </div>
-        </a>
-        <a href="../seguranca/seguranca.html"
-          ><div class="botaoMenu">
-            <img src="../img/Seguranca.svg" alt="" />
-            <p class="palavra-limitada">Segurança</p>
-          </div>
-        </a>
-        <a href="../shop/shop.html"
-          ><div class="botaoMenu">
-            <img src="../img/Shop.svg" alt="" />
-            <p>Shop</p>
-          </div>
-        </a>
-        <a href="../cartoes/cartoes.html"
-          ><div class="botaoMenu">
-            <img src="../img/Cartao.svg" alt="" />
-            <p>Cartões</p>
-          </div>
-        </a>
-        <a href="../menu/menu.html"
-          ><div class="botaoMenu">
-            <img src="../img/Menu.svg" alt="" />
-            <p class="palavra-limitada">Menu</p>
-          </div>
-        </a>
-      </div>
-
-      <div class="saldo-container">
-        <div class="saldo">
-          <h2>Saldo:</h2>
-          <p id="saldo">R$ 1.250,00</p>
+          <nav class="sidebar-nav">
+            <a
+              href="../PaginaInicial/paginainicial.html"
+              class="nav-item active"
+            >
+              <img src="../img/home.svg" alt="" />
+              <span>Início</span>
+            </a>
+            <a href="../pagamentos/pagar/extrato.html" class="nav-item">
+              <img src="../img/Pagar.svg" alt="" />
+              <span>Extrato</span>
+            </a>
+            <a href="../pagamentos/pix.html" class="nav-item">
+              <img src="../img/Pix.svg" alt="" />
+              <span>Transferir</span>
+            </a>
+            <a href="../pagamentos/pagar/pagar.html" class="nav-item">
+              <img src="../img/Pagar.svg" alt="" />
+              <span>Pagar</span>
+            </a>
+            <a href="../cartoes/cartoes.html" class="nav-item">
+              <img src="../img/Cartao.svg" alt="" />
+              <span>Cartões</span>
+            </a>
+            <a href="../shop/shop.html" class="nav-item">
+              <img src="../img/shop.svg" alt="" />
+              <span>Shop</span>
+            </a>
+            <a href="../configuracoes/configuracoes.html" class="nav-item">
+              <img src="../img/Configuracoes.svg" alt="" />
+              <span>Configurações</span>
+            </a>
+          </nav>
         </div>
-        <button
-          id="btn-toggle-saldo"
-          type="button"
-          aria-label="Alternar visibilidade do saldo"
-        >
-          <img
-            id="icone-olho"
-            src="../img/Ver.svg"
-            alt="Mostrar/Esconder saldo"
-          />
-        </button>
-      </div>
 
-      <div class="oquefazer-container">
-        <div class="oquefazer">
-          <h2>O que fazer?</h2>
-          <div class="opcoes-oquefazer">
-            <a href="../cartoes/cartoes.html">
-              <div class="opcoes">
-                <p>Ver Cartões</p>
-                <img src="../img/Cartao.svg" alt="" />
-              </div>
+        <div class="sidebar-bottom">
+          <a href="../index.html" class="nav-item logout">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span>Sair</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="menu-container">
+        <header class="header-conteudo">
+          <div class="header-saudacao">
+            <h1 id="saudacao">Olá, {primeiroNome}!</h1>
+            <p class="header-data" id="data-atual">Carregando data...</p>
+          </div>
+
+          <nav class="header-navegacao">
+            <a
+              href="../notificacoes/notificacoes.html"
+              aria-label="Notificações"
+              class="nav-icon-btn"
+            >
+              <img src="../img/Notificacoes.svg" alt="" />
             </a>
-            <a href="../cartoes/cartoes.html">
-              <div class="opcoes">
-                <p>Meu Dinheiro</p>
-                <img src="../img/porquinho.svg" alt="" />
-              </div>
+            <a
+              href="../configuracoes/configuracoes.html"
+              aria-label="Configurações"
+              class="nav-icon-btn"
+            >
+              <img src="../img/Configuracoes.svg" alt="" />
             </a>
-            <a href="../emprestimo/emprestimo.html">
-              <div class="opcoes emprestimo-opcao">
-                <p>Empréstimo</p>
+            <a
+              href="../perfil/perfil.html"
+              class="nav-icon-btn"
+              title="Perfil do Usuário"
+            >
+              <img src="../img/Conta.svg" alt="Perfil" />
+            </a>
+          </nav>
+        </header>
+
+        <div class="container dashboard-grid">
+          <div class="dashboard-col-main">
+            <div class="saldo-container">
+              <div class="saldo-header">
+                <h2>SALDO EM CONTA</h2>
+                <button
+                  id="btn-toggle-saldo"
+                  type="button"
+                  aria-label="Alternar visibilidade do saldo"
+                >
+                  <img
+                    id="icone-olho"
+                    src="../img/Ver.svg"
+                    alt="Mostrar/Esconder saldo"
+                  />
+                </button>
+              </div>
+
+              <div class="saldo">
+                <p id="saldo">R$ 1.250,00</p>
+              </div>
+
+              <div class="dados-conta">
+                <div><span>Agência</span> <strong>0001</strong></div>
+                <div><span>Conta</span> <strong>48219-7</strong></div>
+                <div><span>Chave Pix</span> <strong>CPF</strong></div>
+              </div>
+            </div>
+
+            <div class="acoes-rapidas-wrapper">
+              <h3>AÇÕES RÁPIDAS</h3>
+              <div class="botoes">
+                <a href="../pagamentos/pix.html">
+                  <div class="botaoMenu">
+                    <img src="../img/Pix.svg" alt="" />
+                    <p class="pix-p">Pix</p>
+                  </div>
+                </a>
+
+                <a href="../pagamentos/pagar/pagar.html">
+                  <div class="botaoMenu">
+                    <img src="../img/Pagar.svg" alt="" />
+                    <p>Pagar</p>
+                  </div>
+                </a>
+
+                <a href="../seguranca/seguranca.html">
+                  <div class="botaoMenu">
+                    <img src="../img/Seguranca.svg" alt="" />
+                    <p class="palavra-limitada">Segurança</p>
+                  </div>
+                </a>
+
+                <a href="../shop/shop.html">
+                  <div class="botaoMenu">
+                    <img src="../img/Shop.svg" alt="" />
+                    <p>Shop</p>
+                  </div>
+                </a>
+
+                <a href="../cartoes/cartoes.html">
+                  <div class="botaoMenu">
+                    <img src="../img/Cartao.svg" alt="" />
+                    <p>Cartões</p>
+                  </div>
+                </a>
+
+                <a href="../menu/menu.html">
+                  <div class="botaoMenu">
+                    <img src="../img/Menu.svg" alt="" />
+                    <p class="palavra-limitada">Menu</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- O Que Fazer -->
+            <div class="oquefazer-container">
+              <div class="oquefazer">
+                <h2>O que fazer?</h2>
+                <div class="opcoes-oquefazer">
+                  <a href="../cartoes/cartoes.html">
+                    <div class="opcoes">
+                      <p>Ver Cartões</p>
+                      <img src="../img/Cartao.svg" alt="" />
+                    </div>
+                  </a>
+
+                  <a href="../cartoes/cartoes.html">
+                    <div class="opcoes">
+                      <p>Meu Dinheiro</p>
+                      <img src="../img/porquinho.svg" alt="" />
+                    </div>
+                  </a>
+
+                  <a href="../emprestimo/emprestimo.html">
+                    <div class="opcoes opcoes-emprestimo-opcao">
+                      <p>Empréstimo</p>
+                      <img src="../img/emprestimo.svg" alt="" />
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Soluções -->
+            <div class="solucoes-container">
+              <div class="solucoes-conteudo">
+                <h2>Soluções para Você</h2>
+
+                <div class="solucao">
+                  <img src="../img/seguranca.jpg" alt="" />
+                  <div class="solucao-descricao">
+                    <h3>Aumente sua segurança!</h3>
+                    <a href="../seguranca/seguranca.html" class="botao"
+                      >Central de Segurança</a
+                    >
+                  </div>
+                </div>
+
+                <div class="solucao">
+                  <div class="solucao-descricao">
+                    <h3>Contrate nosso Seguro Digital!</h3>
+                    <a href="../seguranca/seguroDigital.html" class="botao"
+                      >Seguro Digital</a
+                    >
+                  </div>
+                  <img src="../img/seguro.jpg" alt="" />
+                </div>
+
+                <div class="solucao">
+                  <img src="../img/shop.jpg" alt="" />
+                  <div class="solucao-descricao">
+                    <h3>Veja novas ofertas no Shop!</h3>
+                    <a href="../shop/shop.html" class="botao">Shop</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna Lateral Direita -->
+          <div class="dashboard-col-side">
+            <!-- Widget Cartão de Crédito -->
+            <div class="widget-card">
+              <div class="widget-header">
+                <h3>Cartão de crédito</h3>
+                <span class="badge">Vence 10/10</span>
+              </div>
+              <p class="widget-sub">Fatura atual</p>
+              <p class="widget-valor">R$ 1.284,56</p>
+              <div class="progress-info">
+                <span>Limite disponível</span>
+                <strong>R$ 3.715,44 de R$ 5.000,00</strong>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 25%"></div>
+              </div>
+              <div class="widget-actions">
+                <a href="../cartoes/cartoes.html" class="btn-primary"
+                  >Pagar fatura</a
+                >
+                <a href="../cartoes/cartoes.html" class="btn-secondary"
+                  >Ver lançamentos</a
+                >
+              </div>
+            </div>
+
+            <!-- Widget Gastos -->
+            <div class="widget-card">
+              <div class="widget-header">
+                <h3>Gastos de setembro</h3>
+                <span class="widget-valor-sm">R$ 2.194,75</span>
+              </div>
+              <div class="gastos-list">
+                <div class="gasto-item">
+                  <div class="gasto-label">
+                    <span>Alimentação</span><strong>R$ 842,10</strong>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%"></div>
+                  </div>
+                </div>
+                <div class="gasto-item">
+                  <div class="gasto-label">
+                    <span>Casa</span><strong>R$ 652,30</strong>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                  </div>
+                </div>
+                <div class="gasto-item">
+                  <div class="gasto-label">
+                    <span>Transporte</span><strong>R$ 410,55</strong>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 35%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget Reserva -->
+            <div class="widget-card reserva-box">
+              <div class="reserva-content">
+                <div class="reserva-icon">
+                  <img src="../img/porquinho.svg" alt="" />
+                </div>
+                <div>
+                  <h4>Reserva de emergência</h4>
+                  <p>R$ 1.250,00 de R$ 5.000,00 · 25% da meta</p>
+                </div>
+              </div>
+              <button class="btn-add" type="button">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Mobile -->
+        <footer class="footer-principal-container">
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../PaginaInicial/paginainicial.html">
+                <img src="../img/home.svg" alt="" />
+                <p>Home</p>
+              </a>
+            </div>
+
+            <div class="footer-principal-nav">
+              <a href="../emprestimo/emprestimo.html">
                 <img src="../img/emprestimo.svg" alt="" />
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
+                <p class="palavra-limitada">Empréstimo</p>
+              </a>
+            </div>
 
-      <div class="solucoes-container">
-        <div class="solucoes-conteudo">
-          <h2>Soluções para Você</h2>
-          <div class="solucao">
-            <img src="../img/seguranca.jpg" alt="" />
-            <div class="solucao-descricao">
-              <h3>Aumente sua segurança!</h3>
-              <a href="../seguranca/seguranca.html" class="botao"
-                >Central de Segurança</a
-              >
+            <div class="footer-principal-nav">
+              <a href="../cartoes/cartoes.html">
+                <img src="../img/Cartao.svg" alt="" />
+                <p>Cartões</p>
+              </a>
+            </div>
+
+            <div class="footer-principal-nav">
+              <a href="../shop/shop.html">
+                <img src="../img/Shop.svg" alt="" />
+                <p>Shop</p>
+              </a>
+            </div>
+
+            <div class="footer-principal-nav">
+              <a href="../configuracoes/configuracoes.html">
+                <img src="../img/Configuracoes.svg" alt="" />
+                <p class="palavra-limitada">Configurações</p>
+              </a>
             </div>
           </div>
-          <div class="solucao">
-            <div class="solucao-descricao">
-              <h3>Contrate nosso Seguro Digital!</h3>
-              <a href="../seguranca/seguroDigital.html" class="botao"
-                >Seguro Digital</a
-              >
-            </div>
-            <img src="../img/seguro.jpg" alt="" />
-          </div>
-          <div class="solucao">
-            <img src="../img/shop.jpg" alt="" />
-            <div class="solucao-descricao">
-              <h3>Veja novas ofertas no Shop!</h3>
-              <a href="../shop/shop.html" class="botao">Shop</a>
-            </div>
-          </div>
-        </div>
-      </div>
+        </footer>
+      </main>
     </div>
-    <footer class="footer-principal-container">
-      <div class="footer-principal-conteudo">
-        <div class="footer-principal-nav">
-          <a href="../PaginaInicial/paginainicial.html"
-            ><img src="../img/home.svg" alt="" />
-            <p>Home</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../emprestimo/emprestimo.html"
-            ><img src="../img/emprestimo.svg" alt="" />
-            <p class="palavra-limitada">Empréstimo</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../cartoes/cartoes.html"
-            ><img src="../img/Cartao.svg" alt="" />
-            <p>Cartões</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../shop/shop.html"
-            ><img src="../img/Shop.svg" alt="" />
-            <p>Shop</p></a
-          >
-        </div>
-        <div class="footer-principal-nav">
-          <a href="../configuracoes/configuracoes.html"
-            ><img src="../img/Configuracoes.svg" alt="" />
-            <p class="palavra-limitada">Configurações</p></a
-          >
-        </div>
-      </div>
-    </footer>
 
     <script src="../js/main.js"></script>
   </body>
