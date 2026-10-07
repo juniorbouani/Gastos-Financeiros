@@ -8,13 +8,17 @@
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../../css/style.css" />
     <title>Extrato - FlowBank</title>
   </head>
   <body>
-    <!-- Layout Principal Dashboard -->
     <div class="app-dashboard">
-      <!-- Sidebar Lateral Esquerda -->
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
           <div class="brand-logo">
@@ -40,7 +44,10 @@
               <img src="../../img/home.svg" alt="" />
               <span>Início</span>
             </a>
-            <a href="../../pagamentos/pagar/extrato.html" class="nav-item active">
+            <a
+              href="../../pagamentos/pagar/extrato.html"
+              class="nav-item active"
+            >
               <img src="../../img/Pagar.svg" alt="" />
               <span>Extrato</span>
             </a>
@@ -86,47 +93,45 @@
         </div>
       </aside>
 
-      <!-- Conteúdo Central -->
       <main class="menu-container">
-        <!-- Header com botão voltar e título -->
         <header class="header-conteudo pix-header">
           <div class="extrato-header-title">
-            <a href="../../pagamentos/pagar/pagar.html" class="btn-voltar">
+            <a href="javascript:history.back()" class="btn-voltar">
               <img src="../../img/Voltar.svg" alt="Voltar" />
             </a>
             <h1>Extrato</h1>
           </div>
         </header>
 
-        <!-- Seção Principal do Extrato -->
         <div class="pix-page-container">
           <div class="extrato-container">
             <div class="extrato-list">
-              <!-- Item 1 -->
               <div class="extrato-item saida">
                 <div class="extrato-info">
                   <span class="badge-tipo saida">Pix enviado</span>
                   <div class="extrato-detalhes">
-                    <p class="extrato-descricao">Pix enviado para João Pereira</p>
+                    <p class="extrato-descricao">
+                      Pix enviado para João Pereira
+                    </p>
                     <span class="extrato-data">Hoje, 15:40</span>
                   </div>
                 </div>
                 <span class="extrato-valor valor-saida">- R$ 120,00</span>
               </div>
 
-              <!-- Item 2 -->
               <div class="extrato-item saida">
                 <div class="extrato-info">
                   <span class="badge-tipo saida">Pix enviado</span>
                   <div class="extrato-detalhes">
-                    <p class="extrato-descricao">Pix enviado para Mercado Central</p>
+                    <p class="extrato-descricao">
+                      Pix enviado para Mercado Central
+                    </p>
                     <span class="extrato-data">Ontem, 19:22</span>
                   </div>
                 </div>
                 <span class="extrato-valor valor-saida">- R$ 45,90</span>
               </div>
 
-              <!-- Item 3 -->
               <div class="extrato-item entrada">
                 <div class="extrato-info">
                   <span class="badge-tipo entrada">Pix recebido</span>
@@ -138,19 +143,19 @@
                 <span class="extrato-valor valor-entrada">+ R$ 300,00</span>
               </div>
 
-              <!-- Item 4 -->
               <div class="extrato-item saida">
                 <div class="extrato-info">
                   <span class="badge-tipo saida">Pix enviado</span>
                   <div class="extrato-detalhes">
-                    <p class="extrato-descricao">Pix enviado para Posto Shell</p>
+                    <p class="extrato-descricao">
+                      Pix enviado para Posto Shell
+                    </p>
                     <span class="extrato-data">02 Out, 08:30</span>
                   </div>
                 </div>
                 <span class="extrato-valor valor-saida">- R$ 150,00</span>
               </div>
 
-              <!-- Item 5 -->
               <div class="extrato-item entrada">
                 <div class="extrato-info">
                   <span class="badge-tipo entrada">Pix recebido</span>
@@ -162,12 +167,13 @@
                 <span class="extrato-valor valor-entrada">+ R$ 1.250,00</span>
               </div>
 
-              <!-- Item 6 -->
               <div class="extrato-item entrada">
                 <div class="extrato-info">
                   <span class="badge-tipo entrada">Pix recebido</span>
                   <div class="extrato-detalhes">
-                    <p class="extrato-descricao">Pix recebido de Carlos Eduardo</p>
+                    <p class="extrato-descricao">
+                      Pix recebido de Carlos Eduardo
+                    </p>
                     <span class="extrato-data">29 Set, 14:15</span>
                   </div>
                 </div>
@@ -177,7 +183,6 @@
           </div>
         </div>
 
-        <!-- Footer Mobile -->
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo">
             <div class="footer-principal-nav">

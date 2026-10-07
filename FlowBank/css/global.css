@@ -17,6 +17,22 @@ body {
 h1,
 h2,
 h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+p,
+span,
+button,
+a {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
 p,
 a,
 input,
@@ -133,6 +149,204 @@ img {
   position: absolute;
   left: 0;
   bottom: -24px;
+}
+
+.extrato-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.extrato-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.badge-tipo {
+  flex-shrink: 0; 
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-tipo.saida {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.badge-tipo.entrada {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.extrato-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 100%; 
+  box-sizing: border-box;
+  overflow: hidden; 
+}
+
+.extrato-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 0%; 
+  min-width: 0; 
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.extrato-detalhes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 0%;
+  min-width: 0; 
+  overflow: hidden;
+}
+
+.extrato-descricao {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  display: block; 
+  width: 100%;
+  white-space: nowrap; 
+  overflow: hidden !important; 
+  text-overflow: ellipsis !important;
+}
+
+.extrato-valor {
+  flex-shrink: 0; 
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.valor-saida {
+  color: #ef4444;
+}
+
+.valor-entrada {
+  color: #10b981;
+}
+
+.card-saldo-secundario {
+  width: 100%;
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+.saldo-secundario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.saldo-voltar-titulo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-voltar-card {
+  width: 32px;
+  height: 32px;
+  background-color: #1a1d26;
+  border: 1px solid #282c3b;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.btn-voltar-card:hover {
+  background-color: #282c3b;
+}
+
+.saldo-voltar-titulo span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #8f94a3;
+  text-transform: uppercase;
+}
+
+.saldo-secundario-valor h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+}
+
+
+@media (max-width: 480px) {
+  .card-saldo-secundario {
+    padding: 16px;
+  }
+
+  .saldo-secundario-valor h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-container,
+  .dashboard-grid,
+  .pix-page-container {
+    padding-bottom: 40px !important;
+  }
+
+  .footer-principal-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #0d0e12;
+    border-top: 1px solid #1e212b;
+  }
+
+  .historico-detalhes {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: space-between !important;
+  }
 }
 
 @media (max-width: 370px) {

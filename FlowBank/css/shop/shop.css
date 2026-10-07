@@ -1,5 +1,3 @@
-/* --- TELA SHOP --- */
-
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -78,8 +76,6 @@
 .btn-comprar:hover {
   background-color: #2b19c2;
 }
-
-/* --- TELA INTERNA DE COMPRA (CHECKOUT SHOP) --- */
 
 .checkout-card {
   background-color: #13151b;

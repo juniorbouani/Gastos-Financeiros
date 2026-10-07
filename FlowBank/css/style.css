@@ -1,5 +1,6 @@
 @import "../css/login/login.css";
 @import "../css/login/cadastro.css";
+@import "../css/login/esqueciSenha.css";
 @import "../css/global.css";
 @import "../css/paginainicial/paginainicial.css";
 @import "../css/notificacoes/notificacoes.css";
@@ -17,4 +18,4 @@
 @import "../css/cartoes/cartoes.css";
 @import "../css/perfil/apagarConta.css";
 
-/*NESTA PÁGINA, APENAS PUXE O CSS DE OUTROS ARQUIVOS */
+/*ESSA PÁGINA APENAS CARREGA CSS DE OUTROS ARQUIVOS!!! */

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <link
+      rel="shortcut icon"
+      href="../img/favicon-flowbank.svg"
+      type="image/x-icon"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Recuperar Senha - FlowBank</title>
+  </head>
+  <body class="auth-body">
+    <div class="auth-container">
+      <!-- Card Central de Recuperação -->
+      <div class="auth-card">
+        <div class="brand-logo auth-logo">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 15C7 9 10 9 12 13C14 17 17 15 20 9"
+              stroke="#3b25eb"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span>FlowBank</span>
+        </div>
+
+        <h2>Recuperar senha</h2>
+        <p class="auth-subtitulo">
+          Informe o e-mail ou CPF cadastrado para receber as instruções de redefinição de senha.
+        </p>
+
+        <form class="auth-form" action="#" method="POST">
+          <div class="input-group">
+            <label for="recovery-input">E-mail ou CPF</label>
+            <input
+              type="text"
+              id="recovery-input"
+              name="recovery"
+              placeholder="seu@email.com ou 000.000.000-00"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-primary-auth">Enviar Instruções</button>
+        </form>
+
+        <div class="auth-footer-link">
+          <a href="../index.html" class="link-voltar-login">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Voltar para o Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

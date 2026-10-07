@@ -2,22 +2,27 @@ const elSaldo = document.getElementById("saldo");
 const btnToggle = document.getElementById("btn-toggle-saldo");
 const imgIcone = document.getElementById("icone-olho");
 
-const valorReal = elSaldo.textContent;
-const mascara = "••••••••";
+if (elSaldo && btnToggle && imgIcone) {
+  const valorReal = elSaldo.textContent;
+  const mascara = "••••••••";
+  let saldoVisivel = true;
 
-let saldoVisivel = true;
+  const caminhoBase = imgIcone.src.includes("Naover.svg")
+    ? imgIcone.src.replace("Naover.svg", "")
+    : imgIcone.src.replace("Ver.svg", "");
 
-btnToggle.addEventListener("click", () => {
-  saldoVisivel = !saldoVisivel;
+  btnToggle.addEventListener("click", () => {
+    saldoVisivel = !saldoVisivel;
 
-  if (saldoVisivel) {
-    elSaldo.textContent = valorReal;
-    imgIcone.src = "../img/Ver.svg";
-  } else {
-    elSaldo.textContent = mascara;
-    imgIcone.src = "../img/Naover.svg";
-  }
-});
+    if (saldoVisivel) {
+      elSaldo.textContent = valorReal;
+      imgIcone.src = caminhoBase + "Ver.svg";
+    } else {
+      elSaldo.textContent = mascara;
+      imgIcone.src = caminhoBase + "Naover.svg";
+    }
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   atualizarDataHora();
@@ -36,12 +41,13 @@ function atualizarDataHora() {
     weekday: "long",
     day: "numeric",
     month: "long",
-    year: "numeric"
+    year: "numeric",
   };
 
   let dataFormatada = agora.toLocaleDateString("pt-BR", opcoesData);
 
-  dataFormatada = dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
+  dataFormatada =
+    dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
 
   elData.textContent = dataFormatada;
 }

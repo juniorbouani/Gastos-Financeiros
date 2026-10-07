@@ -1,30 +1,98 @@
-.apagar-conteudo {
-    text-align: center;
+.encerrar-conta-card {
+  background-color: #13151b;
+  border: 1px solid #1e212b;
+  border-radius: 16px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 20px auto 0 auto;
+  box-sizing: border-box;
 }
 
-.apagar-conteudo p {
-    margin: 12px 0 12px 0;
+.encerrar-icon-warning {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: rgba(239, 68, 68, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
 }
 
-.opcoesApagar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
+.encerrar-conta-card h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px 0;
 }
 
-.opcoesApagar a {
-    background-color: #D9D9D9;
-    padding: 12px;
-    border-radius: 4px;
-    color: #1F1C1C;
+.encerrar-texto-aviso {
+  font-size: 0.9rem;
+  color: #8f94a3;
+  line-height: 1.5;
+  margin: 0 0 28px 0;
 }
 
-.opcoesApagar button {
-    background-color: red;
-    color: white;
-    border: none;
-    font-size: 1rem;
-    padding: 12px;
-    border-radius: 4px;
+.encerrar-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-cancelar {
+  flex: 1;
+  padding: 12px 20px;
+  background-color: #1c1f29;
+  border: 1px solid #272b38;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.btn-cancelar:hover {
+  background-color: #262a38;
+}
+
+.btn-apagar-conta {
+  flex: 1;
+  padding: 12px 20px;
+  background-color: #ef4444;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-apagar-conta:hover {
+  background-color: #dc2626;
+}
+
+@media (max-width: 480px) {
+  .encerrar-conta-card {
+    padding: 24px 16px;
+  }
+
+  .encerrar-acoes {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .btn-cancelar,
+  .btn-apagar-conta {
+    width: 100%;
+  }
 }

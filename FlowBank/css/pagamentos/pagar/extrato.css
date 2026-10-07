@@ -1,5 +1,3 @@
-/* --- TELA EXTRATO --- */
-
 .extrato-header-title {
   display: flex;
   align-items: center;
@@ -115,9 +113,6 @@
   }
 }
 
-/* --- TELA DE EMPRÉSTIMO --- */
-
-/* Card de Saldo */
 .emprestimo-saldo-card {
   width: 100%;
   max-width: 560px;
@@ -160,7 +155,6 @@
   color: #ffffff;
 }
 
-/* Card de Formulario */
 .emprestimo-form-card {
   width: 100%;
   max-width: 560px;
@@ -239,7 +233,6 @@
   transform: scale(0.99);
 }
 
-/* Historico de Transferencias */
 .historico-secao {
   width: 100%;
   max-width: 560px;
