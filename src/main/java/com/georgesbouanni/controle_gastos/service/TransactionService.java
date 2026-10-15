@@ -1,6 +1,7 @@
 package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
+import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.*;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,6 +47,7 @@ public class TransactionService {
         return repository.findById(id);
     }
 
+    @Transactional
     public Transaction save(TransactionRequest request) {
         User sender = userRepository.findById(request.getSenderId())
                 .orElseThrow(() -> new ResourceNotFoundException("Remetente não encontrado com id: " + request.getSenderId()));
@@ -53,11 +56,7 @@ public class TransactionService {
             throw new InsuficientBalanceException("Saldo insuficiente para realizar essa transação");
         }
 
-        sender.setBalance(sender.getBalance().subtract(request.getValue()));
-        userRepository.save(sender);
-
         User receiver = null;
-
         if (request.getType() == TransactionType.PIX && request.getPixKey() != null) {
             PixKey pixKey = pixKeyRepository.findByKeyValue(request.getPixKey())
                     .orElseThrow(() -> new ResourceNotFoundException("Chave PIX não encontrada: " + request.getPixKey()));
@@ -67,16 +66,22 @@ public class TransactionService {
                     .orElseThrow(() -> new ResourceNotFoundException("Destinatario não encontrado com id: " + request.getReceiverId()));
         }
 
-        if (receiver != null) {
-            receiver.setBalance(receiver.getBalance().add(request.getValue()));
-            userRepository.save(receiver);
-        }
-
         Category category = null;
-
         if (request.getCategoryId() != null) {
             category = categoryRepository.findById(request.getCategoryId())
                     .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com id: " + request.getCategoryId()));
+
+            if (!category.getUser().getId().equals(sender.getId())) {
+                throw new BusinessRuleException("Essa categoria não pertence ao remetente.");
+            }
+        }
+
+        sender.setBalance(sender.getBalance().subtract(request.getValue()));
+        userRepository.save(sender);
+
+        if (receiver != null) {
+            receiver.setBalance(receiver.getBalance().add(request.getValue()));
+            userRepository.save(receiver);
         }
 
         Transaction transaction = new Transaction(
