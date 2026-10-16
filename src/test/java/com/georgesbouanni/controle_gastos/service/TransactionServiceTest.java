@@ -1,12 +1,11 @@
 package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
+import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
-import com.georgesbouanni.controle_gastos.model.Transaction;
-import com.georgesbouanni.controle_gastos.model.TransactionStatus;
-import com.georgesbouanni.controle_gastos.model.TransactionType;
-import com.georgesbouanni.controle_gastos.model.User;
+import com.georgesbouanni.controle_gastos.model.*;
+import com.georgesbouanni.controle_gastos.repository.BudgetRepository;
 import com.georgesbouanni.controle_gastos.repository.CategoryRepository;
 import com.georgesbouanni.controle_gastos.repository.TransactionRepository;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
@@ -20,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +40,12 @@ public class TransactionServiceTest {
 
     @InjectMocks
     private TransactionService service;
+
+    @Mock
+    private BudgetRepository budgetRepository;
+
+    @Mock
+    private NotificationService notificationService;
 
     @Test
     void listarTodasAsTransacoes() {
@@ -176,5 +182,87 @@ public class TransactionServiceTest {
         service.delete(1L);
 
         Mockito.verify(repository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void bloquearQuandoTransacaoUltrapassaOrcamento() {
+        User sender = new User();
+        sender.setId(1L);
+        sender.setBalance(new BigDecimal("1000.00"));
+
+        User receiver = new User();
+        receiver.setId(2L);
+        receiver.setBalance(new BigDecimal("0.00"));
+
+        Category category = new Category();
+        category.setId(5L);
+        category.setName("Alimentação");
+        category.setUser(sender);
+
+        Budget budget = new Budget(sender, category, YearMonth.of(2026, 10), new BigDecimal("200.00"));
+
+        TransactionRequest request = new TransactionRequest();
+        request.setDescription("Mercado");
+        request.setValue(new BigDecimal("100.00"));
+        request.setDate(LocalDate.of(2026, 10, 13));
+        request.setType(TransactionType.TRANSFERENCIA);
+        request.setSenderId(1L);
+        request.setReceiverId(2L);
+        request.setCategoryId(5L);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(sender));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(receiver));
+        when(categoryRepository.findById(5L)).thenReturn(Optional.of(category));
+        when(budgetRepository.findByUserIdAndCategoryIdAndMesReferencia(1L, 5L, YearMonth.of(2026, 10)))
+                .thenReturn(Optional.of(budget));
+        when(repository.sumSpent(1L, 5L, LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 31)))
+                .thenReturn(new BigDecimal("150.00"));
+
+        Assertions.assertThrows(BusinessRuleException.class, () -> service.save(request));
+
+        Assertions.assertEquals(new BigDecimal("1000.00"), sender.getBalance());
+        Mockito.verify(userRepository, Mockito.never()).save(Mockito.any(User.class));
+        Mockito.verify(repository, Mockito.never()).save(Mockito.any(Transaction.class));
+    }
+
+    @Test
+    void notificarQuandoGastoAtingeOLimiteDoOrcamento() {
+        User sender = new User();
+        sender.setId(1L);
+        sender.setBalance(new BigDecimal("1000.00"));
+
+        User receiver = new User();
+        receiver.setId(2L);
+        receiver.setBalance(new BigDecimal("0.00"));
+
+        Category category = new Category();
+        category.setId(5L);
+        category.setName("Alimentação");
+        category.setUser(sender);
+
+        Budget budget = new Budget(sender, category, YearMonth.of(2026, 10), new BigDecimal("200.00"));
+
+        TransactionRequest request = new TransactionRequest();
+        request.setDescription("Mercado");
+        request.setValue(new BigDecimal("100.00"));
+        request.setDate(LocalDate.of(2026, 10, 13));
+        request.setType(TransactionType.TRANSFERENCIA);
+        request.setSenderId(1L);
+        request.setReceiverId(2L);
+        request.setCategoryId(5L);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(sender));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(receiver));
+        when(categoryRepository.findById(5L)).thenReturn(Optional.of(category));
+        when(budgetRepository.findByUserIdAndCategoryIdAndMesReferencia(1L, 5L, YearMonth.of(2026, 10)))
+                .thenReturn(Optional.of(budget));
+        when(repository.sumSpent(1L, 5L, LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 31)))
+                .thenReturn(new BigDecimal("100.00"));
+        when(repository.save(Mockito.any(Transaction.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        Transaction resultado = service.save(request);
+
+        Assertions.assertEquals(TransactionStatus.COMPLETED, resultado.getStatus());
+        Mockito.verify(notificationService, Mockito.times(1)).create(Mockito.eq(sender), Mockito.anyString());
     }
 }
