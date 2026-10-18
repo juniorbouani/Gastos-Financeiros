@@ -1,16 +1,30 @@
+version: '3.8'
+
 services:
   postgres:
     image: postgres:16
     container_name: flowbank-postgres
     restart: always
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB: flowbank
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
       - flowbank_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: flowbank-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGA_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${PGA_PASSWORD}
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
 
 volumes:
   flowbank_data:
