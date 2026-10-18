@@ -1,5 +1,7 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
+import com.georgesbouanni.controle_gastos.exception.DataAlreadyExistsException;
 import com.georgesbouanni.controle_gastos.exception.EmailAlreadyExistsException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.User;
@@ -32,14 +34,26 @@ public class UserService {
     }
 
     public User save(User user) {
-        String emailNormalizado = user.getEmail().trim().toLowerCase();
+        String email = user.getEmail().trim().toLowerCase();
+        String cpf = user.getCpf().replaceAll("[^0-9]", "");
+        String telefone = user.getNumeroTelefone().replaceAll("[^0-9]", "");
 
-        if (repository.findByEmail(emailNormalizado).isPresent()) {
+        if (cpf.length() != 11) {
+            throw new BusinessRuleException("O CPF deve conter exatamente 11 dígitos.");
+        }
+        if (repository.findByEmail(email).isPresent()) {
             throw new EmailAlreadyExistsException("Esse e-mail já está cadastrado.");
         }
+        if (repository.findByCpf(cpf).isPresent()) {
+            throw new DataAlreadyExistsException("Esse CPF já está cadastrado.");
+        }
+        if (repository.findByNumeroTelefone(telefone).isPresent()) {
+            throw new DataAlreadyExistsException("Esse telefone já está cadastrado.");
+        }
 
-        user.setEmail(emailNormalizado);
-        user.setCpf(user.getCpf().replaceAll("[^0-9]", ""));
+        user.setEmail(email);
+        user.setCpf(cpf);
+        user.setNumeroTelefone(telefone);
         user.setSenhaHash(passwordEncoder.encode(user.getSenhaHash()));
         return repository.save(user);
     }
@@ -47,11 +61,22 @@ public class UserService {
     public User update(Long id, User user) {
         User exist = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado com id: " + id));
+
+        String email = user.getEmail().trim().toLowerCase();
+        String telefone = user.getNumeroTelefone().replaceAll("[^0-9]", "");
+
+        repository.findByEmail(email)
+                .filter(outro -> !outro.getId().equals(id))
+                .ifPresent(outro -> { throw new EmailAlreadyExistsException("Esse e-mail já está cadastrado."); });
+        repository.findByNumeroTelefone(telefone)
+                .filter(outro -> !outro.getId().equals(id))
+                .ifPresent(outro -> { throw new DataAlreadyExistsException("Esse telefone já está cadastrado."); });
+
         exist.setName(user.getName());
-        exist.setNumeroTelefone(user.getNumeroTelefone());
-        exist.setEmail(user.getEmail());
+        exist.setNumeroTelefone(telefone);
+        exist.setEmail(email);
         exist.setDataNascimento(user.getDataNascimento());
-        exist.setBalance(user.getBalance());
+
         return repository.save(exist);
     }
 

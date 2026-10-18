@@ -2,11 +2,7 @@ package com.georgesbouanni.controle_gastos.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -25,9 +21,11 @@ public class User {
     @NotBlank(message = "O nome deve ser obrigatório")
     private String name;
 
+    @Column(unique = true)
     @NotBlank(message = "O CPF deve ser obrigatório")
     private String cpf;
 
+    @Column(unique = true)
     @NotBlank(message = "O telefone deve ser obrigatório")
     private String numeroTelefone;
 
@@ -38,6 +36,7 @@ public class User {
     @NotBlank(message = "A senha deve ser obrigatória")
     private String senhaHash;
 
+    @Column(unique = true)
     @NotBlank(message = "O email deve ser obrigatório")
     private String email;
 
