@@ -3,6 +3,7 @@ package com.georgesbouanni.controle_gastos.controller;
 import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
+import com.georgesbouanni.controle_gastos.security.CurrentUserService;
 import com.georgesbouanni.controle_gastos.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,13 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionService service;
+    private final CurrentUserService currentUser;
+
 
     @Autowired
-    public TransactionController(TransactionService service) {
+    public TransactionController(TransactionService service, CurrentUserService currentUser) {
         this.service = service;
+        this.currentUser = currentUser;
     }
 
     @GetMapping
@@ -41,7 +45,7 @@ public class TransactionController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Transaction create(@Valid @RequestBody TransactionRequest request) {
-        return service.save(request);
+        return service.save(request, currentUser.getId());
     }
 
     @PutMapping("/{id}")

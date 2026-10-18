@@ -51,9 +51,9 @@ public class TransactionService {
     }
 
     @Transactional
-    public Transaction save(TransactionRequest request) {
-        User sender = userRepository.findById(request.getSenderId())
-                .orElseThrow(() -> new ResourceNotFoundException("Remetente não encontrado com id: " + request.getSenderId()));
+    public Transaction save(TransactionRequest request, Long senderId) {
+        User sender = userRepository.findById(senderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Remetente não encontrado com id: " + senderId));
 
         if (sender.getBalance().compareTo(request.getValue()) < 0) {
             throw new InsuficientBalanceException("Saldo insuficiente para realizar essa transação");

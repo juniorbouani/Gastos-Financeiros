@@ -126,14 +126,13 @@ public class TransactionServiceTest {
         request.setValue(new BigDecimal("150.50"));
         request.setDate(LocalDate.of(2026, 7, 20));
         request.setType(TransactionType.PIX);
-        request.setSenderId(1L);
         request.setReceiverId(2L);
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(sender));
         when(userRepository.findById(2L)).thenReturn(Optional.of(receiver));
         when(repository.save(Mockito.any(Transaction.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        Transaction resultado = service.save(request);
+        Transaction resultado = service.save(request, 1L);
 
         Assertions.assertNotNull(resultado);
         Assertions.assertEquals(TransactionStatus.COMPLETED, resultado.getStatus());
@@ -153,12 +152,11 @@ public class TransactionServiceTest {
         request.setValue(new BigDecimal("150.50"));
         request.setDate(LocalDate.of(2026, 7, 20));
         request.setType(TransactionType.PIX);
-        request.setSenderId(1L);
         request.setReceiverId(2L);
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(sender));
 
-        Assertions.assertThrows(InsuficientBalanceException.class, () -> service.save(request));
+        Assertions.assertThrows(InsuficientBalanceException.class, () -> service.save(request, 1l));
         Mockito.verify(repository, times(0)).save(Mockito.any());
     }
 
@@ -169,12 +167,11 @@ public class TransactionServiceTest {
         request.setValue(new BigDecimal("150.50"));
         request.setDate(LocalDate.of(2026, 7, 20));
         request.setType(TransactionType.PIX);
-        request.setSenderId(999L);
         request.setReceiverId(2L);
 
         when(userRepository.findById(999L)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.save(request));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.save(request,999L));
     }
 
     @Test
@@ -206,7 +203,6 @@ public class TransactionServiceTest {
         request.setValue(new BigDecimal("100.00"));
         request.setDate(LocalDate.of(2026, 10, 13));
         request.setType(TransactionType.TRANSFERENCIA);
-        request.setSenderId(1L);
         request.setReceiverId(2L);
         request.setCategoryId(5L);
 
@@ -218,7 +214,7 @@ public class TransactionServiceTest {
         when(repository.sumSpent(1L, 5L, LocalDate.of(2026, 10, 1), LocalDate.of(2026, 10, 31)))
                 .thenReturn(new BigDecimal("150.00"));
 
-        Assertions.assertThrows(BusinessRuleException.class, () -> service.save(request));
+        Assertions.assertThrows(BusinessRuleException.class, () -> service.save(request, 1L));
 
         Assertions.assertEquals(new BigDecimal("1000.00"), sender.getBalance());
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any(User.class));
@@ -247,7 +243,6 @@ public class TransactionServiceTest {
         request.setValue(new BigDecimal("100.00"));
         request.setDate(LocalDate.of(2026, 10, 13));
         request.setType(TransactionType.TRANSFERENCIA);
-        request.setSenderId(1L);
         request.setReceiverId(2L);
         request.setCategoryId(5L);
 
@@ -260,7 +255,7 @@ public class TransactionServiceTest {
                 .thenReturn(new BigDecimal("100.00"));
         when(repository.save(Mockito.any(Transaction.class))).thenAnswer(inv -> inv.getArgument(0));
 
-        Transaction resultado = service.save(request);
+        Transaction resultado = service.save(request, 1L);
 
         Assertions.assertEquals(TransactionStatus.COMPLETED, resultado.getStatus());
         Mockito.verify(notificationService, Mockito.times(1)).create(Mockito.eq(sender), Mockito.anyString());
