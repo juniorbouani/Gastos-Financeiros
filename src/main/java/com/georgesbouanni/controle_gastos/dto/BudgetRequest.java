@@ -9,9 +9,6 @@ import java.time.YearMonth;
 
 public class BudgetRequest {
 
-    @NotNull(message = "O usuário é obrigatório")
-    private Long userId;
-
     @NotNull(message = "A categoria é obrigatória!")
     private Long categoryId;
 
@@ -21,14 +18,6 @@ public class BudgetRequest {
     @NotNull(message = "O limite é obrigatório!")
     @Positive(message = "O limite deve ser positivo!")
     private BigDecimal limite;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public Long getCategoryId() {
         return categoryId;

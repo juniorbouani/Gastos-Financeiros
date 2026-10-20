@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Notification;
 import com.georgesbouanni.controle_gastos.model.User;
@@ -33,9 +34,12 @@ public class NotificationService {
         return repository.countByUserIdAndLidaFalse(userId);
     }
 
-    public Notification markAsRead(Long id) {
+    public Notification markAsRead(Long id, Long userId) {
         Notification notification = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Notificação não encontrada com id: " + id));
+        if (!notification.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("Esta notificação não pertence a você");
+        }
         notification.setLida(true);
         return repository.save(notification);
     }

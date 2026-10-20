@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
 import com.georgesbouanni.controle_gastos.exception.PixKeyAlreadyExistsException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.PixKey;
@@ -56,7 +57,12 @@ public class PixKeyService {
                 .orElseThrow(() -> new ResourceNotFoundException("Chave Pix não encontrada: " + keyValue));
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void delete(Long id, Long userId) {
+        PixKey pixKey= repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Chave pix não encontrada na id: " + id));
+        if (!pixKey.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("Essa chave pix não pertence a você.");
+        }
+        repository.delete(pixKey);
     }
 }

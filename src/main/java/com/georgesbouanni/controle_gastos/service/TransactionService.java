@@ -2,6 +2,7 @@ package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
+import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.*;
@@ -158,4 +159,30 @@ public class TransactionService {
     public List<Transaction> listByUser(Long userId) {
         return repository.findBySenderIdOrReceiverId(userId, userId);
     }
+
+    public List<Transaction> listByUserAndType(Long userId, TransactionType type) {
+        return repository.findByUserAndType(userId, type);
+    }
+
+    public List<Transaction> listByUserAndPeriod(Long userId, LocalDate start, LocalDate end) {
+        return repository.findByUserAndPeriod(userId, start, end);
+    }
+
+    public Page<Transaction> listByUserPaginated(Long userId, Pageable pageable) {
+        return repository.findBySenderIdOrReceiverId(userId, userId, pageable);
+    }
+
+    public Transaction findByIdForUser(Long id, Long userId) {
+        Transaction transaction = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Transação não encontrada com id: " + id));
+
+        boolean participa = transaction.getSender().getId().equals(userId)
+                || (transaction.getReceiver() != null && transaction.getReceiver().getId().equals(userId));
+
+        if (!participa) {
+            throw new ForbiddenException("Você não tem permissão para acessar esta transação.");
+        }
+        return transaction;
+    }
+
 }

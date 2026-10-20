@@ -35,4 +35,10 @@ public class CurrentUserService {
     public Long getId(){
         return get().getId();
     }
+
+    public void requireSameUser(Long userId) {
+        if (!get().getId().equals(userId)) {
+            throw new ForbiddenException("Você não tem permissão para acessar os dados de outro usuário");
+        }
+    }
 }

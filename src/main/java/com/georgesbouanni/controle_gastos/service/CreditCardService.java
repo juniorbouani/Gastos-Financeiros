@@ -1,8 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
-import com.georgesbouanni.controle_gastos.exception.CardBlockedException;
-import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
-import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
+import com.georgesbouanni.controle_gastos.exception.*;
 import com.georgesbouanni.controle_gastos.model.*;
 import com.georgesbouanni.controle_gastos.repository.CreditCardRepository;
 import com.georgesbouanni.controle_gastos.repository.InvoiceItemRepository;
@@ -10,6 +8,7 @@ import com.georgesbouanni.controle_gastos.repository.InvoiceRepository;
 import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.smartcardio.Card;
 import java.math.BigDecimal;
@@ -56,28 +55,30 @@ public class CreditCardService {
         return cardRepository.findByUserId(userId);
     }
 
-    public CreditCard blockCard(Long cardId) {
-        CreditCard card = findCardorThrow(cardId);
+    public CreditCard blockCard(Long cardId, Long userId) {
+        CreditCard card = findOwnedCard(cardId, userId);
         card.setStatus(CreditCardStatus.BLOQUEADO);
         return cardRepository.save(card);
     }
 
-    public CreditCard unblockCard(Long cardId) {
-        CreditCard card = findCardorThrow(cardId);
+    public CreditCard unblockCard(Long cardId, Long userId) {
+        CreditCard card = findOwnedCard(cardId, userId);
         card.setStatus(CreditCardStatus.ATIVO);
         return cardRepository.save(card);
     }
 
-    public CreditCard setSpendingLimit(Long cardId, BigDecimal novoLimite) {
-        CreditCard card = findCardorThrow(cardId);
+    public CreditCard setSpendingLimit(Long cardId, Long userId, BigDecimal novoLimite) {
+        CreditCard card = findOwnedCard(cardId, userId);
         BigDecimal diferenca = novoLimite.subtract(card.getLimiteTotal());
         card.setLimiteTotal(novoLimite);
         card.setLimiteTotal(card.getLimiteDisponivel().add(diferenca));
         return cardRepository.save(card);
     }
 
-    public InvoiceItem registerPurchase(Long cardId, String descricao, BigDecimal valor, int totalParcelas) {
-        CreditCard card = findCardorThrow(cardId);
+    @Transactional
+    public InvoiceItem registerPurchase(Long cardId, Long userId, String descricao,
+                                        BigDecimal valor, int totalParcelas) {
+        CreditCard card = findOwnedCard(cardId, userId);
 
         if (card.getStatus() == CreditCardStatus.BLOQUEADO) {
             throw new CardBlockedException("Este cartão está bloqueado.");
@@ -123,52 +124,74 @@ public class CreditCardService {
                 });
     }
 
-    public Invoice payInvoice(Long invoiceId, BigDecimal valorPagamento) {
+    @Transactional
+    public Invoice payInvoice(Long invoiceId, Long userId, BigDecimal valorPagamento) {
         Invoice invoice = invoiceRepository.findById(invoiceId)
-                .orElseThrow(() ->  new ResourceNotFoundException("Fatura não encontrada com id: " + invoiceId));
+                .orElseThrow(() -> new ResourceNotFoundException("Fatura não encontrada com id: " + invoiceId));
 
-        User user = invoice.getCreditCard().getUser();
+        CreditCard card = invoice.getCreditCard();
+        User user = card.getUser();
 
+        if (!user.getId().equals(userId)) {
+            throw new ForbiddenException("Esta fatura não pertence a você.");
+        }
+
+        BigDecimal restante = invoice.getValorTotal().subtract(invoice.getValorPago());
+        if (valorPagamento.compareTo(restante) > 0) {
+            throw new BusinessRuleException("O valor excede o saldo devedor da fatura (" + restante + ").");
+        }
         if (user.getBalance().compareTo(valorPagamento) < 0) {
             throw new InsuficientBalanceException("Saldo insuficiente para pagar a fatura.");
-
         }
 
         user.setBalance(user.getBalance().subtract(valorPagamento));
+        userRepository.save(user);
 
-        CreditCard card = invoice.getCreditCard();
+        invoice.setValorPago(invoice.getValorPago().add(valorPagamento));
         card.setLimiteDisponivel(card.getLimiteDisponivel().add(valorPagamento));
         cardRepository.save(card);
 
-        if (invoice.getValorPago().compareTo(invoice.getValorTotal()) >= 0) {
-            invoice.setStatus(InvoiceStatus.PAGA);
-        }
-        else {
-            invoice.setStatus(InvoiceStatus.PARCIAL);
-        }
+        invoice.setStatus(invoice.getValorPago().compareTo(invoice.getValorTotal()) >= 0
+                ? InvoiceStatus.PAGA : InvoiceStatus.PARCIAL);
 
         return invoiceRepository.save(invoice);
     }
 
-    public InvoiceItem disputeItem(Long itemId) {
+    @Transactional
+    public InvoiceItem disputeItem(Long itemId, Long userId) {
         InvoiceItem item = invoiceItemRepository.findById(itemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Lançamento não encontrado com id: " + itemId));
 
-        item.setEstornado(true);
-
         Invoice invoice = item.getInvoice();
+        CreditCard card = invoice.getCreditCard();
+
+        if (!card.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("Este lançamento não pertence a você.");
+        }
+        if (item.isEstornado()) {
+            throw new BusinessRuleException("Este lançamento já foi estornado.");
+        }
+
+        item.setEstornado(true);
         invoice.setValorTotal(invoice.getValorTotal().subtract(item.getValor()));
         invoiceRepository.save(invoice);
 
-        CreditCard card = invoice.getCreditCard();
-        invoice.setValorTotal(invoice.getValorTotal().subtract(item.getValor()));
+        card.setLimiteDisponivel(card.getLimiteDisponivel().add(item.getValor()));
         cardRepository.save(card);
 
         return invoiceItemRepository.save(item);
     }
 
-    private CreditCard findCardorThrow(Long cardId) {
+    private CreditCard findCardorThrow(Long cardId, Long userId) {
         return cardRepository.findById(cardId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cartão não encontrado com id:" + cardId));
+    }
+
+    public CreditCard findOwnedCard(Long cardId, Long userId) {
+        CreditCard card = findCardorThrow(cardId, userId);
+        if (!card.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("Esse cartão não pertence a você");
+        }
+        return card;
     }
 }

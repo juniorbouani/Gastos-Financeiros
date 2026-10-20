@@ -23,7 +23,6 @@ public class TransactionController {
     private final TransactionService service;
     private final CurrentUserService currentUser;
 
-
     @Autowired
     public TransactionController(TransactionService service, CurrentUserService currentUser) {
         this.service = service;
@@ -32,14 +31,12 @@ public class TransactionController {
 
     @GetMapping
     public Page<Transaction> list(Pageable pageable) {
-        return service.listAllPaginated(pageable);
+        return service.listByUserPaginated(currentUser.getId(), pageable);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaction> findById(@PathVariable Long id) {
-        return service.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Transaction findById(@PathVariable Long id) {
+        return service.findByIdForUser(id, currentUser.getId());
     }
 
     @PostMapping
@@ -48,32 +45,19 @@ public class TransactionController {
         return service.save(request, currentUser.getId());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Transaction> update(@PathVariable Long id, @Valid @RequestBody Transaction transaction) {
-        Transaction updated = service.update(id, transaction);
-        return ResponseEntity.ok(updated);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping("/type/{type}")
     public List<Transaction> listByType(@PathVariable TransactionType type) {
-        return service.listByType(type);
+        return service.listByUserAndType(currentUser.getId(), type);
     }
 
     @GetMapping("/period")
-    public List<Transaction> listByPeriod(
-            @RequestParam LocalDate start,
-            @RequestParam LocalDate end) {
-        return service.listByPeriod(start, end);
+    public List<Transaction> listByPeriod(@RequestParam LocalDate start, @RequestParam LocalDate end) {
+        return service.listByUserAndPeriod(currentUser.getId(), start, end);
     }
 
     @GetMapping("/user/{userId}")
     public List<Transaction> listByUser(@PathVariable Long userId) {
+        currentUser.requireSameUser(userId);
         return service.listByUser(userId);
     }
 }

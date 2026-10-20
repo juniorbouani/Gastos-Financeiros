@@ -3,6 +3,7 @@ package com.georgesbouanni.controle_gastos.controller;
 import com.georgesbouanni.controle_gastos.dto.PixKeyRequest;
 import com.georgesbouanni.controle_gastos.model.PixKey;
 import com.georgesbouanni.controle_gastos.repository.PixKeyRepository;
+import com.georgesbouanni.controle_gastos.security.CurrentUserService;
 import com.georgesbouanni.controle_gastos.service.PixKeyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +18,23 @@ import java.util.List;
 public class PixKeyController {
 
     private final PixKeyService service;
+    private final CurrentUserService currentUser;
 
     @Autowired
-    public PixKeyController(PixKeyService service) {
+    public PixKeyController(PixKeyService service, CurrentUserService currentUser) {
         this.service = service;
+        this.currentUser = currentUser;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PixKey create(@Valid @RequestBody PixKeyRequest request) {
-        return service.create(request.getUserId(), request.getKeyType(), request.getKeyValue());
+        return service.create(currentUser.getId(), request.getKeyType(), request.getKeyValue());
     }
 
     @GetMapping("/user/{userId}")
     public List<PixKey> listByUser(@PathVariable Long userId) {
+        currentUser.requireSameUser(userId);
         return service.listByUser(userId);
     }
 
@@ -41,7 +45,7 @@ public class PixKeyController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
+        service.delete(id, currentUser.getId());
         return ResponseEntity.noContent().build();
     }
 }

@@ -2,6 +2,7 @@ package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.dto.BudgetSummaryResponse;
 import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
+import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Budget;
 import com.georgesbouanni.controle_gastos.model.Category;
@@ -59,15 +60,23 @@ public class BudgetService {
                 .toList();
     }
 
-    public BudgetSummaryResponse updateLimit(Long id, BigDecimal novoLimite) {
+    private Budget findOwnedBudget(Long id, Long userId) {
         Budget budget = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Orçamento não encontrado com id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Orçamento não encontrado na id: " + id));
+        if(!budget.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("Este orçamento não pertence a você");
+        }
+        return budget;
+    }
+
+    public BudgetSummaryResponse updateLimit(Long id, Long userId, BigDecimal novoLimite) {
+        Budget budget = findOwnedBudget(id, userId);
         budget.setLimite(novoLimite);
         return toSummary(repository.save(budget));
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void delete(Long id, Long userId) {
+        repository.delete(findOwnedBudget(id, userId));
     }
 
     private BudgetSummaryResponse toSummary(Budget budget) {

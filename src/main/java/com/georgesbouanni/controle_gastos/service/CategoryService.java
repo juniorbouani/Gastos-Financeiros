@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Category;
 import com.georgesbouanni.controle_gastos.model.User;
@@ -43,16 +44,24 @@ public class CategoryService {
         return repository.findById(id);
     }
 
-    public Category update(Long id, String name, String icone) {
+    public Category findByIdForUser(Long id, Long userId) {
         Category category = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com id: " + id));
+        if (!category.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("Esta categoria não pertence a você.");
+        }
+        return category;
+    }
+
+    public Category update(Long id, Long userId, String name, String icone) {
+        Category category = findByIdForUser(id, userId);
         category.setName(name);
         category.setIcone(icone);
         return repository.save(category);
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void delete(Long id, Long userId) {
+        repository.delete(findByIdForUser(id, userId));
     }
 
 }

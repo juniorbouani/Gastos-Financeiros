@@ -2,6 +2,7 @@ package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
 import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
+import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
 import com.georgesbouanni.controle_gastos.exception.InsuficientBalanceException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.*;
@@ -259,5 +260,23 @@ public class TransactionServiceTest {
 
         Assertions.assertEquals(TransactionStatus.COMPLETED, resultado.getStatus());
         Mockito.verify(notificationService, Mockito.times(1)).create(Mockito.eq(sender), Mockito.anyString());
+    }
+
+    @Test
+    void negarAcessoATransacaoDeOutroUsuario() {
+        User sender = new User();
+        sender.setId(1L);
+        User receiver = new User();
+        receiver.setId(2L);
+
+        Transaction transaction = new Transaction("Pix", new BigDecimal("10.00"),
+                LocalDate.of(2026, 10, 1), TransactionType.PIX, TransactionStatus.COMPLETED,
+                sender, receiver, null, null);
+        transaction.setId(10L);
+
+        when(repository.findById(10L)).thenReturn(Optional.of(transaction));
+
+        Assertions.assertThrows(ForbiddenException.class, () -> service.findByIdForUser(10L, 3L));
+        Assertions.assertEquals(transaction, service.findByIdForUser(10L, 2L));
     }
 }
