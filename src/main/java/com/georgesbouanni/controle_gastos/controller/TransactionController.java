@@ -63,4 +63,10 @@ public class TransactionController {
         currentUser.requireSameUser(userId);
         return service.listByUser(userId).stream().map(TransactionResponse::from).toList();
     }
+
+    @PostMapping("/{id}/reverse")
+    @ResponseStatus(HttpStatus.CREATED)
+    public TransactionResponse reverse(@PathVariable Long id) {
+        return TransactionResponse.from(service.reverse(id, currentUser.getId()));
+    }
 }

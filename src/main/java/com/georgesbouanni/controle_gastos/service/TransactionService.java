@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
@@ -131,22 +133,62 @@ public class TransactionService {
         return saved;
     }
 
-    public Transaction update(Long id, Transaction updatedData) {
-        Transaction existing = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Transação não encontrada com id: " + id));
+    private static final Duration REVERSAL_WINDOW = Duration.ofMinutes(30);
 
-        existing.setDescription(updatedData.getDescription());
-        existing.setValue(updatedData.getValue());
-        existing.setDate(updatedData.getDate());
-        existing.setType(updatedData.getType());
-        existing.setDestination(updatedData.getDestination());
+    @Transactional
+    public Transaction reverse(Long transactionId, Long userId) {
+        Transaction original = repository.findById(transactionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Transação não encontrada com id: " + transactionId));
 
-        return repository.save(existing);
+        if (!original.getSender().getId().equals(userId)) {
+            throw new ForbiddenException("Somente quem enviou a transação pode estorná-la.");
+        }
+        if (original.getType() == TransactionType.ESTORNO) {
+            throw new BusinessRuleException("Um estorno não pode ser estornado.");
+        }
+        if (original.getStatus() != TransactionStatus.COMPLETED) {
+            throw new BusinessRuleException("Só transações concluídas podem ser estornadas.");
+        }
+        if (original.getReceiver() == null) {
+            throw new BusinessRuleException("Esta transação não possui destinatário interno e não pode ser estornada.");
+        }
+        if (repository.existsByReversalOfId(original.getId())) {
+            throw new BusinessRuleException("Esta transação já foi estornada.");
+        }
+        if (original.getCreatedAt() == null
+                || Duration.between(original.getCreatedAt(), LocalDateTime.now()).compareTo(REVERSAL_WINDOW) > 0) {
+            throw new BusinessRuleException("O prazo para estornar esta transação ("
+                    + REVERSAL_WINDOW.toMinutes() + " minutos) já passou.");
+        }
+
+        User payer = original.getSender();
+        User payee = original.getReceiver();
+
+        if (payee.getBalance().compareTo(original.getValue()) < 0) {
+            throw new InsuficientBalanceException("O destinatário não tem saldo suficiente para devolver o valor.");
+        }
+
+        payee.setBalance(payee.getBalance().subtract(original.getValue()));
+        payer.setBalance(payer.getBalance().add(original.getValue()));
+        userRepository.save(payee);
+        userRepository.save(payer);
+
+        Transaction reversal = new Transaction(
+                "Estorno: " + original.getDescription(),
+                original.getValue(),
+                LocalDate.now(),
+                TransactionType.ESTORNO,
+                TransactionStatus.COMPLETED,
+                payee,
+                payer,
+                null,
+                null
+        );
+        reversal.setReversalOf(original);
+
+        return repository.save(reversal);
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
-    }
 
     public List<Transaction> listByType(TransactionType type) {
         return repository.findByType(type);

@@ -4,7 +4,8 @@ public enum TransactionType {
     PIX,
     BOLETO,
     TRANSFERENCIA,
-    TED
+    TED,
+    ESTORNO
 
 }
 

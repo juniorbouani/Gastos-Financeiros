@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
@@ -175,12 +176,6 @@ public class TransactionServiceTest {
         Assertions.assertThrows(ResourceNotFoundException.class, () -> service.save(request,999L));
     }
 
-    @Test
-    void deletarTransacao() {
-        service.delete(1L);
-
-        Mockito.verify(repository, times(1)).deleteById(1L);
-    }
 
     @Test
     void bloquearQuandoTransacaoUltrapassaOrcamento() {
@@ -278,5 +273,75 @@ public class TransactionServiceTest {
 
         Assertions.assertThrows(ForbiddenException.class, () -> service.findByIdForUser(10L, 3L));
         Assertions.assertEquals(transaction, service.findByIdForUser(10L, 2L));
+    }
+
+    private User usuario(Long id, String saldo) {
+        User u = new User();
+        u.setId(id);
+        u.setBalance(new BigDecimal(saldo));
+        return u;
+    }
+
+    private Transaction transacaoOriginal(User payer, User payee) {
+        Transaction t = new Transaction("Pix", new BigDecimal("150.00"), LocalDate.of(2026, 10, 22),
+                TransactionType.PIX, TransactionStatus.COMPLETED, payer, payee, null, null);
+        t.setId(10L);
+        return t;
+    }
+
+    @Test
+    void estornarDevolveOValorEGeraLancamentoDeEstorno() {
+        User payer = usuario(1L, "350.00");
+        User payee = usuario(2L, "250.00");
+        Transaction original = transacaoOriginal(payer, payee);
+
+        when(repository.findById(10L)).thenReturn(Optional.of(original));
+        when(repository.save(Mockito.any(Transaction.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        Transaction estorno = service.reverse(10L, 1L);
+
+        Assertions.assertEquals(TransactionType.ESTORNO, estorno.getType());
+        Assertions.assertEquals(original, estorno.getReversalOf());
+        Assertions.assertEquals(payee, estorno.getSender());
+        Assertions.assertEquals(payer, estorno.getReceiver());
+        Assertions.assertEquals(new BigDecimal("500.00"), payer.getBalance());
+        Assertions.assertEquals(new BigDecimal("100.00"), payee.getBalance());
+    }
+
+    @Test
+    void negarEstornoDeQuemNaoEnviou() {
+        Transaction original = transacaoOriginal(usuario(1L, "0.00"), usuario(2L, "500.00"));
+        when(repository.findById(10L)).thenReturn(Optional.of(original));
+
+        Assertions.assertThrows(ForbiddenException.class, () -> service.reverse(10L, 2L));
+    }
+
+    @Test
+    void negarEstornoDuplicado() {
+        Transaction original = transacaoOriginal(usuario(1L, "0.00"), usuario(2L, "500.00"));
+        when(repository.findById(10L)).thenReturn(Optional.of(original));
+        when(repository.existsByReversalOfId(10L)).thenReturn(true);
+
+        Assertions.assertThrows(BusinessRuleException.class, () -> service.reverse(10L, 1L));
+    }
+
+    @Test
+    void negarEstornoForaDoPrazo() {
+        User payer = usuario(1L, "0.00");
+        User payee = usuario(2L, "500.00");
+        Transaction original = transacaoOriginal(payer, payee);
+        original.setCreatedAt(LocalDateTime.now().minusHours(2));
+        when(repository.findById(10L)).thenReturn(Optional.of(original));
+
+        Assertions.assertThrows(BusinessRuleException.class, () -> service.reverse(10L, 1L));
+        Assertions.assertEquals(new BigDecimal("500.00"), payee.getBalance());
+    }
+
+    @Test
+    void negarEstornoQuandoDestinatarioNaoTemSaldo() {
+        Transaction original = transacaoOriginal(usuario(1L, "0.00"), usuario(2L, "10.00"));
+        when(repository.findById(10L)).thenReturn(Optional.of(original));
+
+        Assertions.assertThrows(InsuficientBalanceException.class, () -> service.reverse(10L, 1L));
     }
 }

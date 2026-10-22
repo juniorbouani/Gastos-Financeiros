@@ -6,6 +6,7 @@ import com.georgesbouanni.controle_gastos.model.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TransactionResponse {
 
@@ -20,6 +21,8 @@ public class TransactionResponse {
     private final String destination;
     private final Long categoryId;
     private final String categoryName;
+    private final LocalDateTime createdAt;
+    private final Long reversalOfId;
 
     public TransactionResponse(Transaction t) {
         this.id = t.getId();
@@ -33,6 +36,8 @@ public class TransactionResponse {
         this.destination = t.getDestination();
         this.categoryId = t.getCategory() != null ? t.getCategory().getId() : null ;
         this.categoryName = t.getCategory() != null ? t.getCategory().getName() : null;
+        this.createdAt = t.getCreatedAt();
+        this.reversalOfId = t.getReversalOf() != null ? t.getReversalOf().getId() : null;
     }
 
     public static TransactionResponse from(Transaction transaction) {

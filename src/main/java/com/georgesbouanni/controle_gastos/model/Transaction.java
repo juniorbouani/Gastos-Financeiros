@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transactions")
@@ -49,6 +51,13 @@ public class Transaction {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    private LocalDateTime createdAt;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "reversal_of_id", unique = true)
+    private Transaction reversalOf;
+
     public Transaction() {
     }
 
@@ -64,6 +73,7 @@ public class Transaction {
         this.receiver = receiver;
         this.destination = destination;
         this.category = category;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -144,5 +154,21 @@ public class Transaction {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Transaction getReversalOf() {
+        return reversalOf;
+    }
+
+    public void setReversalOf(Transaction reversalOf) {
+        this.reversalOf = reversalOf;
     }
 }
