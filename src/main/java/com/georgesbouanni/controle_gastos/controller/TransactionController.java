@@ -1,6 +1,7 @@
 package com.georgesbouanni.controle_gastos.controller;
 
 import com.georgesbouanni.controle_gastos.dto.TransactionRequest;
+import com.georgesbouanni.controle_gastos.dto.TransactionResponse;
 import com.georgesbouanni.controle_gastos.model.Transaction;
 import com.georgesbouanni.controle_gastos.model.TransactionType;
 import com.georgesbouanni.controle_gastos.security.CurrentUserService;
@@ -30,34 +31,36 @@ public class TransactionController {
     }
 
     @GetMapping
-    public Page<Transaction> list(Pageable pageable) {
-        return service.listByUserPaginated(currentUser.getId(), pageable);
+    public Page<TransactionResponse> list(Pageable pageable) {
+        return service.listByUserPaginated(currentUser.getId(), pageable).map(TransactionResponse::from);
     }
 
     @GetMapping("/{id}")
-    public Transaction findById(@PathVariable Long id) {
-        return service.findByIdForUser(id, currentUser.getId());
+    public TransactionResponse findById(@PathVariable Long id) {
+        return TransactionResponse.from(service.findByIdForUser(id, currentUser.getId()));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Transaction create(@Valid @RequestBody TransactionRequest request) {
-        return service.save(request, currentUser.getId());
+    public TransactionResponse create(@Valid @RequestBody TransactionRequest request) {
+        return TransactionResponse.from(service.save(request, currentUser.getId()));
     }
 
     @GetMapping("/type/{type}")
-    public List<Transaction> listByType(@PathVariable TransactionType type) {
-        return service.listByUserAndType(currentUser.getId(), type);
+    public List<TransactionResponse> listByType(@PathVariable TransactionType type) {
+        return service.listByUserAndType(currentUser.getId(), type).stream()
+                .map(TransactionResponse::from).toList();
     }
 
     @GetMapping("/period")
-    public List<Transaction> listByPeriod(@RequestParam LocalDate start, @RequestParam LocalDate end) {
-        return service.listByUserAndPeriod(currentUser.getId(), start, end);
+    public List<TransactionResponse> listByPeriod(@RequestParam LocalDate start, @RequestParam LocalDate end) {
+        return service.listByUserAndPeriod(currentUser.getId(), start, end).stream()
+                .map(TransactionResponse::from).toList();
     }
 
     @GetMapping("/user/{userId}")
-    public List<Transaction> listByUser(@PathVariable Long userId) {
+    public List<TransactionResponse> listByUser(@PathVariable Long userId) {
         currentUser.requireSameUser(userId);
-        return service.listByUser(userId);
+        return service.listByUser(userId).stream().map(TransactionResponse::from).toList();
     }
 }

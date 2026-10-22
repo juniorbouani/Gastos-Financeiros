@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ public class PixKey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @NotNull(message = "O usuário é obrigatório!")
     @ManyToOne
     @JoinColumn(name = "user_id")

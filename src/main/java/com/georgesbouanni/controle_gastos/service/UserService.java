@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.service;
 
+import com.georgesbouanni.controle_gastos.dto.UserUpdateRequest;
 import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
 import com.georgesbouanni.controle_gastos.exception.DataAlreadyExistsException;
 import com.georgesbouanni.controle_gastos.exception.EmailAlreadyExistsException;
@@ -58,12 +59,12 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User update(Long id, User user) {
+    public User update(Long id, UserUpdateRequest request) {
         User exist = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado com id: " + id));
 
-        String email = user.getEmail().trim().toLowerCase();
-        String telefone = user.getNumeroTelefone().replaceAll("[^0-9]", "");
+        String email = request.getEmail().trim().toLowerCase();
+        String telefone = request.getNumeroTelefone().replaceAll("[^0-9]", "");
 
         repository.findByEmail(email)
                 .filter(outro -> !outro.getId().equals(id))
@@ -72,10 +73,10 @@ public class UserService {
                 .filter(outro -> !outro.getId().equals(id))
                 .ifPresent(outro -> { throw new DataAlreadyExistsException("Esse telefone já está cadastrado."); });
 
-        exist.setName(user.getName());
+        exist.setName(request.getName());
         exist.setNumeroTelefone(telefone);
         exist.setEmail(email);
-        exist.setDataNascimento(user.getDataNascimento());
+        exist.setDataNascimento(request.getDataNascimento());
 
         return repository.save(exist);
     }

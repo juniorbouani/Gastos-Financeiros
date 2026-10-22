@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -15,6 +16,7 @@ public class CreditCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @NotNull(message = "O usuário é obrigatório")
     @ManyToOne
     @JoinColumn(name = "user_id")

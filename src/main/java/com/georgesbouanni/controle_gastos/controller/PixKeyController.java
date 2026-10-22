@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.controller;
 
+import com.georgesbouanni.controle_gastos.dto.PixKeyLookupResponse;
 import com.georgesbouanni.controle_gastos.dto.PixKeyRequest;
 import com.georgesbouanni.controle_gastos.model.PixKey;
 import com.georgesbouanni.controle_gastos.repository.PixKeyRepository;
@@ -39,10 +40,10 @@ public class PixKeyController {
     }
 
     @GetMapping("/{keyValue}")
-    public PixKey findKeyValue(@PathVariable String keyValue) {
-        return service.findByKeyValue(keyValue);
+    public PixKeyLookupResponse lookup(@PathVariable String keyValue) {
+        PixKey key = service.findByKeyValue(keyValue);
+        return new PixKeyLookupResponse(key.getKeyType(), key.getKeyValue(), key.getUser().getName());
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id, currentUser.getId());
