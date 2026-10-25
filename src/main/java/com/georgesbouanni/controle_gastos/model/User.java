@@ -9,6 +9,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -43,6 +44,13 @@ public class User {
     @NotNull(message = "O valor deve ser obrigatório")
     @PositiveOrZero(message = "O saldo não pode ser negativo")
     private BigDecimal balance;
+
+    @JsonIgnore
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    private int failedLoginAttempts = 0;
+
+    @JsonIgnore
+    private LocalDateTime lockedUntil;
 
     public User() {
     }
@@ -120,4 +128,21 @@ public class User {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+
+    public int getFailedLoginAttempts() {
+        return failedLoginAttempts;
+    }
+
+    public void setFailedLoginAttempts(int failedLoginAttempts) {
+        this.failedLoginAttempts = failedLoginAttempts;
+    }
+
+    public LocalDateTime getLockedUntil() {
+        return lockedUntil;
+    }
+
+    public void setLockedUntil(LocalDateTime lockedUntil) {
+        this.lockedUntil = lockedUntil;
+    }
+
 }
