@@ -54,24 +54,58 @@ public class CreditCardService {
         return cardRepository.findByUserId(userId);
     }
 
+    @Transactional
     public CreditCard blockCard(Long cardId, Long userId) {
         CreditCard card = findOwnedCard(cardId, userId);
-        card.setStatus(CreditCardStatus.BLOQUEADO);
-        return cardRepository.save(card);
+
+        if (card.getStatus() == CreditCardStatus.CANCELADO) {
+            throw new BusinessRuleException("Este cartão está cancelado.");
+        }
+        if (card.getStatus() != CreditCardStatus.BLOQUEADO) {
+            card.setStatus(CreditCardStatus.BLOQUEADO);
+            cardRepository.save(card);
+            notificationService.create(card.getUser(),
+                    "Cartão " + card.getNumeroMascarado() + " bloqueado.");
+        }
+        return card;
     }
 
+    @Transactional
     public CreditCard unblockCard(Long cardId, Long userId) {
         CreditCard card = findOwnedCard(cardId, userId);
-        card.setStatus(CreditCardStatus.ATIVO);
-        return cardRepository.save(card);
+
+        if (card.getStatus() == CreditCardStatus.CANCELADO) {
+            throw new BusinessRuleException("Este cartão está cancelado.");
+        }
+        if (card.getStatus() != CreditCardStatus.ATIVO) {
+            card.setStatus(CreditCardStatus.ATIVO);
+            cardRepository.save(card);
+            notificationService.create(card.getUser(),
+                    "Cartão " + card.getNumeroMascarado() + " desbloqueado.");
+        }
+        return card;
     }
 
+    @Transactional
     public CreditCard setSpendingLimit(Long cardId, Long userId, BigDecimal novoLimite) {
         CreditCard card = findOwnedCard(cardId, userId);
-        BigDecimal diferenca = novoLimite.subtract(card.getLimiteTotal());
+
+        BigDecimal limiteAnterior = card.getLimiteTotal();
+        BigDecimal utilizado = limiteAnterior.subtract(card.getLimiteDisponivel());
+
+        if (novoLimite.compareTo(utilizado) < 0) {
+            throw new BusinessRuleException(
+                    "O novo limite é menor que o valor já utilizado (" + MoneyFormatter.format(utilizado) + ").");
+        }
+
         card.setLimiteTotal(novoLimite);
-        card.setLimiteTotal(card.getLimiteDisponivel().add(diferenca));
-        return cardRepository.save(card);
+        card.setLimiteDisponivel(card.getLimiteDisponivel().add(novoLimite.subtract(limiteAnterior)));
+        cardRepository.save(card);
+
+        notificationService.create(card.getUser(),
+                "Limite do cartão " + card.getNumeroMascarado() + " alterado de "
+                        + MoneyFormatter.format(limiteAnterior) + " para " + MoneyFormatter.format(novoLimite) + ".");
+        return card;
     }
 
     @Transactional

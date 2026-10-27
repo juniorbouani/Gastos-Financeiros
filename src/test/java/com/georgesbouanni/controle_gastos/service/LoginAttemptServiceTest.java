@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,9 @@ public class LoginAttemptServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private NotificationService notificationService;
 
     @InjectMocks
     private LoginAttemptService service;
@@ -81,5 +85,25 @@ public class LoginAttemptServiceTest {
         when(userRepository.findByCpf("12345678900")).thenReturn(Optional.of(user));
 
         Assertions.assertDoesNotThrow(() -> service.checkNotLocked("12345678900"));
+    }
+
+    @Test
+    void notificarBloqueioCriaAvisoParaOUsuario() {
+        User user = usuarioComTentativas(0);
+        when(userRepository.findByCpf("12345678900")).thenReturn(Optional.of(user));
+
+        service.notifyLock("12345678900");
+
+        Mockito.verify(notificationService).create(Mockito.eq(user), Mockito.contains("bloqueada"));
+    }
+
+    @Test
+    void falhaAoNotificarNaoQuebraOLogin() {
+        User user = usuarioComTentativas(0);
+        when(userRepository.findByCpf("12345678900")).thenReturn(Optional.of(user));
+        when(notificationService.create(Mockito.eq(user), Mockito.anyString()))
+                .thenThrow(new RuntimeException("falha"));
+
+        Assertions.assertDoesNotThrow(() -> service.notifyLock("12345678900"));
     }
 }

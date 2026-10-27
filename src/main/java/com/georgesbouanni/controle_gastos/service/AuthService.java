@@ -30,7 +30,10 @@ public class AuthService {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(cpf, senha));
         } catch (AuthenticationException e) {
-            loginAttemptService.registerFailure(cpf);
+            boolean bloqueou = loginAttemptService.registerFailure(cpf);
+            if (bloqueou) {
+                loginAttemptService.notifyLock(cpf);
+            }
             loginAttemptService.checkNotLocked(cpf);
             throw new BadCredentialsException("CPF ou senha inválidos");
         }

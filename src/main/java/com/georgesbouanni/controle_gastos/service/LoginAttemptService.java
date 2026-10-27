@@ -5,6 +5,8 @@ import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -12,15 +14,21 @@ import java.time.LocalDateTime;
 @Service
 public class LoginAttemptService {
 
-    public static final int MAX_ATTEMPT = 5;
+    public static final int MAX_ATTEMPTS = 5;
     public static final Duration LOCK_DURATION = Duration.ofMinutes(15);
 
     private final  UserRepository userRepository;
 
-    @Autowired
-    public LoginAttemptService(UserRepository userRepository) {
+    private static final Logger log = LoggerFactory.getLogger(LoginAttemptService.class);
+
+    private final NotificationService notificationService;
+
+
+@Autowired
+    public LoginAttemptService(UserRepository userRepository, NotificationService notificationService) {
         this.userRepository = userRepository;
-    }
+        this.notificationService = notificationService;
+}
 
     public void checkNotLocked(String cpf) {
         userRepository.findByCpf(cpf).ifPresent(user -> {
@@ -38,29 +46,44 @@ public class LoginAttemptService {
     }
 
     @Transactional
-    public void registerFailure(String cpf) {
+    public void registerSuccess(String cpf) {
         userRepository.findByCpf(cpf).ifPresent(user -> {
-            int tentativas = user.getFailedLoginAttempts() + 1;
+            if (user.getFailedLoginAttempts() != 0 || user.getLockedUntil() != null) {
+                user.setFailedLoginAttempts(0);
+                user.setLockedUntil(null);
+                userRepository.save(user);
+            }
+        });
+    }
 
-            if (tentativas >= MAX_ATTEMPT) {
+    @Transactional
+    public boolean registerFailure(String cpf) {
+        return userRepository.findByCpf(cpf).map(user -> {
+            int tentativas = user.getFailedLoginAttempts() + 1;
+            boolean bloqueou = tentativas >= MAX_ATTEMPTS;
+
+            if (bloqueou) {
                 user.setLockedUntil(LocalDateTime.now().plus(LOCK_DURATION));
                 user.setFailedLoginAttempts(0);
             } else {
                 user.setFailedLoginAttempts(tentativas);
             }
             userRepository.save(user);
+            return bloqueou;
+        }).orElse(false);
+    }
+
+    public void notifyLock(String cpf) {
+        userRepository.findByCpf(cpf).ifPresent(user -> {
+            try {
+                notificationService.create(user,
+                        "Sua conta foi bloqueada por " + LOCK_DURATION.toMinutes() + " minutos após "
+                                + MAX_ATTEMPTS + " tentativas de login incorretas. "
+                                + "Se não foi você, fique atento: alguém pode estar tentando acessar sua conta.");
+            } catch (RuntimeException e) {
+                log.warn("Falha ao registrar a notificação de bloqueio do usuário {}", user.getId(), e);
+            }
         });
-
     }
 
-    @Transactional
-    public void registerSuccess(String cpf) {
-            userRepository.findByCpf(cpf).ifPresent(user -> {
-                if (user.getFailedLoginAttempts() != 0 || user.getLockedUntil() != null) {
-                    user.setFailedLoginAttempts(0);
-                    user.setLockedUntil(null);
-                    userRepository.save(user);
-                }
-            });
-    }
 }

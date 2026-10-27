@@ -2,10 +2,7 @@ package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
 import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
-import com.georgesbouanni.controle_gastos.model.CreditCard;
-import com.georgesbouanni.controle_gastos.model.Invoice;
-import com.georgesbouanni.controle_gastos.model.InvoiceItem;
-import com.georgesbouanni.controle_gastos.model.User;
+import com.georgesbouanni.controle_gastos.model.*;
 import com.georgesbouanni.controle_gastos.repository.CreditCardRepository;
 import com.georgesbouanni.controle_gastos.repository.InvoiceItemRepository;
 import com.georgesbouanni.controle_gastos.repository.InvoiceRepository;
@@ -108,5 +105,63 @@ public class CreditCardServiceTest {
 
         Assertions.assertEquals(new BigDecimal("960.00"), dono.getBalance());
         Mockito.verify(notificationService).create(Mockito.eq(dono), Mockito.contains("R$ 40,00"));
+    }
+
+    @Test
+    void bloquearCartaoNotificaOUsuario() {
+        User dono = dono();
+        CreditCard card = cartaoDe(dono);
+        when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
+
+        CreditCard resultado = service.blockCard(10L, 1L);
+
+        Assertions.assertEquals(CreditCardStatus.BLOQUEADO, resultado.getStatus());
+        Mockito.verify(notificationService).create(Mockito.eq(dono), Mockito.contains("bloqueado"));
+    }
+
+    @Test
+    void bloquearCartaoJaBloqueadoNaoGravaNemNotifica() {
+        CreditCard card = cartaoDe(dono());
+        card.setStatus(CreditCardStatus.BLOQUEADO);
+        when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
+
+        service.blockCard(10L, 1L);
+
+        Mockito.verify(cardRepository, Mockito.never()).save(Mockito.any(CreditCard.class));
+        Mockito.verifyNoInteractions(notificationService);
+    }
+
+    @Test
+    void negarDesbloqueioDeCartaoCancelado() {
+        CreditCard card = cartaoDe(dono());
+        card.setStatus(CreditCardStatus.CANCELADO);
+        when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
+
+        Assertions.assertThrows(BusinessRuleException.class, () -> service.unblockCard(10L, 1L));
+        Assertions.assertEquals(CreditCardStatus.CANCELADO, card.getStatus());
+    }
+
+    @Test
+    void alterarLimiteNotificaComValorAntigoENovo() {
+        User dono = dono();
+        CreditCard card = cartaoDe(dono);
+        when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
+
+        service.setSpendingLimit(10L, 1L, new BigDecimal("2000.00"));
+
+        Assertions.assertEquals(new BigDecimal("2000.00"), card.getLimiteDisponivel());
+        Mockito.verify(notificationService).create(Mockito.eq(dono),
+                Mockito.argThat(msg -> msg.contains("R$ 1.000,00") && msg.contains("R$ 2.000,00")));
+    }
+
+    @Test
+    void recusarLimiteAbaixoDoValorUtilizado() {
+        CreditCard card = cartaoDe(dono());
+        card.setLimiteDisponivel(new BigDecimal("400.00")); // 600 já utilizados
+        when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
+
+        Assertions.assertThrows(BusinessRuleException.class,
+                () -> service.setSpendingLimit(10L, 1L, new BigDecimal("500.00")));
+        Mockito.verify(cardRepository, Mockito.never()).save(Mockito.any(CreditCard.class));
     }
 }

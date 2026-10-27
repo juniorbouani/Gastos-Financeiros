@@ -39,6 +39,7 @@ public class AuthServiceTest {
 
         Mockito.verify(loginAttemptService).registerFailure("12345678900");
         Mockito.verify(jwtService, Mockito.never()).generateToken(Mockito.anyString());
+        Mockito.verify(loginAttemptService, Mockito.never()).notifyLock(Mockito.anyString());
     }
 
     @Test
@@ -49,5 +50,16 @@ public class AuthServiceTest {
 
         Assertions.assertEquals("token", token);
         Mockito.verify(loginAttemptService).registerSuccess("12345678900");
+    }
+
+    @Test
+    void quintaFalhaNotificaOBloqueio() {
+        when(authenticationManager.authenticate(Mockito.any())).thenThrow(new BadCredentialsException("x"));
+        when(loginAttemptService.registerFailure("12345678900")).thenReturn(true);
+
+        Assertions.assertThrows(BadCredentialsException.class,
+                () -> service.login("123.456.789-00", "errada"));
+
+        Mockito.verify(loginAttemptService).notifyLock("12345678900");
     }
 }
