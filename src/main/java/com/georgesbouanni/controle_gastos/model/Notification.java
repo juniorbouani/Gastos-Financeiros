@@ -31,6 +31,13 @@ public class Notification {
     public Notification() {
     }
 
+    public Notification(User user, String mensagem) {
+        this.user = user;
+        this.mensagem = mensagem;
+        this.dataCriacao = LocalDateTime.now();
+        this.lida = false;
+    }
+
     public Notification(User user, String mensagem, LocalDateTime dataCriacao, boolean lida) {
         this.user = user;
         this.mensagem = mensagem;

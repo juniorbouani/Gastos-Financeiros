@@ -125,6 +125,8 @@ public class TransactionService {
 
         Transaction saved = repository.save(transaction);
 
+        notificationService.notifyTransfer(saved);
+
         if (budget != null && totalAposTransacao.compareTo(budget.getLimite()) == 0) {
             notificationService.create(sender,
                     "Você atingiu 100% do orçamento de " + category.getName() + " em " + mes + ".");
@@ -185,8 +187,9 @@ public class TransactionService {
                 null
         );
         reversal.setReversalOf(original);
-
-        return repository.save(reversal);
+        Transaction saved = repository.save(reversal);
+        notificationService.notifyReversal(saved);
+        return saved;
     }
 
 

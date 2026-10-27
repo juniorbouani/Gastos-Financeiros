@@ -2,10 +2,7 @@ package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.exception.*;
 import com.georgesbouanni.controle_gastos.model.*;
-import com.georgesbouanni.controle_gastos.repository.CreditCardRepository;
-import com.georgesbouanni.controle_gastos.repository.InvoiceItemRepository;
-import com.georgesbouanni.controle_gastos.repository.InvoiceRepository;
-import com.georgesbouanni.controle_gastos.repository.UserRepository;
+import com.georgesbouanni.controle_gastos.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +22,15 @@ public class CreditCardService {
     private final InvoiceRepository invoiceRepository;
     private final InvoiceItemRepository invoiceItemRepository;
     private final UserRepository userRepository;
+    private final NotificationService notificationService;
 
     @Autowired
-    public CreditCardService(CreditCardRepository cardRepository, InvoiceRepository invoiceRepository, InvoiceItemRepository invoiceItemRepository, UserRepository userRepository) {
+    public CreditCardService(CreditCardRepository cardRepository, InvoiceRepository invoiceRepository, InvoiceItemRepository invoiceItemRepository, UserRepository userRepository, NotificationService notificationService) {
         this.cardRepository = cardRepository;
         this.invoiceRepository = invoiceRepository;
         this.invoiceItemRepository = invoiceItemRepository;
         this.userRepository = userRepository;
+        this.notificationService = notificationService;
     }
 
     public CreditCard requestCard(Long userId, BigDecimal limiteTotal, boolean descartavel) {
@@ -112,6 +111,10 @@ public class CreditCardService {
             if (i == 1) primeiroItem = item;
         }
 
+        notificationService.create(card.getUser(),
+                "Compra de " + MoneyFormatter.format(valor) + " no cartão " + card.getNumeroMascarado()
+                        + (totalParcelas > 1 ? " em " + totalParcelas + "x" : "") + ": " + descricao + ".");
+
         return primeiroItem;
     }
 
@@ -154,6 +157,10 @@ public class CreditCardService {
         invoice.setStatus(invoice.getValorPago().compareTo(invoice.getValorTotal()) >= 0
                 ? InvoiceStatus.PAGA : InvoiceStatus.PARCIAL);
 
+        notificationService.create(user,
+                "Pagamento de " + MoneyFormatter.format(valorPagamento) + " na fatura de "
+                        + invoice.getMesReferencia() + " realizado.");
+
         return invoiceRepository.save(invoice);
     }
 
@@ -178,6 +185,9 @@ public class CreditCardService {
 
         card.setLimiteDisponivel(card.getLimiteDisponivel().add(item.getValor()));
         cardRepository.save(card);
+
+        notificationService.create(card.getUser(),
+                "Lançamento estornado: " + item.getDescricao() + " (" + MoneyFormatter.format(item.getValor()) + ").");
 
         return invoiceItemRepository.save(item);
     }

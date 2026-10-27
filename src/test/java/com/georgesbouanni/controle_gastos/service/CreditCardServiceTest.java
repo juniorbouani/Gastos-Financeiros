@@ -41,6 +41,9 @@ public class CreditCardServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private NotificationService notificationService;
+
     @InjectMocks
     private CreditCardService service;
 
@@ -92,5 +95,18 @@ public class CreditCardServiceTest {
         Assertions.assertThrows(BusinessRuleException.class,
                 () -> service.payInvoice(3L, 1L, new BigDecimal("150.00")));
         Assertions.assertEquals(new BigDecimal("1000.00"), dono.getBalance());
+    }
+
+    @Test
+    void pagarFaturaNotificaOUsuario() {
+        User dono = dono();
+        Invoice invoice = new Invoice(cartaoDe(dono), YearMonth.of(2026, 10), LocalDate.of(2026, 11, 10));
+        invoice.setValorTotal(new BigDecimal("100.00"));
+        when(invoiceRepository.findById(3L)).thenReturn(Optional.of(invoice));
+
+        service.payInvoice(3L, 1L, new BigDecimal("40.00"));
+
+        Assertions.assertEquals(new BigDecimal("960.00"), dono.getBalance());
+        Mockito.verify(notificationService).create(Mockito.eq(dono), Mockito.contains("R$ 40,00"));
     }
 }

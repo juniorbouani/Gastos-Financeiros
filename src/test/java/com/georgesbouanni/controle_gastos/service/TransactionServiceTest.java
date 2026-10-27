@@ -141,6 +141,7 @@ public class TransactionServiceTest {
         Assertions.assertEquals(new BigDecimal("349.50"), sender.getBalance());
         Assertions.assertEquals(new BigDecimal("250.50"), receiver.getBalance());
         Mockito.verify(repository, times(1)).save(Mockito.any(Transaction.class));
+        Mockito.verify(notificationService).notifyTransfer(resultado);
     }
 
     @Test
@@ -215,6 +216,7 @@ public class TransactionServiceTest {
         Assertions.assertEquals(new BigDecimal("1000.00"), sender.getBalance());
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any(User.class));
         Mockito.verify(repository, Mockito.never()).save(Mockito.any(Transaction.class));
+        Mockito.verifyNoInteractions(notificationService);
     }
 
     @Test
@@ -306,6 +308,7 @@ public class TransactionServiceTest {
         Assertions.assertEquals(payer, estorno.getReceiver());
         Assertions.assertEquals(new BigDecimal("500.00"), payer.getBalance());
         Assertions.assertEquals(new BigDecimal("100.00"), payee.getBalance());
+        Mockito.verify(notificationService).notifyReversal(estorno);
     }
 
     @Test
