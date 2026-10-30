@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="../css/style.css" />
     <title>Teclado RGB - FlowBank</title>
   <link rel="stylesheet" href="../css/navegacao.css" />
+  <link rel="stylesheet" href="../css/shop/integracao.css" />
   </head>
-  <body>
+  <body data-shop-page="product" data-product-id="teclado">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -96,42 +97,7 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="../shop/shop.html" class="btn-voltar">
-              <img src="../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Confirme a Compra</h1>
-          </div>
-        </header>
-
-        <div class="pix-page-container">
-          <div class="checkout-card">
-            <div class="checkout-produto-info">
-              <div class="checkout-imagem-wrapper">
-                <img src="../img/TecladoRGB.jpg" alt="Teclado RGB" />
-              </div>
-              <div class="checkout-produto-detalhes">
-                <h2>Teclado RGB</h2>
-                <span class="checkout-preco">R$ 189,99</span>
-              </div>
-            </div>
-
-            <div class="checkout-saldo-box">
-              <span>Saldo disponível:</span>
-              <strong id="saldo">{saldo}</strong>
-            </div>
-
-            <a
-              href="../pagamentos/confirmar.html"
-              id="btnComprar"
-              class="btn-transferir btn-confirmar-compra"
-            >
-              COMPRAR
-          </a>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Comprar no Shop</h1></header><div class="pix-page-container"><section class="shop-integration"><nav><a href="shop.html">Catálogo</a><a href="../cartoes/cartoes.html">Cartões e faturas</a></nav><p id="shop-message" role="status" aria-live="polite">Carregando...</p><p>Compras internas do projeto: usam o limite do cartão FlowBank e geram lançamentos nas faturas. Não há entrega física ou cobrança numa loja externa.</p><div id="shop-pending"></div><div id="shop-product"></div><form id="shop-form"><label for="shop-card">Cartão de crédito</label><select id="shop-card" required><option value="">Selecione um cartão</option></select><label for="shop-installments">Parcelas sem juros</label><select id="shop-installments" required></select><button type="submit" id="shop-review" disabled>Conferir compra</button></form><section id="shop-confirmation" hidden><h2>Resumo da compra</h2><div id="shop-summary"></div><button type="button" id="shop-confirm" disabled>Confirmar compra no cartão</button><button type="button" id="shop-edit">Voltar e editar</button></section><div id="shop-result"></div></section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../orcamentos/orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
             <div class="footer-principal-nav">
@@ -173,6 +139,6 @@
       </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/shop.js" defer></script>
   </body>
 </html>

@@ -45,6 +45,8 @@ public class SecurityConfig {
                                 "/seguranca/seguranca.html", "/encerrarConta/encerrarConta.html",
                                 "/notificacoes/notificacoes.html", "/categorias/categorias.html",
                                 "/orcamentos/orcamentos.html", "/js/conta-painel.js").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/shop/shop.html", "/shop/500.html", "/shop/speaker.html",
+                                "/shop/mouse.html", "/shop/teclado.html", "/shop/watch.html", "/js/shop.js").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()

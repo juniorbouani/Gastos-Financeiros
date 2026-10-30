@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="../css/style.css" />
     <title>Shop - FlowBank</title>
   <link rel="stylesheet" href="../css/navegacao.css" />
+  <link rel="stylesheet" href="../css/shop/integracao.css" />
   </head>
-  <body>
+  <body data-shop-page="catalog" data-product-id="">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -96,74 +97,7 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="../PaginaInicial/paginainicial.html" class="btn-voltar">
-              <img src="../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Shop FlowBank</h1>
-          </div>
-        </header>
-
-        <div class="pix-page-container">
-          <div class="shop-grid">
-            <div class="produto-card">
-              <div class="produto-imagem-wrapper">
-                <img src="../img/JBLSpeaker.jpg" alt="JBL Speaker" />
-              </div>
-              <div class="produto-detalhes">
-                <h3 class="produto-nome">JBL Speaker</h3>
-                <span class="produto-preco">R$ 499,99</span>
-                <a href="./speaker.html" class="btn-comprar">COMPRAR</a>
-              </div>
-            </div>
-
-            <div class="produto-card">
-              <div class="produto-imagem-wrapper">
-                <img src="../img/JBL500.jpg" alt="JBL 500" />
-              </div>
-              <div class="produto-detalhes">
-                <h3 class="produto-nome">JBL 500</h3>
-                <span class="produto-preco">R$ 199,99</span>
-                <a href="./500.html" class="btn-comprar">COMPRAR</a>
-              </div>
-            </div>
-
-            <div class="produto-card">
-              <div class="produto-imagem-wrapper">
-                <img src="../img/MouseGamer.jpg" alt="Mouse Gamer" />
-              </div>
-              <div class="produto-detalhes">
-                <h3 class="produto-nome">Mouse Gamer</h3>
-                <span class="produto-preco">R$ 99,99</span>
-                <a href="./mouse.html" class="btn-comprar">COMPRAR</a>
-              </div>
-            </div>
-
-            <div class="produto-card">
-              <div class="produto-imagem-wrapper">
-                <img src="../img/TecladoRGB.jpg" alt="Teclado RGB" />
-              </div>
-              <div class="produto-detalhes">
-                <h3 class="produto-nome">Teclado RGB</h3>
-                <span class="produto-preco">R$ 189,99</span>
-                <a href="./teclado.html" class="btn-comprar">COMPRAR</a>
-              </div>
-            </div>
-
-            <div class="produto-card">
-              <div class="produto-imagem-wrapper">
-                <img src="../img/SmartWatch.jpg" alt="SmartWatch" />
-              </div>
-              <div class="produto-detalhes">
-                <h3 class="produto-nome">SmartWatch</h3>
-                <span class="produto-preco">R$ 289,99</span>
-                <a href="./watch.html" class="btn-comprar">COMPRAR</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Shop FlowBank</h1></header><div class="pix-page-container"><section class="shop-integration"><nav><a href="shop.html">Catálogo</a><a href="../cartoes/cartoes.html">Cartões e faturas</a></nav><p id="shop-message" role="status" aria-live="polite">Carregando...</p><p>Compras internas do projeto: usam o limite do cartão FlowBank e geram lançamentos nas faturas. Não há entrega física ou cobrança numa loja externa.</p><div id="shop-pending"></div><h2>Produtos</h2><div class="shop-product-grid" id="shop-products"></div><h2>Meus pedidos</h2><button type="button" id="shop-refresh">Atualizar pedidos</button><div id="shop-orders"></div><div class="shop-pagination"><button type="button" id="shop-previous" disabled>Anterior</button><span id="shop-page-label">—</span><button type="button" id="shop-next" disabled>Próxima</button></div></section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../orcamentos/orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
             <div class="footer-principal-nav">
@@ -205,6 +139,6 @@
       </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/shop.js" defer></script>
   </body>
 </html>
