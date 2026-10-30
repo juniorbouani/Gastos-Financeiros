@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/pagamentos/pagar/extrato-integracao.css" />
     <title>Extrato - FlowBank</title>
   </head>
   <body>
@@ -96,7 +97,7 @@
       <main class="menu-container">
         <header class="header-conteudo pix-header">
           <div class="extrato-header-title">
-            <a href="javascript:history.back()" class="btn-voltar">
+            <a href="../../PaginaInicial/paginainicial.html" class="btn-voltar">
               <img src="../../img/Voltar.svg" alt="Voltar" />
             </a>
             <h1>Extrato</h1>
@@ -105,81 +106,17 @@
 
         <div class="pix-page-container">
           <div class="extrato-container">
-            <div class="extrato-list">
-              <div class="extrato-item saida">
-                <div class="extrato-info">
-                  <span class="badge-tipo saida">Pix enviado</span>
-                  <div class="extrato-detalhes">
-                    <p class="extrato-descricao">
-                      Pix enviado para João Pereira
-                    </p>
-                    <span class="extrato-data">Hoje, 15:40</span>
-                  </div>
-                </div>
-                <span class="extrato-valor valor-saida">- R$ 120,00</span>
-              </div>
-
-              <div class="extrato-item saida">
-                <div class="extrato-info">
-                  <span class="badge-tipo saida">Pix enviado</span>
-                  <div class="extrato-detalhes">
-                    <p class="extrato-descricao">
-                      Pix enviado para Mercado Central
-                    </p>
-                    <span class="extrato-data">Ontem, 19:22</span>
-                  </div>
-                </div>
-                <span class="extrato-valor valor-saida">- R$ 45,90</span>
-              </div>
-
-              <div class="extrato-item entrada">
-                <div class="extrato-info">
-                  <span class="badge-tipo entrada">Pix recebido</span>
-                  <div class="extrato-detalhes">
-                    <p class="extrato-descricao">Pix recebido de Maria Clara</p>
-                    <span class="extrato-data">03 Out, 11:05</span>
-                  </div>
-                </div>
-                <span class="extrato-valor valor-entrada">+ R$ 300,00</span>
-              </div>
-
-              <div class="extrato-item saida">
-                <div class="extrato-info">
-                  <span class="badge-tipo saida">Pix enviado</span>
-                  <div class="extrato-detalhes">
-                    <p class="extrato-descricao">
-                      Pix enviado para Posto Shell
-                    </p>
-                    <span class="extrato-data">02 Out, 08:30</span>
-                  </div>
-                </div>
-                <span class="extrato-valor valor-saida">- R$ 150,00</span>
-              </div>
-
-              <div class="extrato-item entrada">
-                <div class="extrato-info">
-                  <span class="badge-tipo entrada">Pix recebido</span>
-                  <div class="extrato-detalhes">
-                    <p class="extrato-descricao">Pix recebido de Empresa XYZ</p>
-                    <span class="extrato-data">01 Out, 17:00</span>
-                  </div>
-                </div>
-                <span class="extrato-valor valor-entrada">+ R$ 1.250,00</span>
-              </div>
-
-              <div class="extrato-item entrada">
-                <div class="extrato-info">
-                  <span class="badge-tipo entrada">Pix recebido</span>
-                  <div class="extrato-detalhes">
-                    <p class="extrato-descricao">
-                      Pix recebido de Carlos Eduardo
-                    </p>
-                    <span class="extrato-data">29 Set, 14:15</span>
-                  </div>
-                </div>
-                <span class="extrato-valor valor-entrada">+ R$ 80,00</span>
-              </div>
+            <div class="extrato-controles">
+              <p id="extrato-titular">Carregando perfil...</p>
+              <button type="button" id="extrato-atualizar">Atualizar extrato</button>
             </div>
+            <p id="extrato-mensagem" role="status" aria-live="polite">Carregando extrato...</p>
+            <div class="extrato-list" id="extrato-lista" aria-busy="true"></div>
+            <nav class="extrato-paginacao" aria-label="Páginas do extrato">
+              <button type="button" id="extrato-anterior" disabled>Anterior</button>
+              <span id="extrato-pagina" aria-live="polite">—</span>
+              <button type="button" id="extrato-proxima" disabled>Próxima</button>
+            </nav>
           </div>
         </div>
 
@@ -224,6 +161,6 @@
       </main>
     </div>
 
-    <script src="../../js/main.js"></script>
+    <script src="../../js/extrato.js" defer></script>
   </body>
 </html>

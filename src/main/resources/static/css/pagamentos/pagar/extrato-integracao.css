@@ -1,0 +1,11 @@
+.extrato-controles, .extrato-paginacao { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
+.extrato-controles button, .extrato-paginacao button { background: #3b25eb; color: white; border: 0; border-radius: 8px; padding: 10px 16px; font: inherit; cursor: pointer; }
+.extrato-controles button:disabled, .extrato-paginacao button:disabled { opacity: .45; cursor: default; }
+#extrato-mensagem { margin: 12px 0; color: #aeb4c2; }
+#extrato-mensagem[data-erro="true"] { color: #fda4af; }
+#extrato-lista .extrato-descricao { white-space: normal; overflow-wrap: anywhere; }
+#extrato-lista .extrato-detalhes { min-width: 0; }
+#extrato-lista .extrato-status { font-size: .8rem; color: #aeb4c2; }
+#extrato-lista .neutro { color: #aeb4c2; }
+#extrato-lista .badge-tipo.neutro { background: #252936; }
+@media (max-width: 600px) { #extrato-lista .extrato-info { flex-wrap: wrap; } }

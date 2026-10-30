@@ -32,7 +32,8 @@ public class SecurityConfig {
                         // Recursos da interface: as APIs continuam exigindo autenticação.
                         .requestMatchers(HttpMethod.GET, "/", "/index.html", "/css/**", "/js/login.js", "/img/**",
                                 "/PaginaInicial/paginainicial.html", "/js/main.js",
-                                "/cadastro/cadastro.html", "/js/cadastro.js", "/js/paginainicial.js").permitAll()
+                                "/cadastro/cadastro.html", "/js/cadastro.js", "/js/paginainicial.js",
+                                "/pagamentos/pagar/extrato.html", "/js/extrato.js").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
