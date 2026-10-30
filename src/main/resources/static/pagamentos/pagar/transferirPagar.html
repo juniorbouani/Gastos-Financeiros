@@ -15,9 +15,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/pagamentos/pagar/pagamentos-integracao.css" />
     <title>Pagar - FlowBank</title>
   </head>
-  <body>
+  <body data-payments-page="form">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -61,7 +62,7 @@
               <span>Cartões</span>
             </a>
             <a href="../../shop/shop.html" class="nav-item">
-              <img src="../../img/shop.svg" alt="" />
+              <img src="../../img/Shop.svg" alt="" />
               <span>Shop</span>
             </a>
             <a href="../../configuracoes/configuracoes.html" class="nav-item">
@@ -91,136 +92,7 @@
       </aside>
 
       <main class="menu-container">
-        <div class="card-saldo-secundario">
-          <div class="saldo-secundario-header">
-            <div class="saldo-voltar-titulo">
-              <a href="javascript:history.back()" class="btn-voltar-card">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </a>
-              <span>SALDO EM CONTA</span>
-            </div>
-
-            <button type="button" class="btn-eye-toggle" id="btn-toggle-saldo">
-              <img
-                id="icone-olho"
-                src="../../img/Ver.svg"
-                alt="Mostrar/Esconder saldo"
-              />
-            </button>
-          </div>
-
-          <div class="saldo-secundario-valor">
-            <h2 id="saldo">R$ 1.250,00</h2>
-          </div>
-        </div>
-
-        <div class="pix-page-container">
-          <div class="transferir-card">
-            <form class="transferir-form">
-              <div class="input-group">
-                <label for="chave-pix">Insira o código:</label>
-                <input
-                  type="text"
-                  id="pagamento-cod"
-                  placeholder="CPF, E-mail, Telefone ou Chave Aleatória"
-                  required
-                />
-              </div>
-
-              <button type="submit" class="btn-transferir">
-                REALIZAR PAGAMENTO
-              </button>
-            </form>
-          </div>
-
-          <div class="ultimastransferencias">
-            <h2>Últimas Transferências</h2>
-            <div class="historico-pix-list">
-              <div class="historico-item entrada">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo entrada">+ Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Recebida.</p>
-                    <span class="historico-meta"
-                      >De: Maria Silva · Hoje, 14:32</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-entrada"
-                  >+ R$ 150,00</strong
-                >
-              </div>
-
-              <div class="historico-item entrada">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo entrada">+ Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Recebida.</p>
-                    <span class="historico-meta"
-                      >De: Carlos Eduardo · Ontem, 09:15</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-entrada"
-                  >+ R$ 85,50</strong
-                >
-              </div>
-
-              <div class="historico-item saida">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo saida">- Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Concluída.</p>
-                    <span class="historico-meta"
-                      >Para: Mercado Central · 03 Out, 18:40</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-saida">- R$ 214,10</strong>
-              </div>
-
-              <div class="historico-item entrada">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo entrada">+ Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Recebida.</p>
-                    <span class="historico-meta"
-                      >De: Lucas Ramos · 02 Out, 11:20</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-entrada"
-                  >+ R$ 500,00</strong
-                >
-              </div>
-
-              <div class="historico-item saida">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo saida">- Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Concluída.</p>
-                    <span class="historico-meta"
-                      >Para: Farmácia Vida · 01 Out, 16:05</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-saida">- R$ 42,90</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Registrar boleto no FlowBank</h1></header><div class="pix-page-container"><section class="pagamentos-integracao"><nav><a href="pagar.html">Pagamentos</a><a href="transferirPagar.html">Registrar boleto</a><a href="extrato.html">Extrato</a><a href="../../cartoes/cartoes.html">Faturas de cartão</a></nav><p>Saldo: <strong id="pagamentos-saldo">Carregando...</strong> <button type="button" id="pagamentos-olho">Ocultar saldo</button></p><p class="pagamentos-aviso">Ambiente do projeto: o registro debita o saldo do FlowBank, mas não paga um boleto na rede bancária. Beneficiário, validade e valor não são consultados em uma instituição externa.</p><p id="pagamentos-mensagem" role="status" aria-live="polite">Carregando...</p><div id="pagamentos-pendencia"></div><form id="pagamento-form"><label for="pagamento-codigo">Código de referência do boleto</label><input id="pagamento-codigo" required inputmode="numeric" maxlength="120" placeholder="Cole ou digite os números do código" /><label for="pagamento-descricao">Descrição / beneficiário informado</label><input id="pagamento-descricao" required maxlength="120" placeholder="Ex.: Conta de internet — empresa informada no boleto" /><label for="pagamento-valor">Valor (R$)</label><input id="pagamento-valor" required inputmode="decimal" pattern="[0-9]+([,.][0-9]{1,2})?" placeholder="Ex.: 125,50" /><button id="pagamento-conferir" type="submit" disabled>Conferir registro</button></form><section id="pagamento-confirmacao" hidden><h2>Confira os dados informados</h2><div id="pagamento-resumo"></div><p>Ao confirmar, o FlowBank debitará o saldo e criará uma transação BOLETO. Isso não liquida o boleto na rede bancária.</p><button type="button" id="pagamento-confirmar" disabled>Confirmar débito no FlowBank</button><button type="button" id="pagamento-editar">Voltar e editar</button></section></section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo">
             <div class="footer-principal-nav">
@@ -262,6 +134,6 @@
       </main>
     </div>
 
-    <script src="../../js/main.js"></script>
+    <script src="../../js/pagamentos.js" defer></script>
   </body>
 </html>

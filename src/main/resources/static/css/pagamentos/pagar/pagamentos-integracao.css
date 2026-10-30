@@ -1,0 +1,8 @@
+.pagamentos-integracao { width: 100%; max-width: 850px; background: #13151b; color: white; border-radius: 14px; padding: 24px; }
+.pagamentos-integracao p { margin: 12px 0; overflow-wrap: anywhere; }.pagamentos-integracao h2 { margin: 24px 0 12px; }
+.pagamentos-integracao a { display: inline-block; margin: 6px 14px 6px 0; color: #b5bcff; }.pagamentos-integracao form { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+.pagamentos-integracao input { padding: 12px; background: #0b0c10; color: white; border: 1px solid #363b4b; border-radius: 8px; font: inherit; width: 100%; }
+.pagamentos-integracao button { padding: 10px 14px; background: #3b25eb; color: white; border: 0; border-radius: 8px; font: inherit; cursor: pointer; margin: 4px; }.pagamentos-integracao button:disabled { opacity: .5; cursor: default; }
+.pagamentos-aviso { padding: 12px; border: 1px solid #626173; border-radius: 8px; color: #d8d9e5; }
+#pagamentos-mensagem[data-erro="true"],#pagamentos-pendencia { color: #fda4af; }.pagamento-linha { padding: 16px 0; border-bottom: 1px solid #363b4b; }
+.pagamentos-integracao [hidden] { display: none !important; }.pagamentos-integracao button:focus-visible,.pagamentos-integracao a:focus-visible { outline: 2px solid white; outline-offset: 3px; }
