@@ -1,6 +1,5 @@
 package com.georgesbouanni.controle_gastos.model;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -35,10 +34,16 @@ public class Invoice {
     @NotNull(message = "A data de vencimento é obrigatória")
     private LocalDate dataVencimento;
 
-    public Invoice() {
-    }
+    public Invoice() {}
 
-    public Invoice(Long id, CreditCard creditCard, YearMonth mesReferencia, BigDecimal valorTotal, BigDecimal valorPago, InvoiceStatus status, LocalDate dataVencimento) {
+    public Invoice(
+            Long id,
+            CreditCard creditCard,
+            YearMonth mesReferencia,
+            BigDecimal valorTotal,
+            BigDecimal valorPago,
+            InvoiceStatus status,
+            LocalDate dataVencimento) {
         this.id = id;
         this.creditCard = creditCard;
         this.mesReferencia = mesReferencia;
@@ -56,8 +61,6 @@ public class Invoice {
         this.valorTotal = BigDecimal.ZERO;
         this.valorPago = BigDecimal.ZERO;
     }
-
-
 
     public Long getId() {
         return id;

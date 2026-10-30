@@ -131,7 +131,7 @@
   }
 
   .input-group-row {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
     gap: 14px;
   }
 

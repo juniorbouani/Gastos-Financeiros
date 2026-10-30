@@ -27,8 +27,7 @@ public class PixKey {
     @Column(unique = true)
     private String keyValue;
 
-    public PixKey() {
-    }
+    public PixKey() {}
 
     public PixKey(User user, PixKeyType keyType, String keyValue) {
         this.user = user;

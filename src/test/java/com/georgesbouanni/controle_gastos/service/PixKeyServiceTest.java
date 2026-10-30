@@ -19,20 +19,15 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-
 public class PixKeyServiceTest {
 
-    @Mock
-    private PixKeyRepository repository;
+    @Mock private PixKeyRepository repository;
 
-    @Mock
-    private UserRepository userRepository;
+    @Mock private UserRepository userRepository;
 
-    @Mock
-    private NotificationService notificationService;
+    @Mock private NotificationService notificationService;
 
-    @InjectMocks
-    private PixKeyService service;
+    @InjectMocks private PixKeyService service;
 
     private User usuario() {
         User u = new User();
@@ -48,7 +43,8 @@ public class PixKeyServiceTest {
 
         service.create(1L, PixKeyType.EMAIL, "Ana@Email.com");
 
-        Mockito.verify(notificationService).create(Mockito.eq(user), Mockito.contains("ana@email.com"));
+        Mockito.verify(notificationService)
+                .create(Mockito.eq(user), Mockito.contains("ana@email.com"));
     }
 
     @Test
@@ -72,4 +68,3 @@ public class PixKeyServiceTest {
         Mockito.verifyNoInteractions(notificationService);
     }
 }
-

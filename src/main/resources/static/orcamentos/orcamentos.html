@@ -1,11 +1,7 @@
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <link
-      rel="shortcut icon"
-      href="../img/favicon-flowbank.svg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +13,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/conta-painel.css" />
     <title>Orçamentos por categoria - FlowBank</title>
-  <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/navegacao.css" />
   </head>
   <body data-panel-page="budgets">
     <div class="app-dashboard">
@@ -66,18 +62,19 @@
               <img src="../img/Shop.svg" alt="" />
               <span>Shop</span>
             </a>
-            <a
-              href="../perfil/perfil.html"
-              class="nav-item"
-            >
+            <a href="../perfil/perfil.html" class="nav-item">
               <img src="../img/Conta.svg" alt="" />
               <span>Perfil</span>
             </a>
-          
-<a href="../categorias/categorias.html" class="nav-item"><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a>
 
-<a href="orcamentos.html" class="nav-item active"><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
-</nav>
+            <a href="../categorias/categorias.html" class="nav-item"
+              ><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a
+            >
+
+            <a href="orcamentos.html" class="nav-item active"
+              ><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a
+            >
+          </nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -100,9 +97,41 @@
       </aside>
 
       <main class="menu-container">
-<header class="header-conteudo"><h1>Orçamentos por categoria</h1></header><div class="pix-page-container"><section class="account-panel"><a href="../PaginaInicial/paginainicial.html">Voltar ao início</a><p id="panel-message" role="status" aria-live="polite">Carregando...</p><button type="button" id="panel-refresh">Atualizar dados</button><p>Os gastos contabilizados são as transações com categoria atribuída. Criar um orçamento não categoriza movimentações antigas.</p><label for="budget-month">Mês de referência</label><input id="budget-month" type="month" required /><form id="panel-form"><label for="budget-category">Categoria</label><select id="budget-category" required><option value="">Selecione uma categoria</option></select><label for="budget-limit">Limite (R$)</label><input id="budget-limit" inputmode="decimal" pattern="[0-9]+([,.][0-9]{1,2})?" required placeholder="Ex.: 500,00" /><button type="submit" id="panel-submit" disabled>Criar orçamento</button></form><div id="panel-list"></div></section></div>
+        <header class="header-conteudo"><h1>Orçamentos por categoria</h1></header
+        ><div class="pix-page-container"
+          ><section class="account-panel"
+            ><a href="../PaginaInicial/paginainicial.html">Voltar ao início</a
+            ><p id="panel-message" role="status" aria-live="polite">Carregando...</p
+            ><button type="button" id="panel-refresh">Atualizar dados</button
+            ><p
+              >Os gastos contabilizados são as transações com categoria atribuída. Criar um
+              orçamento não categoriza movimentações antigas.</p
+            ><label for="budget-month">Mês de referência</label
+            ><input id="budget-month" type="month" required /><form id="panel-form"
+              ><label for="budget-category">Categoria</label
+              ><select id="budget-category" required
+                ><option value="">Selecione uma categoria</option></select
+              ><label for="budget-limit">Limite (R$)</label
+              ><input
+                id="budget-limit"
+                inputmode="decimal"
+                pattern="[0-9]+([,.][0-9]{1,2})?"
+                required
+                placeholder="Ex.: 500,00"
+              /><button type="submit" id="panel-submit" disabled>Criar orçamento</button></form
+            ><div id="panel-list"></div></section
+        ></div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
+          <div class="footer-principal-conteudo"
+            ><div class="footer-principal-nav"
+              ><a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
+              ></div
+            ><div class="footer-principal-nav"
+              ><a href="orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
+              ></div
+            >
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />

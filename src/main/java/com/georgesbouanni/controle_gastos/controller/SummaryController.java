@@ -25,7 +25,6 @@ public class SummaryController {
     }
 
     @GetMapping("/monthly")
-
     public MonthlySummaryResponse monthly(@RequestParam(required = false) YearMonth month) {
         return service.monthly(currentUser.getId(), month != null ? month : YearMonth.now());
     }

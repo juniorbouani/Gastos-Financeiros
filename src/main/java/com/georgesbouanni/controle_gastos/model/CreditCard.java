@@ -44,10 +44,14 @@ public class CreditCard {
     @Column(name = "row_version", nullable = false, columnDefinition = "bigint default 0")
     private Long rowVersion = 0L;
 
-    public CreditCard() {
-    }
+    public CreditCard() {}
 
-    public CreditCard(User user, String numeroMascarado, BigDecimal limiteTotal, boolean descartavel, LocalDate dataExpiracao) {
+    public CreditCard(
+            User user,
+            String numeroMascarado,
+            BigDecimal limiteTotal,
+            boolean descartavel,
+            LocalDate dataExpiracao) {
         this.user = user;
         this.numeroMascarado = numeroMascarado;
         this.limiteTotal = limiteTotal;

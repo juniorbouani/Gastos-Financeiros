@@ -16,7 +16,10 @@ public class AuthService {
     private final LoginAttemptService loginAttemptService;
 
     @Autowired
-    public AuthService(AuthenticationManager authenticationManager, JwtService jwtService, LoginAttemptService loginAttemptService) {
+    public AuthService(
+            AuthenticationManager authenticationManager,
+            JwtService jwtService,
+            LoginAttemptService loginAttemptService) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
         this.loginAttemptService = loginAttemptService;

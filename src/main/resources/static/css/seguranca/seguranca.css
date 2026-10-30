@@ -1,15 +1,14 @@
 .config-item-info {
   display: flex;
   align-items: center;
-  gap: 14px; 
+  gap: 14px;
 }
-
 
 .config-item-info svg,
 .config-item-info img {
   width: 20px;
   height: 20px;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 .seguros-grid {
@@ -30,7 +29,9 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
-  transition: transform 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
 }
 
 .seguro-card:hover {
@@ -106,7 +107,9 @@
   font-weight: 700;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.2s, opacity 0.2s;
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
 }
 
 .btn-ouro {

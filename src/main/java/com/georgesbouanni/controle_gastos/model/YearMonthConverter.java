@@ -1,6 +1,5 @@
 package com.georgesbouanni.controle_gastos.model;
 
-
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
@@ -11,7 +10,7 @@ public class YearMonthConverter implements AttributeConverter<YearMonth, String>
 
     @Override
     public String convertToDatabaseColumn(YearMonth attribute) {
-        return attribute != null ?attribute.toString() : null;
+        return attribute != null ? attribute.toString() : null;
     }
 
     @Override

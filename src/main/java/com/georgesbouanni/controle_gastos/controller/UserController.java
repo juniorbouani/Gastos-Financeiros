@@ -26,7 +26,6 @@ public class UserController {
         this.currentUser = currentUser;
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse create(@Valid @RequestBody User user) {
@@ -39,9 +38,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest request) {
+    public UserResponse update(
+            @PathVariable Long id, @Valid @RequestBody UserUpdateRequest request) {
         currentUser.requireSameUser(id);
         return UserResponse.from(service.update(id, request));
     }
-
 }

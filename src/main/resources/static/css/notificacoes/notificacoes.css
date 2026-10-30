@@ -14,7 +14,9 @@
   background-color: #13151b;
   border: 1px solid #1e212b;
   border-radius: 14px;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
   position: relative;
 }
 

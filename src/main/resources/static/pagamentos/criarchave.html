@@ -1,11 +1,7 @@
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <link
-      rel="shortcut icon"
-      href="../img/favicon-flowbank.svg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +13,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/pagamentos/pix-integracao.css" />
     <title>Criar Chave Pix - FlowBank</title>
-  <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/navegacao.css" />
   </head>
   <body data-pix-page="keys">
     <div class="app-dashboard">
@@ -70,11 +66,15 @@
               <img src="../img/Conta.svg" alt="" />
               <span>Perfil</span>
             </a>
-          
-<a href="../categorias/categorias.html" class="nav-item"><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a>
 
-<a href="../orcamentos/orcamentos.html" class="nav-item"><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
-</nav>
+            <a href="../categorias/categorias.html" class="nav-item"
+              ><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a
+            >
+
+            <a href="../orcamentos/orcamentos.html" class="nav-item"
+              ><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a
+            >
+          </nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -97,15 +97,44 @@
       </aside>
 
       <main class="menu-container">
-<header class="header-conteudo"><h1>Minhas chaves Pix</h1></header>
-<div class="pix-page-container"><section class="pix-integracao">
-<nav class="pix-links"><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a><a href="transferir.html">Transferir por chave</a><a href="pixcopiaecola.html">Chave copiada</a><a href="pagar/extrato.html">Extrato</a></nav>
-<p>Saldo: <strong id="pix-saldo">Carregando...</strong> <button type="button" id="pix-olho">Ocultar saldo</button></p>
-<p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
-<form id="pix-chave-form"><label for="pix-tipo">Tipo de chave</label><select id="pix-tipo"><option value="ALEATORIA">Aleatória (gerada pelo servidor)</option><option value="CPF">CPF do cadastro</option><option value="EMAIL">E-mail do cadastro</option><option value="TELEFONE">Telefone do cadastro</option></select><p id="pix-chave-previa"></p><button type="submit" id="pix-criar" disabled>Cadastrar chave</button></form><h2>Chaves registradas</h2><button type="button" id="pix-atualizar">Atualizar chaves</button><div id="pix-chaves"></div>
-</section></div>
+        <header class="header-conteudo"><h1>Minhas chaves Pix</h1></header>
+        <div class="pix-page-container"
+          ><section class="pix-integracao">
+            <nav class="pix-links"
+              ><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a
+              ><a href="transferir.html">Transferir por chave</a
+              ><a href="pixcopiaecola.html">Chave copiada</a
+              ><a href="pagar/extrato.html">Extrato</a></nav
+            >
+            <p
+              >Saldo: <strong id="pix-saldo">Carregando...</strong>
+              <button type="button" id="pix-olho">Ocultar saldo</button></p
+            >
+            <p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
+            <form id="pix-chave-form"
+              ><label for="pix-tipo">Tipo de chave</label
+              ><select id="pix-tipo"
+                ><option value="ALEATORIA">Aleatória (gerada pelo servidor)</option
+                ><option value="CPF">CPF do cadastro</option
+                ><option value="EMAIL">E-mail do cadastro</option
+                ><option value="TELEFONE">Telefone do cadastro</option></select
+              ><p id="pix-chave-previa"></p
+              ><button type="submit" id="pix-criar" disabled>Cadastrar chave</button></form
+            ><h2>Chaves registradas</h2
+            ><button type="button" id="pix-atualizar">Atualizar chaves</button
+            ><div id="pix-chaves"></div> </section
+        ></div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../orcamentos/orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
+          <div class="footer-principal-conteudo"
+            ><div class="footer-principal-nav"
+              ><a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
+              ></div
+            ><div class="footer-principal-nav"
+              ><a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
+              ></div
+            >
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />

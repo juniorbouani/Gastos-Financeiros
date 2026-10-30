@@ -1,3 +1,7 @@
+/**
+ * Mantém os comportamentos visuais compartilhados pelas páginas legadas.
+ * Fluxo: carregar dados → validar a ação → chamar a API → atualizar a interface.
+ */
 const elSaldo = document.getElementById("saldo");
 const btnToggle = document.getElementById("btn-toggle-saldo");
 const imgIcone = document.getElementById("icone-olho");
@@ -46,8 +50,7 @@ function atualizarDataHora() {
 
   let dataFormatada = agora.toLocaleDateString("pt-BR", opcoesData);
 
-  dataFormatada =
-    dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
+  dataFormatada = dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
 
   elData.textContent = dataFormatada;
 }

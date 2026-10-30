@@ -42,8 +42,10 @@ public class PixKeyController {
     @GetMapping("/{keyValue}")
     public PixKeyLookupResponse lookup(@PathVariable String keyValue) {
         PixKey key = service.findByKeyValue(keyValue);
-        return new PixKeyLookupResponse(key.getKeyType(), key.getKeyValue(), key.getUser().getName());
+        return new PixKeyLookupResponse(
+                key.getKeyType(), key.getKeyValue(), key.getUser().getName());
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id, currentUser.getId());

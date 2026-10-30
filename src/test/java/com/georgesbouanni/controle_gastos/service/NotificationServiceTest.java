@@ -20,14 +20,11 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-
 public class NotificationServiceTest {
 
-    @Mock
-    private NotificationRepository repository;
+    @Mock private NotificationRepository repository;
 
-    @InjectMocks
-    private NotificationService service;
+    @InjectMocks private NotificationService service;
 
     @Test
     void criarNotificacaoPreencheUsuarioEMensagem() {
@@ -45,8 +42,16 @@ public class NotificationServiceTest {
     }
 
     private Transaction transacao(User sender, User receiver) {
-        return new Transaction("Pix", new BigDecimal("150.00"), LocalDate.of(2026, 10, 25),
-                TransactionType.PIX, TransactionStatus.COMPLETED, sender, receiver, null, null);
+        return new Transaction(
+                "Pix",
+                new BigDecimal("150.00"),
+                LocalDate.of(2026, 10, 25),
+                TransactionType.PIX,
+                TransactionStatus.COMPLETED,
+                sender,
+                receiver,
+                null,
+                null);
     }
 
     private User usuario(Long id, String nome) {

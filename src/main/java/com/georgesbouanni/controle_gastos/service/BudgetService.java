@@ -27,27 +27,44 @@ public class BudgetService {
     private final TransactionRepository transactionRepository;
 
     @Autowired
-    public BudgetService(BudgetRepository repository, UserRepository userRepository,
-                         CategoryRepository categoryRepository, TransactionRepository transactionRepository) {
+    public BudgetService(
+            BudgetRepository repository,
+            UserRepository userRepository,
+            CategoryRepository categoryRepository,
+            TransactionRepository transactionRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.transactionRepository = transactionRepository;
     }
 
-    public BudgetSummaryResponse create(Long userId, Long categoryId, YearMonth mes, BigDecimal limite) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com id: " + userId));
+    public BudgetSummaryResponse create(
+            Long userId, Long categoryId, YearMonth mes, BigDecimal limite) {
+        User user =
+                userRepository
+                        .findById(userId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Usuário não encontrado com id: " + userId));
 
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com id: " + categoryId));
+        Category category =
+                categoryRepository
+                        .findById(categoryId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Categoria não encontrada com id: " + categoryId));
 
         if (!category.getUser().getId().equals(userId)) {
             throw new BusinessRuleException("Essa categoria não pertence ao usuário informado.");
         }
 
-        if (repository.findByUserIdAndCategoryIdAndMesReferencia(userId, categoryId, mes).isPresent()) {
-            throw new BusinessRuleException("Já existe um orçamento para essa categoria nesse mês.");
+        if (repository
+                .findByUserIdAndCategoryIdAndMesReferencia(userId, categoryId, mes)
+                .isPresent()) {
+            throw new BusinessRuleException(
+                    "Já existe um orçamento para essa categoria nesse mês.");
         }
 
         Budget budget = repository.save(new Budget(user, category, mes, limite));
@@ -61,9 +78,14 @@ public class BudgetService {
     }
 
     private Budget findOwnedBudget(Long id, Long userId) {
-        Budget budget = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Orçamento não encontrado na id: " + id));
-        if(!budget.getUser().getId().equals(userId)) {
+        Budget budget =
+                repository
+                        .findById(id)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Orçamento não encontrado na id: " + id));
+        if (!budget.getUser().getId().equals(userId)) {
             throw new ForbiddenException("Este orçamento não pertence a você");
         }
         return budget;
@@ -80,19 +102,18 @@ public class BudgetService {
     }
 
     private BudgetSummaryResponse toSummary(Budget budget) {
-        BigDecimal gasto = transactionRepository.sumSpent(
-                budget.getUser().getId(),
-                budget.getCategory().getId(),
-                budget.getMesReferencia().atDay(1),
-                budget.getMesReferencia().atEndOfMonth()
-        );
+        BigDecimal gasto =
+                transactionRepository.sumSpent(
+                        budget.getUser().getId(),
+                        budget.getCategory().getId(),
+                        budget.getMesReferencia().atDay(1),
+                        budget.getMesReferencia().atEndOfMonth());
 
         return new BudgetSummaryResponse(
                 budget.getId(),
                 budget.getCategory().getName(),
                 budget.getMesReferencia(),
                 budget.getLimite(),
-                gasto
-        );
+                gasto);
     }
 }

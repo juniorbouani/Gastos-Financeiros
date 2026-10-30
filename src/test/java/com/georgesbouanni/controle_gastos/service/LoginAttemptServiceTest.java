@@ -19,14 +19,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class LoginAttemptServiceTest {
 
-    @Mock
-    private UserRepository userRepository;
+    @Mock private UserRepository userRepository;
 
-    @Mock
-    private NotificationService notificationService;
+    @Mock private NotificationService notificationService;
 
-    @InjectMocks
-    private LoginAttemptService service;
+    @InjectMocks private LoginAttemptService service;
 
     private User usuarioComTentativas(int tentativas) {
         User u = new User();
@@ -75,7 +72,8 @@ public class LoginAttemptServiceTest {
         user.setLockedUntil(LocalDateTime.now().plusMinutes(10));
         when(userRepository.findByCpf("12345678900")).thenReturn(Optional.of(user));
 
-        Assertions.assertThrows(AccountLockedException.class, () -> service.checkNotLocked("12345678900"));
+        Assertions.assertThrows(
+                AccountLockedException.class, () -> service.checkNotLocked("12345678900"));
     }
 
     @Test

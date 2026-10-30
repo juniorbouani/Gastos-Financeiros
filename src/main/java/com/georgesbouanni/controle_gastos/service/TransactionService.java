@@ -32,7 +32,13 @@ public class TransactionService {
     private final NotificationService notificationService;
 
     @Autowired
-    public TransactionService(TransactionRepository repository, UserRepository userRepository, PixKeyRepository pixKeyRepository, CategoryRepository categoryRepository, BudgetRepository budgetRepository, NotificationService notificationService) {
+    public TransactionService(
+            TransactionRepository repository,
+            UserRepository userRepository,
+            PixKeyRepository pixKeyRepository,
+            CategoryRepository categoryRepository,
+            BudgetRepository budgetRepository,
+            NotificationService notificationService) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.pixKeyRepository = pixKeyRepository;
@@ -55,21 +61,39 @@ public class TransactionService {
 
     @Transactional
     public Transaction save(TransactionRequest request, Long senderId) {
-        User sender = userRepository.findById(senderId)
-                .orElseThrow(() -> new ResourceNotFoundException("Remetente não encontrado com id: " + senderId));
+        User sender =
+                userRepository
+                        .findById(senderId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Remetente não encontrado com id: " + senderId));
 
         if (sender.getBalance().compareTo(request.getValue()) < 0) {
-            throw new InsuficientBalanceException("Saldo insuficiente para realizar essa transação");
+            throw new InsuficientBalanceException(
+                    "Saldo insuficiente para realizar essa transação");
         }
 
         User receiver = null;
         if (request.getType() == TransactionType.PIX && request.getPixKey() != null) {
-            PixKey pixKey = pixKeyRepository.findByKeyValue(request.getPixKey())
-                    .orElseThrow(() -> new ResourceNotFoundException("Chave PIX não encontrada: " + request.getPixKey()));
+            PixKey pixKey =
+                    pixKeyRepository
+                            .findByKeyValue(request.getPixKey())
+                            .orElseThrow(
+                                    () ->
+                                            new ResourceNotFoundException(
+                                                    "Chave PIX não encontrada: "
+                                                            + request.getPixKey()));
             receiver = pixKey.getUser();
         } else if (request.getReceiverId() != null) {
-            receiver = userRepository.findById(request.getReceiverId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Destinatario não encontrado com id: " + request.getReceiverId()));
+            receiver =
+                    userRepository
+                            .findById(request.getReceiverId())
+                            .orElseThrow(
+                                    () ->
+                                            new ResourceNotFoundException(
+                                                    "Destinatario não encontrado com id: "
+                                                            + request.getReceiverId()));
         }
 
         if (sender.isAccountClosed() || (receiver != null && receiver.isAccountClosed())) {
@@ -82,27 +106,44 @@ public class TransactionService {
         YearMonth mes = YearMonth.from(request.getDate());
 
         if (request.getCategoryId() != null) {
-            category = categoryRepository.findById(request.getCategoryId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com id: " + request.getCategoryId()));
+            category =
+                    categoryRepository
+                            .findById(request.getCategoryId())
+                            .orElseThrow(
+                                    () ->
+                                            new ResourceNotFoundException(
+                                                    "Categoria não encontrada com id: "
+                                                            + request.getCategoryId()));
 
             if (!category.getUser().getId().equals(sender.getId())) {
                 throw new BusinessRuleException("Essa categoria não pertence ao remetente.");
             }
 
-            budget = budgetRepository
-                    .findByUserIdAndCategoryIdAndMesReferencia(sender.getId(), category.getId(), mes)
-                    .orElse(null);
+            budget =
+                    budgetRepository
+                            .findByUserIdAndCategoryIdAndMesReferencia(
+                                    sender.getId(), category.getId(), mes)
+                            .orElse(null);
 
             if (budget != null) {
-                BigDecimal gastoAtual = repository.sumSpent(
-                        sender.getId(), category.getId(), mes.atDay(1), mes.atEndOfMonth());
+                BigDecimal gastoAtual =
+                        repository.sumSpent(
+                                sender.getId(), category.getId(), mes.atDay(1), mes.atEndOfMonth());
                 totalAposTransacao = gastoAtual.add(request.getValue());
 
                 if (totalAposTransacao.compareTo(budget.getLimite()) > 0) {
                     throw new BusinessRuleException(
-                            "Orçamento de " + category.getName() + " em " + mes + " excedido. Limite: "
-                                    + budget.getLimite() + ", já gasto: " + gastoAtual
-                                    + ", esta transação: " + request.getValue() + ".");
+                            "Orçamento de "
+                                    + category.getName()
+                                    + " em "
+                                    + mes
+                                    + " excedido. Limite: "
+                                    + budget.getLimite()
+                                    + ", já gasto: "
+                                    + gastoAtual
+                                    + ", esta transação: "
+                                    + request.getValue()
+                                    + ".");
                 }
             }
         }
@@ -115,24 +156,25 @@ public class TransactionService {
             userRepository.save(receiver);
         }
 
-        Transaction transaction = new Transaction(
-                request.getDescription(),
-                request.getValue(),
-                request.getDate(),
-                request.getType(),
-                TransactionStatus.COMPLETED,
-                sender,
-                receiver,
-                request.getDestination(),
-                category
-        );
+        Transaction transaction =
+                new Transaction(
+                        request.getDescription(),
+                        request.getValue(),
+                        request.getDate(),
+                        request.getType(),
+                        TransactionStatus.COMPLETED,
+                        sender,
+                        receiver,
+                        request.getDestination(),
+                        category);
 
         Transaction saved = repository.save(transaction);
 
         notificationService.notifyTransfer(saved);
 
         if (budget != null && totalAposTransacao.compareTo(budget.getLimite()) == 0) {
-            notificationService.create(sender,
+            notificationService.create(
+                    sender,
                     "Você atingiu 100% do orçamento de " + category.getName() + " em " + mes + ".");
         }
 
@@ -143,8 +185,14 @@ public class TransactionService {
 
     @Transactional
     public Transaction reverse(Long transactionId, Long userId) {
-        Transaction original = repository.findById(transactionId)
-                .orElseThrow(() -> new ResourceNotFoundException("Transação não encontrada com id: " + transactionId));
+        Transaction original =
+                repository
+                        .findById(transactionId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Transação não encontrada com id: "
+                                                        + transactionId));
 
         if (!original.getSender().getId().equals(userId)) {
             throw new ForbiddenException("Somente quem enviou a transação pode estorná-la.");
@@ -156,25 +204,32 @@ public class TransactionService {
             throw new BusinessRuleException("Só transações concluídas podem ser estornadas.");
         }
         if (original.getReceiver() == null) {
-            throw new BusinessRuleException("Esta transação não possui destinatário interno e não pode ser estornada.");
+            throw new BusinessRuleException(
+                    "Esta transação não possui destinatário interno e não pode ser estornada.");
         }
         if (repository.existsByReversalOfId(original.getId())) {
             throw new BusinessRuleException("Esta transação já foi estornada.");
         }
         if (original.getCreatedAt() == null
-                || Duration.between(original.getCreatedAt(), LocalDateTime.now()).compareTo(REVERSAL_WINDOW) > 0) {
-            throw new BusinessRuleException("O prazo para estornar esta transação ("
-                    + REVERSAL_WINDOW.toMinutes() + " minutos) já passou.");
+                || Duration.between(original.getCreatedAt(), LocalDateTime.now())
+                                .compareTo(REVERSAL_WINDOW)
+                        > 0) {
+            throw new BusinessRuleException(
+                    "O prazo para estornar esta transação ("
+                            + REVERSAL_WINDOW.toMinutes()
+                            + " minutos) já passou.");
         }
 
         User payer = original.getSender();
         User payee = original.getReceiver();
         if (payer.isAccountClosed() || payee.isAccountClosed()) {
-            throw new BusinessRuleException("Não é possível estornar movimentação envolvendo conta encerrada.");
+            throw new BusinessRuleException(
+                    "Não é possível estornar movimentação envolvendo conta encerrada.");
         }
 
         if (payee.getBalance().compareTo(original.getValue()) < 0) {
-            throw new InsuficientBalanceException("O destinatário não tem saldo suficiente para devolver o valor.");
+            throw new InsuficientBalanceException(
+                    "O destinatário não tem saldo suficiente para devolver o valor.");
         }
 
         payee.setBalance(payee.getBalance().subtract(original.getValue()));
@@ -182,23 +237,22 @@ public class TransactionService {
         userRepository.save(payee);
         userRepository.save(payer);
 
-        Transaction reversal = new Transaction(
-                "Estorno: " + original.getDescription(),
-                original.getValue(),
-                LocalDate.now(),
-                TransactionType.ESTORNO,
-                TransactionStatus.COMPLETED,
-                payee,
-                payer,
-                null,
-                null
-        );
+        Transaction reversal =
+                new Transaction(
+                        "Estorno: " + original.getDescription(),
+                        original.getValue(),
+                        LocalDate.now(),
+                        TransactionType.ESTORNO,
+                        TransactionStatus.COMPLETED,
+                        payee,
+                        payer,
+                        null,
+                        null);
         reversal.setReversalOf(original);
         Transaction saved = repository.save(reversal);
         notificationService.notifyReversal(saved);
         return saved;
     }
-
 
     public List<Transaction> listByType(TransactionType type) {
         return repository.findByType(type);
@@ -225,16 +279,22 @@ public class TransactionService {
     }
 
     public Transaction findByIdForUser(Long id, Long userId) {
-        Transaction transaction = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Transação não encontrada com id: " + id));
+        Transaction transaction =
+                repository
+                        .findById(id)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Transação não encontrada com id: " + id));
 
-        boolean participa = transaction.getSender().getId().equals(userId)
-                || (transaction.getReceiver() != null && transaction.getReceiver().getId().equals(userId));
+        boolean participa =
+                transaction.getSender().getId().equals(userId)
+                        || (transaction.getReceiver() != null
+                                && transaction.getReceiver().getId().equals(userId));
 
         if (!participa) {
             throw new ForbiddenException("Você não tem permissão para acessar esta transação.");
         }
         return transaction;
     }
-
 }

@@ -29,7 +29,8 @@ public class NotificationController {
     @GetMapping
     public Page<Notification> list(
             @RequestParam(defaultValue = "false") boolean onlyUnread,
-            @PageableDefault(size = 20, sort = "dataCriacao", direction = Sort.Direction.DESC) Pageable pageable) {
+            @PageableDefault(size = 20, sort = "dataCriacao", direction = Sort.Direction.DESC)
+                    Pageable pageable) {
         return service.list(currentUser.getId(), onlyUnread, pageable);
     }
 

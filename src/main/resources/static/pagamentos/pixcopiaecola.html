@@ -1,11 +1,7 @@
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <link
-      rel="shortcut icon"
-      href="../img/favicon-flowbank.svg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +13,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/pagamentos/pix-integracao.css" />
     <title>Transferir Pix - FlowBank</title>
-  <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/navegacao.css" />
   </head>
   <body data-pix-page="paste">
     <div class="app-dashboard">
@@ -70,11 +66,15 @@
               <img src="../img/Conta.svg" alt="" />
               <span>Perfil</span>
             </a>
-          
-<a href="../categorias/categorias.html" class="nav-item"><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a>
 
-<a href="../orcamentos/orcamentos.html" class="nav-item"><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
-</nav>
+            <a href="../categorias/categorias.html" class="nav-item"
+              ><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a
+            >
+
+            <a href="../orcamentos/orcamentos.html" class="nav-item"
+              ><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a
+            >
+          </nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -97,19 +97,64 @@
       </aside>
 
       <main class="menu-container">
-<header class="header-conteudo"><h1>Chave Pix copiada</h1></header>
-<div class="pix-page-container"><section class="pix-integracao">
-<nav class="pix-links"><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a><a href="transferir.html">Transferir por chave</a><a href="pixcopiaecola.html">Chave copiada</a><a href="pagar/extrato.html">Extrato</a></nav>
-<p>Saldo: <strong id="pix-saldo">Carregando...</strong> <button type="button" id="pix-olho">Ocultar saldo</button></p>
-<p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
-<p>O backend atual aceita chaves Pix cadastradas no FlowBank. Códigos Pix Copia e Cola (BR Code/QR Code) ainda não são suportados. Para uma transferência por chave, cole a chave abaixo.</p><form id="pix-transferir-form">
-<label for="pix-chave">Chave Pix do destinatário</label><input id="pix-chave" required maxlength="254" placeholder="CPF, e-mail, telefone ou chave aleatória" autocomplete="off" />
-<label for="pix-valor">Valor (R$)</label><input id="pix-valor" required inputmode="decimal" placeholder="Ex.: 25,50" pattern="[0-9]+([,.][0-9]{1,2})?" title="Informe o valor sem separador de milhar, por exemplo 1250,50" />
-<label for="pix-descricao">Descrição</label><input id="pix-descricao" maxlength="120" placeholder="Opcional" />
-<label for="pix-categoria">Categoria (opcional)</label><select id="pix-categoria"><option value="">Sem categoria</option></select><button type="submit" id="pix-continuar" disabled>Consultar destinatário e continuar</button></form>
-</section></div>
+        <header class="header-conteudo"><h1>Chave Pix copiada</h1></header>
+        <div class="pix-page-container"
+          ><section class="pix-integracao">
+            <nav class="pix-links"
+              ><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a
+              ><a href="transferir.html">Transferir por chave</a
+              ><a href="pixcopiaecola.html">Chave copiada</a
+              ><a href="pagar/extrato.html">Extrato</a></nav
+            >
+            <p
+              >Saldo: <strong id="pix-saldo">Carregando...</strong>
+              <button type="button" id="pix-olho">Ocultar saldo</button></p
+            >
+            <p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
+            <p
+              >O backend atual aceita chaves Pix cadastradas no FlowBank. Códigos Pix Copia e Cola
+              (BR Code/QR Code) ainda não são suportados. Para uma transferência por chave, cole a
+              chave abaixo.</p
+            ><form id="pix-transferir-form">
+              <label for="pix-chave">Chave Pix do destinatário</label
+              ><input
+                id="pix-chave"
+                required
+                maxlength="254"
+                placeholder="CPF, e-mail, telefone ou chave aleatória"
+                autocomplete="off"
+              />
+              <label for="pix-valor">Valor (R$)</label
+              ><input
+                id="pix-valor"
+                required
+                inputmode="decimal"
+                placeholder="Ex.: 25,50"
+                pattern="[0-9]+([,.][0-9]{1,2})?"
+                title="Informe o valor sem separador de milhar, por exemplo 1250,50"
+              />
+              <label for="pix-descricao">Descrição</label
+              ><input id="pix-descricao" maxlength="120" placeholder="Opcional" />
+              <label for="pix-categoria">Categoria (opcional)</label
+              ><select id="pix-categoria"
+                ><option value="">Sem categoria</option></select
+              ><button type="submit" id="pix-continuar" disabled
+                >Consultar destinatário e continuar</button
+              ></form
+            >
+          </section></div
+        >
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../orcamentos/orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
+          <div class="footer-principal-conteudo"
+            ><div class="footer-principal-nav"
+              ><a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
+              ></div
+            ><div class="footer-principal-nav"
+              ><a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
+              ></div
+            >
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />

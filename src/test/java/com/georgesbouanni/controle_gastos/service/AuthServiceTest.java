@@ -14,28 +14,23 @@ import org.springframework.security.authentication.BadCredentialsException;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-
 public class AuthServiceTest {
 
-    @Mock
-    private AuthenticationManager authenticationManager;
+    @Mock private AuthenticationManager authenticationManager;
 
-    @Mock
-    private JwtService jwtService;
+    @Mock private JwtService jwtService;
 
-    @Mock
-    private LoginAttemptService loginAttemptService;
+    @Mock private LoginAttemptService loginAttemptService;
 
-    @InjectMocks
-    private AuthService service;
+    @InjectMocks private AuthService service;
 
     @Test
     void senhaErradaRegistraFalhaELancaCredencialInvalida() {
         when(authenticationManager.authenticate(Mockito.any()))
                 .thenThrow(new BadCredentialsException("x"));
 
-        Assertions.assertThrows(BadCredentialsException.class,
-                () -> service.login("123.456.789-00", "errada"));
+        Assertions.assertThrows(
+                BadCredentialsException.class, () -> service.login("123.456.789-00", "errada"));
 
         Mockito.verify(loginAttemptService).registerFailure("12345678900");
         Mockito.verify(jwtService, Mockito.never()).generateToken(Mockito.anyString());
@@ -54,11 +49,12 @@ public class AuthServiceTest {
 
     @Test
     void quintaFalhaNotificaOBloqueio() {
-        when(authenticationManager.authenticate(Mockito.any())).thenThrow(new BadCredentialsException("x"));
+        when(authenticationManager.authenticate(Mockito.any()))
+                .thenThrow(new BadCredentialsException("x"));
         when(loginAttemptService.registerFailure("12345678900")).thenReturn(true);
 
-        Assertions.assertThrows(BadCredentialsException.class,
-                () -> service.login("123.456.789-00", "errada"));
+        Assertions.assertThrows(
+                BadCredentialsException.class, () -> service.login("123.456.789-00", "errada"));
 
         Mockito.verify(loginAttemptService).notifyLock("12345678900");
     }

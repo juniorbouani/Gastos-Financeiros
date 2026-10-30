@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+/** Expõe consultas de faturas e lançamentos sem devolver o grafo completo de entidades. */
 @RestController
 @RequestMapping("/credit-cards")
 public class InvoiceQueryController {

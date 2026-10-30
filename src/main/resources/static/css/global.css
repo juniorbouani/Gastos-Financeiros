@@ -174,7 +174,7 @@ img {
 }
 
 .badge-tipo {
-  flex-shrink: 0; 
+  flex-shrink: 0;
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 0.75rem;
@@ -202,17 +202,17 @@ img {
   border: 1px solid #1e212b;
   border-radius: 14px;
   width: 100%;
-  max-width: 100%; 
+  max-width: 100%;
   box-sizing: border-box;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .extrato-info {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex: 1 1 0%; 
-  min-width: 0; 
+  flex: 1 1 0%;
+  min-width: 0;
   max-width: 100%;
   overflow: hidden;
 }
@@ -222,7 +222,7 @@ img {
   flex-direction: column;
   gap: 2px;
   flex: 1 1 0%;
-  min-width: 0; 
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -231,15 +231,15 @@ img {
   font-weight: 600;
   color: #ffffff;
   margin: 0;
-  display: block; 
+  display: block;
   width: 100%;
-  white-space: nowrap; 
-  overflow: hidden !important; 
+  white-space: nowrap;
+  overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
 
 .extrato-valor {
-  flex-shrink: 0; 
+  flex-shrink: 0;
   font-size: 0.9rem;
   font-weight: 700;
   white-space: nowrap;
@@ -313,7 +313,6 @@ img {
   margin: 0;
   white-space: nowrap;
 }
-
 
 @media (max-width: 480px) {
   .card-saldo-secundario {

@@ -14,7 +14,7 @@ public class LoginRequest {
         return cpf;
     }
 
-    public void setCpf (String cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

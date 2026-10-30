@@ -18,12 +18,17 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
 }
 
 .config-item svg {
   color: #8f94a3;
-  transition: color 0.2s, transform 0.2s;
+  transition:
+    color 0.2s,
+    transform 0.2s;
 }
 
 .config-item:hover {
@@ -74,7 +79,10 @@
   border-radius: 14px;
   text-decoration: none;
   color: #ffffff;
-  transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.1s;
 }
 
 .config-item:hover {
@@ -123,7 +131,7 @@
 }
 
 .config-icon-wrapper svg {
-  stroke: #3b25eb; 
+  stroke: #3b25eb;
   width: 20px;
   height: 20px;
 }

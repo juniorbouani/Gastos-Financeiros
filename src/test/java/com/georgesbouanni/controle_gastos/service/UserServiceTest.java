@@ -12,25 +12,19 @@ import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
-    @Mock
-    private UserRepository repository;
+    @Mock private UserRepository repository;
 
-    @Mock
-    private PasswordEncoder passwordEncoder;
+    @Mock private PasswordEncoder passwordEncoder;
 
-    @InjectMocks
-    private UserService service;
+    @InjectMocks private UserService service;
 
     private User novoUsuario() {
         User u = new User();
@@ -48,7 +42,8 @@ public class UserServiceTest {
     void rejeitarCpfDuplicado() {
         when(repository.findByCpf("12345678900")).thenReturn(Optional.of(new User()));
 
-        Assertions.assertThrows(DataAlreadyExistsException.class, () -> service.save(novoUsuario()));
+        Assertions.assertThrows(
+                DataAlreadyExistsException.class, () -> service.save(novoUsuario()));
         Mockito.verify(repository, Mockito.never()).save(Mockito.any(User.class));
     }
 

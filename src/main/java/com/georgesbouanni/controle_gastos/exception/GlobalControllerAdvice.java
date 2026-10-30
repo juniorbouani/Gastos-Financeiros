@@ -17,115 +17,169 @@ import java.util.Map;
 public class GlobalControllerAdvice {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND.value(),
-                "Not Found", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(
+            ResourceNotFoundException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
+                        "Not Found",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handValidationErrors(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handValidationErrors(
+            MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                errors.put(error.getField(), error.getDefaultMessage()));
+        ex.getBindingResult()
+                .getFieldErrors()
+                .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
     }
 
     @ExceptionHandler(InsuficientBalanceException.class)
-    public ResponseEntity<ErrorResponse> handleInsufficientBalance(InsuficientBalanceException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleInsufficientBalance(
+            InsuficientBalanceException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad Request",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ErrorResponse> handleBadCredentials(BadCredentialsException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.UNAUTHORIZED.value(),
-                "Unauthorized", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleBadCredentials(
+            BadCredentialsException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.UNAUTHORIZED.value(),
+                        "Unauthorized",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
 
     @ExceptionHandler(PixKeyAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> handlePixAlreadyExists(PixKeyAlreadyExistsException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(),
-                "Conflict", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handlePixAlreadyExists(
+            PixKeyAlreadyExistsException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.CONFLICT.value(),
+                        "Conflict",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> handleEmailAlreadyExists(EmailAlreadyExistsException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(),
-                "Conflict", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleEmailAlreadyExists(
+            EmailAlreadyExistsException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.CONFLICT.value(),
+                        "Conflict",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     @ExceptionHandler(CardBlockedException.class)
-    public ResponseEntity<ErrorResponse> handleCardBlocked(CardBlockedException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleCardBlocked(
+            CardBlockedException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad Request",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(InsufficientCreditLimitException.class)
-    public ResponseEntity<ErrorResponse> handleInsufficientCreditLimit(InsufficientCreditLimitException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleInsufficientCreditLimit(
+            InsufficientCreditLimitException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad Request",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(BusinessRuleException.class)
-    public ResponseEntity<ErrorResponse> handleBusinessRule(BusinessRuleException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleBusinessRule(
+            BusinessRuleException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Bad Request",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(DataAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> handleDataAlreadyExists(DataAlreadyExistsException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(),
-                "Conflict", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleDataAlreadyExists(
+            DataAlreadyExistsException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.CONFLICT.value(),
+                        "Conflict",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ErrorResponse> handleDataIntegrity(DataIntegrityViolationException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(),
-                "Conflict", "Os dados informados conflitam com um registro já existente.",
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleDataIntegrity(
+            DataIntegrityViolationException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.CONFLICT.value(),
+                        "Conflict",
+                        "Os dados informados conflitam com um registro já existente.",
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<ErrorResponse> handleForbidden(ForbiddenException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.FORBIDDEN.value(),
-                "Forbidden", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleForbidden(
+            ForbiddenException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.FORBIDDEN.value(),
+                        "Forbidden",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
 
     @ExceptionHandler(AccountLockedException.class)
-    public ResponseEntity<ErrorResponse> handleAccountLocked(AccountLockedException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.TOO_MANY_REQUESTS.value(),
-                "Too Many Requests", ex.getMessage(),
-                request.getDescription(false).replace("uri=", ""));
+    public ResponseEntity<ErrorResponse> handleAccountLocked(
+            AccountLockedException ex, WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.TOO_MANY_REQUESTS.value(),
+                        "Too Many Requests",
+                        ex.getMessage(),
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(error);
     }
 
     @ExceptionHandler(org.springframework.orm.ObjectOptimisticLockingFailureException.class)
     public ResponseEntity<ErrorResponse> handleConcurrentChange(
-            org.springframework.orm.ObjectOptimisticLockingFailureException ex, WebRequest request) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(), "Conflict",
-                "Os dados foram alterados por outra operação. Atualize a tela antes de tentar novamente.",
-                request.getDescription(false).replace("uri=", ""));
+            org.springframework.orm.ObjectOptimisticLockingFailureException ex,
+            WebRequest request) {
+        ErrorResponse error =
+                new ErrorResponse(
+                        HttpStatus.CONFLICT.value(),
+                        "Conflict",
+                        "Os dados foram alterados por outra operação. Atualize a tela antes de tentar novamente.",
+                        request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }

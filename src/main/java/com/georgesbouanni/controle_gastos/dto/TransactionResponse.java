@@ -34,7 +34,7 @@ public class TransactionResponse {
         this.sender = PartyResponse.from(t.getSender());
         this.receiver = PartyResponse.from(t.getReceiver());
         this.destination = t.getDestination();
-        this.categoryId = t.getCategory() != null ? t.getCategory().getId() : null ;
+        this.categoryId = t.getCategory() != null ? t.getCategory().getId() : null;
         this.categoryName = t.getCategory() != null ? t.getCategory().getName() : null;
         this.createdAt = t.getCreatedAt();
         this.reversalOfId = t.getReversalOf() != null ? t.getReversalOf().getId() : null;

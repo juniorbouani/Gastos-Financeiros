@@ -1,6 +1,6 @@
 package com.georgesbouanni.controle_gastos.dto;
 
-import  com.georgesbouanni.controle_gastos.model.TransactionType;
+import com.georgesbouanni.controle_gastos.model.TransactionType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -34,9 +34,13 @@ public class TransactionRequest {
 
     private Long categoryId;
 
-    public String getPixKey() { return pixKey; }
+    public String getPixKey() {
+        return pixKey;
+    }
 
-    public void setPixKey(String pixKey) { this.pixKey = pixKey; }
+    public void setPixKey(String pixKey) {
+        this.pixKey = pixKey;
+    }
 
     public String getDescription() {
         return description;

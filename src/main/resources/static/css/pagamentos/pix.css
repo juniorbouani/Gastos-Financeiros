@@ -295,7 +295,9 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
   text-align: center;
 }
 
@@ -353,7 +355,7 @@
   transition: background-color 0.2s;
   width: 100%;
   box-sizing: border-box;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .chave-item:hover {
@@ -364,8 +366,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  flex: 1 1 0%; 
-  min-width: 0; 
+  flex: 1 1 0%;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -376,7 +378,7 @@
   border-radius: 8px;
   background-color: #1e212b;
   color: #3b25eb;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 .chave-valor {
@@ -386,7 +388,7 @@
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   flex: 1 1 0%;
   min-width: 0;
 }
@@ -401,7 +403,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 .btn-copiar-chave:hover {

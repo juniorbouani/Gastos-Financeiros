@@ -25,7 +25,12 @@ public class CreditCardService {
     private final NotificationService notificationService;
 
     @Autowired
-    public CreditCardService(CreditCardRepository cardRepository, InvoiceRepository invoiceRepository, InvoiceItemRepository invoiceItemRepository, UserRepository userRepository, NotificationService notificationService) {
+    public CreditCardService(
+            CreditCardRepository cardRepository,
+            InvoiceRepository invoiceRepository,
+            InvoiceItemRepository invoiceItemRepository,
+            UserRepository userRepository,
+            NotificationService notificationService) {
         this.cardRepository = cardRepository;
         this.invoiceRepository = invoiceRepository;
         this.invoiceItemRepository = invoiceItemRepository;
@@ -34,13 +39,20 @@ public class CreditCardService {
     }
 
     public CreditCard requestCard(Long userId, BigDecimal limiteTotal, boolean descartavel) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encotrando de id: " + userId));
+        User user =
+                userRepository
+                        .findById(userId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Usuário não encotrando de id: " + userId));
 
         String numeroMascarado = gerarNumeroMascarado();
-        LocalDate expiracao = descartavel ? LocalDate.now().plusDays(1) : LocalDate.now().plusYears(5);
+        LocalDate expiracao =
+                descartavel ? LocalDate.now().plusDays(1) : LocalDate.now().plusYears(5);
 
-        CreditCard card = new CreditCard(user, numeroMascarado, limiteTotal, descartavel, expiracao);
+        CreditCard card =
+                new CreditCard(user, numeroMascarado, limiteTotal, descartavel, expiracao);
         return cardRepository.save(card);
     }
 
@@ -64,8 +76,8 @@ public class CreditCardService {
         if (card.getStatus() != CreditCardStatus.BLOQUEADO) {
             card.setStatus(CreditCardStatus.BLOQUEADO);
             cardRepository.save(card);
-            notificationService.create(card.getUser(),
-                    "Cartão " + card.getNumeroMascarado() + " bloqueado.");
+            notificationService.create(
+                    card.getUser(), "Cartão " + card.getNumeroMascarado() + " bloqueado.");
         }
         return card;
     }
@@ -80,8 +92,8 @@ public class CreditCardService {
         if (card.getStatus() != CreditCardStatus.ATIVO) {
             card.setStatus(CreditCardStatus.ATIVO);
             cardRepository.save(card);
-            notificationService.create(card.getUser(),
-                    "Cartão " + card.getNumeroMascarado() + " desbloqueado.");
+            notificationService.create(
+                    card.getUser(), "Cartão " + card.getNumeroMascarado() + " desbloqueado.");
         }
         return card;
     }
@@ -95,22 +107,31 @@ public class CreditCardService {
 
         if (novoLimite.compareTo(utilizado) < 0) {
             throw new BusinessRuleException(
-                    "O novo limite é menor que o valor já utilizado (" + MoneyFormatter.format(utilizado) + ").");
+                    "O novo limite é menor que o valor já utilizado ("
+                            + MoneyFormatter.format(utilizado)
+                            + ").");
         }
 
         card.setLimiteTotal(novoLimite);
-        card.setLimiteDisponivel(card.getLimiteDisponivel().add(novoLimite.subtract(limiteAnterior)));
+        card.setLimiteDisponivel(
+                card.getLimiteDisponivel().add(novoLimite.subtract(limiteAnterior)));
         cardRepository.save(card);
 
-        notificationService.create(card.getUser(),
-                "Limite do cartão " + card.getNumeroMascarado() + " alterado de "
-                        + MoneyFormatter.format(limiteAnterior) + " para " + MoneyFormatter.format(novoLimite) + ".");
+        notificationService.create(
+                card.getUser(),
+                "Limite do cartão "
+                        + card.getNumeroMascarado()
+                        + " alterado de "
+                        + MoneyFormatter.format(limiteAnterior)
+                        + " para "
+                        + MoneyFormatter.format(novoLimite)
+                        + ".");
         return card;
     }
 
     @Transactional
-    public InvoiceItem registerPurchase(Long cardId, Long userId, String descricao,
-                                        BigDecimal valor, int totalParcelas) {
+    public InvoiceItem registerPurchase(
+            Long cardId, Long userId, String descricao, BigDecimal valor, int totalParcelas) {
         CreditCard card = findOwnedCard(cardId, userId);
 
         if (card.getStatus() == CreditCardStatus.BLOQUEADO) {
@@ -125,27 +146,39 @@ public class CreditCardService {
             throw new InsuficientBalanceException("Limite de credito insuficiente.");
         }
 
-        if (totalParcelas <= 0 || valor.scale() > 2
+        if (totalParcelas <= 0
+                || valor.scale() > 2
                 || valor.compareTo(BigDecimal.valueOf(totalParcelas, 2)) < 0) {
-            throw new BusinessRuleException("Informe um valor com até duas casas decimais e parcelas de pelo menos R$ 0,01.");
+            throw new BusinessRuleException(
+                    "Informe um valor com até duas casas decimais e parcelas de pelo menos R$ 0,01.");
         }
 
         card.setLimiteDisponivel(card.getLimiteDisponivel().subtract(valor));
         cardRepository.save(card);
 
-        BigDecimal valorParcela = valor.divide(BigDecimal.valueOf(totalParcelas), 2, RoundingMode.DOWN);
+        BigDecimal valorParcela =
+                valor.divide(BigDecimal.valueOf(totalParcelas), 2, RoundingMode.DOWN);
         YearMonth mesAtual = YearMonth.now();
         InvoiceItem primeiroItem = null;
 
-        for (int i = 1; i<= totalParcelas; i++) {
+        for (int i = 1; i <= totalParcelas; i++) {
             YearMonth mesParcela = mesAtual.plusMonths(i - 1);
             Invoice invoice = findCreateInvoice(card, mesParcela);
 
             // A última parcela recebe os centavos restantes, preservando o total da compra.
-            BigDecimal valorDestaParcela = i == totalParcelas
-                    ? valor.subtract(valorParcela.multiply(BigDecimal.valueOf(totalParcelas - 1)))
-                    : valorParcela;
-            InvoiceItem item = new InvoiceItem(invoice, descricao, valorDestaParcela, LocalDate.now(), i, totalParcelas);
+            BigDecimal valorDestaParcela =
+                    i == totalParcelas
+                            ? valor.subtract(
+                                    valorParcela.multiply(BigDecimal.valueOf(totalParcelas - 1)))
+                            : valorParcela;
+            InvoiceItem item =
+                    new InvoiceItem(
+                            invoice,
+                            descricao,
+                            valorDestaParcela,
+                            LocalDate.now(),
+                            i,
+                            totalParcelas);
             invoiceItemRepository.save(item);
 
             invoice.setValorTotal(invoice.getValorTotal().add(valorDestaParcela));
@@ -154,26 +187,40 @@ public class CreditCardService {
             if (i == 1) primeiroItem = item;
         }
 
-        notificationService.create(card.getUser(),
-                "Compra de " + MoneyFormatter.format(valor) + " no cartão " + card.getNumeroMascarado()
-                        + (totalParcelas > 1 ? " em " + totalParcelas + "x" : "") + ": " + descricao + ".");
+        notificationService.create(
+                card.getUser(),
+                "Compra de "
+                        + MoneyFormatter.format(valor)
+                        + " no cartão "
+                        + card.getNumeroMascarado()
+                        + (totalParcelas > 1 ? " em " + totalParcelas + "x" : "")
+                        + ": "
+                        + descricao
+                        + ".");
 
         return primeiroItem;
     }
 
     private Invoice findCreateInvoice(CreditCard card, YearMonth mesReferencia) {
-        return invoiceRepository.findByCreditCardIdAndMesReferencia(card.getId(), mesReferencia)
-                .orElseGet(() -> {
-                    LocalDate vencimento = mesReferencia.plusMonths(1).atDay(10);
-                    Invoice novaFatura = new Invoice(card, mesReferencia, vencimento);
-                    return invoiceRepository.save(novaFatura);
-                });
+        return invoiceRepository
+                .findByCreditCardIdAndMesReferencia(card.getId(), mesReferencia)
+                .orElseGet(
+                        () -> {
+                            LocalDate vencimento = mesReferencia.plusMonths(1).atDay(10);
+                            Invoice novaFatura = new Invoice(card, mesReferencia, vencimento);
+                            return invoiceRepository.save(novaFatura);
+                        });
     }
 
     @Transactional
     public Invoice payInvoice(Long invoiceId, Long userId, BigDecimal valorPagamento) {
-        Invoice invoice = invoiceRepository.findById(invoiceId)
-                .orElseThrow(() -> new ResourceNotFoundException("Fatura não encontrada com id: " + invoiceId));
+        Invoice invoice =
+                invoiceRepository
+                        .findById(invoiceId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Fatura não encontrada com id: " + invoiceId));
 
         CreditCard card = invoice.getCreditCard();
         User user = card.getUser();
@@ -184,7 +231,8 @@ public class CreditCardService {
 
         BigDecimal restante = invoice.getValorTotal().subtract(invoice.getValorPago());
         if (valorPagamento.compareTo(restante) > 0) {
-            throw new BusinessRuleException("O valor excede o saldo devedor da fatura (" + restante + ").");
+            throw new BusinessRuleException(
+                    "O valor excede o saldo devedor da fatura (" + restante + ").");
         }
         if (user.getBalance().compareTo(valorPagamento) < 0) {
             throw new InsuficientBalanceException("Saldo insuficiente para pagar a fatura.");
@@ -197,20 +245,31 @@ public class CreditCardService {
         card.setLimiteDisponivel(card.getLimiteDisponivel().add(valorPagamento));
         cardRepository.save(card);
 
-        invoice.setStatus(invoice.getValorPago().compareTo(invoice.getValorTotal()) >= 0
-                ? InvoiceStatus.PAGA : InvoiceStatus.PARCIAL);
+        invoice.setStatus(
+                invoice.getValorPago().compareTo(invoice.getValorTotal()) >= 0
+                        ? InvoiceStatus.PAGA
+                        : InvoiceStatus.PARCIAL);
 
-        notificationService.create(user,
-                "Pagamento de " + MoneyFormatter.format(valorPagamento) + " na fatura de "
-                        + invoice.getMesReferencia() + " realizado.");
+        notificationService.create(
+                user,
+                "Pagamento de "
+                        + MoneyFormatter.format(valorPagamento)
+                        + " na fatura de "
+                        + invoice.getMesReferencia()
+                        + " realizado.");
 
         return invoiceRepository.save(invoice);
     }
 
     @Transactional
     public InvoiceItem disputeItem(Long itemId, Long userId) {
-        InvoiceItem item = invoiceItemRepository.findById(itemId)
-                .orElseThrow(() -> new ResourceNotFoundException("Lançamento não encontrado com id: " + itemId));
+        InvoiceItem item =
+                invoiceItemRepository
+                        .findById(itemId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Lançamento não encontrado com id: " + itemId));
 
         Invoice invoice = item.getInvoice();
         CreditCard card = invoice.getCreditCard();
@@ -229,15 +288,24 @@ public class CreditCardService {
         card.setLimiteDisponivel(card.getLimiteDisponivel().add(item.getValor()));
         cardRepository.save(card);
 
-        notificationService.create(card.getUser(),
-                "Lançamento estornado: " + item.getDescricao() + " (" + MoneyFormatter.format(item.getValor()) + ").");
+        notificationService.create(
+                card.getUser(),
+                "Lançamento estornado: "
+                        + item.getDescricao()
+                        + " ("
+                        + MoneyFormatter.format(item.getValor())
+                        + ").");
 
         return invoiceItemRepository.save(item);
     }
 
     private CreditCard findCardorThrow(Long cardId, Long userId) {
-        return cardRepository.findById(cardId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cartão não encontrado com id:" + cardId));
+        return cardRepository
+                .findById(cardId)
+                .orElseThrow(
+                        () ->
+                                new ResourceNotFoundException(
+                                        "Cartão não encontrado com id:" + cardId));
     }
 
     public CreditCard findOwnedCard(Long cardId, Long userId) {

@@ -30,19 +30,23 @@ public class BudgetController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public BudgetSummaryResponse create(@Valid @RequestBody BudgetRequest request) {
-        return service.create(currentUser.getId(), request.getCategoryId(),
-                request.getMesReferencia(), request.getLimite());
+        return service.create(
+                currentUser.getId(),
+                request.getCategoryId(),
+                request.getMesReferencia(),
+                request.getLimite());
     }
 
     @GetMapping("/user/{userId}")
-    public List<BudgetSummaryResponse> listByUserAndMonth(@PathVariable Long userId,
-                                                          @RequestParam YearMonth month) {
+    public List<BudgetSummaryResponse> listByUserAndMonth(
+            @PathVariable Long userId, @RequestParam YearMonth month) {
         currentUser.requireSameUser(userId);
         return service.listByUserAndMonth(userId, month);
     }
 
     @PutMapping("/{id}/limit")
-    public BudgetSummaryResponse updateLimit(@PathVariable Long id, @Valid @RequestBody BudgetLimitRequest request) {
+    public BudgetSummaryResponse updateLimit(
+            @PathVariable Long id, @Valid @RequestBody BudgetLimitRequest request) {
         return service.updateLimit(id, currentUser.getId(), request.getLimite());
     }
 

@@ -33,8 +33,12 @@ public class NotificationService {
         User receiver = t.getReceiver();
 
         if (receiver != null) {
-            create(sender, "Você enviou " + valor + " para " + receiver.getName() + " (" + tipo + ").");
-            create(receiver, "Você recebeu " + valor + " de " + sender.getName() + " (" + tipo + ").");
+            create(
+                    sender,
+                    "Você enviou " + valor + " para " + receiver.getName() + " (" + tipo + ").");
+            create(
+                    receiver,
+                    "Você recebeu " + valor + " de " + sender.getName() + " (" + tipo + ").");
         } else {
             create(sender, "Você realizou um pagamento de " + valor + " (" + tipo + ").");
         }
@@ -45,7 +49,9 @@ public class NotificationService {
         User devolveu = reversal.getSender();
         User recebeu = reversal.getReceiver();
 
-        create(recebeu, "Estorno recebido: " + valor + " devolvido por " + devolveu.getName() + ".");
+        create(
+                recebeu,
+                "Estorno recebido: " + valor + " devolvido por " + devolveu.getName() + ".");
         create(devolveu, "Você devolveu " + valor + " para " + recebeu.getName() + " (estorno).");
     }
 
@@ -65,8 +71,13 @@ public class NotificationService {
     }
 
     public Notification markAsRead(Long id, Long userId) {
-        Notification notification = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Notificação não encontrada com id: " + id));
+        Notification notification =
+                repository
+                        .findById(id)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Notificação não encontrada com id: " + id));
         if (!notification.getUser().getId().equals(userId)) {
             throw new ForbiddenException("Esta notificação não pertence a você.");
         }

@@ -32,7 +32,8 @@ public class TransactionController {
 
     @GetMapping
     public Page<TransactionResponse> list(Pageable pageable) {
-        return service.listByUserPaginated(currentUser.getId(), pageable).map(TransactionResponse::from);
+        return service.listByUserPaginated(currentUser.getId(), pageable)
+                .map(TransactionResponse::from);
     }
 
     @GetMapping("/{id}")
@@ -49,13 +50,16 @@ public class TransactionController {
     @GetMapping("/type/{type}")
     public List<TransactionResponse> listByType(@PathVariable TransactionType type) {
         return service.listByUserAndType(currentUser.getId(), type).stream()
-                .map(TransactionResponse::from).toList();
+                .map(TransactionResponse::from)
+                .toList();
     }
 
     @GetMapping("/period")
-    public List<TransactionResponse> listByPeriod(@RequestParam LocalDate start, @RequestParam LocalDate end) {
+    public List<TransactionResponse> listByPeriod(
+            @RequestParam LocalDate start, @RequestParam LocalDate end) {
         return service.listByUserAndPeriod(currentUser.getId(), start, end).stream()
-                .map(TransactionResponse::from).toList();
+                .map(TransactionResponse::from)
+                .toList();
     }
 
     @GetMapping("/user/{userId}")

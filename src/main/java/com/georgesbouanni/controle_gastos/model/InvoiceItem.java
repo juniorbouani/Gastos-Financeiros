@@ -1,6 +1,5 @@
 package com.georgesbouanni.controle_gastos.model;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -22,25 +21,32 @@ public class InvoiceItem {
     private Invoice invoice;
 
     @NotNull(message = "A descrição é obrigatória")
-    private  String descricao;
+    private String descricao;
 
     @NotNull(message = "O valor é obrigatório")
     @Positive(message = "O valor deve ser positivo")
-    private BigDecimal  valor;
+    private BigDecimal valor;
 
     @NotNull(message = "A data é obrigatória")
     private LocalDate data;
 
     private int parcelaAtual = 1;
 
-    private int totalParcelas= 1;
+    private int totalParcelas = 1;
 
     private boolean estornado = false;
 
-    public InvoiceItem() {
-    }
+    public InvoiceItem() {}
 
-    public InvoiceItem(Long id, Invoice invoice, String descricao, BigDecimal valor, LocalDate data, int parcelaAtual, int totalParcelas, boolean estornado) {
+    public InvoiceItem(
+            Long id,
+            Invoice invoice,
+            String descricao,
+            BigDecimal valor,
+            LocalDate data,
+            int parcelaAtual,
+            int totalParcelas,
+            boolean estornado) {
         this.id = id;
         this.invoice = invoice;
         this.descricao = descricao;
@@ -51,7 +57,13 @@ public class InvoiceItem {
         this.estornado = estornado;
     }
 
-    public InvoiceItem(Invoice invoice, String descricao, BigDecimal valor, LocalDate data, int parcelaAtual, int totalParcelas) {
+    public InvoiceItem(
+            Invoice invoice,
+            String descricao,
+            BigDecimal valor,
+            LocalDate data,
+            int parcelaAtual,
+            int totalParcelas) {
         this.invoice = invoice;
         this.descricao = descricao;
         this.valor = valor;

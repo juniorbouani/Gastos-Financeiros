@@ -11,8 +11,11 @@ public class MonthlySummaryResponse {
     private final BigDecimal totalReceived;
     private final List<CategorySummaryItem> categories;
 
-    public MonthlySummaryResponse(YearMonth month, BigDecimal totalSpent, BigDecimal totalReceived,
-                                  List<CategorySummaryItem> categories) {
+    public MonthlySummaryResponse(
+            YearMonth month,
+            BigDecimal totalSpent,
+            BigDecimal totalReceived,
+            List<CategorySummaryItem> categories) {
         this.month = month;
         this.totalSpent = totalSpent;
         this.totalReceived = totalReceived;
@@ -35,5 +38,7 @@ public class MonthlySummaryResponse {
         return categories;
     }
 
-    public BigDecimal getNet() { return totalReceived.subtract(totalSpent); }
+    public BigDecimal getNet() {
+        return totalReceived.subtract(totalSpent);
+    }
 }

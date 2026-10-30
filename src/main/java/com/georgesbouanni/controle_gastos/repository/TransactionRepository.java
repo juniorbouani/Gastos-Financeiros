@@ -25,7 +25,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findBySenderIdOrReceiverId(Long senderId, Long receiverId);
 
-    @Query("""
+    @Query(
+            """
         SELECT COALESCE(SUM(t.value), 0)
         FROM Transaction t
         WHERE t.sender.id = :userId
@@ -34,32 +35,38 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
           AND t.status = com.georgesbouanni.controle_gastos.model.TransactionStatus.COMPLETED
           AND NOT EXISTS (SELECT r.id FROM Transaction r WHERE r.reversalOf.id = t.id)
         """)
-    BigDecimal sumSpent(@Param("userId") Long userId,
-                        @Param("categoryId") Long categoryId,
-                        @Param("start") LocalDate start,
-                        @Param("end") LocalDate end);
+    BigDecimal sumSpent(
+            @Param("userId") Long userId,
+            @Param("categoryId") Long categoryId,
+            @Param("start") LocalDate start,
+            @Param("end") LocalDate end);
 
     Page<Transaction> findBySenderIdOrReceiverId(Long senderId, Long receiverId, Pageable pageable);
 
-    @Query("""
+    @Query(
+            """
         SELECT t FROM Transaction t
         WHERE (t.sender.id = :userId OR t.receiver.id = :userId)
           AND t.type = :type
         """)
-    List<Transaction> findByUserAndType(@Param("userId") Long userId, @Param("type") TransactionType type);
+    List<Transaction> findByUserAndType(
+            @Param("userId") Long userId, @Param("type") TransactionType type);
 
-    @Query("""
+    @Query(
+            """
         SELECT t FROM Transaction t
         WHERE (t.sender.id = :userId OR t.receiver.id = :userId)
           AND t.date BETWEEN :start AND :end
         """)
-    List<Transaction> findByUserAndPeriod(@Param("userId") Long userId,
-                                          @Param("start") LocalDate start,
-                                          @Param("end") LocalDate end);
+    List<Transaction> findByUserAndPeriod(
+            @Param("userId") Long userId,
+            @Param("start") LocalDate start,
+            @Param("end") LocalDate end);
 
     boolean existsByReversalOfId(Long reversalOfId);
 
-    @Query("""
+    @Query(
+            """
         SELECT new com.georgesbouanni.controle_gastos.dto.CategorySpent(c.id, c.name, SUM(t.value), COUNT(t))
         FROM Transaction t LEFT JOIN t.category c
         WHERE t.sender.id = :userId
@@ -69,11 +76,13 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
           AND NOT EXISTS (SELECT r.id FROM Transaction r WHERE r.reversalOf.id = t.id)
         GROUP BY c.id, c.name
         """)
-    List<CategorySpent> spentByCategory(@Param("userId") Long userId,
-                                        @Param("start") LocalDate start,
-                                        @Param("end") LocalDate end);
+    List<CategorySpent> spentByCategory(
+            @Param("userId") Long userId,
+            @Param("start") LocalDate start,
+            @Param("end") LocalDate end);
 
-    @Query("""
+    @Query(
+            """
         SELECT COALESCE(SUM(t.value), 0)
         FROM Transaction t
         WHERE t.receiver.id = :userId
@@ -82,8 +91,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
           AND t.type <> com.georgesbouanni.controle_gastos.model.TransactionType.ESTORNO
           AND NOT EXISTS (SELECT r.id FROM Transaction r WHERE r.reversalOf.id = t.id)
         """)
-    BigDecimal sumReceived(@Param("userId") Long userId,
-                           @Param("start") LocalDate start,
-                           @Param("end") LocalDate end);
+    BigDecimal sumReceived(
+            @Param("userId") Long userId,
+            @Param("start") LocalDate start,
+            @Param("end") LocalDate end);
 }
-

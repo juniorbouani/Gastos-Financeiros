@@ -26,42 +26,85 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        // Recursos da interface: as APIs continuam exigindo autenticação.
-                        .requestMatchers(HttpMethod.GET, "/", "/index.html", "/css/**", "/js/login.js", "/img/**",
-                                "/PaginaInicial/paginainicial.html", "/js/main.js",
-                                "/cadastro/cadastro.html", "/js/cadastro.js", "/js/paginainicial.js",
-                                "/pagamentos/pagar/extrato.html", "/js/extrato.js",
-                                "/pagamentos/pix.html", "/pagamentos/criarchave.html",
-                                "/pagamentos/transferir.html", "/pagamentos/confirmar.html",
-                                "/pagamentos/pixcopiaecola.html", "/js/pix.js", "/cartoes/cartoes.html",
-                                "/cartoes/solicitarCartao.html", "/js/cartoes.js",
-                                "/pagamentos/pagar/pagar.html", "/pagamentos/pagar/lercodigo.html",
-                                "/pagamentos/pagar/transferirPagar.html", "/js/pagamentos.js",
-                                "/perfil/perfil.html", "/perfil/dadoscadastrais.html",
-                                "/configuracoes/configuracoes.html", "/js/perfil.js",
-                                "/seguranca/seguranca.html", "/encerrarConta/encerrarConta.html",
-                                "/notificacoes/notificacoes.html", "/categorias/categorias.html",
-                                "/orcamentos/orcamentos.html", "/js/conta-painel.js").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/shop/shop.html", "/shop/500.html", "/shop/speaker.html",
-                                "/shop/mouse.html", "/shop/teclado.html", "/shop/watch.html", "/js/shop.js").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/error").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(
+                        auth ->
+                                auth
+                                        // Recursos da interface: as APIs continuam exigindo
+                                        // autenticação.
+                                        .requestMatchers(
+                                                HttpMethod.GET,
+                                                "/",
+                                                "/index.html",
+                                                "/css/**",
+                                                "/js/login.js",
+                                                "/img/**",
+                                                "/PaginaInicial/paginainicial.html",
+                                                "/js/main.js",
+                                                "/cadastro/cadastro.html",
+                                                "/js/cadastro.js",
+                                                "/js/paginainicial.js",
+                                                "/pagamentos/pagar/extrato.html",
+                                                "/js/extrato.js",
+                                                "/pagamentos/pix.html",
+                                                "/pagamentos/criarchave.html",
+                                                "/pagamentos/transferir.html",
+                                                "/pagamentos/confirmar.html",
+                                                "/pagamentos/pixcopiaecola.html",
+                                                "/js/pix.js",
+                                                "/cartoes/cartoes.html",
+                                                "/cartoes/solicitarCartao.html",
+                                                "/js/cartoes.js",
+                                                "/pagamentos/pagar/pagar.html",
+                                                "/pagamentos/pagar/lercodigo.html",
+                                                "/pagamentos/pagar/transferirPagar.html",
+                                                "/js/pagamentos.js",
+                                                "/perfil/perfil.html",
+                                                "/perfil/dadoscadastrais.html",
+                                                "/configuracoes/configuracoes.html",
+                                                "/js/perfil.js",
+                                                "/seguranca/seguranca.html",
+                                                "/encerrarConta/encerrarConta.html",
+                                                "/notificacoes/notificacoes.html",
+                                                "/categorias/categorias.html",
+                                                "/orcamentos/orcamentos.html",
+                                                "/js/conta-painel.js")
+                                        .permitAll()
+                                        .requestMatchers(
+                                                HttpMethod.GET,
+                                                "/shop/shop.html",
+                                                "/shop/500.html",
+                                                "/shop/speaker.html",
+                                                "/shop/mouse.html",
+                                                "/shop/teclado.html",
+                                                "/shop/watch.html",
+                                                "/js/shop.js")
+                                        .permitAll()
+                                        .requestMatchers(HttpMethod.POST, "/users")
+                                        .permitAll()
+                                        .requestMatchers(HttpMethod.POST, "/auth/login")
+                                        .permitAll()
+                                        .requestMatchers(
+                                                "/swagger-ui/**",
+                                                "/swagger-ui.html",
+                                                "/v3/api-docs/**")
+                                        .permitAll()
+                                        .requestMatchers("/error")
+                                        .permitAll()
+                                        .anyRequest()
+                                        .authenticated())
+                .sessionManagement(
+                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(
+                        jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+            throws Exception {
         return config.getAuthenticationManager();
     }
 }

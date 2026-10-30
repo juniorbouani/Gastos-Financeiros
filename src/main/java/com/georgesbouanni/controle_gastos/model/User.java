@@ -49,8 +49,7 @@ public class User {
     @Column(nullable = false, columnDefinition = "integer default 0")
     private int failedLoginAttempts = 0;
 
-    @JsonIgnore
-    private LocalDateTime lockedUntil;
+    @JsonIgnore private LocalDateTime lockedUntil;
 
     @JsonIgnore
     @Column(name = "account_closed", nullable = false, columnDefinition = "boolean default false")
@@ -60,20 +59,37 @@ public class User {
     @Column(name = "credential_version", nullable = false, columnDefinition = "integer default 0")
     private int credentialVersion = 0;
 
-    public boolean isAccountClosed() { return accountClosed; }
-    public void setAccountClosed(boolean accountClosed) { this.accountClosed = accountClosed; }
-    public int getCredentialVersion() { return credentialVersion; }
-    public void setCredentialVersion(int credentialVersion) { this.credentialVersion = credentialVersion; }
+    public boolean isAccountClosed() {
+        return accountClosed;
+    }
+
+    public void setAccountClosed(boolean accountClosed) {
+        this.accountClosed = accountClosed;
+    }
+
+    public int getCredentialVersion() {
+        return credentialVersion;
+    }
+
+    public void setCredentialVersion(int credentialVersion) {
+        this.credentialVersion = credentialVersion;
+    }
 
     @JsonIgnore
     @Version
     @Column(name = "row_version", nullable = false, columnDefinition = "bigint default 0")
     private Long rowVersion = 0L;
 
-    public User() {
-    }
+    public User() {}
 
-    public User(String name, String cpf, String numeroTelefone, LocalDate dataNascimento, String senhaHash, String email, BigDecimal balance) {
+    public User(
+            String name,
+            String cpf,
+            String numeroTelefone,
+            LocalDate dataNascimento,
+            String senhaHash,
+            String email,
+            BigDecimal balance) {
         this.name = name;
         this.cpf = cpf;
         this.numeroTelefone = numeroTelefone;
@@ -162,5 +178,4 @@ public class User {
     public void setLockedUntil(LocalDateTime lockedUntil) {
         this.lockedUntil = lockedUntil;
     }
-
 }

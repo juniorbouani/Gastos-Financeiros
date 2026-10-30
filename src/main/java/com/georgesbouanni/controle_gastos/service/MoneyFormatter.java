@@ -8,11 +8,11 @@ public class MoneyFormatter {
 
     private static final Locale PT_BR = Locale.of("pt", "BR");
 
-    private MoneyFormatter() {
-    }
+    private MoneyFormatter() {}
 
     public static String format(BigDecimal value) {
-        return NumberFormat.getCurrencyInstance(PT_BR).format(value)
+        return NumberFormat.getCurrencyInstance(PT_BR)
+                .format(value)
                 .replaceAll("[\\u00a0\\u202f]", " ");
     }
 }

@@ -6,6 +6,4 @@ public enum TransactionType {
     TRANSFERENCIA,
     TED,
     ESTORNO
-
 }
-

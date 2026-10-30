@@ -23,23 +23,26 @@ public class CurrentUserService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null || !authentication.isAuthenticated()
-            || authentication instanceof AnonymousAuthenticationToken) {
+        if (authentication == null
+                || !authentication.isAuthenticated()
+                || authentication instanceof AnonymousAuthenticationToken) {
             throw new ForbiddenException("Você precisa estar autenticado");
         }
 
-        return userRepository.findByCpf(authentication.getName())
+        return userRepository
+                .findByCpf(authentication.getName())
                 .filter(user -> !user.isAccountClosed())
                 .orElseThrow(() -> new ForbiddenException("Usuário do token não encontrado."));
     }
 
-    public Long getId(){
+    public Long getId() {
         return get().getId();
     }
 
     public void requireSameUser(Long userId) {
         if (!get().getId().equals(userId)) {
-            throw new ForbiddenException("Você não tem permissão para acessar os dados de outro usuário");
+            throw new ForbiddenException(
+                    "Você não tem permissão para acessar os dados de outro usuário");
         }
     }
 }

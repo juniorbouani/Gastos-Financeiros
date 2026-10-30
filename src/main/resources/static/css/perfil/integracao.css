@@ -1,10 +1,84 @@
-.perfil-integracao { width: 100%; max-width: 800px; background: #13151b; color: white; padding: 24px; border-radius: 14px; }
-.perfil-integracao nav { display: flex; flex-wrap: wrap; gap: 12px; }.perfil-integracao a { color: #b5bcff; display: inline-block; margin: 8px 12px 8px 0; }
-.perfil-integracao h2 { margin: 24px 0 12px; }.perfil-integracao p { margin: 12px 0; overflow-wrap: anywhere; }
-.perfil-integracao button { background: #3b25eb; color: white; border: 0; padding: 10px 14px; border-radius: 8px; cursor: pointer; font: inherit; margin: 4px; }
-.perfil-integracao button:disabled,.perfil-integracao fieldset:disabled { opacity: .55; }.perfil-integracao button:disabled { cursor: default; }
-.perfil-integracao fieldset { border: 0; display: flex; flex-direction: column; gap: 12px; padding: 0; margin: 24px 0; min-width: 0; }
-.perfil-integracao input { padding: 12px; color: white; background: #0b0c10; border: 1px solid #363b4b; border-radius: 8px; width: 100%; font: inherit; }
-.perfil-integracao input[readonly] { color: #aeb4c2; }.perfil-integracao dt { color: #aeb4c2; margin-top: 16px; }.perfil-integracao dd { margin: 4px 0; overflow-wrap: anywhere; }
-.perfil-atalhos { display: flex; flex-direction: column; gap: 8px; }#perfil-mensagem[data-erro="true"] { color: #fda4af; }
-.perfil-integracao button:focus-visible,.perfil-integracao a:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.perfil-integracao {
+  width: 100%;
+  max-width: 800px;
+  background: #13151b;
+  color: white;
+  padding: 24px;
+  border-radius: 14px;
+}
+.perfil-integracao nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.perfil-integracao a {
+  color: #b5bcff;
+  display: inline-block;
+  margin: 8px 12px 8px 0;
+}
+.perfil-integracao h2 {
+  margin: 24px 0 12px;
+}
+.perfil-integracao p {
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.perfil-integracao button {
+  background: #3b25eb;
+  color: white;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  margin: 4px;
+}
+.perfil-integracao button:disabled,
+.perfil-integracao fieldset:disabled {
+  opacity: 0.55;
+}
+.perfil-integracao button:disabled {
+  cursor: default;
+}
+.perfil-integracao fieldset {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 24px 0;
+  min-width: 0;
+}
+.perfil-integracao input {
+  padding: 12px;
+  color: white;
+  background: #0b0c10;
+  border: 1px solid #363b4b;
+  border-radius: 8px;
+  width: 100%;
+  font: inherit;
+}
+.perfil-integracao input[readonly] {
+  color: #aeb4c2;
+}
+.perfil-integracao dt {
+  color: #aeb4c2;
+  margin-top: 16px;
+}
+.perfil-integracao dd {
+  margin: 4px 0;
+  overflow-wrap: anywhere;
+}
+.perfil-atalhos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#perfil-mensagem[data-erro="true"] {
+  color: #fda4af;
+}
+.perfil-integracao button:focus-visible,
+.perfil-integracao a:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}

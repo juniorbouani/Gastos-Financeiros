@@ -32,7 +32,8 @@ public class CreditCardController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreditCard requestCard(@Valid @RequestBody CreditCardRequest request) {
-        return service.requestCard(currentUser.getId(), request.getLimiteTotal(), request.isDescartavel());
+        return service.requestCard(
+                currentUser.getId(), request.getLimiteTotal(), request.isDescartavel());
     }
 
     @GetMapping("/user/{userId}")
@@ -52,19 +53,26 @@ public class CreditCardController {
     }
 
     @PutMapping("/{id}/limit")
-    public CreditCard setSpendingLimit(@PathVariable Long id, @Valid @RequestBody SpendingLimitRequest request) {
+    public CreditCard setSpendingLimit(
+            @PathVariable Long id, @Valid @RequestBody SpendingLimitRequest request) {
         return service.setSpendingLimit(id, currentUser.getId(), request.getNovoLimite());
     }
 
     @PostMapping("/{id}/purchases")
     @ResponseStatus(HttpStatus.CREATED)
-    public InvoiceItem registerPurchase(@PathVariable Long id, @Valid @RequestBody PurchaseRequest request) {
-        return service.registerPurchase(id, currentUser.getId(), request.getDescricao(),
-                request.getValor(), request.getTotalParcelas());
+    public InvoiceItem registerPurchase(
+            @PathVariable Long id, @Valid @RequestBody PurchaseRequest request) {
+        return service.registerPurchase(
+                id,
+                currentUser.getId(),
+                request.getDescricao(),
+                request.getValor(),
+                request.getTotalParcelas());
     }
 
     @PostMapping("/invoices/{invoiceId}/pay")
-    public Invoice payInvoice(@PathVariable Long invoiceId, @Valid @RequestBody PaymentRequest request) {
+    public Invoice payInvoice(
+            @PathVariable Long invoiceId, @Valid @RequestBody PaymentRequest request) {
         return service.payInvoice(invoiceId, currentUser.getId(), request.getValor());
     }
 

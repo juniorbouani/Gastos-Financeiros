@@ -23,26 +23,19 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-
 public class CreditCardServiceTest {
 
-    @Mock
-    private CreditCardRepository cardRepository;
+    @Mock private CreditCardRepository cardRepository;
 
-    @Mock
-    private InvoiceRepository invoiceRepository;
+    @Mock private InvoiceRepository invoiceRepository;
 
-    @Mock
-    private InvoiceItemRepository invoiceItemRepository;
+    @Mock private InvoiceItemRepository invoiceItemRepository;
 
-    @Mock
-    private UserRepository userRepository;
+    @Mock private UserRepository userRepository;
 
-    @Mock
-    private NotificationService notificationService;
+    @Mock private NotificationService notificationService;
 
-    @InjectMocks
-    private CreditCardService service;
+    @InjectMocks private CreditCardService service;
 
     private User dono() {
         User u = new User();
@@ -52,8 +45,13 @@ public class CreditCardServiceTest {
     }
 
     private CreditCard cartaoDe(User dono) {
-        CreditCard card = new CreditCard(dono, "**** 1234", new BigDecimal("1000.00"), false,
-                LocalDate.now().plusYears(5));
+        CreditCard card =
+                new CreditCard(
+                        dono,
+                        "**** 1234",
+                        new BigDecimal("1000.00"),
+                        false,
+                        LocalDate.now().plusYears(5));
         card.setId(10L);
         return card;
     }
@@ -71,8 +69,14 @@ public class CreditCardServiceTest {
         CreditCard card = cartaoDe(dono());
         Invoice invoice = new Invoice(card, YearMonth.of(2026, 10), LocalDate.of(2026, 11, 10));
         invoice.setValorTotal(new BigDecimal("100.00"));
-        InvoiceItem item = new InvoiceItem(invoice, "Compra", new BigDecimal("100.00"),
-                LocalDate.of(2026, 10, 5), 1, 1);
+        InvoiceItem item =
+                new InvoiceItem(
+                        invoice,
+                        "Compra",
+                        new BigDecimal("100.00"),
+                        LocalDate.of(2026, 10, 5),
+                        1,
+                        1);
         item.setEstornado(true);
 
         when(invoiceItemRepository.findById(7L)).thenReturn(Optional.of(item));
@@ -84,12 +88,14 @@ public class CreditCardServiceTest {
     @Test
     void negarPagamentoMaiorQueOSaldoDevedor() {
         User dono = dono();
-        Invoice invoice = new Invoice(cartaoDe(dono), YearMonth.of(2026, 10), LocalDate.of(2026, 11, 10));
+        Invoice invoice =
+                new Invoice(cartaoDe(dono), YearMonth.of(2026, 10), LocalDate.of(2026, 11, 10));
         invoice.setValorTotal(new BigDecimal("100.00"));
 
         when(invoiceRepository.findById(3L)).thenReturn(Optional.of(invoice));
 
-        Assertions.assertThrows(BusinessRuleException.class,
+        Assertions.assertThrows(
+                BusinessRuleException.class,
                 () -> service.payInvoice(3L, 1L, new BigDecimal("150.00")));
         Assertions.assertEquals(new BigDecimal("1000.00"), dono.getBalance());
     }
@@ -97,7 +103,8 @@ public class CreditCardServiceTest {
     @Test
     void pagarFaturaNotificaOUsuario() {
         User dono = dono();
-        Invoice invoice = new Invoice(cartaoDe(dono), YearMonth.of(2026, 10), LocalDate.of(2026, 11, 10));
+        Invoice invoice =
+                new Invoice(cartaoDe(dono), YearMonth.of(2026, 10), LocalDate.of(2026, 11, 10));
         invoice.setValorTotal(new BigDecimal("100.00"));
         when(invoiceRepository.findById(3L)).thenReturn(Optional.of(invoice));
 
@@ -150,8 +157,11 @@ public class CreditCardServiceTest {
         service.setSpendingLimit(10L, 1L, new BigDecimal("2000.00"));
 
         Assertions.assertEquals(new BigDecimal("2000.00"), card.getLimiteDisponivel());
-        Mockito.verify(notificationService).create(Mockito.eq(dono),
-                Mockito.argThat(msg -> msg.contains("R$ 1.000,00") && msg.contains("R$ 2.000,00")));
+        Mockito.verify(notificationService)
+                .create(
+                        Mockito.eq(dono),
+                        Mockito.argThat(
+                                msg -> msg.contains("R$ 1.000,00") && msg.contains("R$ 2.000,00")));
     }
 
     @Test
@@ -160,7 +170,8 @@ public class CreditCardServiceTest {
         card.setLimiteDisponivel(new BigDecimal("400.00")); // 600 já utilizados
         when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
 
-        Assertions.assertThrows(BusinessRuleException.class,
+        Assertions.assertThrows(
+                BusinessRuleException.class,
                 () -> service.setSpendingLimit(10L, 1L, new BigDecimal("500.00")));
         Mockito.verify(cardRepository, Mockito.never()).save(Mockito.any(CreditCard.class));
     }
@@ -169,7 +180,8 @@ public class CreditCardServiceTest {
     void parcelasPreservamTotalDaCompraComCentavosRestantesNaUltima() {
         var card = cartaoDe(dono());
         when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
-        when(invoiceRepository.findByCreditCardIdAndMesReferencia(org.mockito.ArgumentMatchers.eq(10L), org.mockito.ArgumentMatchers.any()))
+        when(invoiceRepository.findByCreditCardIdAndMesReferencia(
+                        org.mockito.ArgumentMatchers.eq(10L), org.mockito.ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
         when(invoiceRepository.save(org.mockito.ArgumentMatchers.any(Invoice.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
@@ -177,7 +189,10 @@ public class CreditCardServiceTest {
         service.registerPurchase(10L, 1L, "Compra", new BigDecimal("100.00"), 3);
         Mockito.verify(invoiceItemRepository, Mockito.times(3)).save(captor.capture());
         var valores = captor.getAllValues().stream().map(InvoiceItem::getValor).toList();
-        Assertions.assertEquals(java.util.List.of(new BigDecimal("33.33"), new BigDecimal("33.33"), new BigDecimal("33.34")), valores);
+        Assertions.assertEquals(
+                java.util.List.of(
+                        new BigDecimal("33.33"), new BigDecimal("33.33"), new BigDecimal("33.34")),
+                valores);
         Assertions.assertEquals(new BigDecimal("900.00"), card.getLimiteDisponivel());
     }
 
@@ -185,7 +200,8 @@ public class CreditCardServiceTest {
     void rejeitaCompraComParcelaMenorQueUmCentavoAntesDeDebitarLimite() {
         var card = cartaoDe(dono());
         when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
-        Assertions.assertThrows(BusinessRuleException.class,
+        Assertions.assertThrows(
+                BusinessRuleException.class,
                 () -> service.registerPurchase(10L, 1L, "Compra", new BigDecimal("0.01"), 2));
         Assertions.assertEquals(new BigDecimal("1000.00"), card.getLimiteDisponivel());
         Mockito.verifyNoInteractions(invoiceRepository, invoiceItemRepository);

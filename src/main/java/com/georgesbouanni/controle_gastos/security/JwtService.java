@@ -11,12 +11,14 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.function.Function;
 
+/** Gera e valida tokens vinculados à versão atual das credenciais da conta. */
 @Service
 public class JwtService {
     private final UserRepository users;
 
-    public JwtService(UserRepository users) { this.users = users; }
-
+    public JwtService(UserRepository users) {
+        this.users = users;
+    }
 
     @Value("${jwt.secret}")
     private String secretKey;
@@ -29,8 +31,10 @@ public class JwtService {
     }
 
     public String generateToken(String cpf) {
-        var user = users.findByCpf(cpf).filter(u -> !u.isAccountClosed())
-                .orElseThrow(() -> new IllegalArgumentException("Conta indisponível."));
+        var user =
+                users.findByCpf(cpf)
+                        .filter(u -> !u.isAccountClosed())
+                        .orElseThrow(() -> new IllegalArgumentException("Conta indisponível."));
         return Jwts.builder()
                 .subject(cpf)
                 .claim("cv", user.getCredentialVersion())
@@ -48,9 +52,12 @@ public class JwtService {
         Claims claims = extractAllClaims(token);
         Number version = claims.get("cv", Number.class);
         int tokenVersion = version == null ? 0 : version.intValue();
-        return cpf.equals(claims.getSubject()) && claims.getExpiration().after(new Date())
-                && users.findByCpf(cpf).filter(u -> !u.isAccountClosed())
-                .map(u -> u.getCredentialVersion() == tokenVersion).orElse(false);
+        return cpf.equals(claims.getSubject())
+                && claims.getExpiration().after(new Date())
+                && users.findByCpf(cpf)
+                        .filter(u -> !u.isAccountClosed())
+                        .map(u -> u.getCredentialVersion() == tokenVersion)
+                        .orElse(false);
     }
 
     private boolean isTokenExpired(String token) {

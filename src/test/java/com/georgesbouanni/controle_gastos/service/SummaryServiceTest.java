@@ -25,25 +25,26 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SummaryServiceTest {
 
-    @Mock
-    private TransactionRepository transactionRepository;
+    @Mock private TransactionRepository transactionRepository;
 
-    @Mock
-    private BudgetRepository budgetRepository;
+    @Mock private BudgetRepository budgetRepository;
 
-    @InjectMocks
-    private SummaryService service;
+    @InjectMocks private SummaryService service;
 
     private final YearMonth mes = YearMonth.of(2026, 10);
     private final LocalDate inicio = LocalDate.of(2026, 10, 1);
-    private final LocalDate fim = LocalDate.of(2026,10,31);
+    private final LocalDate fim = LocalDate.of(2026, 10, 31);
 
     @Test
     void agruparGastosPorCategoriaComPercentualEOrcamento() {
-        when(transactionRepository.spentByCategory(1L, inicio, fim)).thenReturn(List.of(
-                new CategorySpent(null, null, new BigDecimal("100.00"), 1L),
-                new CategorySpent(2L, "Alimentação", new BigDecimal("300.00"), 3L)));
-        when(transactionRepository.sumReceived(1L, inicio, fim)).thenReturn(new BigDecimal("500.00"));
+        when(transactionRepository.spentByCategory(1L, inicio, fim))
+                .thenReturn(
+                        List.of(
+                                new CategorySpent(null, null, new BigDecimal("100.00"), 1L),
+                                new CategorySpent(
+                                        2L, "Alimentação", new BigDecimal("300.00"), 3L)));
+        when(transactionRepository.sumReceived(1L, inicio, fim))
+                .thenReturn(new BigDecimal("500.00"));
 
         Category categoria = new Category();
         categoria.setId(2L);

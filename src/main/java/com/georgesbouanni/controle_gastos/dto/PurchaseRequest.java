@@ -11,7 +11,6 @@ public class PurchaseRequest {
     @NotBlank(message = "A descricao é obrigatória")
     private String descricao;
 
-
     @NotNull(message = "O valor é obrigatório")
     @Positive(message = "O valor deve ser positivo")
     private BigDecimal valor;

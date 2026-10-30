@@ -8,8 +8,11 @@ import java.math.BigDecimal;
 import java.time.YearMonth;
 
 @Entity
-@Table(name = "budgets", uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "category_id", "mes_referencia" })
-})
+@Table(
+        name = "budgets",
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"user_id", "category_id", "mes_referencia"})
+        })
 public class Budget {
 
     @Id
@@ -33,8 +36,7 @@ public class Budget {
     @Positive(message = "O limite deve ser positivo!")
     private BigDecimal limite;
 
-    public Budget() {
-    }
+    public Budget() {}
 
     public Budget(User user, Category category, YearMonth mesReferencia, BigDecimal limite) {
         this.user = user;
@@ -83,4 +85,3 @@ public class Budget {
         this.limite = limite;
     }
 }
-

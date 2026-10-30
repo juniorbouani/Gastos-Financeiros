@@ -21,15 +21,13 @@ public class Notification {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotBlank
-    private String mensagem;
+    @NotBlank private String mensagem;
 
     private LocalDateTime dataCriacao;
 
     private boolean lida;
 
-    public Notification() {
-    }
+    public Notification() {}
 
     public Notification(User user, String mensagem) {
         this.user = user;

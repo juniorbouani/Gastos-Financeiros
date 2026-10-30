@@ -60,18 +60,33 @@ public class UserService {
     }
 
     public User update(Long id, UserUpdateRequest request) {
-        User exist = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado com id: " + id));
+        User exist =
+                repository
+                        .findById(id)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Usuario não encontrado com id: " + id));
 
         String email = request.getEmail().trim().toLowerCase();
         String telefone = request.getNumeroTelefone().replaceAll("[^0-9]", "");
 
-        repository.findByEmail(email)
+        repository
+                .findByEmail(email)
                 .filter(outro -> !outro.getId().equals(id))
-                .ifPresent(outro -> { throw new EmailAlreadyExistsException("Esse e-mail já está cadastrado."); });
-        repository.findByNumeroTelefone(telefone)
+                .ifPresent(
+                        outro -> {
+                            throw new EmailAlreadyExistsException(
+                                    "Esse e-mail já está cadastrado.");
+                        });
+        repository
+                .findByNumeroTelefone(telefone)
                 .filter(outro -> !outro.getId().equals(id))
-                .ifPresent(outro -> { throw new DataAlreadyExistsException("Esse telefone já está cadastrado."); });
+                .ifPresent(
+                        outro -> {
+                            throw new DataAlreadyExistsException(
+                                    "Esse telefone já está cadastrado.");
+                        });
 
         exist.setName(request.getName());
         exist.setNumeroTelefone(telefone);

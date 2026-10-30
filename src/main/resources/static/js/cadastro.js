@@ -1,3 +1,7 @@
+/**
+ * Valida o formulário e cria uma conta pela API existente.
+ * Fluxo: carregar dados → validar a ação → chamar a API → atualizar a interface.
+ */
 // Usa o endpoint POST /users que já existe no seu projeto.
 const formulario = document.getElementById("cadastro-form");
 const botao = document.getElementById("cadastro-botao");
@@ -58,10 +62,13 @@ formulario.addEventListener("submit", async (evento) => {
       const dados = await resposta.json().catch(() => null);
       let texto = "Não foi possível cadastrar. Tente novamente.";
       if ([400, 409].includes(resposta.status)) {
-        const campos = dados && typeof dados === "object"
-          ? Object.values(dados).filter(valor => typeof valor === "string").join(" ")
-          : "";
-        texto = dados?.message || campos || texto;
+        const lerCamposFormulario =
+          dados && typeof dados === "object"
+            ? Object.values(dados)
+                .filter((valor) => typeof valor === "string")
+                .join(" ")
+            : "";
+        texto = dados?.message || lerCamposFormulario || texto;
       }
       throw new Error(texto);
     }
@@ -72,11 +79,13 @@ formulario.addEventListener("submit", async (evento) => {
     botao.textContent = "Conta criada";
     setTimeout(() => window.location.assign("../index.html"), 1500);
   } catch (erro) {
-    mostrarMensagem(erro.name === "AbortError"
-      ? "O servidor demorou para responder. Antes de repetir, tente entrar com os dados cadastrados: a conta pode ter sido criada."
-      : erro instanceof TypeError
-        ? "A conexão falhou. Verifique o servidor e tente entrar antes de repetir o cadastro."
-        : erro.message);
+    mostrarMensagem(
+      erro.name === "AbortError"
+        ? "O servidor demorou para responder. Antes de repetir, tente entrar com os dados cadastrados: a conta pode ter sido criada."
+        : erro instanceof TypeError
+          ? "A conexão falhou. Verifique o servidor e tente entrar antes de repetir o cadastro."
+          : erro.message,
+    );
   } finally {
     clearTimeout(timeout);
     enviando = false;

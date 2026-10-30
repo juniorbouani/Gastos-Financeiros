@@ -25,7 +25,8 @@ public class SummaryService {
     private final BudgetRepository budgetRepository;
 
     @Autowired
-    public SummaryService(TransactionRepository transactionRepository, BudgetRepository budgetRepository) {
+    public SummaryService(
+            TransactionRepository transactionRepository, BudgetRepository budgetRepository) {
         this.transactionRepository = transactionRepository;
         this.budgetRepository = budgetRepository;
     }
@@ -37,31 +38,38 @@ public class SummaryService {
         List<CategorySpent> rows = transactionRepository.spentByCategory(userId, start, end);
         BigDecimal received = transactionRepository.sumReceived(userId, start, end);
 
-        Map<Long, BigDecimal> limits = budgetRepository.findByUserIdAndMesReferencia(userId, month).stream()
-                .collect(Collectors.toMap(b -> b.getCategory().getId(), Budget::getLimite));
+        Map<Long, BigDecimal> limits =
+                budgetRepository.findByUserIdAndMesReferencia(userId, month).stream()
+                        .collect(Collectors.toMap(b -> b.getCategory().getId(), Budget::getLimite));
 
-        BigDecimal totalSpent = rows.stream()
-                .map(CategorySpent::total)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalSpent =
+                rows.stream().map(CategorySpent::total).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        List<CategorySummaryItem> items = rows.stream()
-                .sorted(Comparator.comparing(CategorySpent::total, Comparator.reverseOrder()))
-                .map(row -> toItem(row, totalSpent, limits ))
-                .toList();
+        List<CategorySummaryItem> items =
+                rows.stream()
+                        .sorted(
+                                Comparator.comparing(
+                                        CategorySpent::total, Comparator.reverseOrder()))
+                        .map(row -> toItem(row, totalSpent, limits))
+                        .toList();
 
         return new MonthlySummaryResponse(month, totalSpent, received, items);
     }
 
-    private CategorySummaryItem toItem(CategorySpent row, BigDecimal totalSpent, Map<Long, BigDecimal> limits) {
-        BigDecimal percentage = totalSpent.signum() == 0
-                ? BigDecimal.ZERO
-                : row.total().multiply(BigDecimal.valueOf(100)).divide(totalSpent, 1, RoundingMode.HALF_UP);
+    private CategorySummaryItem toItem(
+            CategorySpent row, BigDecimal totalSpent, Map<Long, BigDecimal> limits) {
+        BigDecimal percentage =
+                totalSpent.signum() == 0
+                        ? BigDecimal.ZERO
+                        : row.total()
+                                .multiply(BigDecimal.valueOf(100))
+                                .divide(totalSpent, 1, RoundingMode.HALF_UP);
 
         BigDecimal limit = row.categoryId() != null ? limits.get(row.categoryId()) : null;
         BigDecimal remaining = limit != null ? limit.subtract(row.total()) : null;
         String name = row.categoryName() != null ? row.categoryName() : "Sem categoria";
 
-        return new CategorySummaryItem(row.categoryId(), name, row.total(), row.count(),
-                percentage, limit, remaining);
+        return new CategorySummaryItem(
+                row.categoryId(), name, row.total(), row.count(), percentage, limit, remaining);
     }
 }

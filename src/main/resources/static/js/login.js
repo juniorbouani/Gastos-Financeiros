@@ -1,3 +1,7 @@
+/**
+ * Autentica o usuário, guarda o token da aba e abre a tela inicial.
+ * Fluxo: carregar dados → validar a ação → chamar a API → atualizar a interface.
+ */
 // O HTML e a API são servidos pelo mesmo Spring Boot.
 const formulario = document.getElementById("login-form");
 const campoCpf = document.getElementById("cpf");
@@ -40,8 +44,10 @@ formulario.addEventListener("submit", async (evento) => {
     if (!resposta.ok) {
       let texto = "Não foi possível entrar. Tente novamente.";
       if (resposta.status === 401) texto = "CPF ou senha inválidos.";
-      if (resposta.status === 429) texto = dados?.message || "Muitas tentativas. Aguarde antes de tentar novamente.";
-      if (resposta.status === 400) texto = dados?.cpf || dados?.senha || dados?.message || "Confira os dados informados.";
+      if (resposta.status === 429)
+        texto = dados?.message || "Muitas tentativas. Aguarde antes de tentar novamente.";
+      if (resposta.status === 400)
+        texto = dados?.cpf || dados?.senha || dados?.message || "Confira os dados informados.";
       throw new Error(texto);
     }
 
@@ -54,11 +60,12 @@ formulario.addEventListener("submit", async (evento) => {
     campoSenha.value = "";
     window.location.assign("./PaginaInicial/paginainicial.html");
   } catch (erro) {
-    mensagem.textContent = erro.name === "AbortError"
-      ? "O servidor demorou para responder. Tente novamente."
-      : erro instanceof TypeError
-        ? "Não foi possível conectar ao servidor. Abra a página pelo Spring Boot."
-        : erro.message;
+    mensagem.textContent =
+      erro.name === "AbortError"
+        ? "O servidor demorou para responder. Tente novamente."
+        : erro instanceof TypeError
+          ? "Não foi possível conectar ao servidor. Abra a página pelo Spring Boot."
+          : erro.message;
     mensagem.hidden = false;
   } finally {
     clearTimeout(timeout);

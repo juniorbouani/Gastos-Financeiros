@@ -1,11 +1,7 @@
 <!doctype html>
 <html lang="pt-br">
   <head>
-    <link
-      rel="shortcut icon"
-      href="../img/favicon-flowbank.svg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="../img/favicon-flowbank.svg" type="image/x-icon" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +13,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/cartoes/integracao.css" />
     <title>Cartões - FlowBank</title>
-  <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/navegacao.css" />
   </head>
   <body data-cards-page="cards">
     <div class="app-dashboard">
@@ -70,11 +66,15 @@
               <img src="../img/Conta.svg" alt="" />
               <span>Perfil</span>
             </a>
-          
-<a href="../categorias/categorias.html" class="nav-item"><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a>
 
-<a href="../orcamentos/orcamentos.html" class="nav-item"><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
-</nav>
+            <a href="../categorias/categorias.html" class="nav-item"
+              ><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a
+            >
+
+            <a href="../orcamentos/orcamentos.html" class="nav-item"
+              ><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a
+            >
+          </nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -97,13 +97,86 @@
       </aside>
 
       <main class="menu-container">
-<header class="header-conteudo"><h1>Cartões e faturas</h1></header>
-<div class="pix-page-container"><section class="cards-integracao"><nav class="cards-links"><a href="cartoes.html">Meus cartões e faturas</a><a href="solicitarCartao.html">Solicitar cartão</a><a href="../pagamentos/pagar/extrato.html">Extrato</a></nav>
-<p>Saldo em conta: <strong id="cards-saldo">Carregando...</strong> <button type="button" id="cards-olho">Ocultar saldo</button></p>
-<p id="cards-mensagem" role="status" aria-live="polite">Carregando...</p>
-<div id="cards-pendencia"></div><button type="button" id="cards-atualizar">Atualizar cartões</button><div id="cards-lista"></div><section id="cards-detalhes" hidden><h2 id="cards-selecionado"></h2><form id="cards-limite-form"><label for="cards-novo-limite">Novo limite total (R$)</label><input id="cards-novo-limite" inputmode="decimal" required pattern="[0-9]+([,.][0-9]{1,2})?" /><button type="submit">Alterar limite</button></form><details><summary>Registrar compra no cartão</summary><p>Este formulário registra uma compra no banco do projeto, compromete limite e gera parcelas nas faturas.</p><form id="cards-compra-form"><label for="cards-compra-descricao">Descrição</label><input id="cards-compra-descricao" required maxlength="120" /><label for="cards-compra-valor">Valor total da compra (R$)</label><input id="cards-compra-valor" inputmode="decimal" required pattern="[0-9]+([,.][0-9]{1,2})?" /><label for="cards-compra-parcelas">Número de parcelas</label><input id="cards-compra-parcelas" type="number" min="1" step="1" value="1" required /><button type="submit">Conferir e registrar compra</button></form></details><h2>Faturas do cartão</h2><div id="cards-faturas"></div><section id="cards-fatura-detalhes" hidden><h3 id="cards-fatura-titulo"></h3><div id="cards-lancamentos"></div><form id="cards-pagamento-form"><label for="cards-pagamento-valor">Valor do pagamento (R$)</label><input id="cards-pagamento-valor" inputmode="decimal" required pattern="[0-9]+([,.][0-9]{1,2})?" /><button type="button" id="cards-pagar-total">Preencher saldo devedor total</button><button type="submit" id="cards-pagar">Conferir e pagar fatura</button></form></section></section></section></div>
+        <header class="header-conteudo"><h1>Cartões e faturas</h1></header>
+        <div class="pix-page-container"
+          ><section class="cards-integracao"
+            ><nav class="cards-links"
+              ><a href="cartoes.html">Meus cartões e faturas</a
+              ><a href="solicitarCartao.html">Solicitar cartão</a
+              ><a href="../pagamentos/pagar/extrato.html">Extrato</a></nav
+            >
+            <p
+              >Saldo em conta: <strong id="cards-saldo">Carregando...</strong>
+              <button type="button" id="cards-olho">Ocultar saldo</button></p
+            >
+            <p id="cards-mensagem" role="status" aria-live="polite">Carregando...</p>
+            <div id="cards-pendencia"></div
+            ><button type="button" id="cards-atualizar">Atualizar cartões</button
+            ><div id="cards-lista"></div
+            ><section id="cards-detalhes" hidden
+              ><h2 id="cards-selecionado"></h2
+              ><form id="cards-limite-form"
+                ><label for="cards-novo-limite">Novo limite total (R$)</label
+                ><input
+                  id="cards-novo-limite"
+                  inputmode="decimal"
+                  required
+                  pattern="[0-9]+([,.][0-9]{1,2})?"
+                /><button type="submit">Alterar limite</button></form
+              ><details
+                ><summary>Registrar compra no cartão</summary
+                ><p
+                  >Este formulário registra uma compra no banco do projeto, compromete limite e gera
+                  parcelas nas faturas.</p
+                ><form id="cards-compra-form"
+                  ><label for="cards-compra-descricao">Descrição</label
+                  ><input id="cards-compra-descricao" required maxlength="120" /><label
+                    for="cards-compra-valor"
+                    >Valor total da compra (R$)</label
+                  ><input
+                    id="cards-compra-valor"
+                    inputmode="decimal"
+                    required
+                    pattern="[0-9]+([,.][0-9]{1,2})?"
+                  /><label for="cards-compra-parcelas">Número de parcelas</label
+                  ><input
+                    id="cards-compra-parcelas"
+                    type="number"
+                    min="1"
+                    step="1"
+                    value="1"
+                    required
+                  /><button type="submit">Conferir e registrar compra</button></form
+                ></details
+              ><h2>Faturas do cartão</h2><div id="cards-faturas"></div
+              ><section id="cards-fatura-detalhes" hidden
+                ><h3 id="cards-fatura-titulo"></h3><div id="cards-lancamentos"></div
+                ><form id="cards-pagamento-form"
+                  ><label for="cards-pagamento-valor">Valor do pagamento (R$)</label
+                  ><input
+                    id="cards-pagamento-valor"
+                    inputmode="decimal"
+                    required
+                    pattern="[0-9]+([,.][0-9]{1,2})?"
+                  /><button type="button" id="cards-pagar-total"
+                    >Preencher saldo devedor total</button
+                  ><button type="submit" id="cards-pagar">Conferir e pagar fatura</button></form
+                ></section
+              ></section
+            ></section
+          ></div
+        >
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../orcamentos/orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
+          <div class="footer-principal-conteudo"
+            ><div class="footer-principal-nav"
+              ><a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
+              ></div
+            ><div class="footer-principal-nav"
+              ><a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
+              ></div
+            >
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />

@@ -26,8 +26,13 @@ public class CategoryService {
     }
 
     public Category create(Long userId, String name, String icone) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com a id: " + userId));
+        User user =
+                userRepository
+                        .findById(userId)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Usuário não encontrado com a id: " + userId));
 
         name = name.trim();
         if (repository.findByUserIdAndNameIgnoreCase(userId, name).isPresent()) {
@@ -47,8 +52,13 @@ public class CategoryService {
     }
 
     public Category findByIdForUser(Long id, Long userId) {
-        Category category = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com id: " + id));
+        Category category =
+                repository
+                        .findById(id)
+                        .orElseThrow(
+                                () ->
+                                        new ResourceNotFoundException(
+                                                "Categoria não encontrada com id: " + id));
         if (!category.getUser().getId().equals(userId)) {
             throw new ForbiddenException("Esta categoria não pertence a você.");
         }
@@ -69,5 +79,4 @@ public class CategoryService {
     public void delete(Long id, Long userId) {
         repository.delete(findByIdForUser(id, userId));
     }
-
 }

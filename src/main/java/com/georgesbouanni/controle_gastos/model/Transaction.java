@@ -58,12 +58,18 @@ public class Transaction {
     @JoinColumn(name = "reversal_of_id", unique = true)
     private Transaction reversalOf;
 
-    public Transaction() {
-    }
+    public Transaction() {}
 
-    public Transaction(String description, BigDecimal value, LocalDate date, TransactionType type,
-                       TransactionStatus status, User sender, User receiver, String destination,
-                       Category category) {
+    public Transaction(
+            String description,
+            BigDecimal value,
+            LocalDate date,
+            TransactionType type,
+            TransactionStatus status,
+            User sender,
+            User receiver,
+            String destination,
+            Category category) {
         this.description = description;
         this.value = value;
         this.date = date;

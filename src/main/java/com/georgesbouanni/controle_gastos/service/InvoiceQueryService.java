@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Comparator;
 import java.util.List;
 
+/** Confere a propriedade do cartão antes de consultar faturas ou lançamentos. */
 @Service
 @Transactional(readOnly = true)
 public class InvoiceQueryService {
@@ -19,7 +20,8 @@ public class InvoiceQueryService {
     private final InvoiceRepository invoices;
     private final InvoiceItemRepository items;
 
-    public InvoiceQueryService(CreditCardService cards, InvoiceRepository invoices, InvoiceItemRepository items) {
+    public InvoiceQueryService(
+            CreditCardService cards, InvoiceRepository invoices, InvoiceItemRepository items) {
         this.cards = cards;
         this.invoices = invoices;
         this.items = items;
@@ -29,16 +31,20 @@ public class InvoiceQueryService {
         cards.findOwnedCard(cardId, userId);
         return invoices.findByCreditCardId(cardId).stream()
                 .sorted(Comparator.comparing(Invoice::getMesReferencia).reversed())
-                .map(InvoiceSummaryResponse::from).toList();
+                .map(InvoiceSummaryResponse::from)
+                .toList();
     }
 
     public List<InvoiceEntryResponse> entries(Long invoiceId, Long userId) {
-        Invoice invoice = invoices.findById(invoiceId)
-                .orElseThrow(() -> new ResourceNotFoundException("Fatura não encontrada."));
+        Invoice invoice =
+                invoices.findById(invoiceId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Fatura não encontrada."));
         cards.findOwnedCard(invoice.getCreditCard().getId(), userId);
         return items.findByInvoiceId(invoiceId).stream()
                 .map(InvoiceEntryResponse::from)
-                .sorted(Comparator.comparing(InvoiceEntryResponse::data).thenComparing(InvoiceEntryResponse::id))
+                .sorted(
+                        Comparator.comparing(InvoiceEntryResponse::data)
+                                .thenComparing(InvoiceEntryResponse::id))
                 .toList();
     }
 }

@@ -32,7 +32,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
 }
 
 .extrato-item:hover {
@@ -222,7 +224,9 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
 }
 
 .btn-solicitar:hover {

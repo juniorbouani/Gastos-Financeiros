@@ -12,8 +12,14 @@ public class CategorySummaryItem {
     private final BigDecimal budgetLimit;
     private final BigDecimal budgetRemaining;
 
-    public CategorySummaryItem(Long categoryId, String categoryName, BigDecimal total, long transactions,
-                               BigDecimal percentage, BigDecimal budgetLimit, BigDecimal budgetRemaining) {
+    public CategorySummaryItem(
+            Long categoryId,
+            String categoryName,
+            BigDecimal total,
+            long transactions,
+            BigDecimal percentage,
+            BigDecimal budgetLimit,
+            BigDecimal budgetRemaining) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.total = total;

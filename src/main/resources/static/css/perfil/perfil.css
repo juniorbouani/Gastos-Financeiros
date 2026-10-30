@@ -73,7 +73,9 @@
   font-size: 0.95rem;
   border-radius: 12px;
   text-align: center;
-  transition: background-color 0.2s, transform 0.1s;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
 }
 
 .btn-perfil-opcao:hover {
