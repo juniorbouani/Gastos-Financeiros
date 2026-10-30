@@ -164,4 +164,30 @@ public class CreditCardServiceTest {
                 () -> service.setSpendingLimit(10L, 1L, new BigDecimal("500.00")));
         Mockito.verify(cardRepository, Mockito.never()).save(Mockito.any(CreditCard.class));
     }
+
+    @Test
+    void parcelasPreservamTotalDaCompraComCentavosRestantesNaUltima() {
+        var card = cartaoDe(dono());
+        when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
+        when(invoiceRepository.findByCreditCardIdAndMesReferencia(org.mockito.ArgumentMatchers.eq(10L), org.mockito.ArgumentMatchers.any()))
+                .thenReturn(Optional.empty());
+        when(invoiceRepository.save(org.mockito.ArgumentMatchers.any(Invoice.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+        var captor = org.mockito.ArgumentCaptor.forClass(InvoiceItem.class);
+        service.registerPurchase(10L, 1L, "Compra", new BigDecimal("100.00"), 3);
+        Mockito.verify(invoiceItemRepository, Mockito.times(3)).save(captor.capture());
+        var valores = captor.getAllValues().stream().map(InvoiceItem::getValor).toList();
+        Assertions.assertEquals(java.util.List.of(new BigDecimal("33.33"), new BigDecimal("33.33"), new BigDecimal("33.34")), valores);
+        Assertions.assertEquals(new BigDecimal("900.00"), card.getLimiteDisponivel());
+    }
+
+    @Test
+    void rejeitaCompraComParcelaMenorQueUmCentavoAntesDeDebitarLimite() {
+        var card = cartaoDe(dono());
+        when(cardRepository.findById(10L)).thenReturn(Optional.of(card));
+        Assertions.assertThrows(BusinessRuleException.class,
+                () -> service.registerPurchase(10L, 1L, "Compra", new BigDecimal("0.01"), 2));
+        Assertions.assertEquals(new BigDecimal("1000.00"), card.getLimiteDisponivel());
+        Mockito.verifyNoInteractions(invoiceRepository, invoiceItemRepository);
+    }
 }

@@ -1,0 +1,10 @@
+.cards-integracao { width: 100%; max-width: 900px; background: #13151b; padding: 24px; border-radius: 14px; color: #fff; }
+.cards-integracao h2,.cards-integracao h3 { margin: 24px 0 12px; }.cards-integracao p { margin: 12px 0; overflow-wrap: anywhere; }
+.cards-integracao form { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.cards-integracao input,.cards-integracao select { padding: 12px; border: 1px solid #363b4b; border-radius: 8px; background: #0b0c10; color: #fff; font: inherit; width: 100%; }
+.cards-integracao button { background: #3b25eb; color: white; border: 0; border-radius: 8px; padding: 10px 14px; font: inherit; cursor: pointer; margin: 4px; }
+.cards-integracao button:disabled { opacity: .5; cursor: default; }.cards-integracao a { color: #b5bcff; display: inline-block; margin: 6px 12px 6px 0; }
+.cards-linha { padding: 16px 0; border-bottom: 1px solid #363b4b; overflow-wrap: anywhere; }.cards-linha.selecionado { border-left: 3px solid #8b7dff; padding-left: 12px; }
+#cards-mensagem[data-erro="true"],#cards-pendencia { color: #fda4af; }.cards-integracao summary { cursor: pointer; margin: 20px 0; }
+.cards-integracao button:focus-visible,.cards-integracao a:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.cards-integracao [hidden] { display: none !important; }

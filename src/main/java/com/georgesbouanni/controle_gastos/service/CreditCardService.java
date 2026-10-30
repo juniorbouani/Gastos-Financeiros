@@ -125,10 +125,15 @@ public class CreditCardService {
             throw new InsuficientBalanceException("Limite de credito insuficiente.");
         }
 
+        if (totalParcelas <= 0 || valor.scale() > 2
+                || valor.compareTo(BigDecimal.valueOf(totalParcelas, 2)) < 0) {
+            throw new BusinessRuleException("Informe um valor com até duas casas decimais e parcelas de pelo menos R$ 0,01.");
+        }
+
         card.setLimiteDisponivel(card.getLimiteDisponivel().subtract(valor));
         cardRepository.save(card);
 
-        BigDecimal valorParcela = valor.divide(BigDecimal.valueOf(totalParcelas), 2, RoundingMode.HALF_UP);
+        BigDecimal valorParcela = valor.divide(BigDecimal.valueOf(totalParcelas), 2, RoundingMode.DOWN);
         YearMonth mesAtual = YearMonth.now();
         InvoiceItem primeiroItem = null;
 
@@ -136,10 +141,14 @@ public class CreditCardService {
             YearMonth mesParcela = mesAtual.plusMonths(i - 1);
             Invoice invoice = findCreateInvoice(card, mesParcela);
 
-            InvoiceItem item = new InvoiceItem(invoice, descricao, valorParcela, LocalDate.now(), i, totalParcelas);
+            // A última parcela recebe os centavos restantes, preservando o total da compra.
+            BigDecimal valorDestaParcela = i == totalParcelas
+                    ? valor.subtract(valorParcela.multiply(BigDecimal.valueOf(totalParcelas - 1)))
+                    : valorParcela;
+            InvoiceItem item = new InvoiceItem(invoice, descricao, valorDestaParcela, LocalDate.now(), i, totalParcelas);
             invoiceItemRepository.save(item);
 
-            invoice.setValorTotal(invoice.getValorTotal().add(valorParcela));
+            invoice.setValorTotal(invoice.getValorTotal().add(valorDestaParcela));
             invoiceRepository.save(invoice);
 
             if (i == 1) primeiroItem = item;

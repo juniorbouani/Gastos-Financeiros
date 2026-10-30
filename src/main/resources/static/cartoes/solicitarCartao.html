@@ -9,9 +9,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cartoes/integracao.css" />
     <title>Solicitar Cartão - FlowBank</title>
   </head>
-  <body>
+  <body data-cards-page="request">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -85,82 +86,11 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="javascript:history.back()" class="btn-voltar">
-              <img src="../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Solicitar Novo Cartão</h1>
-          </div>
-        </header>
-
-        <div class="pix-page-container">
-          <div class="cartao-preview-container">
-            <div class="cartao-preview-card">
-              <div class="cartao-preview-top">
-                <span class="cartao-preview-brand">FlowBank</span>
-                <span class="cartao-preview-chip"></span>
-              </div>
-              <div class="cartao-preview-number">•••• •••• •••• 4092</div>
-              <div class="cartao-preview-bottom">
-                <div>
-                  <small>TITULAR</small>
-                  <p id="preview-nome">SEU NOME AQUI</p>
-                </div>
-                <div class="cartao-preview-flag">VISA</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="transferir-card">
-            <form class="transferir-form" action="#" method="POST">
-              <div class="input-group">
-                <label for="tipo-cartao">Tipo do Cartão</label>
-                <select id="tipo-cartao" class="select-chave" required>
-                  <option value="multiplo">Múltiplo (Débito e Crédito)</option>
-                  <option value="credito">Apenas Crédito</option>
-                  <option value="debito">Apenas Débito</option>
-                  <option value="virtual">Cartão Virtual Adicional</option>
-                </select>
-              </div>
-
-              <div class="input-group">
-                <label for="nome-impresso">Nome Impresso no Cartão</label>
-                <input
-                  type="text"
-                  id="nome-impresso"
-                  placeholder="Ex: NOME SOBRENOME"
-                  maxlength="26"
-                  required
-                />
-              </div>
-
-              <div class="input-group">
-                <label for="bandeira">Bandeira</label>
-                <select id="bandeira" class="select-chave" required>
-                  <option value="visa">Visa Gold</option>
-                  <option value="mastercard">Mastercard Platinum</option>
-                  <option value="elo">Elo Nanquim</option>
-                </select>
-              </div>
-
-              <div class="input-group">
-                <label for="endereco-entrega">Endereço para Entrega</label>
-                <input
-                  type="text"
-                  id="endereco-entrega"
-                  placeholder="Rua, número, bairro e CEP"
-                  required
-                />
-              </div>
-
-              <button type="submit" class="btn-transferir">
-                Confirmar Solicitação
-              </button>
-            </form>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Solicitar cartão virtual</h1></header>
+<div class="pix-page-container"><section class="cards-integracao"><nav class="cards-links"><a href="cartoes.html">Meus cartões e faturas</a><a href="solicitarCartao.html">Solicitar cartão</a><a href="../pagamentos/pagar/extrato.html">Extrato</a></nav>
+<p>Saldo em conta: <strong id="cards-saldo">Carregando...</strong> <button type="button" id="cards-olho">Ocultar saldo</button></p>
+<p id="cards-mensagem" role="status" aria-live="polite">Carregando...</p>
+<div id="cards-pendencia"></div><p>Cartão virtual de crédito. O limite informado será enviado ao backend do projeto.</p><form id="cards-request-form"><label for="cards-limite">Limite solicitado (R$)</label><input id="cards-limite" inputmode="decimal" required placeholder="Ex.: 1000,00" pattern="[0-9]+([,.][0-9]{1,2})?" /><label for="cards-descartavel">Tipo</label><select id="cards-descartavel"><option value="false">Virtual</option><option value="true">Virtual descartável</option></select><button id="cards-solicitar" type="submit" disabled>Confirmar solicitação</button></form></section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo">
             <div class="footer-principal-nav">
@@ -202,16 +132,6 @@
       </main>
     </div>
 
-    <script>
-      const inputNome = document.getElementById('nome-impresso');
-      const previewNome = document.getElementById('preview-nome');
-
-      if (inputNome && previewNome) {
-        inputNome.addEventListener('input', (e) => {
-          const valor = e.target.value.trim();
-          previewNome.textContent = valor ? valor.toUpperCase() : 'SEU NOME AQUI';
-        });
-      }
-    </script>
+    <script src="../js/cartoes.js" defer></script>
   </body>
 </html>
