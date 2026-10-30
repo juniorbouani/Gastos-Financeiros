@@ -15,9 +15,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pagamentos/pix-integracao.css" />
     <title>Confirmar Dados - FlowBank</title>
   </head>
-  <body>
+  <body data-pix-page="confirm">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -94,63 +95,13 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="javascript:history.back()" class="btn-voltar">
-              <img src="../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Confirme os Dados</h1>
-          </div>
-        </header>
-
-        <div class="pix-page-container">
-          <div class="confirmar-card">
-            <div class="confirmar-card-header">
-              <div class="confirmar-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#3b25eb"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              </div>
-              <h2>Resumo da Operação</h2>
-              <p>Verifique as informações antes de finalizar</p>
-            </div>
-
-            <div class="confirmar-dados-list">
-              <div class="dado-row">
-                <span class="dado-label">Nome</span>
-                <span class="dado-value">{name}</span>
-              </div>
-
-              <div class="dado-row">
-                <span class="dado-label">CPF</span>
-                <span class="dado-value">{cpf}</span>
-              </div>
-
-              <div class="dado-row">
-                <span class="dado-label">E-mail</span>
-                <span class="dado-value">{email}</span>
-              </div>
-
-              <div class="dado-row">
-                <span class="dado-label">Telefone</span>
-                <span class="dado-value">{numeroTelefone}</span>
-              </div>
-            </div>
-
-            <button type="button" class="btn-confirmar-final">CONFIRMAR</button>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Confirmar transferência Pix</h1></header>
+<div class="pix-page-container"><section class="pix-integracao">
+<nav class="pix-links"><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a><a href="transferir.html">Transferir por chave</a><a href="pixcopiaecola.html">Chave copiada</a><a href="pagar/extrato.html">Extrato</a></nav>
+<p>Saldo: <strong id="pix-saldo">Carregando...</strong> <button type="button" id="pix-olho">Ocultar saldo</button></p>
+<p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
+<div id="pix-resumo"></div><button type="button" id="pix-confirmar" disabled>Confirmar transferência</button><a href="transferir.html" id="pix-cancelar">Voltar e editar</a><a href="pagar/extrato.html">Consultar extrato</a>
+</section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo">
             <div class="footer-principal-nav">
@@ -192,6 +143,6 @@
       </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/pix.js" defer></script>
   </body>
 </html>

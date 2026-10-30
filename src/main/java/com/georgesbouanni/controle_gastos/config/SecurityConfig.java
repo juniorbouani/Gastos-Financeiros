@@ -33,7 +33,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/", "/index.html", "/css/**", "/js/login.js", "/img/**",
                                 "/PaginaInicial/paginainicial.html", "/js/main.js",
                                 "/cadastro/cadastro.html", "/js/cadastro.js", "/js/paginainicial.js",
-                                "/pagamentos/pagar/extrato.html", "/js/extrato.js").permitAll()
+                                "/pagamentos/pagar/extrato.html", "/js/extrato.js",
+                                "/pagamentos/pix.html", "/pagamentos/criarchave.html",
+                                "/pagamentos/transferir.html", "/pagamentos/confirmar.html",
+                                "/pagamentos/pixcopiaecola.html", "/js/pix.js").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()

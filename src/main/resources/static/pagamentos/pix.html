@@ -15,9 +15,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pagamentos/pix-integracao.css" />
     <title>Pix - FlowBank</title>
   </head>
-  <body>
+  <body data-pix-page="home">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -91,142 +92,13 @@
       </aside>
 
       <main class="menu-container">
-        <div class="card-saldo-secundario">
-          <div class="saldo-secundario-header">
-            <div class="saldo-voltar-titulo">
-              <a
-                href="../PaginaInicial/paginainicial.html"
-                class="btn-voltar-card"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </a>
-              <span>SALDO EM CONTA</span>
-            </div>
-
-            <button type="button" class="btn-eye-toggle" id="btn-toggle-saldo">
-              <img
-                id="icone-olho"
-                src="../img/Ver.svg"
-                alt="Mostrar/Esconder saldo"
-              />
-            </button>
-          </div>
-
-          <div class="saldo-secundario-valor">
-            <h2 id="saldo">R$ 1.250,00</h2>
-          </div>
-        </div>
-
-        <div class="pix-page-container">
-          <div class="botoesPix">
-            <a href="../pagamentos/transferir.html">
-              <div class="botaoMenuPix">
-                <img src="../img/Pix.svg" alt="" />
-                <p class="pix-p">Transferir</p>
-              </div>
-            </a>
-            <a href="../pagamentos/pixcopiaecola.html">
-              <div class="botaoMenuPix">
-                <img src="../img/Copiaecola.svg" alt="" />
-                <p>Pix Copia e Cola</p>
-              </div>
-            </a>
-            <a href="../pagamentos/criarchave.html">
-              <div class="botaoMenuPix">
-                <img src="../img/porquinho.svg" alt="" />
-                <p>Criar Chave</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="ultimastransferencias">
-            <h2>Últimas Transferências</h2>
-            <div class="historico-pix-list">
-              <div class="historico-item entrada">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo entrada">+ Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Recebida.</p>
-                    <span class="historico-meta"
-                      >De: Maria Silva · Hoje, 14:32</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-entrada"
-                  >+ R$ 150,00</strong
-                >
-              </div>
-
-              <div class="historico-item entrada">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo entrada">+ Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Recebida.</p>
-                    <span class="historico-meta"
-                      >De: Carlos Eduardo · Ontem, 09:15</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-entrada"
-                  >+ R$ 85,50</strong
-                >
-              </div>
-
-              <div class="historico-item saida">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo saida">- Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Concluída.</p>
-                    <span class="historico-meta"
-                      >Para: Mercado Central · 03 Out, 18:40</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-saida">- R$ 214,10</strong>
-              </div>
-
-              <div class="historico-item entrada">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo entrada">+ Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Recebida.</p>
-                    <span class="historico-meta"
-                      >De: Lucas Ramos · 02 Out, 11:20</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-entrada"
-                  >+ R$ 500,00</strong
-                >
-              </div>
-
-              <div class="historico-item saida">
-                <div class="historico-detalhes">
-                  <span class="badge-tipo saida">- Pix</span>
-                  <div>
-                    <p class="historico-titulo">Transferência Concluída.</p>
-                    <span class="historico-meta"
-                      >Para: Farmácia Vida · 01 Out, 16:05</span
-                    >
-                  </div>
-                </div>
-                <strong class="historico-valor valor-saida">- R$ 42,90</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Área Pix</h1></header>
+<div class="pix-page-container"><section class="pix-integracao">
+<nav class="pix-links"><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a><a href="transferir.html">Transferir por chave</a><a href="pixcopiaecola.html">Chave copiada</a><a href="pagar/extrato.html">Extrato</a></nav>
+<p>Saldo: <strong id="pix-saldo">Carregando...</strong> <button type="button" id="pix-olho">Ocultar saldo</button></p>
+<p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
+<button type="button" id="pix-atualizar">Atualizar dados</button><h2>Suas chaves</h2><div id="pix-chaves"></div><h2>Últimas transferências Pix</h2><div id="pix-historico"></div>
+</section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo">
             <div class="footer-principal-nav">
@@ -268,6 +140,6 @@
       </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/pix.js" defer></script>
   </body>
 </html>
