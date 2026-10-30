@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/paginainicial/integracao.css" />
     <title>Menu Principal - FlowBank</title>
   </head>
   <body>
@@ -96,7 +97,7 @@
       <main class="menu-container">
         <header class="header-conteudo">
           <div class="header-saudacao">
-            <h1 id="saudacao">Olá, {primeiroNome}!</h1>
+            <h1 id="saudacao">Carregando perfil...</h1>
             <p class="header-data" id="data-atual">Carregando data...</p>
           </div>
 
@@ -125,6 +126,10 @@
           </nav>
         </header>
 
+        <div class="painel-status">
+          <p id="painel-mensagem" role="status" aria-live="polite">Carregando seus dados...</p>
+          <button type="button" id="recarregar-painel" class="btn-secondary">Atualizar dados</button>
+        </div>
         <div class="container dashboard-grid">
           <div class="dashboard-col-main">
             <div class="saldo-container">
@@ -144,13 +149,13 @@
               </div>
 
               <div class="saldo">
-                <p id="saldo">R$ 1.250,00</p>
+                <p id="saldo" aria-live="polite">Carregando...</p>
               </div>
 
               <div class="dados-conta">
-                <div><span>Agência</span> <strong>0001</strong></div>
-                <div><span>Conta</span> <strong>48219-7</strong></div>
-                <div><span>Chave Pix</span> <strong>CPF</strong></div>
+                <div><span>Agência</span> <strong>Não informada</strong></div>
+                <div><span>Conta</span> <strong>Não informada</strong></div>
+                <div><span>Chave Pix</span> <strong id="chave-pix">Carregando...</strong></div>
               </div>
             </div>
 
@@ -272,73 +277,24 @@
 
           <div class="dashboard-col-side">
             <div class="widget-card">
-              <div class="widget-header">
-                <h3>Cartão de crédito</h3>
-                <span class="badge">Vence 10/10</span>
-              </div>
-              <p class="widget-sub">Fatura atual</p>
-              <p class="widget-valor">R$ 1.284,56</p>
-              <div class="progress-info">
-                <span>Limite disponível</span>
-                <strong>R$ 3.715,44 de R$ 5.000,00</strong>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 25%"></div>
-              </div>
-              <div class="widget-actions">
-                <a href="../cartoes/cartoes.html" class="btn-primary"
-                  >Pagar fatura</a
-                >
-                <a href="../cartoes/cartoes.html" class="btn-secondary"
-                  >Ver lançamentos</a
-                >
-              </div>
+              <div class="widget-header"><h3>Cartões de crédito</h3><span class="badge" id="cartoes-quantidade">Carregando...</span></div>
+              <p class="widget-sub">Limite disponível total</p>
+              <p class="widget-valor" id="cartoes-disponivel">—</p>
+              <div class="progress-info"><span>Limite total</span><strong id="cartoes-total">—</strong></div>
+              <p class="widget-sub" id="cartoes-status">Consultando cartões...</p>
+              <p class="widget-sub">Fatura e vencimento não disponíveis neste resumo.</p>
             </div>
 
             <div class="widget-card">
-              <div class="widget-header">
-                <h3>Gastos de setembro</h3>
-                <span class="widget-valor-sm">R$ 2.194,75</span>
-              </div>
-              <div class="gastos-list">
-                <div class="gasto-item">
-                  <div class="gasto-label">
-                    <span>Alimentação</span><strong>R$ 842,10</strong>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress-fill" style="width: 70%"></div>
-                  </div>
-                </div>
-                <div class="gasto-item">
-                  <div class="gasto-label">
-                    <span>Casa</span><strong>R$ 652,30</strong>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress-fill" style="width: 50%"></div>
-                  </div>
-                </div>
-                <div class="gasto-item">
-                  <div class="gasto-label">
-                    <span>Transporte</span><strong>R$ 410,55</strong>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress-fill" style="width: 35%"></div>
-                  </div>
-                </div>
-              </div>
+              <div class="widget-header"><h3 id="gastos-titulo">Gastos do mês</h3><span class="widget-valor-sm" id="gastos-total">—</span></div>
+              <div class="gastos-list" id="gastos-lista"><p>Carregando categorias...</p></div>
             </div>
 
             <div class="widget-card reserva-box">
               <div class="reserva-content">
-                <div class="reserva-icon">
-                  <img src="../img/porquinho.svg" alt="" />
-                </div>
-                <div>
-                  <h4>Reserva de emergência</h4>
-                  <p>R$ 1.250,00 de R$ 5.000,00 · 25% da meta</p>
-                </div>
+                <div class="reserva-icon"><img src="../img/porquinho.svg" alt="" /></div>
+                <div><h4>Reserva de emergência</h4><p>Dados de reserva ainda não disponíveis.</p></div>
               </div>
-              <button class="btn-add" type="button">+</button>
             </div>
           </div>
         </div>
@@ -384,6 +340,6 @@
       </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/paginainicial.js" defer></script>
   </body>
 </html>

@@ -1,0 +1,7 @@
+.painel-status { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0 24px; }
+#painel-mensagem { color: #aeb4c2; }
+#painel-mensagem[data-erro="true"] { color: #fda4af; }
+#recarregar-painel { cursor: pointer; font: inherit; padding: 8px 14px; }
+#recarregar-painel:disabled { opacity: .6; cursor: wait; }
+#chave-pix { overflow-wrap: anywhere; }
+#gastos-lista p { color: #aeb4c2; }
