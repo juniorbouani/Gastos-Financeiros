@@ -39,7 +39,9 @@ public class SecurityConfig {
                                 "/pagamentos/pixcopiaecola.html", "/js/pix.js", "/cartoes/cartoes.html",
                                 "/cartoes/solicitarCartao.html", "/js/cartoes.js",
                                 "/pagamentos/pagar/pagar.html", "/pagamentos/pagar/lercodigo.html",
-                                "/pagamentos/pagar/transferirPagar.html", "/js/pagamentos.js").permitAll()
+                                "/pagamentos/pagar/transferirPagar.html", "/js/pagamentos.js",
+                                "/perfil/perfil.html", "/perfil/dadoscadastrais.html",
+                                "/configuracoes/configuracoes.html", "/js/perfil.js").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()

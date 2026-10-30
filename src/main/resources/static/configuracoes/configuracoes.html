@@ -15,9 +15,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/perfil/integracao.css" />
     <title>Configurações - FlowBank</title>
   </head>
-  <body>
+  <body data-profile-page="settings">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -94,134 +95,7 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="javascript:history.back()" class="btn-voltar">
-              <img src="../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Configurações</h1>
-          </div>
-        </header>
-
-        <div class="pix-page-container">
-          <div class="config-list-container">
-            <a href="../perfil/perfil.html" class="config-item">
-              <span>Meu Perfil</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-
-            <a href="../sobre/sobre.html" class="config-item">
-              <span>Termos de Uso</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-
-            <a href="../seguranca/seguranca.html" class="config-item">
-              <span>Segurança</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-
-            <a href="../perfil/dadoscadastrais.html" class="config-item">
-              <span>Dados Cadastrais</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-
-            <a href="../perfil/perfil.html" class="config-item">
-              <span>Informações da Conta</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-
-            <a href="../sobre/sobre.html" class="config-item">
-              <span>Sobre o Aplicativo</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-
-            <a href="../PaginaInicial/paginainicial.html" class="config-item">
-              <span>Home</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-
-            <a
-              href="../encerrarConta/encerrarConta.html"
-              class="config-item config-danger"
-            >
-              <span>Encerrar Conta</span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Configurações</h1></header><div class="pix-page-container"><section class="perfil-integracao"><nav><a href="../perfil/perfil.html">Meu perfil</a><a href="../perfil/dadoscadastrais.html">Dados cadastrais</a><a href="../configuracoes/configuracoes.html">Configurações</a></nav><p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p><button type="button" id="perfil-atualizar">Recarregar dados</button><h2 id="perfil-nome">Carregando perfil...</h2><div class="perfil-atalhos"><a href="../perfil/dadoscadastrais.html">Editar nome, telefone, e-mail e nascimento</a><a href="../pagamentos/criarchave.html">Gerenciar chaves Pix</a><a href="../cartoes/cartoes.html">Gerenciar cartões e faturas</a><a href="../pagamentos/pagar/extrato.html">Consultar extrato</a></div><h2>Acesso e conta</h2><p>Troca de senha e encerramento de conta ainda não estão disponíveis.</p><button type="button" id="perfil-sair">Sair da conta nesta aba</button></section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo">
             <div class="footer-principal-nav">
@@ -263,6 +137,6 @@
       </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/perfil.js" defer></script>
   </body>
 </html>

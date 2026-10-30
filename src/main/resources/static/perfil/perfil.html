@@ -15,9 +15,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/perfil/integracao.css" />
     <title>Meu Perfil - FlowBank</title>
   </head>
-  <body>
+  <body data-profile-page="profile">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -91,48 +92,7 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="javascript:history.back()" class="btn-voltar">
-              <img src="../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Meu Perfil</h1>
-          </div>
-        </header>
-
-        <div class="pix-page-container">
-          <div class="perfil-card">
-            <div class="perfil-avatar-wrapper">
-              <img
-                src="../img/Conta.svg"
-                alt="Foto de Perfil"
-                class="perfil-avatar-img"
-              />
-            </div>
-
-            <div class="perfil-info">
-              <h3>{nomeCompleto}</h3>
-              <div class="dados-agencia">
-                <span>Agência: <strong>0155</strong></span>
-                <span class="divisor">•</span>
-                <span>Conta: <strong>555</strong></span>
-              </div>
-            </div>
-
-            <div class="perfil-acoes">
-              <a href="./dadoscadastrais.html" class="btn-perfil-opcao">
-                Dados Cadastrais
-              </a>
-              <a href="../sobre/sobre.html" class="btn-perfil-opcao">
-                Sobre o Aplicativo
-              </a>
-              <a href="../index.html" class="btn-perfil-opcao btn-perfil-sair">
-                Sair
-              </a>
-            </div>
-          </div>
-        </div>
-
+<header class="header-conteudo"><h1>Meu perfil</h1></header><div class="pix-page-container"><section class="perfil-integracao"><nav><a href="../perfil/perfil.html">Meu perfil</a><a href="../perfil/dadoscadastrais.html">Dados cadastrais</a><a href="../configuracoes/configuracoes.html">Configurações</a></nav><p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p><button type="button" id="perfil-atualizar">Recarregar dados</button><div class="perfil-resumo"><img src="../img/Conta.svg" alt="" width="64" height="64" /><h2 id="perfil-nome">Carregando perfil...</h2><dl><dt>CPF</dt><dd id="perfil-cpf">—</dd><dt>E-mail</dt><dd id="perfil-email">—</dd><dt>Telefone</dt><dd id="perfil-telefone">—</dd><dt>Data de nascimento</dt><dd id="perfil-nascimento">—</dd></dl><p>Agência e número de conta não informados pelo cadastro.</p></div><a href="dadoscadastrais.html">Editar meus dados</a><button type="button" id="perfil-sair">Sair da conta nesta aba</button></section></div>
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo">
             <div class="footer-principal-nav">
@@ -174,6 +134,6 @@
       </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/perfil.js" defer></script>
   </body>
 </html>
