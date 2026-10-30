@@ -29,10 +29,34 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // Páginas e arquivos necessários para carregar a interface.
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/",
+                                "/index.html",
+                                "/cadastro/cadastro.html",
+                                "/PaginaInicial/paginainicial.html",
+                                "/css/**",
+                                "/img/**",
+                                "/js/login.js",
+                                "/js/cadastro.js",
+                                "/js/paginainicial.js",
+                                "/js/main.js"
+                        ).permitAll()
+
+                        // Cadastro e autenticação.
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/error").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+
+                        // Documentação da API e tratamento de erros.
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/error"
+                        ).permitAll()
+
+                        // Os dados da tela inicial exigem o token do login.
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
