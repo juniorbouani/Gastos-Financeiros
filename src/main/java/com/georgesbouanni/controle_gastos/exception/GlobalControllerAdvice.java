@@ -119,4 +119,13 @@ public class GlobalControllerAdvice {
                 request.getDescription(false).replace("uri=", ""));
         return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(error);
     }
+
+    @ExceptionHandler(org.springframework.orm.ObjectOptimisticLockingFailureException.class)
+    public ResponseEntity<ErrorResponse> handleConcurrentChange(
+            org.springframework.orm.ObjectOptimisticLockingFailureException ex, WebRequest request) {
+        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(), "Conflict",
+                "Os dados foram alterados por outra operação. Atualize a tela antes de tentar novamente.",
+                request.getDescription(false).replace("uri=", ""));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 }

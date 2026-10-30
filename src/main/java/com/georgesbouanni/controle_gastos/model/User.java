@@ -52,6 +52,24 @@ public class User {
     @JsonIgnore
     private LocalDateTime lockedUntil;
 
+    @JsonIgnore
+    @Column(name = "account_closed", nullable = false, columnDefinition = "boolean default false")
+    private boolean accountClosed = false;
+
+    @JsonIgnore
+    @Column(name = "credential_version", nullable = false, columnDefinition = "integer default 0")
+    private int credentialVersion = 0;
+
+    public boolean isAccountClosed() { return accountClosed; }
+    public void setAccountClosed(boolean accountClosed) { this.accountClosed = accountClosed; }
+    public int getCredentialVersion() { return credentialVersion; }
+    public void setCredentialVersion(int credentialVersion) { this.credentialVersion = credentialVersion; }
+
+    @JsonIgnore
+    @Version
+    @Column(name = "row_version", nullable = false, columnDefinition = "bigint default 0")
+    private Long rowVersion = 0L;
+
     public User() {
     }
 

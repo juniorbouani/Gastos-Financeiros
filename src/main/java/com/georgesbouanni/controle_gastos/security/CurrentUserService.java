@@ -29,6 +29,7 @@ public class CurrentUserService {
         }
 
         return userRepository.findByCpf(authentication.getName())
+                .filter(user -> !user.isAccountClosed())
                 .orElseThrow(() -> new ForbiddenException("Usuário do token não encontrado."));
     }
 

@@ -28,6 +28,7 @@ public class CustomUserDetailService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getCpf())
                 .password(user.getSenhaHash())
+                .disabled(user.isAccountClosed())
                 .authorities(Collections.emptyList())
                 .build();
     }

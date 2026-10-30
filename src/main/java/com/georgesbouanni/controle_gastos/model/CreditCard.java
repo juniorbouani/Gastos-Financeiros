@@ -39,6 +39,11 @@ public class CreditCard {
 
     private LocalDate dataExpiracao;
 
+    @JsonIgnore
+    @Version
+    @Column(name = "row_version", nullable = false, columnDefinition = "bigint default 0")
+    private Long rowVersion = 0L;
+
     public CreditCard() {
     }
 

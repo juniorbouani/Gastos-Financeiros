@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../css/style.css" />
     <link rel="stylesheet" href="../../css/pagamentos/pagar/pagamentos-integracao.css" />
     <title>Pagar - FlowBank</title>
+  <link rel="stylesheet" href="../../css/navegacao.css" />
   </head>
   <body data-payments-page="form">
     <div class="app-dashboard">
@@ -53,7 +54,7 @@
               <img src="../../img/Pix.svg" alt="" />
               <span>Transferir</span>
             </a>
-            <a href="../../pagamentos/pagar/pagar.html" class="nav-item active">
+            <a href="../../pagamentos/pagar/pagar.html" class="nav-item">
               <img src="../../img/Pagar.svg" alt="" />
               <span>Pagar</span>
             </a>
@@ -65,11 +66,15 @@
               <img src="../../img/Shop.svg" alt="" />
               <span>Shop</span>
             </a>
-            <a href="../../configuracoes/configuracoes.html" class="nav-item">
-              <img src="../../img/Configuracoes.svg" alt="" />
-              <span>Configurações</span>
+            <a href="../../perfil/perfil.html" class="nav-item">
+              <img src="../../img/Conta.svg" alt="" />
+              <span>Perfil</span>
             </a>
-          </nav>
+          
+<a href="../../categorias/categorias.html" class="nav-item"><img src="../../img/Menu.svg" alt="" /><span>Categorias</span></a>
+
+<a href="../../orcamentos/orcamentos.html" class="nav-item"><img src="../../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
+</nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -92,9 +97,9 @@
       </aside>
 
       <main class="menu-container">
-<header class="header-conteudo"><h1>Registrar boleto no FlowBank</h1></header><div class="pix-page-container"><section class="pagamentos-integracao"><nav><a href="pagar.html">Pagamentos</a><a href="transferirPagar.html">Registrar boleto</a><a href="extrato.html">Extrato</a><a href="../../cartoes/cartoes.html">Faturas de cartão</a></nav><p>Saldo: <strong id="pagamentos-saldo">Carregando...</strong> <button type="button" id="pagamentos-olho">Ocultar saldo</button></p><p class="pagamentos-aviso">Ambiente do projeto: o registro debita o saldo do FlowBank, mas não paga um boleto na rede bancária. Beneficiário, validade e valor não são consultados em uma instituição externa.</p><p id="pagamentos-mensagem" role="status" aria-live="polite">Carregando...</p><div id="pagamentos-pendencia"></div><form id="pagamento-form"><label for="pagamento-codigo">Código de referência do boleto</label><input id="pagamento-codigo" required inputmode="numeric" maxlength="120" placeholder="Cole ou digite os números do código" /><label for="pagamento-descricao">Descrição / beneficiário informado</label><input id="pagamento-descricao" required maxlength="120" placeholder="Ex.: Conta de internet — empresa informada no boleto" /><label for="pagamento-valor">Valor (R$)</label><input id="pagamento-valor" required inputmode="decimal" pattern="[0-9]+([,.][0-9]{1,2})?" placeholder="Ex.: 125,50" /><button id="pagamento-conferir" type="submit" disabled>Conferir registro</button></form><section id="pagamento-confirmacao" hidden><h2>Confira os dados informados</h2><div id="pagamento-resumo"></div><p>Ao confirmar, o FlowBank debitará o saldo e criará uma transação BOLETO. Isso não liquida o boleto na rede bancária.</p><button type="button" id="pagamento-confirmar" disabled>Confirmar débito no FlowBank</button><button type="button" id="pagamento-editar">Voltar e editar</button></section></section></div>
+<header class="header-conteudo"><h1>Registrar boleto no FlowBank</h1></header><div class="pix-page-container"><section class="pagamentos-integracao"><nav><a href="pagar.html">Pagamentos</a><a href="transferirPagar.html">Registrar boleto</a><a href="extrato.html">Extrato</a><a href="../../cartoes/cartoes.html">Faturas de cartão</a></nav><p>Saldo: <strong id="pagamentos-saldo">Carregando...</strong> <button type="button" id="pagamentos-olho">Ocultar saldo</button></p><p class="pagamentos-aviso">Ambiente do projeto: o registro debita o saldo do FlowBank, mas não paga um boleto na rede bancária. Beneficiário, validade e valor não são consultados em uma instituição externa.</p><p id="pagamentos-mensagem" role="status" aria-live="polite">Carregando...</p><div id="pagamentos-pendencia"></div><form id="pagamento-form"><label for="pagamento-codigo">Código de referência do boleto</label><input id="pagamento-codigo" required inputmode="numeric" maxlength="120" placeholder="Cole ou digite os números do código" /><label for="pagamento-descricao">Descrição / beneficiário informado</label><input id="pagamento-descricao" required maxlength="120" placeholder="Ex.: Conta de internet — empresa informada no boleto" /><label for="pagamento-valor">Valor (R$)</label><input id="pagamento-valor" required inputmode="decimal" pattern="[0-9]+([,.][0-9]{1,2})?" placeholder="Ex.: 125,50" /><label for="pagamento-categoria">Categoria (opcional)</label><select id="pagamento-categoria"><option value="">Sem categoria</option></select><button id="pagamento-conferir" type="submit" disabled>Conferir registro</button></form><section id="pagamento-confirmacao" hidden><h2>Confira os dados informados</h2><div id="pagamento-resumo"></div><p>Ao confirmar, o FlowBank debitará o saldo e criará uma transação BOLETO. Isso não liquida o boleto na rede bancária.</p><button type="button" id="pagamento-confirmar" disabled>Confirmar débito no FlowBank</button><button type="button" id="pagamento-editar">Voltar e editar</button></section></section></div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo">
+          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../../categorias/categorias.html"><img src="../../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../../orcamentos/orcamentos.html"><img src="../../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
             <div class="footer-principal-nav">
               <a href="../../PaginaInicial/paginainicial.html">
                 <img src="../../img/home.svg" alt="" />
@@ -124,9 +129,9 @@
             </div>
 
             <div class="footer-principal-nav">
-              <a href="../../configuracoes/configuracoes.html">
-                <img src="../../img/Configuracoes.svg" alt="" />
-                <p class="palavra-limitada">Configurações</p>
+              <a href="../../perfil/perfil.html">
+                <img src="../../img/Conta.svg" alt="" />
+                <p class="palavra-limitada">Perfil</p>
               </a>
             </div>
           </div>

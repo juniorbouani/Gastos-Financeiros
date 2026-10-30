@@ -1,5 +1,6 @@
 package com.georgesbouanni.controle_gastos.security;
 
+import com.georgesbouanni.controle_gastos.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -12,6 +13,10 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
+    private final UserRepository users;
+
+    public JwtService(UserRepository users) { this.users = users; }
+
 
     @Value("${jwt.secret}")
     private String secretKey;
@@ -24,8 +29,11 @@ public class JwtService {
     }
 
     public String generateToken(String cpf) {
+        var user = users.findByCpf(cpf).filter(u -> !u.isAccountClosed())
+                .orElseThrow(() -> new IllegalArgumentException("Conta indisponível."));
         return Jwts.builder()
                 .subject(cpf)
+                .claim("cv", user.getCredentialVersion())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(getSigningKey())
@@ -37,8 +45,12 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, String cpf) {
-        String extractedCpf = extractCpf(token);
-        return extractedCpf.equals(cpf) && !isTokenExpired(token);
+        Claims claims = extractAllClaims(token);
+        Number version = claims.get("cv", Number.class);
+        int tokenVersion = version == null ? 0 : version.intValue();
+        return cpf.equals(claims.getSubject()) && claims.getExpiration().after(new Date())
+                && users.findByCpf(cpf).filter(u -> !u.isAccountClosed())
+                .map(u -> u.getCredentialVersion() == tokenVersion).orElse(false);
     }
 
     private boolean isTokenExpired(String token) {

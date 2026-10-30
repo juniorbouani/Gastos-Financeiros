@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../css/style.css" />
     <link rel="stylesheet" href="../../css/pagamentos/pagar/pagamentos-integracao.css" />
     <title>Pagar - FlowBank</title>
+  <link rel="stylesheet" href="../../css/navegacao.css" />
   </head>
   <body data-payments-page="home">
     <div class="app-dashboard">
@@ -65,11 +66,15 @@
               <img src="../../img/Shop.svg" alt="" />
               <span>Shop</span>
             </a>
-            <a href="../../configuracoes/configuracoes.html" class="nav-item">
-              <img src="../../img/Configuracoes.svg" alt="" />
-              <span>Configurações</span>
+            <a href="../../perfil/perfil.html" class="nav-item">
+              <img src="../../img/Conta.svg" alt="" />
+              <span>Perfil</span>
             </a>
-          </nav>
+          
+<a href="../../categorias/categorias.html" class="nav-item"><img src="../../img/Menu.svg" alt="" /><span>Categorias</span></a>
+
+<a href="../../orcamentos/orcamentos.html" class="nav-item"><img src="../../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
+</nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -94,7 +99,7 @@
       <main class="menu-container">
 <header class="header-conteudo"><h1>Pagamentos e boletos</h1></header><div class="pix-page-container"><section class="pagamentos-integracao"><nav><a href="pagar.html">Pagamentos</a><a href="transferirPagar.html">Registrar boleto</a><a href="extrato.html">Extrato</a><a href="../../cartoes/cartoes.html">Faturas de cartão</a></nav><p>Saldo: <strong id="pagamentos-saldo">Carregando...</strong> <button type="button" id="pagamentos-olho">Ocultar saldo</button></p><p class="pagamentos-aviso">Ambiente do projeto: o registro debita o saldo do FlowBank, mas não paga um boleto na rede bancária. Beneficiário, validade e valor não são consultados em uma instituição externa.</p><p id="pagamentos-mensagem" role="status" aria-live="polite">Carregando...</p><div id="pagamentos-pendencia"></div><a href="lercodigo.html">Digitar ou colar código</a><button type="button" id="pagamentos-atualizar">Atualizar dados</button><h2>Últimos registros de boletos</h2><div id="pagamentos-historico"></div></section></div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo">
+          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../../categorias/categorias.html"><img src="../../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../../orcamentos/orcamentos.html"><img src="../../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
             <div class="footer-principal-nav">
               <a href="../../PaginaInicial/paginainicial.html">
                 <img src="../../img/home.svg" alt="" />
@@ -124,9 +129,9 @@
             </div>
 
             <div class="footer-principal-nav">
-              <a href="../../configuracoes/configuracoes.html">
-                <img src="../../img/Configuracoes.svg" alt="" />
-                <p class="palavra-limitada">Configurações</p>
+              <a href="../../perfil/perfil.html">
+                <img src="../../img/Conta.svg" alt="" />
+                <p class="palavra-limitada">Perfil</p>
               </a>
             </div>
           </div>

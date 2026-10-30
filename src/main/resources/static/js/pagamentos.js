@@ -60,8 +60,16 @@
     catch(e){if(!encerrada){usuario.balance=null;saldo();mensagem(erroTexto(e),true);}}
     finally{ocupado=false;el("pagamentos-atualizar").disabled=false;}
   }
-  function prepararFormulario(){
+  async function prepararFormulario(){
+    let categoriasDisponiveis=[];
     if(pendente()){mostrarPendencia();return;}
+    try {
+      const categorias=await api(`categories/user/${usuario.id}`);
+      if(encerrada)return;
+      if(!Array.isArray(categorias))throw new Error("Categorias inválidas.");
+      categoriasDisponiveis=categorias;
+      for(const categoria of categorias){const option=no("option",categoria.name);option.value=String(categoria.id);el("pagamento-categoria").appendChild(option);}
+    } catch(erro){if(encerrada)return;mensagem("Categorias indisponíveis. Você pode registrar sem categoria ou recarregar a página.",true);}
     el("pagamento-conferir").disabled=false;
     el("pagamento-form").addEventListener("submit",async e=>{
       e.preventDefault();if(ocupado)return;if(pendente()){mostrarPendencia();return;}
@@ -75,8 +83,12 @@
         const valor=decimal(el("pagamento-valor").value);
         await perfil();if(encerrada)return;
         if(Number(valor)>Number(usuario.balance))throw new Error("Saldo insuficiente para esse registro.");
-        preparado={owner:usuario.id,code:codigo,description:descricao,value:valor,created:Date.now()};
-        el("pagamento-resumo").replaceChildren(no("p",`Descrição informada: ${descricao}`),no("p",`Código informado: ${codigo}`),no("p",`Valor a debitar no FlowBank: ${moeda(valor)}`));
+        const categoriaSelecionada=el("pagamento-categoria").value;
+        const categoryId=categoriaSelecionada?Number(categoriaSelecionada):null;
+        if(categoryId!=null&&(!Number.isSafeInteger(categoryId)||categoryId<=0))throw new Error("Categoria inválida.");
+        const categoryName=categoriasDisponiveis.find(c=>c.id===categoryId)?.name||"Sem categoria";
+        preparado={owner:usuario.id,categoryId,categoryName,code:codigo,description:descricao,value:valor,created:Date.now()};
+        el("pagamento-resumo").replaceChildren(no("p",`Descrição informada: ${descricao}`),no("p",`Código informado: ${codigo}`),no("p",`Valor a debitar no FlowBank: ${moeda(valor)}`),no("p",`Categoria: ${categoryName}`));
         el("pagamento-form").hidden=true;el("pagamento-confirmacao").hidden=false;el("pagamento-confirmar").disabled=false;
         mensagem("Confira os dados. Nenhum débito foi enviado ainda.");
       }catch(erro){if(!encerrada)mensagem(erroTexto(erro),true);}
@@ -93,7 +105,7 @@
         if(Number(preparado.value)>Number(usuario.balance))throw new Error("Saldo insuficiente. Volte e confira o valor.");
         const hoje=new Date();const date=`${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,"0")}-${String(hoje.getDate()).padStart(2,"0")}`;
         sessionStorage.setItem(pendingKey,JSON.stringify(preparado));enviado=true;
-        const resultado=await api("transactions",{method:"POST",body:JSON.stringify({description:preparado.description,value:preparado.value,date,type:"BOLETO",senderId:usuario.id,destination:preparado.code})});
+        const resultado=await api("transactions",{method:"POST",body:JSON.stringify({description:preparado.description,value:preparado.value,date,type:"BOLETO",senderId:usuario.id,destination:preparado.code,categoryId:preparado.categoryId})});
         if(encerrada)return;
         if(resultado?.id==null||resultado.status!=="COMPLETED")throw new Error("Resposta inesperada após o envio.");
         sessionStorage.removeItem(pendingKey);preparado=null;mostrarPendencia();el("pagamento-confirmar").textContent="Registro concluído";el("pagamento-editar").disabled=true;
@@ -107,6 +119,6 @@
       }finally{ocupado=false;}
     });
   }
-  try{await perfil();if(encerrada)return;mostrarPendencia();if(pagina==="home"){el("pagamentos-atualizar").addEventListener("click",atualizar);await atualizar();}else{prepararFormulario();if(!pendente())mensagem("Preencha os dados para conferir antes de registrar.");}}
+  try{await perfil();if(encerrada)return;mostrarPendencia();if(pagina==="home"){el("pagamentos-atualizar").addEventListener("click",atualizar);await atualizar();}else{await prepararFormulario();if(!pendente()&&el("pagamentos-mensagem").dataset.erro!=="true")mensagem("Preencha os dados para conferir antes de registrar.");}}
   catch(e){if(!encerrada)mensagem(`${erroTexto(e)} Recarregue a página para tentar novamente.`,true);}
 })();

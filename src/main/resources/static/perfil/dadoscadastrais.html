@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/perfil/integracao.css" />
     <title>Dados Cadastrais - FlowBank</title>
+  <link rel="stylesheet" href="../css/navegacao.css" />
   </head>
   <body data-profile-page="edit">
     <div class="app-dashboard">
@@ -66,13 +67,17 @@
               <span>Shop</span>
             </a>
             <a
-              href="../configuracoes/configuracoes.html"
-              class="nav-item active"
+              href="perfil.html"
+              class="nav-item"
             >
-              <img src="../img/Configuracoes.svg" alt="" />
-              <span>Configurações</span>
+              <img src="../img/Conta.svg" alt="" />
+              <span>Perfil</span>
             </a>
-          </nav>
+          
+<a href="../categorias/categorias.html" class="nav-item"><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a>
+
+<a href="../orcamentos/orcamentos.html" class="nav-item"><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
+</nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -95,9 +100,9 @@
       </aside>
 
       <main class="menu-container">
-<header class="header-conteudo"><h1>Dados cadastrais</h1></header><div class="pix-page-container"><section class="perfil-integracao"><nav><a href="../perfil/perfil.html">Meu perfil</a><a href="../perfil/dadoscadastrais.html">Dados cadastrais</a><a href="../configuracoes/configuracoes.html">Configurações</a></nav><p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p><button type="button" id="perfil-atualizar">Recarregar dados</button><p>Você pode alterar os campos abaixo. O CPF é somente para consulta.</p><form id="perfil-form"><fieldset id="perfil-campos" disabled><label for="perfil-name-input">Nome completo</label><input id="perfil-name-input" autocomplete="name" required /><label for="perfil-cpf-input">CPF</label><input id="perfil-cpf-input" readonly /><label for="perfil-phone-input">Telefone</label><input id="perfil-phone-input" type="tel" autocomplete="tel" required /><label for="perfil-email-input">E-mail</label><input id="perfil-email-input" type="email" autocomplete="email" required /><label for="perfil-birth-input">Data de nascimento</label><input id="perfil-birth-input" type="date" required /><p>Alterar telefone ou e-mail do cadastro não atualiza automaticamente suas chaves Pix já registradas. Gerencie-as na área Pix.</p><button type="submit" id="perfil-salvar">Salvar alterações</button><button type="button" id="perfil-cancelar">Descartar alterações</button></fieldset></form></section></div>
+<header class="header-conteudo"><h1>Dados cadastrais</h1></header><div class="pix-page-container"><section class="perfil-integracao"><nav><a href="perfil.html">Meu perfil</a></nav><p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p><button type="button" id="perfil-atualizar">Recarregar dados</button><p>Você pode alterar os campos abaixo. O CPF é somente para consulta.</p><form id="perfil-form"><fieldset id="perfil-campos" disabled><label for="perfil-name-input">Nome completo</label><input id="perfil-name-input" autocomplete="name" required /><label for="perfil-cpf-input">CPF</label><input id="perfil-cpf-input" readonly /><label for="perfil-phone-input">Telefone</label><input id="perfil-phone-input" type="tel" autocomplete="tel" required /><label for="perfil-email-input">E-mail</label><input id="perfil-email-input" type="email" autocomplete="email" required /><label for="perfil-birth-input">Data de nascimento</label><input id="perfil-birth-input" type="date" required /><p>Alterar telefone ou e-mail do cadastro não atualiza automaticamente suas chaves Pix já registradas. Gerencie-as na área Pix.</p><button type="submit" id="perfil-salvar">Salvar alterações</button><button type="button" id="perfil-cancelar">Descartar alterações</button></fieldset></form><a href="../seguranca/seguranca.html" class="perfil-trocar-senha">Trocar senha</a></section></div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo">
+          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../orcamentos/orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
@@ -127,9 +132,9 @@
             </div>
 
             <div class="footer-principal-nav">
-              <a href="../configuracoes/configuracoes.html">
-                <img src="../img/Configuracoes.svg" alt="" />
-                <p class="palavra-limitada">Configurações</p>
+              <a href="perfil.html">
+                <img src="../img/Conta.svg" alt="" />
+                <p class="palavra-limitada">Perfil</p>
               </a>
             </div>
           </div>

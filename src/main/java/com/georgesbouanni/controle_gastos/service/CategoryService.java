@@ -1,6 +1,7 @@
 package com.georgesbouanni.controle_gastos.service;
 
 import com.georgesbouanni.controle_gastos.exception.ForbiddenException;
+import com.georgesbouanni.controle_gastos.exception.BusinessRuleException;
 import com.georgesbouanni.controle_gastos.exception.ResourceNotFoundException;
 import com.georgesbouanni.controle_gastos.model.Category;
 import com.georgesbouanni.controle_gastos.model.User;
@@ -28,8 +29,9 @@ public class CategoryService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com a id: " + userId));
 
+        name = name.trim();
         if (repository.findByUserIdAndNameIgnoreCase(userId, name).isPresent()) {
-            throw new IllegalArgumentException("Você já possui uma categoria com esse nome");
+            throw new BusinessRuleException("Você já possui uma categoria com esse nome.");
         }
 
         Category category = new Category(user, name, icone);
@@ -55,7 +57,11 @@ public class CategoryService {
 
     public Category update(Long id, Long userId, String name, String icone) {
         Category category = findByIdForUser(id, userId);
-        category.setName(name);
+        String normalized = name.trim();
+        var duplicate = repository.findByUserIdAndNameIgnoreCase(userId, normalized);
+        if (duplicate.isPresent() && !duplicate.get().getId().equals(id))
+            throw new BusinessRuleException("Você já possui uma categoria com esse nome.");
+        category.setName(normalized);
         category.setIcone(icone);
         return repository.save(category);
     }

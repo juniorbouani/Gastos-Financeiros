@@ -347,4 +347,30 @@ public class TransactionServiceTest {
 
         Assertions.assertThrows(InsuficientBalanceException.class, () -> service.reverse(10L, 1L));
     }
+
+    @Test
+    void contaEncerradaNaoPodeReceberTransferencia() {
+        User sender=new User();sender.setId(1L);sender.setBalance(new BigDecimal("100.00"));
+        User receiver=new User();receiver.setId(2L);receiver.setBalance(BigDecimal.ZERO);receiver.setAccountClosed(true);
+        TransactionRequest request=new TransactionRequest();request.setValue(new BigDecimal("10.00"));
+        request.setType(TransactionType.TRANSFERENCIA);request.setReceiverId(2L);
+        when(userRepository.findById(1L)).thenReturn(Optional.of(sender));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(receiver));
+        Assertions.assertThrows(BusinessRuleException.class,()->service.save(request,1L));
+        Mockito.verify(userRepository,Mockito.never()).save(Mockito.any());
+        Mockito.verify(repository,Mockito.never()).save(Mockito.any());
+    }
+
+    @Test
+    void estornoNaoReabreContaEncerrada() {
+        User payer=new User();payer.setId(1L);payer.setBalance(BigDecimal.ZERO);payer.setAccountClosed(true);
+        User payee=new User();payee.setId(2L);payee.setBalance(new BigDecimal("100.00"));
+        Transaction original=new Transaction("Pix",new BigDecimal("10.00"),LocalDate.now(),
+                TransactionType.PIX,TransactionStatus.COMPLETED,payer,payee,null,null);
+        original.setId(10L);original.setCreatedAt(LocalDateTime.now());
+        when(repository.findById(10L)).thenReturn(Optional.of(original));
+        Assertions.assertThrows(BusinessRuleException.class,()->service.reverse(10L,1L));
+        Mockito.verify(userRepository,Mockito.never()).save(Mockito.any());
+        Assertions.assertTrue(payer.isAccountClosed());
+    }
 }

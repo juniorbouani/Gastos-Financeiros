@@ -1,0 +1,6 @@
+/* Entradas adicionais do menu principal sem aumentar a altura da barra móvel. */
+.sidebar-lateral { overflow-y: auto; }
+@media (max-width: 900px) {
+  .footer-principal-conteudo { justify-content: flex-start !important; gap: 12px; overflow-x: auto; padding-bottom: 4px; }
+  .footer-principal-nav { flex: 0 0 68px; }
+}

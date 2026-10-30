@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/cartoes/integracao.css" />
     <title>Cartões - FlowBank</title>
+  <link rel="stylesheet" href="../css/navegacao.css" />
   </head>
   <body data-cards-page="cards">
     <div class="app-dashboard">
@@ -65,11 +66,15 @@
               <img src="../img/Shop.svg" alt="" />
               <span>Shop</span>
             </a>
-            <a href="../configuracoes/configuracoes.html" class="nav-item">
-              <img src="../img/Configuracoes.svg" alt="" />
-              <span>Configurações</span>
+            <a href="../perfil/perfil.html" class="nav-item">
+              <img src="../img/Conta.svg" alt="" />
+              <span>Perfil</span>
             </a>
-          </nav>
+          
+<a href="../categorias/categorias.html" class="nav-item"><img src="../img/Menu.svg" alt="" /><span>Categorias</span></a>
+
+<a href="../orcamentos/orcamentos.html" class="nav-item"><img src="../img/porquinho.svg" alt="" /><span>Orçamentos</span></a>
+</nav>
         </div>
 
         <div class="sidebar-bottom">
@@ -98,7 +103,7 @@
 <p id="cards-mensagem" role="status" aria-live="polite">Carregando...</p>
 <div id="cards-pendencia"></div><button type="button" id="cards-atualizar">Atualizar cartões</button><div id="cards-lista"></div><section id="cards-detalhes" hidden><h2 id="cards-selecionado"></h2><form id="cards-limite-form"><label for="cards-novo-limite">Novo limite total (R$)</label><input id="cards-novo-limite" inputmode="decimal" required pattern="[0-9]+([,.][0-9]{1,2})?" /><button type="submit">Alterar limite</button></form><details><summary>Registrar compra no cartão</summary><p>Este formulário registra uma compra no banco do projeto, compromete limite e gera parcelas nas faturas.</p><form id="cards-compra-form"><label for="cards-compra-descricao">Descrição</label><input id="cards-compra-descricao" required maxlength="120" /><label for="cards-compra-valor">Valor total da compra (R$)</label><input id="cards-compra-valor" inputmode="decimal" required pattern="[0-9]+([,.][0-9]{1,2})?" /><label for="cards-compra-parcelas">Número de parcelas</label><input id="cards-compra-parcelas" type="number" min="1" step="1" value="1" required /><button type="submit">Conferir e registrar compra</button></form></details><h2>Faturas do cartão</h2><div id="cards-faturas"></div><section id="cards-fatura-detalhes" hidden><h3 id="cards-fatura-titulo"></h3><div id="cards-lancamentos"></div><form id="cards-pagamento-form"><label for="cards-pagamento-valor">Valor do pagamento (R$)</label><input id="cards-pagamento-valor" inputmode="decimal" required pattern="[0-9]+([,.][0-9]{1,2})?" /><button type="button" id="cards-pagar-total">Preencher saldo devedor total</button><button type="submit" id="cards-pagar">Conferir e pagar fatura</button></form></section></section></section></div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo">
+          <div class="footer-principal-conteudo"><div class="footer-principal-nav"><a href="../categorias/categorias.html"><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a></div><div class="footer-principal-nav"><a href="../orcamentos/orcamentos.html"><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a></div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
@@ -128,9 +133,9 @@
             </div>
 
             <div class="footer-principal-nav">
-              <a href="../configuracoes/configuracoes.html">
-                <img src="../img/Configuracoes.svg" alt="" />
-                <p class="palavra-limitada">Configurações</p>
+              <a href="../perfil/perfil.html">
+                <img src="../img/Conta.svg" alt="" />
+                <p class="palavra-limitada">Perfil</p>
               </a>
             </div>
           </div>

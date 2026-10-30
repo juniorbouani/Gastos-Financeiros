@@ -67,3 +67,11 @@ formulario.addEventListener("submit", async (evento) => {
     botao.innerHTML = "Entrar &rarr;";
   }
 });
+
+// Mensagem após alteração de senha ou encerramento de conta, sem armazenar credenciais.
+const avisoConta = sessionStorage.getItem("flowbank.accountMessage");
+if (avisoConta) {
+  sessionStorage.removeItem("flowbank.accountMessage");
+  mensagem.textContent = avisoConta;
+  mensagem.hidden = false;
+}

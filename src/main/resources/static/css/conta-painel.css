@@ -1,0 +1,8 @@
+.account-panel { width: 100%; max-width: 900px; padding: 24px; border-radius: 14px; background: #13151b; color: white; }
+.account-panel nav { display: flex; flex-wrap: wrap; gap: 12px; }.account-panel a { color: #b5bcff; display: inline-block; margin: 6px 12px 6px 0; }
+.account-panel p { margin: 12px 0; overflow-wrap: anywhere; }.account-panel h2 { margin: 16px 0; }
+.account-panel form { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+.account-panel input,.account-panel select { background: #0b0c10; color: white; border: 1px solid #363b4b; border-radius: 8px; padding: 12px; font: inherit; width: 100%; }
+.account-panel button { background: #3b25eb; border: 0; color: white; border-radius: 8px; padding: 10px 14px; margin: 4px; font: inherit; cursor: pointer; }.account-panel button:disabled { opacity: .5; cursor: default; }
+.panel-row { padding: 16px 0; border-bottom: 1px solid #363b4b; }.panel-row.unread { border-left: 3px solid #8b7dff; padding-left: 12px; }.panel-pagination { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+#panel-message[data-error="true"] { color: #fda4af; }.account-panel button:focus-visible,.account-panel a:focus-visible { outline: 2px solid white; outline-offset: 3px; }

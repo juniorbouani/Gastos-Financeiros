@@ -39,20 +39,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String token = authHeader.substring(7);
-        String cpf = jwtService.extractCpf(token);
-
-       if (cpf != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-           UserDetails userDetails = userDetailService.loadUserByUsername(cpf);
-
-           if (jwtService.isTokenValid(token, cpf)) {
-               UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                       userDetails, null, userDetails.getAuthorities());
-               authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-               SecurityContextHolder.getContext().setAuthentication(authToken);
-           }
-       }
+        try {
+            String token = authHeader.substring(7);
+            String cpf = jwtService.extractCpf(token);
+            if (cpf == null || !jwtService.isTokenValid(token, cpf)) {
+                unauthorized(response);
+                return;
+            }
+            if (SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = userDetailService.loadUserByUsername(cpf);
+                if (!userDetails.isEnabled()) {
+                    unauthorized(response);
+                    return;
+                }
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+        } catch (io.jsonwebtoken.JwtException | IllegalArgumentException
+                 | org.springframework.security.core.AuthenticationException ex) {
+            unauthorized(response);
+            return;
+        }
 
        filterChain.doFilter(request, response);
+    }
+
+    private void unauthorized(HttpServletResponse response) throws IOException {
+        SecurityContextHolder.clearContext();
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"message\":\"Sessão inválida ou expirada. Entre novamente.\"}");
     }
 }

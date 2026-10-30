@@ -199,8 +199,22 @@
     if (!dados?.keyValue || !dados?.titular) throw new Error("Resposta de destinatário inválida.");
     return dados;
   }
-  function prepararTransferencia() {
+  async function prepararTransferencia() {
+    let categoriasDisponiveis = [];
     if (bloqueado(lerDraft())) { avisoIncerto(); return; }
+    try {
+      const categorias = await api(`categories/user/${usuario.id}`);
+      if (encerrada) return;
+      if (!Array.isArray(categorias)) throw new Error("Categorias inválidas.");
+      categoriasDisponiveis = categorias;
+      for (const categoria of categorias) {
+        const option = no("option", categoria.name); option.value = String(categoria.id);
+        el("pix-categoria").appendChild(option);
+      }
+    } catch (erro) {
+      if (encerrada) return;
+      mensagem("Categorias indisponíveis. Você pode continuar sem categoria ou recarregar a página.", true);
+    }
     el("pix-continuar").disabled = false;
     el("pix-transferir-form").addEventListener("submit", async e => {
       e.preventDefault(); if (ocupado) return;
@@ -211,7 +225,11 @@
         if (Number(value) > Number(usuario.balance)) throw new Error("Saldo insuficiente para esse valor.");
         const destinatario = await consultarChave(el("pix-chave").value);
         if (encerrada) return;
-        salvarDraft({ owner: usuario.id, value, description: el("pix-descricao").value.trim() || "Transferência Pix", destinatario, created: Date.now(), state: "ready" });
+        const categoriaSelecionada = el("pix-categoria").value;
+        const categoryId = categoriaSelecionada ? Number(categoriaSelecionada) : null;
+        if (categoryId != null && (!Number.isSafeInteger(categoryId) || categoryId <= 0)) throw new Error("Categoria inválida.");
+        const categoryName = categoriasDisponiveis.find(c => c.id === categoryId)?.name || "Sem categoria";
+        salvarDraft({ owner: usuario.id, value, categoryId, categoryName, description: el("pix-descricao").value.trim() || "Transferência Pix", destinatario, created: Date.now(), state: "ready" });
         window.location.assign("confirmar.html");
       } catch (erro) { if (!encerrada) mensagem(erroTexto(erro), true); }
       finally { ocupado = false; el("pix-continuar").disabled = false; }
@@ -224,7 +242,7 @@
     if (draft.state !== "ready" || !draft.destinatario?.keyValue || Date.now() - draft.created > 600000 || !Number.isFinite(draft.created)) { mensagem("Esta confirmação expirou. Volte e prepare a transferência novamente.", true); return; }
     valorDecimal(draft.value);
     const resumo = el("pix-resumo");
-    resumo.append(no("h2", "Confira antes de enviar"), no("p", `Destinatário: ${draft.destinatario.titular}`), no("p", `Chave: ${draft.destinatario.keyValue}`), no("p", `Valor: ${moeda(draft.value)}`), no("p", `Descrição: ${draft.description}`));
+    resumo.append(no("h2", "Confira antes de enviar"), no("p", `Destinatário: ${draft.destinatario.titular}`), no("p", `Chave: ${draft.destinatario.keyValue}`), no("p", `Valor: ${moeda(draft.value)}`), no("p", `Descrição: ${draft.description}`), no("p", `Categoria: ${draft.categoryName || "Sem categoria"}`));
     el("pix-confirmar").disabled = false;
     mensagem("A transferência só será enviada ao clicar em Confirmar transferência.");
     el("pix-confirmar").addEventListener("click", async () => {
@@ -243,7 +261,7 @@
         const date = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,"0")}-${String(hoje.getDate()).padStart(2,"0")}`;
         draft.state = "sending"; salvarDraft(draft);
         enviado = true;
-        const resultado = await api("transactions", { method: "POST", body: JSON.stringify({ description: draft.description, value: draft.value, date, type: "PIX", senderId: usuario.id, pixKey: destino.keyValue }) });
+        const resultado = await api("transactions", { method: "POST", body: JSON.stringify({ description: draft.description, value: draft.value, date, type: "PIX", senderId: usuario.id, pixKey: destino.keyValue, categoryId: draft.categoryId || null }) });
         if (encerrada) return;
         // Uma resposta inesperada pode ocorrer depois do débito; nunca reenviar automaticamente.
         if (!resultado?.id || resultado.status !== "COMPLETED") throw new Error("Resposta inesperada da transferência.");
@@ -274,7 +292,7 @@
       el("pix-atualizar").addEventListener("click", atualizarDados);
       if (pagina === "keys") prepararChaves();
       await atualizarDados();
-    } else if (["transfer", "paste"].includes(pagina)) prepararTransferencia();
+    } else if (["transfer", "paste"].includes(pagina)) await prepararTransferencia();
     else if (pagina === "confirm") await prepararConfirmacao();
   } catch (erro) { if (!encerrada) mensagem(`${erroTexto(erro)} Recarregue a página para tentar novamente.`, true); }
 })();

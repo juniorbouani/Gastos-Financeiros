@@ -72,6 +72,10 @@ public class TransactionService {
                     .orElseThrow(() -> new ResourceNotFoundException("Destinatario não encontrado com id: " + request.getReceiverId()));
         }
 
+        if (sender.isAccountClosed() || (receiver != null && receiver.isAccountClosed())) {
+            throw new BusinessRuleException("Não é possível movimentar uma conta encerrada.");
+        }
+
         Category category = null;
         Budget budget = null;
         BigDecimal totalAposTransacao = null;
@@ -165,6 +169,9 @@ public class TransactionService {
 
         User payer = original.getSender();
         User payee = original.getReceiver();
+        if (payer.isAccountClosed() || payee.isAccountClosed()) {
+            throw new BusinessRuleException("Não é possível estornar movimentação envolvendo conta encerrada.");
+        }
 
         if (payee.getBalance().compareTo(original.getValue()) < 0) {
             throw new InsuficientBalanceException("O destinatário não tem saldo suficiente para devolver o valor.");
