@@ -139,3 +139,20 @@
     max-width: 100%;
   }
 }
+/* Estilos exclusivos do formulário de cadastro. */
+#cadastro-form .botao {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+#cadastro-form .botao:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+#cadastro-form #cadastro-mensagem {
+  color: #fda4af;
+  text-align: left;
+}
+#cadastro-form #cadastro-mensagem[data-sucesso="true"] {
+  color: #86efac;
+}

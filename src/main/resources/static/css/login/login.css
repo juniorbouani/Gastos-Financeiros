@@ -245,3 +245,19 @@
     max-width: 100%;
   }
 }
+/* Feedback e botão do formulário de login. */
+#login-form .botao {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#login-form .botao:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+#login-form .login-mensagem {
+  color: #fda4af;
+  margin-top: 16px;
+}

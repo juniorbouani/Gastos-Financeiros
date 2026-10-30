@@ -50,13 +50,16 @@
       </div>
 
       <div class="login-conteudo">
-        <div class="form-wrapper">
+        <form id="login-form" class="form-wrapper">
           <h3 class="form-title">Entrar</h3>
 
           <div class="caixa-de-login">
             <div class="input-group">
-              <label for="email">CPF</label>
-              <input type="text" id="email" placeholder="000.000.000-0" />
+              <label for="cpf">CPF</label>
+              <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00"
+                inputmode="numeric" autocomplete="username" maxlength="14"
+                pattern="[0-9]{11}|[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
+                title="Informe os 11 números do CPF, com ou sem pontuação" required />
             </div>
 
             <div class="input-group">
@@ -67,6 +70,9 @@
                 <input
                   type="password"
                   id="senha"
+                  name="senha"
+                  autocomplete="current-password"
+                  required
                   placeholder="Digite sua senha"
                 />
                 <button
@@ -90,15 +96,15 @@
             </div>
           </div>
 
-          <a href="./PaginaInicial/paginainicial.html" class="botao"
-            >Entrar &rarr;</a
-          >
+          <p id="login-mensagem" class="login-mensagem" role="alert" hidden></p>
+          <button type="submit" id="login-botao" class="botao">Entrar &rarr;</button>
 
           <p class="signup-text">
             Não tem conta? <a href="./cadastro/cadastro.html">Abrir conta</a>
           </p>
-        </div>
+        </form>
       </div>
     </div>
+    <script src="./js/login.js" defer></script>
   </body>
 </html>
