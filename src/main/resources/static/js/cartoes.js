@@ -270,23 +270,45 @@
             }),
           ),
         );
+      // O botão "Recolher faturas" só aparece no cartão selecionado enquanto as faturas estão abertas.
+      const recolher = botao("Recolher faturas", recolherFaturas);
+      recolher.className = "cards-recolher";
+      recolher.dataset.cartaoId = String(c.id);
+      item.appendChild(recolher);
       lista.appendChild(item);
     }
     if (selecionado) {
       const atual = cartoes.find((c) => String(c.id) === String(selecionado.id));
-      if (atual) await selecionarCartao(atual);
+      // Ao atualizar os dados, mantém as faturas recolhidas se o usuário já as tinha recolhido.
+      if (atual) await selecionarCartao(atual, obterElemento("cards-faturas-area").hidden);
       else {
         selecionado = null;
         obterElemento("cards-detalhes").hidden = true;
       }
     }
+    atualizarBotoesRecolher();
     mostrarPendencia();
   }
-  async function selecionarCartao(c) {
+  // Mostra o botão "Recolher faturas" apenas no cartão selecionado com as faturas visíveis.
+  function atualizarBotoesRecolher() {
+    const aberto = !obterElemento("cards-faturas-area").hidden;
+    for (const b of document.querySelectorAll(".cards-recolher")) {
+      const visivel = aberto && selecionado != null && b.dataset.cartaoId === String(selecionado.id);
+      b.hidden = !visivel;
+      b.style.display = visivel ? "" : "none";
+    }
+  }
+  function recolherFaturas() {
+    obterElemento("cards-faturas-area").hidden = true;
+    atualizarBotoesRecolher();
+  }
+  async function selecionarCartao(c, manterRecolhido = false) {
     selecionado = c;
     fatura = null;
     obterElemento("cards-detalhes").hidden = false;
+    obterElemento("cards-faturas-area").hidden = manterRecolhido;
     obterElemento("cards-fatura-detalhes").hidden = true;
+    atualizarBotoesRecolher();
     obterElemento("cards-selecionado").textContent = `Cartão selecionado: ${c.numeroMascarado}`;
     obterElemento("cards-novo-limite").value = String(c.limiteTotal);
     obterElemento("cards-faturas").replaceChildren(criarElemento("p", "Carregando faturas..."));
