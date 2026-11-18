@@ -1,0 +1,158 @@
+.dinheiro-pagina {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 36px;
+}
+
+.dinheiro-toolbar,
+.dinheiro-secao-titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.dinheiro-toolbar p,
+.dinheiro-card > p:not(.dinheiro-valor),
+.dinheiro-secao-titulo p,
+.dinheiro-aviso {
+  color: #a0a5b5;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.dinheiro-toolbar [data-erro="true"] {
+  color: #fca5a5;
+}
+
+.dinheiro-botao {
+  background: #3b25eb;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.dinheiro-botao:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.dinheiro-resumo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.dinheiro-card,
+.dinheiro-cartao {
+  background: #13151b;
+  border: 1px solid #242731;
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 0;
+}
+
+.dinheiro-saldo {
+  background: linear-gradient(120deg, #20164b, #13151b);
+  border-color: #483678;
+}
+
+.dinheiro-card h2 {
+  color: #d9dce5;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dinheiro-valor {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin: 14px 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.dinheiro-card a,
+.dinheiro-secao-titulo a {
+  display: inline-block;
+  color: #c0b5ff;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+.dinheiro-aviso {
+  margin: 18px 0 32px;
+}
+
+.dinheiro-secao-titulo h2 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.dinheiro-lista {
+  display: grid;
+  gap: 14px;
+}
+
+.dinheiro-cartao-cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.dinheiro-cartao h3 {
+  font-size: 1rem;
+}
+
+.dinheiro-situacao {
+  color: #a0a5b5;
+  font-size: 0.85rem;
+}
+
+.dinheiro-cartao dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.dinheiro-cartao dt {
+  font-size: 0.85rem;
+  color: #a0a5b5;
+  margin-bottom: 6px;
+}
+
+.dinheiro-cartao dd {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.dinheiro-pagina a:focus-visible,
+.dinheiro-botao:focus-visible {
+  outline: 2px solid #c0b5ff;
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .dinheiro-resumo,
+  .dinheiro-cartao dl {
+    grid-template-columns: 1fr;
+  }
+
+  .dinheiro-toolbar,
+  .dinheiro-secao-titulo {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dinheiro-card,
+  .dinheiro-cartao {
+    padding: 20px;
+  }
+}

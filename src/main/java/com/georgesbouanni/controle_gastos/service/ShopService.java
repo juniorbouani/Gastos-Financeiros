@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-/** Define preços no servidor e registra pedidos com idempotência na mesma transação da compra. */
 @Service
 public class ShopService {
     private final UserRepository users;
@@ -66,7 +65,6 @@ public class ShopService {
 
     @Transactional
     public ShopOrderResponse checkout(Long userId, ShopCheckoutRequest request) {
-        // Serializa checkouts da mesma conta: o mesmo requestId nunca registra duas compras.
         User user =
                 users.findForShopUpdate(userId)
                         .filter(u -> !u.isAccountClosed())
@@ -102,8 +100,7 @@ public class ShopService {
                         "Shop: " + product.nome(),
                         product.preco(),
                         request.totalParcelas());
-        // A entidade está gerenciada pela transação: cartão descartável é cancelado após esta
-        // compra.
+
         if (card.isDescartavel()) card.setStatus(CreditCardStatus.CANCELADO);
         ShopOrder order =
                 orders.save(
