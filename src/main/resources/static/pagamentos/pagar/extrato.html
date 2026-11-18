@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../css/pagamentos/pagar/extrato-integracao.css" />
     <title>Extrato - FlowBank</title>
     <link rel="stylesheet" href="../../css/navegacao.css" />
+    <link rel="stylesheet" href="../../css/pagamentos/pagar/visual.css" />
   </head>
   <body>
     <div class="app-dashboard">
@@ -97,50 +98,58 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="../../PaginaInicial/paginainicial.html" class="btn-voltar">
-              <img src="../../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Extrato</h1>
+        <header class="header-conteudo movimentos-header">
+          <div class="movimentos-heading">
+            <a href="../../PaginaInicial/paginainicial.html" class="btn-voltar" aria-label="Voltar"
+              ><img src="../../img/Voltar.svg" alt=""
+            /></a>
+            <div>
+              <h1>Extrato</h1>
+              <p>Acompanhe as entradas, saídas e estornos da sua conta.</p>
+            </div>
           </div>
         </header>
-
-        <div class="pix-page-container">
-          <div class="extrato-container">
-            <div class="extrato-controles">
+        <section class="extrato-container extrato-visual" aria-label="Movimentações da conta">
+          <div class="extrato-toolbar">
+            <div>
+              <span class="movimentos-etapa">HISTÓRICO DA CONTA</span>
               <p id="extrato-titular">Carregando perfil...</p>
-              <button type="button" id="extrato-atualizar">Atualizar extrato</button>
             </div>
-            <p id="extrato-mensagem" role="status" aria-live="polite">Carregando extrato...</p>
-            <div class="extrato-list" id="extrato-lista" aria-busy="true"></div>
-            <nav class="extrato-paginacao" aria-label="Páginas do extrato">
-              <button type="button" id="extrato-anterior" disabled>Anterior</button>
-              <span id="extrato-pagina" aria-live="polite">—</span>
-              <button type="button" id="extrato-proxima" disabled>Próxima</button>
-            </nav>
+            <button type="button" id="extrato-atualizar">Atualizar extrato</button>
           </div>
-        </div>
-
+          <div class="extrato-informacoes">
+            <p id="extrato-mensagem" role="status" aria-live="polite">Carregando extrato...</p>
+            <div class="extrato-legenda" aria-label="Legenda">
+              <span>Entradas</span><span>Saídas</span>
+            </div>
+          </div>
+          <div class="extrato-list" id="extrato-lista" aria-busy="true"></div>
+          <nav class="extrato-paginacao" aria-label="Páginas do extrato">
+            <button type="button" id="extrato-anterior" disabled>← Anterior</button
+            ><span id="extrato-pagina" aria-live="polite">—</span
+            ><button type="button" id="extrato-proxima" disabled>Próxima →</button>
+          </nav>
+        </section>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../../categorias/categorias.html"
-                ><img src="../../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../../orcamentos/orcamentos.html"
-                ><img src="../../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../../categorias/categorias.html"
+                ><img src="../../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../../orcamentos/orcamentos.html"
+                ><img src="../../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../../PaginaInicial/paginainicial.html">
                 <img src="../../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../../cartoes/cartoes.html">

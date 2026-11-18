@@ -32,7 +32,8 @@
     preparado = null;
     for (const id of ["pagamentos-historico", "pagamento-resumo"])
       obterElemento(id)?.replaceChildren();
-    obterElemento("pagamentos-saldo").textContent = "—";
+    const campoSaldo = obterElemento("pagamentos-saldo");
+    if (campoSaldo) campoSaldo.textContent = "—";
     window.location.replace("../../index.html");
   }
   document.querySelector(".logout").addEventListener("click", (evento) => {
@@ -100,10 +101,12 @@
         : erro.message;
   }
   function atualizarSaldo() {
-    obterElemento("pagamentos-saldo").textContent = visivel ? moeda(usuario?.balance) : "••••••••";
-    obterElemento("pagamentos-olho").textContent = visivel ? "Ocultar saldo" : "Mostrar saldo";
+    const campoSaldo = obterElemento("pagamentos-saldo");
+    const botaoSaldo = obterElemento("pagamentos-olho");
+    if (campoSaldo) campoSaldo.textContent = visivel ? moeda(usuario?.balance) : "••••••••";
+    if (botaoSaldo) botaoSaldo.textContent = visivel ? "Ocultar saldo" : "Mostrar saldo";
   }
-  obterElemento("pagamentos-olho").addEventListener("click", () => {
+  obterElemento("pagamentos-olho")?.addEventListener("click", () => {
     visivel = !visivel;
     atualizarSaldo();
   });
