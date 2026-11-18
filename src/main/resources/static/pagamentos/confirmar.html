@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="../css/pagamentos/pix-integracao.css" />
     <title>Confirmar Dados - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/pagamentos/pix-home.css" />
+    <link rel="stylesheet" href="../css/pagamentos/pix-fluxo.css" />
   </head>
   <body data-pix-page="confirm">
     <div class="app-dashboard">
@@ -97,45 +99,64 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Confirmar transferência Pix</h1></header>
-        <div class="pix-page-container"
-          ><section class="pix-integracao">
-            <nav class="pix-links"
-              ><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a
-              ><a href="transferir.html">Transferir por chave</a
-              ><a href="pixcopiaecola.html">Chave copiada</a
-              ><a href="pagar/extrato.html">Extrato</a></nav
-            >
-            <p
-              >Saldo: <strong id="pix-saldo">Carregando...</strong>
-              <button type="button" id="pix-olho">Ocultar saldo</button></p
-            >
-            <p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
-            <div id="pix-resumo"></div
-            ><button type="button" id="pix-confirmar" disabled>Confirmar transferência</button
-            ><a href="transferir.html" id="pix-cancelar">Voltar e editar</a
-            ><a href="pagar/extrato.html">Consultar extrato</a>
-          </section></div
-        >
+        <header class="header-conteudo pix-home-header">
+          <div class="pix-home-titulo">
+            <a
+              href="pix.html"
+              class="btn-voltar"
+              data-pix-voltar
+              aria-label="Voltar à página anterior"
+              ><img src="../img/Voltar.svg" alt=""
+            /></a>
+            <div>
+              <h1>Confirmar Pix</h1>
+              <p>Confira o destinatário e o valor antes de enviar.</p>
+            </div>
+          </div>
+        </header>
+        <section class="pix-home pix-fluxo" aria-label="Confirmar Pix">
+          <section class="pix-home-saldo" aria-label="Saldo para a transferência">
+            <div>
+              <p>Saldo disponível para transferir</p>
+              <strong id="pix-saldo" aria-live="polite">Carregando...</strong>
+            </div>
+            <button type="button" id="pix-olho">Ocultar saldo</button>
+          </section>
+          <div class="pix-fluxo-status">
+            <p id="pix-mensagem" role="status" aria-live="polite">Carregando seus dados...</p>
+          </div>
+          <section class="pix-fluxo-card pix-fluxo-confirmacao">
+            <span class="pix-fluxo-etapa">02 · CONFIRMAÇÃO</span>
+            <div id="pix-resumo" aria-live="polite"></div>
+            <div class="pix-fluxo-botoes">
+              <button type="button" id="pix-confirmar" disabled>Confirmar transferência</button
+              ><a href="transferir.html" id="pix-cancelar" class="pix-fluxo-secundario"
+                >Voltar e editar</a
+              >
+            </div>
+            <a href="pagar/extrato.html" class="pix-fluxo-extrato">Consultar extrato →</a>
+          </section>
+        </section>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

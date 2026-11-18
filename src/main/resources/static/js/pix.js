@@ -6,6 +6,14 @@
 (async () => {
   const obterElemento = (id) => document.getElementById(id);
   const pagina = document.body.dataset.pixPage;
+  document.querySelectorAll("[data-pix-voltar]").forEach((link) => {
+    link.addEventListener("click", (evento) => {
+      if (document.referrer && new URL(document.referrer).origin === window.location.origin && window.history.length > 1) {
+        evento.preventDefault();
+        window.history.back();
+      }
+    });
+  });
   const token = sessionStorage.getItem("token");
   const draftKey = "flowbank.pixDraft";
   let usuario;
@@ -32,7 +40,8 @@
     // Mantém o rascunho incerto para não autorizar um reenvio após novo login.
     for (const id of ["pix-chaves", "pix-historico", "pix-resumo"])
       obterElemento(id)?.replaceChildren();
-    obterElemento("pix-saldo").textContent = "—";
+    const campoSaldo = obterElemento("pix-saldo");
+    if (campoSaldo) campoSaldo.textContent = "—";
     window.location.replace("../index.html");
   }
   document.querySelector(".logout").addEventListener("click", (evento) => {
@@ -101,10 +110,12 @@
         : erro.message;
   }
   function renderSaldo() {
-    obterElemento("pix-saldo").textContent = saldoVisivel ? moeda(usuario?.balance) : "••••••••";
-    obterElemento("pix-olho").textContent = saldoVisivel ? "Ocultar saldo" : "Mostrar saldo";
+    const campoSaldo = obterElemento("pix-saldo");
+    const botaoSaldo = obterElemento("pix-olho");
+    if (campoSaldo) campoSaldo.textContent = saldoVisivel ? moeda(usuario?.balance) : "••••••••";
+    if (botaoSaldo) botaoSaldo.textContent = saldoVisivel ? "Ocultar saldo" : "Mostrar saldo";
   }
-  obterElemento("pix-olho").addEventListener("click", () => {
+  obterElemento("pix-olho")?.addEventListener("click", () => {
     saldoVisivel = !saldoVisivel;
     renderSaldo();
   });

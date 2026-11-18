@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="../css/pagamentos/pix-integracao.css" />
     <title>Criar Chave Pix - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/pagamentos/pix-home.css" />
+    <link rel="stylesheet" href="../css/pagamentos/pix-fluxo.css" />
   </head>
   <body data-pix-page="keys">
     <div class="app-dashboard">
@@ -97,52 +99,78 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Minhas chaves Pix</h1></header>
-        <div class="pix-page-container"
-          ><section class="pix-integracao">
-            <nav class="pix-links"
-              ><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a
-              ><a href="transferir.html">Transferir por chave</a
-              ><a href="pixcopiaecola.html">Chave copiada</a
-              ><a href="pagar/extrato.html">Extrato</a></nav
-            >
-            <p
-              >Saldo: <strong id="pix-saldo">Carregando...</strong>
-              <button type="button" id="pix-olho">Ocultar saldo</button></p
-            >
-            <p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
-            <form id="pix-chave-form"
-              ><label for="pix-tipo">Tipo de chave</label
-              ><select id="pix-tipo"
-                ><option value="ALEATORIA">Aleatória (gerada pelo servidor)</option
-                ><option value="CPF">CPF do cadastro</option
-                ><option value="EMAIL">E-mail do cadastro</option
-                ><option value="TELEFONE">Telefone do cadastro</option></select
-              ><p id="pix-chave-previa"></p
-              ><button type="submit" id="pix-criar" disabled>Cadastrar chave</button></form
-            ><h2>Chaves registradas</h2
-            ><button type="button" id="pix-atualizar">Atualizar chaves</button
-            ><div id="pix-chaves"></div> </section
-        ></div>
+        <header class="header-conteudo pix-home-header">
+          <div class="pix-home-titulo">
+            <a
+              href="pix.html"
+              class="btn-voltar"
+              data-pix-voltar
+              aria-label="Voltar à página anterior"
+              ><img src="../img/Voltar.svg" alt=""
+            /></a>
+            <div>
+              <h1>Minhas chaves</h1>
+              <p>Cadastre, compartilhe e gerencie suas chaves Pix.</p>
+            </div>
+          </div>
+        </header>
+        <section class="pix-home pix-fluxo" aria-label="Minhas chaves">
+          <div class="pix-fluxo-status">
+            <p id="pix-mensagem" role="status" aria-live="polite">Carregando seus dados...</p>
+          </div>
+          <div class="pix-fluxo-grade">
+            <section class="pix-fluxo-card">
+              <div class="pix-fluxo-emblema" aria-hidden="true">＋</div>
+              <h2>Cadastrar uma chave</h2>
+              <p class="pix-fluxo-texto">Escolha como você quer receber seus próximos Pix.</p>
+              <form id="pix-chave-form">
+                <label for="pix-tipo">Tipo de chave</label
+                ><select id="pix-tipo">
+                  <option value="ALEATORIA">Aleatória (gerada pelo servidor)</option>
+                  <option value="CPF">CPF do cadastro</option>
+                  <option value="EMAIL">E-mail do cadastro</option>
+                  <option value="TELEFONE">Telefone do cadastro</option>
+                </select>
+                <p id="pix-chave-previa"></p>
+                <button type="submit" id="pix-criar" disabled>Cadastrar chave</button>
+              </form>
+              <p class="pix-fluxo-nota">
+                CPF, telefone e e-mail usam seus dados cadastrais. A chave aleatória é criada
+                automaticamente.
+              </p>
+            </section>
+            <section class="pix-fluxo-card">
+              <div class="pix-home-secao-titulo">
+                <h2>Chaves registradas</h2>
+                <button type="button" id="pix-atualizar">Atualizar chaves</button>
+              </div>
+              <p class="pix-fluxo-texto">
+                Copie uma chave para compartilhar ou exclua as que não usa mais.
+              </p>
+              <div id="pix-chaves" class="pix-home-lista"><p>Carregando suas chaves...</p></div>
+            </section>
+          </div>
+        </section>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">
