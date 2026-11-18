@@ -48,7 +48,8 @@
       "cards-fatura-titulo",
     ])
       obterElemento(id)?.replaceChildren();
-    obterElemento("cards-saldo").textContent = "—";
+    const campoSaldo = obterElemento("cards-saldo");
+    if (campoSaldo) campoSaldo.textContent = "—";
     window.location.replace("../index.html");
   }
   document.querySelector(".logout").addEventListener("click", (evento) => {
@@ -124,10 +125,12 @@
     return (c / 100).toFixed(2);
   }
   function atualizarSaldo() {
-    obterElemento("cards-saldo").textContent = saldoVisivel ? moeda(usuario?.balance) : "••••••••";
-    obterElemento("cards-olho").textContent = saldoVisivel ? "Ocultar saldo" : "Mostrar saldo";
+    const campoSaldo = obterElemento("cards-saldo");
+    const botaoSaldo = obterElemento("cards-olho");
+    if (campoSaldo) campoSaldo.textContent = saldoVisivel ? moeda(usuario?.balance) : "••••••••";
+    if (botaoSaldo) botaoSaldo.textContent = saldoVisivel ? "Ocultar saldo" : "Mostrar saldo";
   }
-  obterElemento("cards-olho").addEventListener("click", () => {
+  obterElemento("cards-olho")?.addEventListener("click", () => {
     saldoVisivel = !saldoVisivel;
     atualizarSaldo();
   });
