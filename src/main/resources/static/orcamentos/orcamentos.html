@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/conta-painel.css" />
     <title>Orçamentos por categoria - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/gestao-visual.css" />
   </head>
-  <body data-panel-page="budgets">
+  <body class="gestao-theme" data-panel-page="budgets">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,49 +98,101 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Orçamentos por categoria</h1></header
-        ><div class="pix-page-container"
-          ><section class="account-panel"
-            ><a href="../PaginaInicial/paginainicial.html">Voltar ao início</a
-            ><p id="panel-message" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="panel-refresh">Atualizar dados</button
-            ><p
-              >Os gastos contabilizados são as transações com categoria atribuída. Criar um
-              orçamento não categoriza movimentações antigas.</p
-            ><label for="budget-month">Mês de referência</label
-            ><input id="budget-month" type="month" required /><form id="panel-form"
-              ><label for="budget-category">Categoria</label
-              ><select id="budget-category" required
-                ><option value="">Selecione uma categoria</option></select
-              ><label for="budget-limit">Limite (R$)</label
-              ><input
-                id="budget-limit"
-                inputmode="decimal"
-                pattern="[0-9]+([,.][0-9]{1,2})?"
-                required
-                placeholder="Ex.: 500,00"
-              /><button type="submit" id="panel-submit" disabled>Criar orçamento</button></form
-            ><div id="panel-list"></div></section
-        ></div>
+        <header class="header-conteudo gestao-header">
+          <div class="gestao-heading">
+            <a
+              class="gestao-voltar"
+              href="../PaginaInicial/paginainicial.html"
+              aria-label="Voltar ao início"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Orçamentos</h1>
+              <p>Planeje seus gastos por categoria e acompanhe seus limites.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="account-panel gestao-visual">
+            <div class="gestao-status">
+              <p id="panel-message" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="panel-refresh">Atualizar dados</button>
+            </div>
+            <section class="gestao-card gestao-highlight gestao-month">
+              <div>
+                <span class="gestao-eyebrow">PLANEJAMENTO MENSAL</span>
+                <h2>Um plano para cada mês</h2>
+                <p>Escolha o período para consultar e criar orçamentos.</p>
+              </div>
+              <div>
+                <label for="budget-month">Mês de referência</label
+                ><input id="budget-month" type="month" required />
+              </div>
+            </section>
+            <div class="gestao-layout">
+              <aside class="gestao-aside">
+                <section class="gestao-card">
+                  <span class="gestao-eyebrow">NOVO ORÇAMENTO</span>
+                  <h2>Defina seu limite</h2>
+                  <p>Selecione uma categoria e informe quanto pretende gastar no mês.</p>
+                  <form id="panel-form">
+                    <label for="budget-category">Categoria</label
+                    ><select id="budget-category" required>
+                      <option value="">Selecione uma categoria</option></select
+                    ><label for="budget-limit">Limite (R$)</label
+                    ><input
+                      id="budget-limit"
+                      inputmode="decimal"
+                      pattern="[0-9]+([,.][0-9]{1,2})?"
+                      required
+                      placeholder="Ex.: 500,00"
+                    /><button type="submit" id="panel-submit" disabled>Criar orçamento</button>
+                  </form>
+                </section>
+                <section class="gestao-card gestao-highlight">
+                  <h2>Como os gastos são calculados</h2>
+                  <p>
+                    Os gastos contabilizados são as transações com categoria atribuída. Criar um
+                    orçamento não categoriza movimentações antigas.
+                  </p>
+                </section>
+              </aside>
+              <section class="gestao-section">
+                <h2>Orçamentos do mês</h2>
+                <p>Acompanhe os gastos e ajuste seus limites.</p>
+                <div id="panel-list" class="gestao-list gestao-budgets"></div>
+              </section>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/conta-painel.css" />
     <title>Notificações - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/gestao-visual.css" />
   </head>
-  <body data-panel-page="notifications">
+  <body class="gestao-theme" data-panel-page="notifications">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,44 +98,83 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Notificações</h1></header
-        ><div class="pix-page-container"
-          ><section class="account-panel"
-            ><p id="panel-message" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="panel-refresh">Atualizar dados</button
-            ><p id="notification-count">Carregando contagem...</p
-            ><label for="only-unread">Exibir</label
-            ><select id="only-unread"
-              ><option value="false">Todas</option
-              ><option value="true">Somente não lidas</option></select
-            ><button type="button" id="read-all">Marcar todas como lidas</button
-            ><div id="panel-list"></div
-            ><div class="panel-pagination"
-              ><button id="page-previous" type="button" disabled>Anterior</button
+        <header class="header-conteudo gestao-header">
+          <div class="gestao-heading">
+            <a
+              class="gestao-voltar"
+              href="../PaginaInicial/paginainicial.html"
+              aria-label="Voltar ao início"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Notificações</h1>
+              <p>Acompanhe as atualizações e movimentações da sua conta.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="account-panel gestao-visual">
+            <div class="gestao-status">
+              <p id="panel-message" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="panel-refresh">Atualizar dados</button>
+            </div>
+            <section class="gestao-card gestao-highlight gestao-notification-summary">
+              <div>
+                <span class="gestao-eyebrow">SUA CENTRAL DE AVISOS</span>
+                <h2>Fique por dentro</h2>
+                <p id="notification-count">Carregando contagem...</p>
+              </div>
+              <span class="gestao-icon" aria-hidden="true">♧</span>
+            </section>
+            <div class="gestao-filtros">
+              <div>
+                <label for="only-unread">Exibir notificações</label
+                ><select id="only-unread">
+                  <option value="false">Todas</option>
+                  <option value="true">Somente não lidas</option>
+                </select>
+              </div>
+              <button type="button" id="read-all">Marcar todas como lidas</button>
+            </div>
+            <section class="gestao-section">
+              <h2>Seus avisos</h2>
+              <div id="panel-list" class="gestao-list gestao-notifications"></div>
+            </section>
+            <div class="panel-pagination">
+              <button id="page-previous" type="button" disabled>Anterior</button
               ><span id="page-label">—</span
-              ><button id="page-next" type="button" disabled>Próxima</button></div
-            ></section
-          ></div
-        >
+              ><button id="page-next" type="button" disabled>Próxima</button>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

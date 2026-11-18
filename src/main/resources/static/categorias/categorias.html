@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/conta-painel.css" />
     <title>Categorias - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/gestao-visual.css" />
   </head>
-  <body data-panel-page="categories">
+  <body class="gestao-theme" data-panel-page="categories">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,43 +98,87 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Categorias</h1></header
-        ><div class="pix-page-container"
-          ><section class="account-panel"
-            ><a href="../PaginaInicial/paginainicial.html">Voltar ao início</a
-            ><p id="panel-message" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="panel-refresh">Atualizar dados</button
-            ><form id="panel-form"
-              ><label for="category-name">Nome da categoria</label
-              ><input id="category-name" required maxlength="100" /><label for="category-icon"
-                >Ícone ou identificação (opcional)</label
-              ><input id="category-icon" maxlength="30" placeholder="Ex.: 🍽️" /><button
-                type="submit"
-                id="panel-submit"
-                disabled
-                >Salvar categoria</button
-              ><button type="button" id="category-cancel">Cancelar edição</button></form
-            ><div id="panel-list"></div></section
-        ></div>
+        <header class="header-conteudo gestao-header">
+          <div class="gestao-heading">
+            <a
+              class="gestao-voltar"
+              href="../PaginaInicial/paginainicial.html"
+              aria-label="Voltar ao início"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Categorias</h1>
+              <p>Organize suas movimentações do seu jeito.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="account-panel gestao-visual">
+            <div class="gestao-status">
+              <p id="panel-message" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="panel-refresh">Atualizar dados</button>
+            </div>
+            <div class="gestao-layout">
+              <aside class="gestao-aside">
+                <section class="gestao-card">
+                  <span class="gestao-eyebrow">ORGANIZAÇÃO FINANCEIRA</span>
+                  <h2>Criar ou editar categoria</h2>
+                  <p>Dê um nome à categoria e, se quiser, escolha um ícone ou identificação.</p>
+                  <form id="panel-form">
+                    <label for="category-name">Nome da categoria</label
+                    ><input id="category-name" required maxlength="100" /><label for="category-icon"
+                      >Ícone ou identificação (opcional)</label
+                    ><input id="category-icon" maxlength="30" placeholder="Ex.: 🍽️" /><button
+                      type="submit"
+                      id="panel-submit"
+                      disabled
+                    >
+                      Salvar categoria</button
+                    ><button type="button" id="category-cancel">Cancelar edição</button>
+                  </form>
+                </section>
+                <section class="gestao-card gestao-highlight">
+                  <h2>Tudo no seu lugar</h2>
+                  <p>Use categorias para identificar suas transações e acompanhar os orçamentos.</p>
+                  <p>Categorias usadas em transações ou orçamentos podem não ser removidas.</p>
+                </section>
+              </aside>
+              <section class="gestao-section">
+                <h2>Minhas categorias</h2>
+                <p>Edite ou exclua as categorias cadastradas.</p>
+                <div id="panel-list" class="gestao-list gestao-categories"></div>
+              </section>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">
