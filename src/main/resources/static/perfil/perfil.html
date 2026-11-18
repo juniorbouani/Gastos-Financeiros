@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/perfil/integracao.css" />
     <title>Meu Perfil - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/perfil/visual.css" />
   </head>
-  <body data-profile-page="profile">
+  <body class="perfil-theme" data-profile-page="profile">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,46 +98,109 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Meu perfil</h1></header
-        ><div class="pix-page-container"
-          ><section class="perfil-integracao"
-            ><nav
-              ><a href="../perfil/perfil.html">Meu perfil</a
-              ><a href="../perfil/dadoscadastrais.html">Dados cadastrais</a
-              ><a href="../configuracoes/configuracoes.html">Configurações</a></nav
-            ><p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="perfil-atualizar">Recarregar dados</button
-            ><div class="perfil-resumo"
-              ><img src="../img/Conta.svg" alt="" width="64" height="64" /><h2 id="perfil-nome"
-                >Carregando perfil...</h2
-              ><dl
-                ><dt>CPF</dt><dd id="perfil-cpf">—</dd><dt>E-mail</dt><dd id="perfil-email">—</dd
-                ><dt>Telefone</dt><dd id="perfil-telefone">—</dd><dt>Data de nascimento</dt
-                ><dd id="perfil-nascimento">—</dd></dl
-              ></div
-            ><a href="dadoscadastrais.html">Editar meus dados</a
-            ><button type="button" id="perfil-sair">Sair da conta nesta aba</button></section
-          ></div
-        >
+        <header class="header-conteudo perfil-header">
+          <div class="perfil-heading">
+            <a class="perfil-voltar" href="../PaginaInicial/paginainicial.html" aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Meu perfil</h1>
+              <p>Seus dados e as opções da sua conta.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="perfil-integracao perfil-visual">
+            <div class="perfil-status">
+              <p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="perfil-atualizar">Recarregar dados</button>
+            </div>
+            <div class="perfil-layout">
+              <section class="perfil-card perfil-identidade">
+                <div class="perfil-avatar">
+                  <img src="../img/Conta.svg" width="36" height="36" alt="" />
+                </div>
+                <span class="perfil-eyebrow">MEU CADASTRO</span>
+                <h2 id="perfil-nome">Carregando perfil...</h2>
+                <p>Seus dados pessoais no FlowBank.</p>
+                <a class="perfil-primary" href="dadoscadastrais.html">Editar meus dados →</a>
+              </section>
+              <section class="perfil-card">
+                <h2>Dados pessoais</h2>
+                <dl class="perfil-dados">
+                  <div>
+                    <dt>CPF</dt>
+                    <dd id="perfil-cpf">—</dd>
+                  </div>
+                  <div>
+                    <dt>E-mail</dt>
+                    <dd id="perfil-email">—</dd>
+                  </div>
+                  <div>
+                    <dt>Telefone</dt>
+                    <dd id="perfil-telefone">—</dd>
+                  </div>
+                  <div>
+                    <dt>Data de nascimento</dt>
+                    <dd id="perfil-nascimento">—</dd>
+                  </div>
+                </dl>
+              </section>
+            </div>
+            <section class="perfil-section">
+              <h2>Gerencie sua conta</h2>
+              <div class="perfil-tiles">
+                <a class="perfil-tile" href="../configuracoes/configuracoes.html"
+                  ><span class="perfil-icon" aria-hidden="true">⚙</span>
+                  <div>
+                    <h3>Configurações</h3>
+                    <p>Acesse os serviços e as opções da sua conta.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                ><a class="perfil-tile" href="dadoscadastrais.html"
+                  ><span class="perfil-icon" aria-hidden="true">✎</span>
+                  <div>
+                    <h3>Dados cadastrais</h3>
+                    <p>Atualize seus dados e acesse a troca de senha.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                >
+              </div>
+            </section>
+            <div class="perfil-session">
+              <p>Encerre o acesso a esta conta nesta aba.</p>
+              <button type="button" id="perfil-sair">Sair da conta nesta aba</button>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

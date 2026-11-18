@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/conta-painel.css" />
     <title>Encerrar conta - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/perfil/visual.css" />
   </head>
-  <body data-panel-page="close">
+  <body class="perfil-theme" data-panel-page="close">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,55 +98,86 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Encerrar conta</h1></header
-        ><div class="pix-page-container"
-          ><section class="account-panel"
-            ><a href="../perfil/perfil.html">Voltar ao perfil</a
-            ><p id="panel-message" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="panel-refresh">Atualizar dados</button
-            ><p
-              >O encerramento desativa o acesso à conta, cancela cartões e remove as chaves Pix. O
-              histórico financeiro e os dados cadastrais serão preservados no projeto; o CPF e o
-              e-mail não ficam liberados para novo cadastro.</p
-            ><p
-              >É necessário saldo zerado e nenhuma dívida nas faturas, inclusive futuras. Não haverá
-              reativação pela interface.</p
-            ><form id="panel-form"
-              ><label for="current-password">Senha atual</label
-              ><input
-                id="current-password"
-                type="password"
-                autocomplete="current-password"
-                required
-              /><label for="close-word">Digite ENCERRAR para confirmar</label
-              ><input id="close-word" autocomplete="off" required /><button
-                type="submit"
-                id="panel-submit"
-                disabled
-                >Confirmar encerramento da conta</button
-              ></form
-            ></section
-          ></div
-        >
+        <header class="header-conteudo perfil-header">
+          <div class="perfil-heading">
+            <a class="perfil-voltar" href="../configuracoes/configuracoes.html" aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Encerrar conta</h1>
+              <p>Confira as condições e confirme sua decisão.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="account-panel perfil-visual">
+            <div class="perfil-status">
+              <p id="panel-message" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="panel-refresh">Recarregar dados</button>
+            </div>
+            <div class="perfil-layout perfil-form-layout">
+              <section class="perfil-card perfil-close">
+                <span class="perfil-eyebrow">ENCERRAMENTO DA CONTA</span>
+                <h2>Confirmar encerramento</h2>
+                <p>Leia as condições antes de continuar.</p>
+                <form id="panel-form">
+                  <label for="current-password">Senha atual</label
+                  ><input
+                    id="current-password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                  /><label for="close-word">Digite ENCERRAR para confirmar</label
+                  ><input id="close-word" autocomplete="off" required /><button
+                    type="submit"
+                    id="panel-submit"
+                    disabled
+                  >
+                    Confirmar encerramento da conta
+                  </button>
+                </form>
+              </section>
+              <aside class="perfil-card perfil-highlight">
+                <h2>Antes de encerrar</h2>
+                <p>É necessário saldo zerado e nenhuma dívida nas faturas, inclusive futuras.</p>
+                <p>O encerramento desativa o acesso, cancela os cartões e remove as chaves Pix.</p>
+                <p>
+                  O histórico financeiro e os dados cadastrais serão preservados no projeto. O CPF e
+                  o e-mail não ficam liberados para novo cadastro.
+                </p>
+                <p>Não haverá reativação pela interface.</p>
+              </aside>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

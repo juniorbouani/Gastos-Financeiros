@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/perfil/integracao.css" />
     <title>Dados Cadastrais - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/perfil/visual.css" />
   </head>
-  <body data-profile-page="edit">
+  <body class="perfil-theme" data-profile-page="edit">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,57 +98,103 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Dados cadastrais</h1></header
-        ><div class="pix-page-container"
-          ><section class="perfil-integracao"
-            ><nav><a href="perfil.html">Meu perfil</a></nav
-            ><p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="perfil-atualizar">Recarregar dados</button
-            ><p>Você pode alterar os campos abaixo. O CPF é somente para consulta.</p
-            ><form id="perfil-form"
-              ><fieldset id="perfil-campos" disabled
-                ><label for="perfil-name-input">Nome completo</label
-                ><input id="perfil-name-input" autocomplete="name" required /><label
-                  for="perfil-cpf-input"
-                  >CPF</label
-                ><input id="perfil-cpf-input" readonly /><label for="perfil-phone-input"
-                  >Telefone</label
-                ><input id="perfil-phone-input" type="tel" autocomplete="tel" required /><label
-                  for="perfil-email-input"
-                  >E-mail</label
-                ><input id="perfil-email-input" type="email" autocomplete="email" required /><label
-                  for="perfil-birth-input"
-                  >Data de nascimento</label
-                ><input id="perfil-birth-input" type="date" required /><p
-                  >Alterar telefone ou e-mail do cadastro não atualiza automaticamente suas chaves
-                  Pix já registradas. Gerencie-as na área Pix.</p
-                ><button type="submit" id="perfil-salvar">Salvar alterações</button
-                ><button type="button" id="perfil-cancelar">Descartar alterações</button></fieldset
-              ></form
-            ><a href="../seguranca/seguranca.html" class="perfil-trocar-senha"
-              >Trocar senha</a
-            ></section
-          ></div
-        >
+        <header class="header-conteudo perfil-header">
+          <div class="perfil-heading">
+            <a class="perfil-voltar" href="perfil.html" aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Dados cadastrais</h1>
+              <p>Mantenha suas informações pessoais atualizadas.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="perfil-integracao perfil-visual">
+            <div class="perfil-status">
+              <p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="perfil-atualizar">Recarregar dados</button>
+            </div>
+            <div class="perfil-layout perfil-form-layout">
+              <section class="perfil-card">
+                <span class="perfil-eyebrow">DADOS PESSOAIS</span>
+                <h2>Atualizar cadastro</h2>
+                <p>Edite os campos abaixo. O CPF permanece somente para consulta.</p>
+                <form id="perfil-form">
+                  <fieldset id="perfil-campos" disabled>
+                    <label for="perfil-name-input">Nome completo</label
+                    ><input id="perfil-name-input" autocomplete="name" required /><label
+                      for="perfil-cpf-input"
+                      >CPF</label
+                    ><input id="perfil-cpf-input" readonly /><label for="perfil-phone-input"
+                      >Telefone</label
+                    ><input id="perfil-phone-input" type="tel" autocomplete="tel" required /><label
+                      for="perfil-email-input"
+                      >E-mail</label
+                    ><input
+                      id="perfil-email-input"
+                      type="email"
+                      autocomplete="email"
+                      required
+                    /><label for="perfil-birth-input">Data de nascimento</label
+                    ><input id="perfil-birth-input" type="date" required />
+                    <p>
+                      Alterar telefone ou e-mail do cadastro não atualiza automaticamente suas
+                      chaves Pix já registradas. Gerencie-as na área Pix.
+                    </p>
+                    <button type="submit" id="perfil-salvar">Salvar alterações</button
+                    ><button type="button" id="perfil-cancelar">Descartar alterações</button>
+                  </fieldset>
+                </form>
+              </section>
+              <aside class="perfil-aside">
+                <section class="perfil-card perfil-highlight">
+                  <span class="perfil-icon" aria-hidden="true">✎</span>
+                  <h2>Seus dados, sempre atualizados</h2>
+                  <p>
+                    Confira suas informações antes de salvar. Você pode descartar as alterações e
+                    restaurar os últimos dados carregados.
+                  </p>
+                </section>
+                <section class="perfil-card">
+                  <h2>Senha de acesso</h2>
+                  <p>Altere a senha usada para entrar na sua conta.</p>
+                  <a href="../seguranca/seguranca.html" class="perfil-trocar-senha perfil-primary"
+                    >Trocar senha →</a
+                  >
+                </section>
+              </aside>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/perfil/integracao.css" />
     <title>Configurações - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/perfil/visual.css" />
   </head>
-  <body data-profile-page="settings">
+  <body class="perfil-theme" data-profile-page="settings">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,45 +98,119 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Configurações</h1></header
-        ><div class="pix-page-container"
-          ><section class="perfil-integracao"
-            ><nav><a href="../perfil/perfil.html">Voltar ao perfil</a></nav
-            ><p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="perfil-atualizar">Recarregar dados</button
-            ><h2 id="perfil-nome">Carregando perfil...</h2
-            ><div class="perfil-atalhos"
-              ><a href="../perfil/dadoscadastrais.html"
-                >Editar nome, telefone, e-mail e nascimento</a
-              ><a href="../pagamentos/criarchave.html">Gerenciar chaves Pix</a
-              ><a href="../cartoes/cartoes.html">Gerenciar cartões e faturas</a
-              ><a href="../pagamentos/pagar/extrato.html">Consultar extrato</a></div
-            ><h2>Acesso e conta</h2
-            ><div class="perfil-atalhos"
-              ><a href="../encerrarConta/encerrarConta.html">Encerrar conta</a
-              ><a href="../notificacoes/notificacoes.html">Notificações</a></div
-            ><button type="button" id="perfil-sair">Sair da conta nesta aba</button></section
-          ></div
-        >
+        <header class="header-conteudo perfil-header">
+          <div class="perfil-heading">
+            <a class="perfil-voltar" href="../perfil/perfil.html" aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Configurações</h1>
+              <p>Tudo para gerenciar sua conta em um só lugar.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="perfil-integracao perfil-visual">
+            <div class="perfil-status">
+              <p id="perfil-mensagem" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="perfil-atualizar">Recarregar dados</button>
+            </div>
+            <section class="perfil-card perfil-settings-summary">
+              <span class="perfil-icon" aria-hidden="true">⚙</span>
+              <div>
+                <span class="perfil-eyebrow">SUA CONTA</span>
+                <h2 id="perfil-nome">Carregando perfil...</h2>
+                <p>Gerencie os serviços e as opções do seu FlowBank.</p>
+              </div>
+            </section>
+            <section class="perfil-section">
+              <h2>Dados e serviços</h2>
+              <div class="perfil-tiles">
+                <a class="perfil-tile" href="../perfil/dadoscadastrais.html"
+                  ><span class="perfil-icon" aria-hidden="true">✎</span>
+                  <div>
+                    <h3>Dados cadastrais</h3>
+                    <p>Edite nome, telefone, e-mail e nascimento.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                ><a class="perfil-tile" href="../pagamentos/criarchave.html"
+                  ><span class="perfil-icon" aria-hidden="true">⌘</span>
+                  <div>
+                    <h3>Chaves Pix</h3>
+                    <p>Consulte e gerencie suas chaves.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                ><a class="perfil-tile" href="../cartoes/cartoes.html"
+                  ><span class="perfil-icon" aria-hidden="true">▤</span>
+                  <div>
+                    <h3>Cartões e faturas</h3>
+                    <p>Gerencie seus cartões e consulte as faturas.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                ><a class="perfil-tile" href="../pagamentos/pagar/extrato.html"
+                  ><span class="perfil-icon" aria-hidden="true">↗</span>
+                  <div>
+                    <h3>Extrato</h3>
+                    <p>Acompanhe as movimentações da conta.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                >
+              </div>
+            </section>
+            <section class="perfil-section">
+              <h2>Acesso e conta</h2>
+              <div class="perfil-tiles">
+                <a class="perfil-tile" href="../notificacoes/notificacoes.html"
+                  ><span class="perfil-icon" aria-hidden="true">♧</span>
+                  <div>
+                    <h3>Notificações</h3>
+                    <p>Consulte as atualizações da sua conta.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                ><a class="perfil-tile perfil-danger" href="../encerrarConta/encerrarConta.html"
+                  ><span class="perfil-icon" aria-hidden="true">×</span>
+                  <div>
+                    <h3>Encerrar conta</h3>
+                    <p>Confira as condições para encerrar seu acesso.</p>
+                  </div>
+                  <span class="perfil-chevron" aria-hidden="true">→</span></a
+                >
+              </div>
+            </section>
+            <div class="perfil-session">
+              <p>Encerre o acesso a esta conta nesta aba.</p>
+              <button type="button" id="perfil-sair">Sair da conta nesta aba</button>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

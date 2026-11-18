@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="../css/conta-painel.css" />
     <title>Trocar senha - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/perfil/visual.css" />
   </head>
-  <body data-panel-page="password">
+  <body class="perfil-theme" data-panel-page="password">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,64 +98,97 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Trocar senha</h1></header
-        ><div class="pix-page-container"
-          ><section class="account-panel"
-            ><a href="../perfil/dadoscadastrais.html">Voltar a Dados cadastrais</a
-            ><p id="panel-message" role="status" aria-live="polite">Carregando...</p
-            ><button type="button" id="panel-refresh">Atualizar dados</button
-            ><p
-              >Informe a senha atual. A nova senha precisa ter pelo menos 8 caracteres e no máximo
-              72 bytes em UTF-8. Após salvar, todos os tokens antigos serão invalidados e será
-              necessário entrar novamente.</p
-            ><form id="panel-form"
-              ><label for="current-password">Senha atual</label
-              ><input
-                id="current-password"
-                type="password"
-                autocomplete="current-password"
-                required
-              /><label for="new-password">Nova senha</label
-              ><input
-                id="new-password"
-                type="password"
-                autocomplete="new-password"
-                minlength="8"
-                maxlength="72"
-                required
-              /><label for="confirm-password">Confirmar nova senha</label
-              ><input
-                id="confirm-password"
-                type="password"
-                autocomplete="new-password"
-                minlength="8"
-                maxlength="72"
-                required
-              /><button type="submit" id="panel-submit" disabled
-                >Alterar senha e encerrar acessos</button
-              ></form
-            ></section
-          ></div
-        >
+        <header class="header-conteudo perfil-header">
+          <div class="perfil-heading">
+            <a class="perfil-voltar" href="../perfil/dadoscadastrais.html" aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Trocar senha</h1>
+              <p>Atualize a segurança do seu acesso.</p>
+            </div>
+          </div>
+        </header>
+        <div class="pix-page-container">
+          <section class="account-panel perfil-visual">
+            <div class="perfil-status">
+              <p id="panel-message" role="status" aria-live="polite">Carregando...</p>
+              <button type="button" id="panel-refresh">Recarregar dados</button>
+            </div>
+            <div class="perfil-layout perfil-form-layout">
+              <section class="perfil-card">
+                <span class="perfil-eyebrow">SENHA DE ACESSO</span>
+                <h2>Definir nova senha</h2>
+                <p>Informe sua senha atual e confirme a nova senha.</p>
+                <form id="panel-form">
+                  <label for="current-password">Senha atual</label
+                  ><input
+                    id="current-password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                  /><label for="new-password">Nova senha</label
+                  ><input
+                    id="new-password"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    maxlength="72"
+                    required
+                  /><label for="confirm-password">Confirmar nova senha</label
+                  ><input
+                    id="confirm-password"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    maxlength="72"
+                    required
+                  /><button type="submit" id="panel-submit" disabled>
+                    Alterar senha e encerrar acessos
+                  </button>
+                </form>
+              </section>
+              <aside class="perfil-card perfil-highlight">
+                <h2>Proteja seu acesso</h2>
+                <p>
+                  A nova senha precisa ter pelo menos 8 caracteres e no máximo 72 bytes em UTF-8.
+                </p>
+                <p>
+                  Após salvar, todos os acessos anteriores serão encerrados. Entre novamente com a
+                  nova senha.
+                </p>
+              </aside>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">
