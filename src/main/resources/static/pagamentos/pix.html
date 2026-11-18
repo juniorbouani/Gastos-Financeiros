@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/pagamentos/pix-integracao.css" />
     <title>Pix - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/pagamentos/pix-home.css" />
   </head>
   <body data-pix-page="home">
     <div class="app-dashboard">
@@ -97,24 +98,91 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Área Pix</h1></header>
-        <div class="pix-page-container"
-          ><section class="pix-integracao">
-            <nav class="pix-links"
-              ><a href="pix.html">Área Pix</a><a href="criarchave.html">Minhas chaves</a
-              ><a href="transferir.html">Transferir por chave</a
-              ><a href="pixcopiaecola.html">Chave copiada</a
-              ><a href="pagar/extrato.html">Extrato</a></nav
-            >
-            <p
-              >Saldo: <strong id="pix-saldo">Carregando...</strong>
-              <button type="button" id="pix-olho">Ocultar saldo</button></p
-            >
-            <p id="pix-mensagem" role="status" aria-live="polite">Carregando...</p>
-            <button type="button" id="pix-atualizar">Atualizar dados</button><h2>Suas chaves</h2
-            ><div id="pix-chaves"></div><h2>Últimas transferências Pix</h2
-            ><div id="pix-historico"></div> </section
-        ></div>
+        <header class="header-conteudo pix-home-header">
+          <div class="pix-home-titulo">
+            <a href="../PaginaInicial/paginainicial.html" class="btn-voltar" aria-label="Voltar para o início">
+              <img src="../img/Voltar.svg" alt="" />
+            </a>
+            <div><h1>Área Pix</h1><p>Seu Pix, do seu jeito.</p></div>
+          </div>
+          <a href="../notificacoes/notificacoes.html" class="nav-icon-btn" aria-label="Ver notificações">
+            <img src="../img/Notificacoes.svg" alt="" />
+          </a>
+        </header>
+
+        <section class="pix-home" aria-label="Serviços Pix">
+          <section class="pix-home-saldo" aria-labelledby="pix-home-saldo-titulo">
+            <div><p id="pix-home-saldo-titulo">Saldo disponível</p><strong id="pix-saldo" aria-live="polite">Carregando...</strong></div>
+            <button type="button" id="pix-olho">Ocultar saldo</button>
+          </section>
+          <div class="pix-home-status">
+            <p id="pix-mensagem" role="status" aria-live="polite">Carregando seus dados...</p>
+            <button type="button" id="pix-atualizar">Atualizar dados</button>
+          </div>
+
+          <nav class="pix-home-principais" aria-label="Ações principais do Pix">
+            <a href="transferir.html" class="pix-home-acao pix-home-enviar">
+              <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/><path d="M5 12v6a1 1 0 0 0 1 1h6"/></svg></span>
+              <strong>Transferir Pix</strong><p>Envie usando a chave de quem vai receber.</p>
+              <span class="pix-home-seta" aria-hidden="true">↗</span>
+            </a>
+            <a href="criarchave.html" class="pix-home-acao">
+              <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7 7 17M7 7v10h10"/><path d="M12 5h6a1 1 0 0 1 1 1v6"/></svg></span>
+              <strong>Receber por chave</strong><p>Copie uma das suas chaves e compartilhe.</p>
+              <span class="pix-home-seta" aria-hidden="true">↗</span>
+            </a>
+          </nav>
+
+          <section class="pix-home-servicos" aria-labelledby="pix-home-servicos-titulo">
+            <div class="pix-home-secao-titulo"><h2 id="pix-home-servicos-titulo">Serviços</h2></div>
+            <nav class="pix-home-grade" aria-label="Mais serviços">
+                <a href="criarchave.html" class="pix-home-servico">
+                  <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="9" r="4"/><path d="m11 12 8 8 2-2-2-2 1-1-2-2-1 1-3-3"/></svg></span>
+                  <strong>Minhas chaves</strong><span class="pix-home-servico-legenda">Cadastre e gerencie</span>
+                </a>
+                <a href="pixcopiaecola.html" class="pix-home-servico">
+                  <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/><path d="M11 12h6m-6 4h4"/></svg></span>
+                  <strong>Colar chave</strong><span class="pix-home-servico-legenda">Use uma chave copiada</span>
+                </a>
+                <a href="pagar/extrato.html" class="pix-home-servico">
+                  <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
+                  <strong>Extrato</strong><span class="pix-home-servico-legenda">Consulte movimentações</span>
+                </a>
+                <a href="../meu-dinheiro/meu-dinheiro.html" class="pix-home-servico">
+                  <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 8H5a2 2 0 0 1 0-4h13v4M3 6v12a2 2 0 0 0 2 2h15V8"/><path d="M20 12h-5v4h5"/><path d="M16 14h.01"/></svg></span>
+                  <strong>Meu Dinheiro</strong><span class="pix-home-servico-legenda">Saldo e cartões</span>
+                </a>
+                <a href="../notificacoes/notificacoes.html" class="pix-home-servico">
+                  <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span>
+                  <strong>Notificações</strong><span class="pix-home-servico-legenda">Acompanhe seus avisos</span>
+                </a>
+                <a href="../perfil/dadoscadastrais.html" class="pix-home-servico">
+                  <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></span>
+                  <strong>Meus dados</strong><span class="pix-home-servico-legenda">Atualize seu cadastro</span>
+                </a>
+            </nav>
+          </section>
+
+          <aside class="pix-home-dica">
+            <span class="pix-home-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="9" r="4"/><path d="m11 12 8 8 2-2-2-2 1-1-2-2-1 1-3-3"/></svg></span>
+            <div><h2>Uma chave. Mais facilidade.</h2><p>Receba compartilhando sua chave Pix. Cadastre e gerencie suas chaves quando precisar.</p></div>
+            <a href="criarchave.html">Cadastrar chave <span aria-hidden="true">→</span></a>
+          </aside>
+
+          <div class="pix-home-detalhes">
+            <section class="pix-home-painel" aria-labelledby="pix-home-chaves-titulo">
+              <div class="pix-home-secao-titulo"><h2 id="pix-home-chaves-titulo">Suas chaves</h2><a href="criarchave.html">Gerenciar <span aria-hidden="true">→</span></a></div>
+              <p class="pix-home-legenda">As chaves que você usa para receber.</p>
+              <div id="pix-chaves" class="pix-home-lista"><p>Carregando suas chaves...</p></div>
+            </section>
+            <section class="pix-home-painel" aria-labelledby="pix-home-historico-titulo">
+              <div class="pix-home-secao-titulo"><h2 id="pix-home-historico-titulo">Últimas transferências</h2><a href="pagar/extrato.html">Ver extrato <span aria-hidden="true">→</span></a></div>
+              <p class="pix-home-legenda">Seus envios e recebimentos por Pix.</p>
+              <div id="pix-historico" class="pix-home-lista"><p>Carregando transferências...</p></div>
+            </section>
+          </div>
+        </section>
+
         <footer class="footer-principal-container">
           <div class="footer-principal-conteudo"
             ><div class="footer-principal-nav"
