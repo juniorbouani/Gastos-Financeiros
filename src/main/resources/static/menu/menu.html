@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="../css/style.css" />
     <title>Menu - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
+    <link rel="stylesheet" href="../css/complementares-visual.css" />
   </head>
-  <body>
+  <body class="menu-visual complementares-visual">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -96,12 +97,26 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo pix-header">
-          <div class="extrato-header-title">
-            <a href="../PaginaInicial/paginainicial.html" class="btn-voltar">
-              <img src="../img/Voltar.svg" alt="Voltar" />
-            </a>
-            <h1>Menu</h1>
+        <header class="header-conteudo complementares-header">
+          <div class="complementares-heading">
+            <a
+              href="../PaginaInicial/paginainicial.html"
+              class="complementares-voltar"
+              aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Menu</h1>
+              <p>Encontre os serviços e atalhos da sua conta.</p>
+            </div>
           </div>
         </header>
 
@@ -184,24 +199,25 @@
         </div>
 
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

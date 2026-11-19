@@ -14,8 +14,9 @@
     <title>Shop - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
     <link rel="stylesheet" href="../css/shop/integracao.css" />
+    <link rel="stylesheet" href="../css/shop/visual.css" />
   </head>
-  <body data-shop-page="catalog" data-product-id="">
+  <body class="shop-theme" data-shop-page="catalog" data-product-id="">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,46 +98,66 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Shop FlowBank</h1></header
-        ><div class="pix-page-container"
-          ><section class="shop-integration"
-            ><nav
-              ><a href="shop.html">Catálogo</a
-              ><a href="../cartoes/cartoes.html">Cartões e faturas</a></nav
-            ><p id="shop-message" role="status" aria-live="polite">Carregando...</p
-            ><p
-              >Compras internas do projeto: usam o limite do cartão FlowBank e geram lançamentos nas
-              faturas. Não há entrega física ou cobrança numa loja externa.</p
-            ><div id="shop-pending"></div><h2>Produtos</h2
-            ><div class="shop-product-grid" id="shop-products"></div><h2>Meus pedidos</h2
-            ><button type="button" id="shop-refresh">Atualizar pedidos</button
-            ><div id="shop-orders"></div
-            ><div class="shop-pagination"
-              ><button type="button" id="shop-previous" disabled>Anterior</button
+        <header class="header-conteudo shop-visual-header">
+          <div class="shop-heading">
+            <a class="shop-back" href="../PaginaInicial/paginainicial.html" aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Shop FlowBank</h1>
+              <p>Explore o catálogo e acompanhe seus pedidos.</p>
+            </div>
+          </div>
+          <a class="shop-cards-link" href="../cartoes/cartoes.html">Cartões e faturas →</a>
+        </header>
+        <div class="pix-page-container">
+          <section class="shop-integration shop-visual">
+            <p id="shop-message" role="status" aria-live="polite">Carregando...</p>
+            <p>
+              Compras internas do projeto: usam o limite do cartão FlowBank e geram lançamentos nas
+              faturas. Não há entrega física ou cobrança numa loja externa.
+            </p>
+            <div id="shop-pending"></div>
+            <h2>Produtos</h2>
+            <div class="shop-product-grid" id="shop-products"></div>
+            <h2>Meus pedidos</h2>
+            <button type="button" id="shop-refresh">Atualizar pedidos</button>
+            <div id="shop-orders"></div>
+            <div class="shop-pagination">
+              <button type="button" id="shop-previous" disabled>Anterior</button
               ><span id="shop-page-label">—</span
-              ><button type="button" id="shop-next" disabled>Próxima</button></div
-            ></section
-          ></div
-        >
+              ><button type="button" id="shop-next" disabled>Próxima</button>
+            </div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

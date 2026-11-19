@@ -1,0 +1,256 @@
+/* Visual da página inicial, sem alterar os componentes de outras telas. */
+.home-visual .header-conteudo,
+.home-visual .painel-status,
+.home-visual .dashboard-grid {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-visual .header-saudacao h1 {
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+}
+.home-visual .header-data {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #969bb0;
+}
+.home-visual .nav-icon-btn {
+  background: #241c31;
+  border-color: #49335e;
+  border-radius: 13px;
+}
+.home-visual .painel-status {
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.home-visual #painel-mensagem {
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+.home-visual #recarregar-painel {
+  background: #292039;
+  color: #dfcff5;
+  border: 1px solid #49375f;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+.home-visual .dashboard-grid {
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 24px;
+}
+.home-visual .saldo-container {
+  display: block;
+  background: linear-gradient(125deg, #35204f, #1b1527 70%);
+  border: 1px solid #64408a;
+  border-radius: 22px;
+  padding: 28px;
+  margin-bottom: 30px;
+}
+.home-visual .saldo-header {
+  justify-content: space-between;
+}
+.home-visual .saldo-header h2 {
+  font-size: 0.75rem;
+  letter-spacing: 0.09em;
+  color: #c4a8e6;
+}
+.home-visual #btn-toggle-saldo {
+  background: #352449;
+  border: 1px solid #64447c;
+  border-radius: 10px;
+}
+.home-visual .saldo {
+  margin: 24px 0;
+}
+.home-visual .saldo p {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+.home-visual .dados-conta {
+  border-top: 1px solid #50365f;
+  padding-top: 20px;
+  display: block;
+}
+.home-visual .dados-conta > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  justify-content: space-between;
+}
+.home-visual .dados-conta span {
+  color: #c0a6d9;
+  font-size: 0.8rem;
+}
+.home-visual .dados-conta strong {
+  color: #e8dcf6;
+  font-size: 0.8rem;
+}
+.home-visual .titulo-opaco {
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+  color: #aca0bd;
+  margin-bottom: 16px;
+}
+.home-visual .botoes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.home-visual .botoes > a {
+  min-width: 0;
+}
+.home-visual .botaoMenu {
+  background: #18131f;
+  border: 1px solid #3b2d4b;
+  border-radius: 16px;
+  width: 100%;
+  min-width: 0;
+  height: 108px;
+  padding: 16px 8px;
+  gap: 12px;
+}
+.home-visual .botaoMenu p {
+  font-size: 0.8rem;
+  color: #dfcff5;
+}
+.home-visual .botaoMenu img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+.home-visual .botaoMenu:hover,
+.home-visual .opcoes:hover {
+  background: #2c1b40;
+  border-color: #8654c2;
+}
+.home-visual .opcoes-oquefazer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.home-visual .opcao {
+  width: 100%;
+}
+.home-visual .opcoes {
+  padding: 22px;
+  background: #13141c;
+  border: 1px solid #393044;
+  border-radius: 16px;
+}
+.home-visual .opcoes p {
+  color: #e2d5f2;
+}
+.home-visual .widget-card {
+  border: 1px solid #393044;
+  background: #13141c;
+  border-radius: 20px;
+  padding: 26px;
+}
+.home-visual .widget-card:first-child {
+  background: linear-gradient(130deg, #21182e, #13141c 75%);
+  border-color: #49335e;
+}
+.home-visual .widget-header {
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.home-visual .widget-header h3 {
+  font-size: 1rem;
+}
+.home-visual .badge {
+  background: #342247;
+  color: #d5b9ff;
+  border: 1px solid #54376c;
+  padding: 6px 10px;
+}
+.home-visual .widget-valor,
+.home-visual .widget-valor-sm {
+  color: #e1caff;
+  overflow-wrap: anywhere;
+}
+.home-visual .widget-sub,
+.home-visual .progress-info {
+  color: #a79bb7;
+  line-height: 1.7;
+}
+.home-visual .progress-fill {
+  background: linear-gradient(90deg, #5933df, #b18aff);
+}
+.home-visual .progress-bar {
+  background: #2a2136;
+}
+.home-visual .gasto-label span {
+  color: #b1a4c1;
+}
+.home-visual .reserva-box {
+  background: #19131f;
+  border-color: #3d2c4c;
+}
+.home-visual a:focus-visible,
+.home-visual button:focus-visible {
+  outline: 2px solid #b5a0ff;
+  outline-offset: 4px;
+}
+@media (max-width: 1100px) {
+  .home-visual .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .home-visual .header-conteudo {
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .home-visual .header-saudacao h1 {
+    font-size: 1.45rem;
+  }
+  .home-visual .header-navegacao {
+    gap: 8px;
+  }
+  .home-visual .nav-icon-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .home-visual .saldo-container,
+  .home-visual .widget-card {
+    padding: 22px;
+  }
+  .home-visual .botoes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .home-visual .botaoMenu {
+    height: 96px;
+  }
+  .home-visual .painel-status {
+    align-items: flex-start;
+  }
+}
+.home-visual #recarregar-painel {
+  flex: 0 0 auto;
+}
+.home-visual .header-navegacao .nav-icon-btn {
+  width: 44px;
+  flex: 0 0 44px;
+}
+.home-visual .opcao {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.home-visual .opcao::after,
+.home-visual .opcao::before {
+  content: none;
+}
+@media (max-width: 600px) {
+  .home-visual .header-navegacao .nav-icon-btn {
+    width: 38px;
+    flex-basis: 38px;
+  }
+}

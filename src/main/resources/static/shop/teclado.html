@@ -14,8 +14,9 @@
     <title>Teclado RGB - FlowBank</title>
     <link rel="stylesheet" href="../css/navegacao.css" />
     <link rel="stylesheet" href="../css/shop/integracao.css" />
+    <link rel="stylesheet" href="../css/shop/visual.css" />
   </head>
-  <body data-shop-page="product" data-product-id="teclado">
+  <body class="shop-theme" data-shop-page="product" data-product-id="teclado">
     <div class="app-dashboard">
       <aside class="sidebar-lateral">
         <div class="sidebar-top">
@@ -97,49 +98,79 @@
       </aside>
 
       <main class="menu-container">
-        <header class="header-conteudo"><h1>Comprar no Shop</h1></header
-        ><div class="pix-page-container"
-          ><section class="shop-integration"
-            ><nav
-              ><a href="shop.html">Catálogo</a
-              ><a href="../cartoes/cartoes.html">Cartões e faturas</a></nav
-            ><p id="shop-message" role="status" aria-live="polite">Carregando...</p
-            ><p
-              >Compras internas do projeto: usam o limite do cartão FlowBank e geram lançamentos nas
-              faturas. Não há entrega física ou cobrança numa loja externa.</p
-            ><div id="shop-pending"></div><div id="shop-product"></div
-            ><form id="shop-form"
-              ><label for="shop-card">Cartão de crédito</label
-              ><select id="shop-card" required
-                ><option value="">Selecione um cartão</option></select
-              ><label for="shop-installments">Parcelas sem juros</label
-              ><select id="shop-installments" required></select
-              ><button type="submit" id="shop-review" disabled>Conferir compra</button></form
-            ><section id="shop-confirmation" hidden
-              ><h2>Resumo da compra</h2><div id="shop-summary"></div
-              ><button type="button" id="shop-confirm" disabled>Confirmar compra no cartão</button
-              ><button type="button" id="shop-edit">Voltar e editar</button></section
-            ><div id="shop-result"></div></section
-        ></div>
+        <header class="header-conteudo shop-visual-header">
+          <div class="shop-heading">
+            <a class="shop-back" href="shop.html" aria-label="Voltar"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6" /></svg
+            ></a>
+            <div>
+              <h1>Detalhes do produto</h1>
+              <p>Escolha seu cartão e confira os dados antes de comprar.</p>
+            </div>
+          </div>
+          <a class="shop-cards-link" href="../cartoes/cartoes.html">Cartões e faturas →</a>
+        </header>
+        <div class="pix-page-container">
+          <section class="shop-integration shop-visual">
+            <p id="shop-message" role="status" aria-live="polite">Carregando...</p>
+            <p>
+              Compras internas do projeto: usam o limite do cartão FlowBank e geram lançamentos nas
+              faturas. Não há entrega física ou cobrança numa loja externa.
+            </p>
+            <div id="shop-pending"></div>
+            <div class="shop-purchase-layout">
+              <div id="shop-product"></div>
+              <div class="shop-checkout">
+                <span class="shop-eyebrow">SUA COMPRA</span>
+                <h2>Pagamento no cartão</h2>
+                <form id="shop-form">
+                  <label for="shop-card">Cartão de crédito</label
+                  ><select id="shop-card" required>
+                    <option value="">Selecione um cartão</option></select
+                  ><label for="shop-installments">Parcelas sem juros</label
+                  ><select id="shop-installments" required></select
+                  ><button type="submit" id="shop-review" disabled>Conferir compra</button>
+                </form>
+                <section id="shop-confirmation" hidden>
+                  <h2>Resumo da compra</h2>
+                  <div id="shop-summary"></div>
+                  <button type="button" id="shop-confirm" disabled>
+                    Confirmar compra no cartão</button
+                  ><button type="button" id="shop-edit">Voltar e editar</button>
+                </section>
+              </div>
+            </div>
+            <div id="shop-result"></div>
+          </section>
+        </div>
         <footer class="footer-principal-container">
-          <div class="footer-principal-conteudo"
-            ><div class="footer-principal-nav"
-              ><a href="../categorias/categorias.html"
-                ><img src="../img/Menu.svg" alt="" /><p>Categorias</p></a
-              ></div
-            ><div class="footer-principal-nav"
-              ><a href="../orcamentos/orcamentos.html"
-                ><img src="../img/porquinho.svg" alt="" /><p>Orçamentos</p></a
-              ></div
-            >
+          <div class="footer-principal-conteudo">
+            <div class="footer-principal-nav">
+              <a href="../categorias/categorias.html"
+                ><img src="../img/Menu.svg" alt="" />
+                <p>Categorias</p></a
+              >
+            </div>
+            <div class="footer-principal-nav">
+              <a href="../orcamentos/orcamentos.html"
+                ><img src="../img/porquinho.svg" alt="" />
+                <p>Orçamentos</p></a
+              >
+            </div>
             <div class="footer-principal-nav">
               <a href="../PaginaInicial/paginainicial.html">
                 <img src="../img/home.svg" alt="" />
                 <p>Home</p>
               </a>
             </div>
-
-
 
             <div class="footer-principal-nav">
               <a href="../cartoes/cartoes.html">

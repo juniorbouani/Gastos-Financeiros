@@ -1,0 +1,200 @@
+/* Visual de Menu, Meu Dinheiro e Sobre; sem efeitos nas demais telas. */
+.complementares-visual .complementares-header,
+.complementares-visual .dinheiro-pagina,
+.complementares-visual .config-list,
+.complementares-visual .termo-text-card {
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+.complementares-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.complementares-heading h1 {
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+}
+.complementares-heading p {
+  color: #969bb0;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  line-height: 1.7;
+}
+.complementares-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  height: 42px;
+  border: 1px solid #2d303d;
+  background: #1d2029;
+  border-radius: 12px;
+}
+.complementares-visual a:focus-visible,
+.complementares-visual button:focus-visible {
+  outline: 2px solid #b5a0ff;
+  outline-offset: 4px;
+}
+.menu-visual .config-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding-bottom: 30px;
+}
+.menu-visual .config-item {
+  border: 1px solid #393044;
+  border-radius: 18px;
+  background: #13141c;
+  padding: 24px;
+  min-width: 0;
+}
+.menu-visual .config-item:hover {
+  background: #21162e;
+  border-color: #8d59c7;
+}
+.menu-visual .config-item-info {
+  gap: 18px;
+  min-width: 0;
+}
+.menu-visual .config-item-info span {
+  font-size: 0.95rem;
+  color: #e3d5f2;
+  overflow-wrap: anywhere;
+}
+.menu-visual .config-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #51366c;
+  border-radius: 14px;
+  background: #30203f;
+}
+.menu-visual .config-icon-wrapper img {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+.menu-visual .config-icon-wrapper svg {
+  stroke: #d5b9ff;
+}
+.menu-visual .config-item::after {
+  content: "→";
+  color: #c4a5ed;
+  margin-left: 12px;
+}
+.dinheiro-visual .dinheiro-card,
+.dinheiro-visual .dinheiro-cartao {
+  background: #13141c;
+  border-color: #393044;
+  border-radius: 20px;
+  padding: 26px;
+}
+.dinheiro-visual .dinheiro-saldo {
+  background: linear-gradient(125deg, #35204f, #1b1527 70%);
+  border-color: #64408a;
+}
+.dinheiro-visual .dinheiro-card h2 {
+  color: #bea5da;
+  font-size: 0.85rem;
+}
+.dinheiro-visual .dinheiro-valor {
+  color: #efdefe;
+  letter-spacing: -0.03em;
+}
+.dinheiro-visual .dinheiro-toolbar p {
+  font-size: 0.85rem;
+}
+.dinheiro-visual .dinheiro-botao {
+  background: #292039;
+  color: #dfcff5;
+  border: 1px solid #49375f;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+}
+.dinheiro-visual .dinheiro-card a,
+.dinheiro-visual .dinheiro-secao-titulo a {
+  color: #c4a5ed;
+  font-size: 0.85rem;
+}
+.dinheiro-visual .dinheiro-aviso {
+  background: #21172d;
+  border: 1px solid #49335e;
+  padding: 18px 22px;
+  border-radius: 14px;
+  color: #bcacd0;
+}
+.dinheiro-visual .dinheiro-situacao {
+  background: #30203f;
+  border: 1px solid #51366c;
+  color: #d5b9ff;
+  padding: 6px 10px;
+  border-radius: 9px;
+  font-size: 0.75rem;
+}
+.dinheiro-visual .dinheiro-cartao dt {
+  color: #a294b4;
+}
+.dinheiro-visual .dinheiro-cartao dd {
+  color: #e1caff;
+}
+.sobre-visual .termo-text-card {
+  padding: 32px;
+  background: #13141c;
+  border: 1px solid #393044;
+  border-radius: 22px;
+}
+.sobre-visual .termo-header {
+  padding-bottom: 24px;
+  border-color: #49335e;
+  gap: 16px;
+}
+.sobre-visual .termo-header h2 {
+  font-size: 1.5rem;
+}
+.sobre-visual .termo-badge {
+  border: 1px solid #51366c;
+  background: #30203f;
+  color: #d5b9ff;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+.sobre-visual .termo-body h3 {
+  color: #d4b4f5;
+  font-size: 1.05rem;
+  margin-top: 28px;
+}
+.sobre-visual .termo-body p {
+  color: #b2a6c0;
+  line-height: 1.9;
+  font-size: 0.9rem;
+}
+@media (max-width: 600px) {
+  .complementares-heading {
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .complementares-heading h1 {
+    font-size: 1.5rem;
+  }
+  .menu-visual .config-list {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .menu-visual .config-item {
+    padding: 20px;
+  }
+  .dinheiro-visual .dinheiro-card,
+  .dinheiro-visual .dinheiro-cartao {
+    padding: 22px;
+  }
+  .sobre-visual .termo-text-card {
+    padding: 24px;
+  }
+  .sobre-visual .termo-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
